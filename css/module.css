@@ -1,0 +1,58 @@
+.hzm3-col.m3, .hzm3-quarter {
+    min-width: 330px;
+}
+
+
+
+@media (min-width: 340px){
+    .hzm3-col.m3, .hzm3-quarter {
+            width: 96% !important;
+            margin: 1% !important;
+    }
+}
+
+@media (min-width: 740px){
+    .hzm3-col.m3, .hzm3-quarter {
+            width: 46% !important;
+            margin: 1% !important;
+    }
+}
+
+@media (min-width: 1065px){
+    .hzm3-col.m3, .hzm3-quarter {
+            width: 29% !important;
+            margin: 1% !important;
+    }
+}
+
+@media (min-width: 1435px){
+    .hzm3-col.m3, .hzm3-quarter {
+            width: 21%;
+            margin: 1% !important;
+    }
+}
+
+@media (min-width: 768px)
+{
+    .navbar-nav>li.hzm_logout {
+        float: left !important;
+    }    
+}
+
+@media print, screen and (max-width: 1450px)
+{
+    ul.navbar-nav>li.navbar-header {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
+
+
+.hzm_data.hzm_data_auser_mfk {
+    height: 350px;
+    min-height: 200px;
+}
+
+.in-group-mau {
+    width: 100%;
+}
