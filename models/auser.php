@@ -1958,16 +1958,19 @@ class Auser extends AFWObject{
 
                         foreach($rolesList as $roleItem)
                         {
-                                $roleId = $roleItem->id;
-                                $bfList = $roleItem->get("bfList"); 
-                                foreach($bfList as $bfItem)
+                                if($roleItem)
                                 {
-                                        $bfId = $bfItem->id;
-                                        if(!isset($mau_info_item['bf'.$bfId]))
+                                        $roleId = $roleItem->id;
+                                        $bfList = $roleItem->get("bfList"); 
+                                        foreach($bfList as $bfItem)
                                         {
-                                                $mau_info_item['bf'.$bfId] = array();
+                                                $bfId = $bfItem->id;
+                                                if(!isset($mau_info_item['bf'.$bfId]))
+                                                {
+                                                        $mau_info_item['bf'.$bfId] = array();
+                                                }
+                                                $mau_info_item['bf'.$bfId][$roleId] = true;
                                         }
-                                        $mau_info_item['bf'.$bfId][$roleId] = true;
                                 }
                         }
 
