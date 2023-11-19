@@ -728,7 +728,7 @@ class Auser extends AFWObject{
 
                 if(($operation_sql=="edit") and ($table=="school_class"))
                 {
-                        die(AfwSession::getLog("iCanDo"));
+                        //die(AfwSession::getLog("iCanDo"));
                 }
                 
                 /*if((!$return or true) and ($this->id==758))
