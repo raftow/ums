@@ -689,6 +689,8 @@ class Auser extends AFWObject{
                 
              $module_code = $myObj->getMyModule();
              $table = $myObj->getMyTable();
+
+             
              
              return $this->iCanDoOperation($module_code, $table, $operation_sql);
         }
@@ -722,6 +724,11 @@ class Auser extends AFWObject{
                 {
                         $return = false;
                         AfwSession::contextLog("BF ID invalid or BF not found for operation $operation", "iCanDo");
+                }
+
+                if(($operation_sql=="edit") and ($table=="school_class"))
+                {
+                        die(AfwSession::getLog("iCanDo"));
                 }
                 
                 /*if((!$return or true) and ($this->id==758))
