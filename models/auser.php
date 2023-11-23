@@ -1511,7 +1511,7 @@ class Auser extends AFWObject{
         {
                 try
                 {
-                        require_once (dirname(__FILE__)."/../external/config.php");
+                        require_once (dirname(__FILE__)."/../../external/config.php");
                         if(!$me_id) $me_id = $this->id;
                         $file_path = $ROOT_WWW_PATH."external/chusers";
                         $fileName = "user_$me_id"."_data.php";
@@ -1550,9 +1550,11 @@ class Auser extends AFWObject{
                 {
                         $this->commit();
                         $info_detail = "";
-                        if($objme and $objme->isSuperAdmin()) $info_detail = "$username enc($pwd)=$pwd_enc";
-                        if(!$message_prefix) $message_prefix = $firstname." ".$this->tm("Your new password is",$lang);
-                        $message = $message_prefix ." : ". $pwd;
+                        if($objme and $objme->isSuperAdmin()) $info_detail = "<!-- username=$username  enc($pwd)=$pwd_enc -->";
+                        if(!$message_prefix) $message_prefix = $firstname;
+                        $message = $message_prefix;
+                        $message .= "<br>\n ".$this->tm("Your user name is",$lang) ." : ". $username;
+                        $message .= "<br>\n ".$this->tm("Your new password is",$lang) ." : ". $pwd;
                         $info = $message." : $info_detail";
                         foreach($password_sent_by as $password_sent_by_try)
                         {
