@@ -3,8 +3,8 @@
         $trad["module"]["step1"] = "البيانات العامة";
         $trad["module"]["step1_help"] = "مسمى ونوع وحالة التطبيق";
         $trad["module"]["step2"] = "البيانات الفنية";
-        $trad["module"]["step3"] = "إحصائيات";
-        $trad["module"]["step3_help"] = "إحصائيات حول حجم التطبيق";
+        $trad["module"]["step3"] = "برمجيات";
+        $trad["module"]["step3_help"] = "برمجيات للتسريع";
         $trad["module"]["step4"] = "المستفيد";
         $trad["module"]["step5"] = "التطبيقات";
         $trad["module"]["step6"] = "الوحدات الفرعية";

@@ -442,7 +442,7 @@ class Module extends AFWObject
         $role_info = array();
         $moduleCode = $this->getVal("module_code");
 
-        $afw_modes_arr = ['display', 'search', 'qsearch', 'edit', 'qedit', 'crossed', 'stats', 'ddb', 'minibox'];
+        $afw_modes_arr = ['display', 'search', 'qsearch', 'edit', 'qedit', 'crossed', 'stats', 'ddb', 'minibox', 'delete'];
 
         $tableList = $this->getAllMyTables();
         foreach ($tableList as $tableItem) {
@@ -971,7 +971,7 @@ class Module extends AFWObject
             if (!$system->load()) {
                 $system = null;
             } else {
-                $cacheSys->putIntoCache("ums", "module", $system, $code_mod, $context = "module::getModuleByCode($id_sh, $code_mod)");
+                if($cacheSys) $cacheSys->putIntoCache("ums", "module", $system, $code_mod, $context = "module::getModuleByCode($id_sh, $code_mod)");
             }
         }
 
