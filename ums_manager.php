@@ -391,7 +391,7 @@ class UmsManager extends AFWRoot
         //if($mode=="all") $code_pbm_to_check = "xc183A";
         // else $code_pbm_to_check = "xxyxx";
         // if(!$pbm_arr[$code_pbm_to_check]) $this->throwError("pb code $code_pbm_to_check not found, pbm_arr = ".var_export($pbm_arr,true));
-        // $code_pbm_to_check = "xc183A";
+        $code_pbm_to_check = "cL1o4s";
 
         $final_pbm_arr = [];
         foreach ($pbm_arr as $pbm_code => $pbm_item) 
@@ -404,12 +404,12 @@ class UmsManager extends AFWRoot
                 $pbm_item['SUPER-ADMIN-ONLY'] = true;
             }
 
-            $mode_is_active = $pbm_item['MODE'][$mode];
+            $mode_is_active = $pbm_item['MODE'][$mode] or $pbm_item[$mode];
             $reason = '';
             if (
                 $mode_is_active or
                 $mode == 'all' or
-                $mode == 'display' and !isset($pbm_item['MODE'])
+                (($mode == 'display') and (!isset($pbm_item['MODE'])) and !isset($pbm_item['DISPLAY']))
             ) {
                 if (!$pbm_item['ADMIN-ONLY'] and !$pbm_item['SUPER-ADMIN-ONLY']) 
                 {
@@ -463,7 +463,7 @@ class UmsManager extends AFWRoot
 
             // if(($mode!="display") and ($pbm_code==$code_pbm_to_check) and ($reason)) die("reason : [$reason], final_pbm_arr = ".var_export($final_pbm_arr,true));
             // if(($mode=="all") and ($pbm_code==$code_pbm_to_check) and (!$reason)) die("display mode accepted, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item".var_export($pbm_item,true));
-            // if($pbm_code==$code_pbm_to_check) die("log reason = $reason, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item = ".var_export($pbm_item,true));
+            if($pbm_code==$code_pbm_to_check) echo("log reason = $reason, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item = ".var_export($pbm_item,true));
         }
 
         return $final_pbm_arr;
