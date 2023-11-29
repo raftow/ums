@@ -462,9 +462,10 @@ class UmsManager extends AFWRoot
             }
 
             // if(($mode!="display") and ($pbm_code==$code_pbm_to_check) and ($reason)) die("reason : [$reason], final_pbm_arr = ".var_export($final_pbm_arr,true));
-            // if(($mode=="all") and ($pbm_code==$code_pbm_to_check) and (!$reason)) die("display mode accepted, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item".var_export($pbm_item,true));
-            if($pbm_code==$code_pbm_to_check) echo("log reason = $reason, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item = ".var_export($pbm_item,true));
+            // if(($mode=="all") and ($pbm_code==$code_pbm_to_check) and (!$reason)) die("display mode accepted, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item".var_export($pbm_item,true));            
         }
+
+        if($pbm_code==$code_pbm_to_check) echo("log reason = $reason, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item = ".var_export($pbm_item,true));
 
         return $final_pbm_arr;
     }
