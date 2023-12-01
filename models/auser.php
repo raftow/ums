@@ -2055,17 +2055,17 @@ class Auser extends AFWObject{
         }
 
 
-        public function getMyQuickLinks($lang="ar")
+        public function getMyQuickLinks($lang="ar", $except_module="")
         {
                 $quick_links_arr = array();
-                include(dirname(__FILE__)."/../external/quick_links.php");
+                //include(dirname(__FILE__)."/../external/quick_links.php");
                 if(!$this->isCustomer())
                 {
                         $mauList = $this->loadMyModules();
                         foreach($mauList as $mauItem)
                         {
                                 $moduleItem = $mauItem->hetModule();
-                                if($moduleItem and $moduleItem->isRunnable())
+                                if($moduleItem and $moduleItem->isRunnable() and ($except_module != $moduleItem->getVal("module_code")))
                                 {
                                         $quick_links_arr[] = array('target'=>$moduleItem->getVal("module_code"), 
                                                                 'name_ar'=>$moduleItem->getShortDisplay("ar"), 
