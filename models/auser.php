@@ -1091,10 +1091,15 @@ class Auser extends AFWObject{
                 $this->myEmployeeObj->select("auser_id",$this->getId());
                 //if($company_id) $empl->select("id_sh_org",$company_id);
                 
-                $this->myEmployeeObj->load();
+                if($this->myEmployeeObj->load()) return $this->myEmployeeObj;
+                unset($this->myEmployeeObj);
+
+                $this->myEmployeeObj = null;
+
+                return null;
                 
                 
-                return $this->myEmployeeObj;
+                
         }
 
         

@@ -140,8 +140,8 @@ class Arole extends AFWObject{
         
         public function getParentGoal()
         {
-               $file_dir_name = dirname(__FILE__);
-               require_once("$file_dir_name/../bau/goal.php");
+               // $file_dir_name = dirname(__FILE__);
+               // require_once("$file_dir_name/../bau/goal.php");
                
                $goal = new Goal();
                $goal->set("goal_name_ar","لا يوجد");
@@ -992,8 +992,8 @@ class Arole extends AFWObject{
         {
                   $category_id = 5;
 
-                  $file_dir_name = dirname(__FILE__); 
-                  require_once("$file_dir_name/../bau/r_a_m_object_type.php");
+                  // $file_dir_name = dirname(__FILE__); 
+                  // require_once("$file_dir_name/../bau/r_a_m_object_type.php");
                   $typeObj = $this->getType();
                   $lookup_code = $typeObj->getVal("lookup_code");
                   $typeObj = RAMObjectType::loadByMainIndex($lookup_code); 

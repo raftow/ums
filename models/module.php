@@ -1651,7 +1651,7 @@ class Module extends AFWObject
         $this_id = $this->id;
         $currmod = $this->getVal("module_code");
         $open_php = "<?php \n";
-        require_once("$file_dir_name/../lib/afw/afw_copy_motor.php");
+        // require_once("$file_dir_name/../lib/afw/afw_copy_motor.php");
 
         if ($create_project) {
             // copy empty project folder files
@@ -1837,8 +1837,8 @@ class Module extends AFWObject
          public function exportToUAMS($lang="ar")
          {
                $file_dir_name = dirname(__FILE__);
-               // require_once("$file_dir_name/../ams/xmodule.php");
-               // require_once("$file_dir_name/../ams/xatable.php");
+               // // require_once("$file_dir_name/../ams/xmodule.php");
+               // // require_once("$file_dir_name/../ams/xatable.php");
                $id_this = $this->getId();
                $id_module_type = $this->getVal("id_module_type");
                
@@ -1927,7 +1927,7 @@ class Module extends AFWObject
             return array("pagAllTables method is Only for application module", "");
         }
         $file_dir_name = dirname(__FILE__);
-        //require_once("$file_dir_name/../lib/afw/afw_displayer_factory.php");
+        //// require_once("$file_dir_name/../lib/afw/afw_displayer_factory.php");
         $cc = $this->getVal("module_code");
         AfwAutoLoader::addModule($cc);
 
@@ -1954,7 +1954,7 @@ class Module extends AFWObject
         }
 
 
-        require_once("$file_dir_name/../$cc/all_to_pag.php");
+        // require_once("$file_dir_name/../$cc/all_to_pag.php");
         foreach ($arr_all_files as $topag_table) {
             $cl = AFWObject::tableToClass($topag_table);
             if ($cl and (!$pagged_arr[$cl])) {
@@ -2294,7 +2294,7 @@ class Module extends AFWObject
     {
 
         $file_dir_name = dirname(__FILE__);
-        require_once("$file_dir_name/../bau/user_story.php");
+        // require_once("$file_dir_name/../bau/user_story.php");
         /*
                 $application = $this->getParentApplication();
                 if(!$application) $this->throwError("no parent application for this module : $this");*/
@@ -2426,7 +2426,7 @@ class Module extends AFWObject
         $category_id = 4;
 
         $file_dir_name = dirname(__FILE__);
-        require_once("$file_dir_name/../bau/r_a_m_object_type.php");
+        // require_once("$file_dir_name/../bau/r_a_m_object_type.php");
         $moduleTypeObj = $this->getType();
         $lookup_code = $moduleTypeObj->getVal("lookup_code");
         $typeObj = RAMObjectType::loadByMainIndex($lookup_code);
@@ -2581,7 +2581,7 @@ class Module extends AFWObject
         $goalObj = null;
 
         if ($this->getId() and $this->getVal("id_system")) {
-            require_once("$file_dir_name/../bau/goal.php");
+            // require_once("$file_dir_name/../bau/goal.php");
             $goal_code = strtoupper($code_jr);
 
             $goalObj = Goal::loadByMainIndex($this->getVal("id_system"), $this->getId(), $goal_code, $create_obj_if_not_found);
@@ -2644,7 +2644,7 @@ class Module extends AFWObject
         $goalObj = null;
 
         if ($this->getId() and $this->getVal("id_system")) {
-            require_once("$file_dir_name/../bau/goal.php");
+            // require_once("$file_dir_name/../bau/goal.php");
             $goal_code = strtoupper($code_jr);
             $goalObj = Goal::loadByMainIndex($this->getVal("id_system"), $this->getId(), $goal_code, $create_obj_if_not_found);
             if ($goalObj->is_new or $always_update_name) {
