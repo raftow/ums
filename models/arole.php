@@ -44,8 +44,8 @@ class Arole extends AFWObject{
         public static function loadByMainIndex($module_id, $role_code,$create_obj_if_not_found=false)
         {
            $obj = new Arole();
-           if(!$module_id) $obj->throwError("loadByMainIndex : module_id is mandatory field");
-           if(!$role_code) $obj->throwError("loadByMainIndex : role_code is mandatory field");
+           if(!$module_id) throw new RuntimeException("loadByMainIndex : module_id is mandatory field");
+           if(!$role_code) throw new RuntimeException("loadByMainIndex : role_code is mandatory field");
  
  
            $obj->select("module_id",$module_id);
@@ -566,7 +566,7 @@ class Arole extends AFWObject{
                     /*
                     if($this->getId()==80)
                     {
-                        $this->throwError("this_bfs[0] = ".$this_bfs[0]);
+                        throw new RuntimeException("this_bfs[0] = ".$this_bfs[0]);
                     }*/
                     
                     foreach($this_bfs as $bf_item)
@@ -589,7 +589,7 @@ class Arole extends AFWObject{
                             /*
                             if($this->getId()==80)
                             {
-                                $this->throwError("bf_item = ".var_export($bf_item,true));
+                                throw new RuntimeException("bf_item = ".var_export($bf_item,true));
                             }*/
                         }
                             
@@ -598,7 +598,7 @@ class Arole extends AFWObject{
               /*
               if($this->getId()==80)
               {
-                  $this->throwError("menu_folder = ".var_export($menu_folder,true));
+                  throw new RuntimeException("menu_folder = ".var_export($menu_folder,true));
               }*/
               
                 $menu_folder["sub-folders"] = array();
@@ -670,7 +670,7 @@ class Arole extends AFWObject{
                        */
                        $rbf->set("menu", 'Y');
                        $rbf->update();
-                       // if($bf->getId()==101434) $this->throwError("before:$mfk_before | after:$mfk_after ");
+                       // if($bf->getId()==101434) throw new RuntimeException("before:$mfk_before | after:$mfk_after ");
                        
                        $menu_added = $this->update();
                        if($menu_added)
@@ -828,7 +828,7 @@ class Arole extends AFWObject{
                                           else $arole_id = $this->getId();
                                           if(!$bf)
                                           {
-                                              $this->throwError("role:$this_id, module:$moduleCode($moduleId), table($tbl_name/id=$atableId/cat=$cat) : createFrameWorkScreens has created null BF for framework mode : $framework_mode");
+                                              throw new RuntimeException("role:$this_id, module:$moduleCode($moduleId), table($tbl_name/id=$atableId/cat=$cat) : createFrameWorkScreens has created null BF for framework mode : $framework_mode");
                                           }
                                           $matriceArr[$atableId][$framework_mode] = array("bf"=>$bf,"arole_id"=>$arole_id,"menu"=>$menu);
                                   }        
@@ -897,7 +897,7 @@ class Arole extends AFWObject{
                               } 
                       }
               }
-              else $this->throwError("module not defined for role : $this");
+              else throw new RuntimeException("module not defined for role : $this");
               
               return array($added_count, $removed_count, $menu_added_count, $menu_removed_count);
         }
