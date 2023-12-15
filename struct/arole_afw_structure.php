@@ -13,13 +13,14 @@
 				'TYPE' => 'FK',  'ANSWER' => 'module',  'ANSMODULE' => 'ums',  'SEARCH-BY-ONE' => true,  
 				'WHERE' => "id_module_type in (4,7)", 
 				 
-				'CATEGORY' => 'FORMULA',  'FIELD-FORMULA' => 'fnGetModuleSystemId(module_id)',  'FORMULA_MODULE' => 'pag',  'SHORTNAME' => 'sys',  'DISPLAY' => true,  'STEP' => 1,  
+				'CATEGORY' => 'FORMULA',  'FIELD-FORMULA' => 'fnGetModuleSystemId(module_id)',  'FORMULA_MODULE' => 'pag',  
+				'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 			'module_id' => array('SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => false,  
 				'TYPE' => 'FK',  'ANSWER' => 'module',  'ANSMODULE' => 'ums',  'SEARCH-BY-ONE' => true,  
-				'RELATION' => 'OneToMany',  'SHORTNAME' => 'module',  'SIZE' => 40,  'DEFAUT' => 0,  
+				'RELATION' => 'OneToMany',  'SIZE' => 40,  'DEFAUT' => 0,  
 				'WHERE' => "id_module_type=5", 
 				 'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
@@ -31,7 +32,8 @@
 				),
 
 			'arole_type_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 40,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'arole_type',  'ANSMODULE' => 'ums',  'DEFAUT' => 0,  'NO-COTE' => true,  'SEARCH-BY-ONE' => true,  'SHORTNAME' => 'type',  'DISPLAY' => true,  'STEP' => 1,  
+				'TYPE' => 'FK',  'ANSWER' => 'arole_type',  'ANSMODULE' => 'ums',  'DEFAUT' => 0,  'NO-COTE' => true,  'SEARCH-BY-ONE' => true,  
+				'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
@@ -40,12 +42,12 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'titre_short' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE-AR' => true,  'EDIT' => true,  'UTF8' => true,  'SIZE' => 40,  'SHORTNAME' => 'title',  
+			'titre_short' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE-AR' => true,  'EDIT' => true,  'UTF8' => true,  'SIZE' => 40,   
 				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'titre_short_en' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE-EN' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,  'SHORTNAME' => 'title_en',  
+			'titre_short_en' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE-EN' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,    
 				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
@@ -63,7 +65,7 @@
 			'parent_arole_id' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 32,  'SEARCH' => true,  'QSEARCH' => false,  'SEARCH-BY-ONE' => true,  
 				'TYPE' => 'FK',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  
 				'WHERE-SEARCH' => "", 
-				 'SHORTNAME' => 'parent',  
+				 
 				'WHERE' => "avail='Y' and id != '§id§' and module_id=§module_id§ and arole_type_id <= 0§arole_type_id§", 
 				 'STEP' => 2,  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
@@ -72,7 +74,7 @@
 		'goal_id' => array('IMPORTANT' => 'IN',  'EDIT' => false,  'QEDIT' => false,  'SHOW' => true,  'READONLY' => true,  
 				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
 				'WHERE-SEARCH' => "", 
-				 'SHORTNAME' => 'goal',  
+				 
 				'CATEGORY' => 'FORMULA',  'PHP_FORMULA' => 'method...getParentGoal',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),

@@ -1024,7 +1024,16 @@ class Arole extends AFWObject{
             return false;
         }
         
-        
+        protected function myShortNameToAttributeName($attribute){
+            if($attribute=="sys") return "system_id";
+            if($attribute=="module") return "module_id";
+            if($attribute=="type") return "arole_type_id";
+            if($attribute=="title") return "titre_short";
+            if($attribute=="title_en") return "titre_short_en";
+            if($attribute=="parent") return "parent_arole_id";
+            if($attribute=="goal") return "goal_id";
+            return $attribute;
+        }      
         
 }
 
