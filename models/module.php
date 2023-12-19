@@ -1954,7 +1954,7 @@ class Module extends AFWObject
         }
 
 
-        // require_once("$file_dir_name/../$cc/all_to_pag.php");
+        require_once("$file_dir_name/../$cc/all_to_pag.php");
         foreach ($arr_all_files as $topag_table) {
             $cl = AFWObject::tableToClass($topag_table);
             if ($cl and (!$pagged_arr[$cl])) {
@@ -2292,7 +2292,7 @@ class Module extends AFWObject
 
     public function resetAllGeneratedUserStories()
     {
-
+        $server_db_prefix = AfwSession::config("db_prefix", "c0");
         $file_dir_name = dirname(__FILE__);
         // require_once("$file_dir_name/../bau/user_story.php");
         /*
@@ -2613,6 +2613,7 @@ class Module extends AFWObject
             $at_mfk .= $atItem->getId() . ",";
         }
         if ($goalObj) {
+            global $lang;
             $goalObj->set("atable_mfk", $at_mfk);
             $goalObj->update();
             $goalObj->genereConcernedGoals($lang, $regen = true, $operation_men = ",1,2,3,5,");
@@ -2742,7 +2743,27 @@ class Module extends AFWObject
     }
 
 
-
+    protected function myShortNameToAttributeName($attribute){
+        if($attribute=="mainsh") return "id_main_sh";
+        if($attribute=="title") return "titre_short";
+        if($attribute=="type") return "id_module_type";
+        if($attribute=="status") return "id_module_status";
+        if($attribute=="sys") return "id_system";
+        if($attribute=="parent") return "id_module_parent";
+        if($attribute=="domain") return "id_pm";
+        if($attribute=="engine") return "dbengine_id";
+        if($attribute=="system") return "dbsystem_id";
+        if($attribute=="php") return "php_ini";
+        if($attribute=="shs") return "orgs";
+        if($attribute=="app") return "applications";
+        if($attribute=="tables") return "tbs";
+        if($attribute=="lookups") return "lkps";
+        if($attribute=="bmjob") return "id_analyst";
+        if($attribute=="mmjob") return "id_hd";
+        if($attribute=="smjob") return "id_br";
+        if($attribute=="dispjobs") return "jobrole_mfk";
+        return $attribute;
+    }
 
 
     /*
