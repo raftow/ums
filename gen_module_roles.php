@@ -70,7 +70,7 @@
                                      if($atb_id_sub_module)
                                           $submod_obj = $atb_obj->getSubModule();
                                      else
-                                          $atb_obj->throwError("for $atb_obj no sub module defined");
+                                          throw new AfwRuntimeException("for $atb_obj no sub module defined");
                                                
                                      if($submod_obj->getId() != $id_sub_mod)
                                      {
@@ -84,12 +84,12 @@
                                             list($arole_type_id, $path) = $submod_obj->getRoleTypeId("",$lang);
                                             if($arole_type_id<0)
                                             {
-                                                 $atb_obj->throwError("for table $atb_obj the module $submod_obj(id=$id_sub_mod) has no role type : $path");
+                                                 throw new AfwRuntimeException("for table $atb_obj the module $submod_obj(id=$id_sub_mod) has no role type : $path");
                                             } 
                                             list($new_role, $arole_arr[$role_code]) = Arole::findOrCreateArole($currApplicationId,$role_code,$titre_short,$titre_short_en,$titre,$titre_en,$arole_type_id);
                                             if(!$arole_arr[$role_code])
                                             {
-                                                 $atb_obj->throwError("for table=$atb_obj submodule=$submod_obj($atb_id_sub_module) the role_code $role_code has no role object created !");
+                                                 throw new AfwRuntimeException("for table=$atb_obj submodule=$submod_obj($atb_id_sub_module) the role_code $role_code has no role object created !");
                                             }
                                             else
                                             {
@@ -104,7 +104,7 @@
                                             list($new_role, $arole_arr[$lkp_role_code]) = Arole::findOrCreateArole($currApplicationId,$lkp_role_code,"البيانات المرجعية","Lookup","البيانات المرجعية","Lookup",30);
                                             if(!$arole_arr[$lkp_role_code])
                                             {
-                                                 $atb_obj->throwError("for table=$atb_obj submodule=$submod_obj($atb_id_sub_module) the lookup role_code $lkp_role_code has no role object created !");
+                                                 throw new AfwRuntimeException("for table=$atb_obj submodule=$submod_obj($atb_id_sub_module) the lookup role_code $lkp_role_code has no role object created !");
                                             }
                                             $arole_arr[$lkp_role_code]->set("bfunction_mfk","");
                                             $arole_arr[$lkp_role_code]->set("parent_arole_id",$arole_arr[$role_code]->getId());
@@ -147,7 +147,7 @@
                                                                   
                                                                   if(!$arole_arr[$role_code])
                                                                   {
-                                                                       $atb_obj->throwError("for table $atb_obj_name : arole_arr[$role_code] not defined : submod($atb_id_sub_module / $id_sub_mod / $submod_obj)");
+                                                                       throw new AfwRuntimeException("for table $atb_obj_name : arole_arr[$role_code] not defined : submod($atb_id_sub_module / $id_sub_mod / $submod_obj)");
                                                                   }
                                                                   
                                                                   $arole_arr[$role_code]->addBF($bf->getId());

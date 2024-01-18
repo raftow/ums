@@ -144,19 +144,19 @@ class AroleBf extends AFWObject{
                        $role->addRemoveInMfk("bfunction_mfk",$bf_to_add, $bf_to_remove);
                        $mfk_after = $role->getVal("bfunction_mfk");
                        
-                       // if($bf->getId()==101434) throw new RuntimeException("before:$mfk_before | after:$mfk_after ");
+                       // if($bf->getId()==101434) throw new AfwRuntimeException("before:$mfk_before | after:$mfk_after ");
                        
                        $menu_added = $role->update();
                        */
                   }
                   else
                   {
-                       // if($bf->getId()==101434) throw new RuntimeException("bf is not menu ".var_export($bf,true));
+                       // if($bf->getId()==101434) throw new AfwRuntimeException("bf is not menu ".var_export($bf,true));
                   }
               }
               else
               {
-                  throw new RuntimeException("bf and role should be defined in arole_bf : ".var_export($this,true));
+                  throw new AfwRuntimeException("bf and role should be defined in arole_bf : ".var_export($this,true));
               }
               
               return true;

@@ -44,8 +44,8 @@ class Arole extends AFWObject{
         public static function loadByMainIndex($module_id, $role_code,$create_obj_if_not_found=false)
         {
            $obj = new Arole();
-           if(!$module_id) throw new RuntimeException("loadByMainIndex : module_id is mandatory field");
-           if(!$role_code) throw new RuntimeException("loadByMainIndex : role_code is mandatory field");
+           if(!$module_id) throw new AfwRuntimeException("loadByMainIndex : module_id is mandatory field");
+           if(!$role_code) throw new AfwRuntimeException("loadByMainIndex : role_code is mandatory field");
  
  
            $obj->select("module_id",$module_id);
@@ -191,7 +191,7 @@ class Arole extends AFWObject{
                
                $application_id = $applicationObj->getId(); 
                $application_code = $applicationObj->getVal("module_code");
-               if(!$application_code) $applicationObj->throwError("the application $applicationObj ($application_id) has not a module code");
+               if(!$application_code) throw new AfwRuntimeException("the application $applicationObj ($application_id) has not a module code");
                
                $role_code = "$application_code-module-".$subModuleObjId;
                
@@ -201,13 +201,13 @@ class Arole extends AFWObject{
         public static function getOrCreateLookupRoleForApplication($applicationObj)
         {
            global $lang;
-               if(!$applicationObj->isApplication()) $applicationObj->throwError("$applicationObj is not an application");
+               if(!$applicationObj->isApplication()) throw new AfwRuntimeException("$applicationObj is not an application");
                if($applicationObj) $applicationObjId = $applicationObj->getId();
                else $applicationObjId = 0;
                if(!$applicationObjId) return null;
                $application_code = $applicationObj->getVal("module_code");
                
-               if(!$application_code) $applicationObj->throwError("$applicationObj has not an application code");
+               if(!$application_code) throw new AfwRuntimeException("$applicationObj has not an application code");
                
                $role_code = "$application_code-lookup";
                
@@ -226,11 +226,11 @@ class Arole extends AFWObject{
         public static function getOrCreateLookupSubRoleForSubModule($lookupRole, $application_code, $module_id, $subModuleObj)
         {
            global $lang, $objme;
-               if(!$lookupRole) $objme->throwError("lookupRole is required for Arole::getOrCreateLookupSubRoleForSubModule method");
+               if(!$lookupRole) throw new AfwRuntimeException("lookupRole is required for Arole::getOrCreateLookupSubRoleForSubModule method");
                
                if($subModuleObj) $subModuleObjId = $subModuleObj->getId();
                else $subModuleObjId = 0;
-               if(!$subModuleObjId) $objme->throwError("subModuleObj is required for Arole::getOrCreateLookupSubRoleForSubModule method");
+               if(!$subModuleObjId) throw new AfwRuntimeException("subModuleObj is required for Arole::getOrCreateLookupSubRoleForSubModule method");
                 
                $role_code = "$application_code-module-".$subModuleObjId;
                
@@ -243,7 +243,7 @@ class Arole extends AFWObject{
                list($arole_type_id, $path) = $subModuleObj->getRoleTypeId("",$lang);
                if($arole_type_id<0)
                {
-                    $subModuleObj->throwError("the module $subModuleObj (id=$subModuleObjId) has no role type, may be level too deep : $path");
+                    throw new AfwRuntimeException("the module $subModuleObj (id=$subModuleObjId) has no role type, may be level too deep : $path");
                }                        
                list($new_role, $rl) = self::findOrCreateArole($module_id, $role_code, $titre_short, $titre_short_en, $titre, $titre_en, $arole_type_id+10, $update_props=true);
                $rl->set("parent_arole_id",$lookupRole->getId());
@@ -566,7 +566,7 @@ class Arole extends AFWObject{
                     /*
                     if($this->getId()==80)
                     {
-                        throw new RuntimeException("this_bfs[0] = ".$this_bfs[0]);
+                        throw new AfwRuntimeException("this_bfs[0] = ".$this_bfs[0]);
                     }*/
                     
                     foreach($this_bfs as $bf_item)
@@ -589,7 +589,7 @@ class Arole extends AFWObject{
                             /*
                             if($this->getId()==80)
                             {
-                                throw new RuntimeException("bf_item = ".var_export($bf_item,true));
+                                throw new AfwRuntimeException("bf_item = ".var_export($bf_item,true));
                             }*/
                         }
                             
@@ -598,7 +598,7 @@ class Arole extends AFWObject{
               /*
               if($this->getId()==80)
               {
-                  throw new RuntimeException("menu_folder = ".var_export($menu_folder,true));
+                  throw new AfwRuntimeException("menu_folder = ".var_export($menu_folder,true));
               }*/
               
                 $menu_folder["sub-folders"] = array();
@@ -670,7 +670,7 @@ class Arole extends AFWObject{
                        */
                        $rbf->set("menu", 'Y');
                        $rbf->update();
-                       // if($bf->getId()==101434) throw new RuntimeException("before:$mfk_before | after:$mfk_after ");
+                       // if($bf->getId()==101434) throw new AfwRuntimeException("before:$mfk_before | after:$mfk_after ");
                        
                        $menu_added = $this->update();
                        if($menu_added)
@@ -828,7 +828,7 @@ class Arole extends AFWObject{
                                           else $arole_id = $this->getId();
                                           if(!$bf)
                                           {
-                                              throw new RuntimeException("role:$this_id, module:$moduleCode($moduleId), table($tbl_name/id=$atableId/cat=$cat) : createFrameWorkScreens has created null BF for framework mode : $framework_mode");
+                                              throw new AfwRuntimeException("role:$this_id, module:$moduleCode($moduleId), table($tbl_name/id=$atableId/cat=$cat) : createFrameWorkScreens has created null BF for framework mode : $framework_mode");
                                           }
                                           $matriceArr[$atableId][$framework_mode] = array("bf"=>$bf,"arole_id"=>$arole_id,"menu"=>$menu);
                                   }        
@@ -897,7 +897,7 @@ class Arole extends AFWObject{
                               } 
                       }
               }
-              else throw new RuntimeException("module not defined for role : $this");
+              else throw new AfwRuntimeException("module not defined for role : $this");
               
               return array($added_count, $removed_count, $menu_added_count, $menu_removed_count);
         }

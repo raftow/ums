@@ -170,7 +170,7 @@ class UmsManager extends AFWRoot
             $chsys_modules_all = "$file_dir_name/../external/chsys/modules_all.php";
             include($chsys_modules_all);
             $module_code = $mod_info["m$module_id"]['code']; 
-            if(!$module_code) throw new RuntimeException("the file $chsys_modules_all doen't contain \$mod_info[m$module_id][code]");
+            if(!$module_code) throw new AfwRuntimeException("the file $chsys_modules_all doen't contain \$mod_info[m$module_id][code]");
 
             $module_sys_file = "$file_dir_name/../external/chsys/module_$module_code.php";
             if(file_exists($module_sys_file))
@@ -390,7 +390,7 @@ class UmsManager extends AFWRoot
     ) {
         //if($mode=="all") $code_pbm_to_check = "xc183A";
         // else $code_pbm_to_check = "xxyxx";
-        // if(!$pbm_arr[$code_pbm_to_check]) $this->throwError("pb code $code_pbm_to_check not found, pbm_arr = ".var_export($pbm_arr,true));
+        // if(!$pbm_arr[$code_pbm_to_check]) throw new AfwRuntimeException("pb code $code_pbm_to_check not found, pbm_arr = ".var_export($pbm_arr,true));
         $code_pbm_to_check = "cL1o4s";
 
         $final_pbm_arr = [];

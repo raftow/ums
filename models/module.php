@@ -53,7 +53,7 @@ class Module extends AFWObject
     public static function loadByMainIndex($module_code, $create_obj_if_not_found = false)
     {
         $obj = new Module();
-        if (!$module_code) throw new RuntimeException("loadByMainIndex : module_code is mandatory field");
+        if (!$module_code) throw new AfwRuntimeException("loadByMainIndex : module_code is mandatory field");
 
         $obj->select("module_code", $module_code);
 
@@ -72,26 +72,26 @@ class Module extends AFWObject
     public static function reverseByCodes($object_code_arr)
     {
         $obj = new Module();
-        if (count($object_code_arr) != 1) throw new RuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
+        if (count($object_code_arr) != 1) throw new AfwRuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
         $module_code = $object_code_arr[0];
 
         $file_dir_name = dirname(__FILE__);
         include("$file_dir_name/../$module_code/module_config.php");
-        if ($module_code != $MODULE) throw new RuntimeException("reverseByCodes : module_code is not correct [=$MODULE] in module_config file");
+        if ($module_code != $MODULE) throw new AfwRuntimeException("reverseByCodes : module_code is not correct [=$MODULE] in module_config file");
         $module_id = $THIS_MODULE_ID;
-        if (!$THIS_MODULE_ID) throw new RuntimeException("reverseByCodes : THIS_MODULE_ID is not defined in module_config file for module $module_code");
+        if (!$THIS_MODULE_ID) throw new AfwRuntimeException("reverseByCodes : THIS_MODULE_ID is not defined in module_config file for module $module_code");
 
         $objByCode = self::loadByMainIndex($module_code);
         if ($objByCode) {
             $objByCodeId = $objByCode->getId();
-            if ($objByCodeId != $module_id) throw new RuntimeException("reverseByCodes : module_id is not correct [=$module_id] in module_config file for module $module_code (vs id = $objByCodeId)");
+            if ($objByCodeId != $module_id) throw new AfwRuntimeException("reverseByCodes : module_id is not correct [=$module_id] in module_config file for module $module_code (vs id = $objByCodeId)");
             $objModule = $objByCode;
         } else {
             $objById = null;
             if ($module_id) $objById = self::loadById($module_id);
             if ($objById) {
                 $objById_module_code = $objById->getVal("module_code");
-                if ($objById_module_code != $module_code) throw new RuntimeException("reverseByCodes : THIS_MODULE_ID [=$THIS_MODULE_ID] in module_config file does'nt much with module code $module_code (this new one is [$objById_module_code])");
+                if ($objById_module_code != $module_code) throw new AfwRuntimeException("reverseByCodes : THIS_MODULE_ID [=$THIS_MODULE_ID] in module_config file does'nt much with module code $module_code (this new one is [$objById_module_code])");
                 $objModule = $objById;
             }
         }
@@ -204,7 +204,7 @@ class Module extends AFWObject
                 $this_id = $this->getId();
                 $parent = $this->getParent();
                 if ($parent->getId() != $this_id) list($role_type_id, $path) = $parent->getRoleTypeId($path, $lang);
-                else throw new RuntimeException("this module $this (id=$this_id) is parent of it self !!!");
+                else throw new AfwRuntimeException("this module $this (id=$this_id) is parent of it self !!!");
                 $role_type_id += 10;
                 if ($role_type_id < 0) $role_type_id = -100;
                 if ($role_type_id > 40) $role_type_id = -100;
@@ -215,7 +215,7 @@ class Module extends AFWObject
             $role_type_id = 10; // role/job title
             $path = ".";
         }
-        //else throw new RuntimeException("$this : id_module_type = ".$this->getVal("id_module_type")." id_module_parent = ".$this->getVal("id_module_parent"));
+        //else throw new AfwRuntimeException("$this : id_module_type = ".$this->getVal("id_module_type")." id_module_parent = ".$this->getVal("id_module_parent"));
 
         return array($role_type_id, $path);
     }
@@ -264,7 +264,7 @@ class Module extends AFWObject
                 $id_module_parent = $this->getVal("id_module_parent");
                 $role = Arole::getAssociatedRoleForSubModule($id_module_parent, $this);
                 $this_id = $this->getId();
-                if (!$role) return " "; //throw new RuntimeException("bad returned value for call : Arole::getAssociatedRoleForSubModule($id_module_parent, $this [id=$this_id])");
+                if (!$role) return " "; //throw new AfwRuntimeException("bad returned value for call : Arole::getAssociatedRoleForSubModule($id_module_parent, $this [id=$this_id])");
                 else return $role;
                 break;
 
@@ -2054,7 +2054,7 @@ class Module extends AFWObject
         if (($new_id_module_parent == $this->getVal("id_module_parent")) or
             ($new_id_system == $this->getVal("id_system"))
         ) {
-            throw new RuntimeException("can't clone module in the same system : $this to clone into ($new_id_system,$new_id_module_parent)");
+            throw new AfwRuntimeException("can't clone module in the same system : $this to clone into ($new_id_system,$new_id_module_parent)");
         }
         $titre_short = $this->getVal("titre_short");
 
@@ -2297,7 +2297,7 @@ class Module extends AFWObject
         // require_once("$file_dir_name/../bau/user_story.php");
         /*
                 $application = $this->getParentApplication();
-                if(!$application) throw new RuntimeException("no parent application for this module : $this");*/
+                if(!$application) throw new AfwRuntimeException("no parent application for this module : $this");*/
         if ($this->isSystem()) $my_system_id = $this->getId();
         else $my_system_id = $this->getVal("id_system");
 
@@ -2318,7 +2318,7 @@ class Module extends AFWObject
         $ustr0->where("user_story_goal_id not in (select id from $server_db_prefix"."bau.goal where system_id=$my_system_id and goal_code like 'manual%')");
         $ustr0->update(false);
 
-        // $ustr0->throwError("see my query : ",array("SQL"=>true));
+        // throw new AfwRuntimeException("see my query : ",array("SQL"=>true));
 
         $ustr0->resetUpdates();
         $ustr0->set("arole_id", 0, true);
@@ -2328,7 +2328,7 @@ class Module extends AFWObject
         $ustr0->update(false);
 
 
-        // $ustr0->throwError("end of module::resetAllGeneratedUserStories",array("FIELDS_UPDATED"=>true));
+        // throw new AfwRuntimeException("end of module::resetAllGeneratedUserStories",array("FIELDS_UPDATED"=>true));
     }
 
     public function resetAllGeneratedLookupAroles()

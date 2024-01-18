@@ -14,7 +14,7 @@
                 
                 if($boucle_inf > 50)
                 {
-                      $this->throwError("heavy page halted after $boucle_inf enter to module_config in one request, ".var_export($boucle_inf_arr,true));
+                      throw new AfwRuntimeException("heavy page halted after $boucle_inf enter to module_config in one request, ".var_export($boucle_inf_arr,true));
                 }*/
                 
                 $TECH_FIELDS = array();

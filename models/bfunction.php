@@ -214,7 +214,7 @@ class Bfunction extends AFWObject{
         public function getShortDisplay($lang="ar")
         {                
                 $lang = strtolower(trim($lang));
-                if(!$lang) $lang = self::getGlobalLanguage();
+                if(!$lang) $lang = AfwLanguageHelper::getGlobalLanguage();
                 
                 if($lang=="fr") $lang_suffix = "_en";
                 elseif($lang=="ar") $lang_suffix = "";
@@ -391,7 +391,7 @@ class Bfunction extends AFWObject{
                         $jrl_code = "sdd-manager";
                         $default_job_id = 52;
                         $ustr = UserStory::loadByMainIndex($system_id, $module_id, $default_job_id, $this->getId(), $create_obj_if_not_found=true);
-                        if(!$ustr->getId()) $ustr->throwError("loadByMainIndex($system_id, $module_id, $default_job_id, ".$this->getId().") failed !",array("SQL"=>true));
+                        if(!$ustr->getId()) throw new AfwRuntimeException("loadByMainIndex($system_id, $module_id, $default_job_id, ".$this->getId().") failed !",array("SQL"=>true));
                         $ustr->set("source","not-auto-generated");
                            
                         $ustr->putGoalIfNeeded();
@@ -456,7 +456,7 @@ class Bfunction extends AFWObject{
                         
                         if(count($jrlist)==0)
                         {
-                             throw new RuntimeException("for table $tableObj category = $tbl_cat for operation=$bfOperation, code of jobroles=[$jrl_code] return empty list (method: Atable::getJobrolesByCode)");
+                             throw new AfwRuntimeException("for table $tableObj category = $tbl_cat for operation=$bfOperation, code of jobroles=[$jrl_code] return empty list (method: Atable::getJobrolesByCode)");
                         }
 
                         
@@ -467,12 +467,12 @@ class Bfunction extends AFWObject{
                               $jrlist_text .= $jroleObj->getDisplay($lang);
                               
                               $ustr = UserStory::loadByMainIndex($system_id, $module_id, $jroleObj->getId(), $this->getId(), $create_obj_if_not_found=true);
-                              if(!$ustr->getId()) $ustr->throwError("loadByMainIndex($system_id, $module_id, ".$jroleObj->getId().", ".$this->getId().") failed !",array("SQL"=>true));
+                              if(!$ustr->getId()) throw new AfwRuntimeException("loadByMainIndex($system_id, $module_id, ".$jroleObj->getId().", ".$this->getId().") failed !",array("SQL"=>true));
                               if($ustr->getVal("user_story_goal_id")>0)
                               {
                                      $user_story_goal = $ustr->het("user_story_goal_id");
                                      $ustr_source = $ustr->getVal("source");
-                                     //throw new RuntimeException("generateUserStory user story $ustr ($ustr_source) found with non empty goal $user_story_goal");
+                                     //throw new AfwRuntimeException("generateUserStory user story $ustr ($ustr_source) found with non empty goal $user_story_goal");
                                      //strange but we will put it 0
                                      $ustr->set("user_story_goal_id",0);
                               }
@@ -504,13 +504,13 @@ class Bfunction extends AFWObject{
                                                 $goal_id = $goal->getId();
                                                 $goal_decision = "goal [$goal] for found for table $tableId and goal code ([oper=$bfOperation][categ=$tbl_cat] => $goal_code)";
                                           }
-                                          //if($goal_code_value=="data") throw new RuntimeException("generateUserStory debugg $jroleObj -> findGoalWithCodeEndsWith(-$goal_code_value,$tableId) => $goal");
+                                          //if($goal_code_value=="data") throw new AfwRuntimeException("generateUserStory debugg $jroleObj -> findGoalWithCodeEndsWith(-$goal_code_value,$tableId) => $goal");
                                     }      
                               }
                               
                               if($goal_id) 
                               {
-                                      //if($goal_code_value=="data") throw new RuntimeException("generateUserStory debugg ustr->set(user_story_goal_id, $goal_id)");
+                                      //if($goal_code_value=="data") throw new AfwRuntimeException("generateUserStory debugg ustr->set(user_story_goal_id, $goal_id)");
                                       $ustr->set("user_story_goal_id", $goal_id);
                                       $ustr->set("source","auto-generated");
                                       $ustr->set("comments",$goal_decision);
@@ -628,7 +628,7 @@ class Bfunction extends AFWObject{
                $bf = new Bfunction();
                if((!$id_system) or (!$bf_code_starts_with))
                {
-                   $bf->throwError("You should specify id_system and starts of bf code to disable auto generated BFs.");
+                   throw new AfwRuntimeException("You should specify id_system and starts of bf code to disable auto generated BFs.");
                }
                $bf->select("id_system",$id_system);
                $bf->select("curr_class_module_id",$module_id);
@@ -805,7 +805,7 @@ class Bfunction extends AFWObject{
                 
                 if($getBfunction>10) 
                 {
-                        throw new RuntimeException("getBfunction($id_system, $file_specification, $curr_class_module_id, $curr_class_atable_id, $bf_specification) entered too much time AfwSession::log_all_data = " .AfwSession::log_all_data());
+                        throw new AfwRuntimeException("getBfunction($id_system, $file_specification, $curr_class_module_id, $curr_class_atable_id, $bf_specification) entered too much time AfwSession::log_all_data = " .AfwSession::log_all_data());
                 }
 
                 
@@ -900,7 +900,7 @@ class Bfunction extends AFWObject{
                  $mode = $this->getVal("file_specification");
                  if(($mode=="qsearch") and ($tbl_cat=="entity") and (!$framework_mode_list[$mode]["menu"][$tbl_cat]))
                  {
-                    throw new RuntimeException("$framework_file_php : error in framework ${framework} specification menu for mode $mode for category $tbl_cat not defined true : ".var_export($framework_mode_list,true));
+                    throw new AfwRuntimeException("$framework_file_php : error in framework ${framework} specification menu for mode $mode for category $tbl_cat not defined true : ".var_export($framework_mode_list,true));
                  }
                  
                  
@@ -908,7 +908,7 @@ class Bfunction extends AFWObject{
              }
              else
              {
-                 if($this->getId()==101434) throw new RuntimeException("error this bf should have table ".var_export($this,true));
+                 if($this->getId()==101434) throw new AfwRuntimeException("error this bf should have table ".var_export($this,true));
                  
                  return ($this->getVal("bfunction_type_id")==5);
              }    
@@ -928,7 +928,7 @@ class Bfunction extends AFWObject{
                   $tableObj_name = $tableObj->getVal("atable_name");
                   $cl = $tableObj->getTableClass();
                   $currmod_obj = $tableObj->hetModule();
-                  if(!$currmod_obj) throw new RuntimeException("This BF id = $this_id ($file_specification) is related to table ($tableObj_id) $tableObj_name that does'nt have module defined !");
+                  if(!$currmod_obj) throw new AfwRuntimeException("This BF id = $this_id ($file_specification) is related to table ($tableObj_id) $tableObj_name that does'nt have module defined !");
                   $currmod = $currmod_obj->getVal("module_code");
                   $url = "main.php?Main_Page=afw_mode_".$file_specification.".php&cl=$cl&currmod=$currmod";
                   if($bf_specification and ($bf_specification!="none")) $url .= "&$bf_specification"; 
@@ -1016,7 +1016,7 @@ class Bfunction extends AFWObject{
                        return "BF_${my_upper_mode}_$my_upper_atable_name";
                   
                   }
-                  else throw new RuntimeException("BF $this_id is not special and has no table class defined !");
+                  else throw new AfwRuntimeException("BF $this_id is not special and has no table class defined !");
              }
              
              

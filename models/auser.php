@@ -121,7 +121,7 @@ class Auser extends AFWObject{
         public static function loadByEmail($email,$create_obj_if_not_found=false)
         {
            $obj = new Auser();
-           if(!$email) throw new RuntimeException("loadByMainIndex : email is mandatory field");
+           if(!$email) throw new AfwRuntimeException("loadByMainIndex : email is mandatory field");
  
  
            $obj->select("email",$email);
@@ -154,7 +154,7 @@ class Auser extends AFWObject{
         public static function loadByUsername($username)
         {
            $obj = new Auser();
-           if(!$username) throw new RuntimeException("loadByUsername : username is mandatory attribute");
+           if(!$username) throw new AfwRuntimeException("loadByUsername : username is mandatory attribute");
  
  
            $obj->select("username",$username);
@@ -438,7 +438,7 @@ class Auser extends AFWObject{
         
                 if(count($ids_to_add_arr)==0)
                 {
-                    throw new RuntimeException("give module access to a user need to define roles on this module");
+                    throw new AfwRuntimeException("give module access to a user need to define roles on this module");
                 }
         
                 $my_module_id = 0;
@@ -457,7 +457,7 @@ class Auser extends AFWObject{
                         }
                         else
                         {
-                             throw new RuntimeException(":: giveMeModule($mod,$roles) :: module [$mod] not found");
+                             throw new AfwRuntimeException(":: giveMeModule($mod,$roles) :: module [$mod] not found");
                         }
                 }
                 
@@ -465,12 +465,12 @@ class Auser extends AFWObject{
                 $ids_to_remove_arr = array();
                 
                 
-                //throw new RuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true));
+                //throw new AfwRuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true));
                 $arole_mfk_before = $mau->getVal("arole_mfk");
                 $mau->addRemoveInMfk("arole_mfk",$ids_to_add_arr, $ids_to_remove_arr);
                 $arole_mfk_after = $mau->getVal("arole_mfk");
                 
-                //$mau->throwError("ids_to_add_arr = ".var_export($ids_to_add_arr,true).", arole_mfk_before = $arole_mfk_before , arole_mfk_after=$arole_mfk_after");
+                //throw new AfwRuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true).", arole_mfk_before = $arole_mfk_before , arole_mfk_after=$arole_mfk_after");
                 
                 $mau->update();
                 
@@ -506,11 +506,11 @@ class Auser extends AFWObject{
                 $mau = ModuleAuser::loadByMainIndex($my_module_id, $this->getId(), $create_obj_if_not_found=false);
                 if($mau)
                 
-                // throw new RuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true));
+                // throw new AfwRuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true));
                 // $arole_mfk_before = $mau->getVal("arole_mfk");
                 $mau->addRemoveInMfk("arole_mfk",$ids_to_add_arr, $ids_to_remove_arr);
                 // $arole_mfk_after = $mau->getVal("arole_mfk");                
-                // $mau->throwError("ids_to_add_arr = ".var_export($ids_to_add_arr,true).", arole_mfk_before = $arole_mfk_before , arole_mfk_after=$arole_mfk_after");
+                // throw new AfwRuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true).", arole_mfk_before = $arole_mfk_before , arole_mfk_after=$arole_mfk_after");
                 
                 $mau->update();
                 
@@ -576,7 +576,7 @@ class Auser extends AFWObject{
         
         public function hasModule($mod)
         {
-                // throw new RuntimeException("new UMS coming إن شاء الله");
+                // throw new AfwRuntimeException("new UMS coming إن شاء الله");
                 
                 global $file_dir_name;
                 
@@ -624,12 +624,12 @@ class Auser extends AFWObject{
                 
         public function findMyModule($my_module_id)
         {
-                // throw new RuntimeException("new UMS coming إن شاء الله");
+                // throw new AfwRuntimeException("new UMS coming إن شاء الله");
                 
                 global $log_show;  // $this->sql_reason = "findMyModule($my_module_id) on $this";
                 if(!$my_module_id)
                 {
-                      throw new RuntimeException("findMyModule : module to find not specified !");
+                      throw new AfwRuntimeException("findMyModule : module to find not specified !");
                 }
                 
                 $this->loadMyModules();
@@ -642,7 +642,7 @@ class Auser extends AFWObject{
                       if($mau_item_module_id==$my_module_id)
                       {
                            $mau_found = $mau_item;
-                           // throw new RuntimeException(var_export($mau_found,true));
+                           // throw new AfwRuntimeException(var_export($mau_found,true));
                            break;
                       }
                       //else echo " compare $my_module_id != id of module of $mau_item = $mau_item_module_id <br>"; 
@@ -1240,7 +1240,7 @@ class Auser extends AFWObject{
         {
                 // user has only one organization 
                 // $module param is obsolete
-                if($module) throw new RuntimeException("user has only one organization => module param is obsolete but has value = $module");
+                if($module) throw new AfwRuntimeException("user has only one organization => module param is obsolete but has value = $module");
 
                 $company_id = $this->getMyOrganizationId();
                 $empl = $this->getEmployee($company_id);
@@ -1256,12 +1256,12 @@ class Auser extends AFWObject{
         {
                 // user has only one organization 
                 // $module param is obsolete
-                if($module) throw new RuntimeException("user has only one organization => module param is obsolete but has value = $module");
+                if($module) throw new AfwRuntimeException("user has only one organization => module param is obsolete but has value = $module");
 
                 if($this->myDepartmentId) return $this->myDepartmentId;
                 $this->myDepartmentId = 0;
                 $me = AfwSession::getUserIdActing();
-                // throw new RuntimeException("why getMyDepartmentName and where ?");
+                // throw new AfwRuntimeException("why getMyDepartmentName and where ?");
                 
                 if($me<=1000000) $empl = $this->getEmployee();
                 else $empl = null;
@@ -1298,7 +1298,7 @@ class Auser extends AFWObject{
         public function getMyDepartmentName($lang="ar")
         {
                 $me = AfwSession::getUserIdActing();
-                // throw new RuntimeException("why getMyDepartmentName and where ?");
+                // throw new AfwRuntimeException("why getMyDepartmentName and where ?");
                 
                 
                 if($me<=1000000) $empl = $this->getEmployee();
@@ -1335,7 +1335,7 @@ class Auser extends AFWObject{
         public function getMyJob($lang="ar")
         {
                 $me = AfwSession::getUserIdActing();
-                // throw new RuntimeException("why getMyDepartmentName and where ?");
+                // throw new AfwRuntimeException("why getMyDepartmentName and where ?");
                 
                 if($me<=1000000) $empl = $this->getEmployee();
                 else $empl = null;
@@ -1352,7 +1352,7 @@ class Auser extends AFWObject{
         {
                 // user has only one organization 
                 // $module param is obsolete
-                if($module) throw new RuntimeException("user has only one organization => module param is obsolete but has value = [$module]");
+                if($module) throw new AfwRuntimeException("user has only one organization => module param is obsolete but has value = [$module]");
                 $objme = AfwSession::getUserConnected();
                 
                 if($this->myOrganizationId) return $this->myOrganizationId;
@@ -1888,7 +1888,7 @@ class Auser extends AFWObject{
         {
                 global $PUBLIC_MODULE_ROLES, $ACCEPT_WITHOUT_ROLE_MODULE;                
 
-                if($MODULE=="lib") return array(true, "done"); // throw new RuntimeException("initWithModule($MODULE)???");
+                if($MODULE=="lib") return array(true, "done"); // throw new AfwRuntimeException("initWithModule($MODULE)???");
                 
                 
                 if($ACCEPT_WITHOUT_ROLE_MODULE[$MODULE])
