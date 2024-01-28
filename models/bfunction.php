@@ -279,7 +279,7 @@ class Bfunction extends AFWObject{
 		return true;
 	}
         
-        protected function afterInsert($id, $fields_updated) 
+        public function afterInsert($id, $fields_updated) 
         {
                 global $lang;
                 if(($this->isToBeInUserStory()) and (!$this->isEmpty()) and (!$this->isInUserStory()))
@@ -590,7 +590,7 @@ class Bfunction extends AFWObject{
                 }
                 else
                 {
-                        $currAtableName = self::classToTable($curr_cl);
+                        $currAtableName = AfwStringHelper::classToTable($curr_cl);
                         $currAtable = Atable::getAtableByName($currmodule->getId(), $currAtableName);
                 }
                 $bf_new = false;
@@ -1256,7 +1256,7 @@ class Bfunction extends AFWObject{
         }
         
         
-        protected function beforeDelete($id,$id_replace) 
+        public function beforeDelete($id,$id_replace) 
         {
             
  

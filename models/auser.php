@@ -128,7 +128,7 @@ class Auser extends AFWObject{
  
            if($obj->load())
            {
-                if(!$obj->id) self::lightSafeDie("Auser::loadByEmail($email) = Auser[$obj->id] => ".var_export($obj,true));
+                if(!$obj->id) AfwRunHelper::lightSafeDie("Auser::loadByEmail($email) = Auser[$obj->id] => ".var_export($obj,true));
                 if($create_obj_if_not_found) $obj->activate();
                 return $obj;
            }
@@ -1508,7 +1508,7 @@ class Auser extends AFWObject{
                         
                 }
 
-                return self::pbm_result($err, $info);
+                return AfwFormatHelper::pbm_result($err, $info);
         }
 
 
@@ -1548,8 +1548,8 @@ class Auser extends AFWObject{
                 $sent_by = "nothing";
                 $sent_to = "nobody";
                 $len = AfwSession::config("password_generated_length", 4);
-                $pwd = self::password_generate($username,$len);
-                $pwd_enc = self::password_encrypt($pwd);
+                $pwd = AfwEncryptionHelper::password_generate($username,$len);
+                $pwd_enc = AfwEncryptionHelper::password_encrypt($pwd);
                 $this->set("pwd",$pwd_enc);
                 if($commit) 
                 {
@@ -1625,7 +1625,7 @@ class Auser extends AFWObject{
 		return true;
 	}
         
-        protected function afterUpdate($id, $fields_updated) 
+        public function afterUpdate($id, $fields_updated) 
         {
                 
                 $objme = AfwSession::getUserConnected();
@@ -1751,7 +1751,7 @@ class Auser extends AFWObject{
           return $importClassesList;
       }
       
-      protected function beforeDelete($id,$id_replace) 
+      public function beforeDelete($id,$id_replace) 
         {
             
  

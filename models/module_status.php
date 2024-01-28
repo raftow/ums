@@ -175,14 +175,14 @@ class ModuleStatus extends AFWObject{
                 
                 
                 if(!$this->getVal("lookup_code")) {
-                           $this->set("lookup_code",self::constNaming($this->getVal("titre_short_en")));
+                           $this->set("lookup_code",AfwStringHelper::constNaming($this->getVal("titre_short_en")));
                 }
                 
                 return true;
         }
         
         
-        protected function beforeDelete($id,$id_replace) 
+        public function beforeDelete($id,$id_replace) 
         {
             
             

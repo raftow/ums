@@ -237,7 +237,7 @@ class Arole extends AFWObject{
                $titre_short          = $subModuleObj->getVal("titre_short");
                $titre_short_en       = $subModuleObj->getVal("titre_short_en");
                if(!$titre_short_en) 
-                  $titre_short_en = Arole::toEnglishText($role_code);
+                  $titre_short_en = AfwStringHelper::toEnglishText($role_code);
                $titre                = $subModuleObj->getVal("titre");
                $titre_en             = $subModuleObj->getVal("titre_en");
                list($arole_type_id, $path) = $subModuleObj->getRoleTypeId("",$lang);
@@ -902,7 +902,7 @@ class Arole extends AFWObject{
               return array($added_count, $removed_count, $menu_added_count, $menu_removed_count);
         }
         
-        protected function beforeDelete($id,$id_replace) 
+        public function beforeDelete($id,$id_replace) 
         {
             
             

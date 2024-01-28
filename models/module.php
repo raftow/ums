@@ -385,7 +385,7 @@ class Module extends AFWObject
 		    break;*/
         }
 
-        return $this->calcFormuleResult($attribute);
+        return AfwFormulaHelper::calculateFormulaResult($this,$attribute);
     }
 
     public function getAllRolesAndSubRoles()
@@ -488,10 +488,10 @@ class Module extends AFWObject
     public function getMyRelationTables($to_ext = true, $from_ext = true, $to_int = true, $from_int = true)
     {
         $all_rel_tables = array();
-        if ($to_ext) $all_rel_tables = self::hzm_array_merge($all_rel_tables, self::hzm_array_merge($all_rel_tables, $this->get("ext_anst")));
-        if ($from_ext) $all_rel_tables = self::hzm_array_merge($all_rel_tables, self::hzm_array_merge($all_rel_tables, $this->get("ext_tome")));
-        if ($to_int) $all_rel_tables = self::hzm_array_merge($all_rel_tables, self::hzm_array_merge($all_rel_tables, $this->get("anst")));
-        if ($from_int) $all_rel_tables = self::hzm_array_merge($all_rel_tables, self::hzm_array_merge($all_rel_tables, $this->get("tome")));
+        if ($to_ext) $all_rel_tables = AfwStringHelper::hzm_array_merge($all_rel_tables, AfwStringHelper::hzm_array_merge($all_rel_tables, $this->get("ext_anst")));
+        if ($from_ext) $all_rel_tables = AfwStringHelper::hzm_array_merge($all_rel_tables, AfwStringHelper::hzm_array_merge($all_rel_tables, $this->get("ext_tome")));
+        if ($to_int) $all_rel_tables = AfwStringHelper::hzm_array_merge($all_rel_tables, AfwStringHelper::hzm_array_merge($all_rel_tables, $this->get("anst")));
+        if ($from_int) $all_rel_tables = AfwStringHelper::hzm_array_merge($all_rel_tables, AfwStringHelper::hzm_array_merge($all_rel_tables, $this->get("tome")));
 
         return $all_rel_tables;
     }
@@ -918,7 +918,7 @@ class Module extends AFWObject
         return true;
     }
 
-    protected function afterInsert($id, $fields_updated)
+    public function afterInsert($id, $fields_updated)
     {
         // create goals for this application and for the standard IT Jobs
         $this->genereITJobsAndGoals();
@@ -1437,7 +1437,7 @@ class Module extends AFWObject
             $role_code =  "$application_code-module-$my_id";
             $titre_short = $this->getVal("titre_short");
             $titre_short_en = $this->getVal("titre_short_en");
-            if(!$titre_short_en) $titre_short_en = self::toEnglishText($role_code);
+            if(!$titre_short_en) $titre_short_en = AfwStringHelper::toEnglishText($role_code);
             
             $titre = $this->getVal("titre");
             $titre_en = $this->getVal("titre_en");
@@ -1956,7 +1956,7 @@ class Module extends AFWObject
 
         require_once("$file_dir_name/../$cc/all_to_pag.php");
         foreach ($arr_all_files as $topag_table) {
-            $cl = AFWObject::tableToClass($topag_table);
+            $cl = AfwStringHelper::tableToClass($topag_table);
             if ($cl and (!$pagged_arr[$cl])) {
                 $myObj = new $cl();
                 $pagged_arr[$cl] = true;
@@ -2092,7 +2092,7 @@ class Module extends AFWObject
                     $role_code = "module-$id_sub_mod";
                     $titre_short = $this->getVal("titre_short");
                     $titre_short_en=$this->getVal("titre_short_en");
-                    if(!$titre_short_en) $titre_short_en = Arole::toEnglishText($role_code);
+                    if(!$titre_short_en) $titre_short_en = AfwStringHelper::toEnglishText($role_code);
                     $titre=$this->getVal("titre");
                     $titre_en=$this->getVal("titre_en");
                     list($arole_type_id, $path) = $this->getRoleTypeId("",$lang);
@@ -2105,7 +2105,7 @@ class Module extends AFWObject
          }*/
 
 
-    protected function beforeDelete($id, $id_replace)
+    public function beforeDelete($id, $id_replace)
     {
 
 
@@ -2483,7 +2483,7 @@ class Module extends AFWObject
 
     public function getAllMyGoals()
     {
-        return self::hzm_array_merge($this->get("applicationGoalList"), $this->get("otherGoalList"));
+        return AfwStringHelper::hzm_array_merge($this->get("applicationGoalList"), $this->get("otherGoalList"));
     }
 
     public function fld_CREATION_USER_ID()

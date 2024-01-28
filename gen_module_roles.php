@@ -78,7 +78,7 @@
                                             $role_code =  "module-$id_sub_mod";
                                             $titre_short=$submod_obj->getVal("titre_short");
                                             $titre_short_en=$submod_obj->getVal("titre_short_en");
-                                            if(!$titre_short_en) $titre_short_en = Arole::toEnglishText($role_code);
+                                            if(!$titre_short_en) $titre_short_en = AfwStringHelper::toEnglishText($role_code);
                                             $titre=$submod_obj->getVal("titre");
                                             $titre_en=$submod_obj->getVal("titre_en");
                                             list($arole_type_id, $path) = $submod_obj->getRoleTypeId("",$lang);
