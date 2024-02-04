@@ -2743,7 +2743,7 @@ class Module extends AFWObject
     }
 
 
-    protected function myShortNameToAttributeName($attribute){
+    public function myShortNameToAttributeName($attribute){
         if($attribute=="mainsh") return "id_main_sh";
         if($attribute=="title") return "titre_short";
         if($attribute=="type") return "id_module_type";

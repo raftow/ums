@@ -1024,7 +1024,7 @@ class Arole extends AFWObject{
             return false;
         }
         
-        protected function myShortNameToAttributeName($attribute){
+        public function myShortNameToAttributeName($attribute){
             if($attribute=="sys") return "system_id";
             if($attribute=="module") return "module_id";
             if($attribute=="type") return "arole_type_id";

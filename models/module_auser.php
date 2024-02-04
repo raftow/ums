@@ -191,5 +191,12 @@ class ModuleAuser extends AFWObject{
                return $html;
 
           }
+
+          public function myShortNameToAttributeName($attribute){
+               if($attribute=="user") return "id_auser";
+               if($attribute=="module") return "id_module";
+               if($attribute=="roles") return "arole_mfk";
+               return $attribute;
+          }
 }
 ?>
