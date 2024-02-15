@@ -236,5 +236,17 @@ class AroleBf extends AFWObject{
         {
         	return  "avail";
         }
+
+        public function shouldBeCalculatedField($attribute){
+            if($attribute=="module_id") return true;
+            return false;
+        }
+
+        public function myShortNameToAttributeName($attribute){
+            if($attribute=="module") return "module_id";
+            if($attribute=="role") return "arole_id";
+            if($attribute=="bf") return "bfunction_id";
+            return $attribute;
+        }
 }
 ?>

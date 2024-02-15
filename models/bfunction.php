@@ -1387,7 +1387,7 @@ class Bfunction extends AFWObject{
         {
                 global $MENU_ICONS;
                 $icon_table = "";
-                $tableObj = $this->snh("table");
+                $tableObj = $this->het("table");
                 if($tableObj)
                 {
                         $icon_table = $tableObj->icon;
@@ -1439,6 +1439,16 @@ class Bfunction extends AFWObject{
         {
                 if($attribute=="bfunction_code") return true;
                 return false;
+        }
+
+        public function myShortNameToAttributeName($attribute){
+                if($attribute=="system") return "id_system";
+                if($attribute=="type") return "bfunction_type_id";
+                if($attribute=="table") return "curr_class_atable_id";
+                if($attribute=="title") return "titre_short";
+                if($attribute=="title_en") return "titre_short_en";
+                if($attribute=="special") return "is_special";
+                return $attribute;
         }
                                 
                                                                                   
