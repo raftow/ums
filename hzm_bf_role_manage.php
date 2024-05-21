@@ -55,14 +55,7 @@
       
       $current_mod_submod = "$moduleName / $subModuleName";
       
-      if(!$framework) $framework = $MODULE_FRAMEWORK[$moduleId];;
-      if(!$framework) $framework = 1; //@todo : temporary
-      if(!$framework) 
-      {
-            $out_scr = "define framework for module $moduleId please";
-            return;
-      }
-      //else die("framework = $framework"); 
+      $framework=AfwSession::config("framework_id", 1);
 
       if($bfrm_submit)
       {
@@ -88,7 +81,7 @@
       //die("count(tbrg_mat) = " . count($tbrg_mat)." tbrg_mat = ".var_export($tbrg_mat,true));
       
       
-      
+      $framework=AfwSession::config("framework_id", 1);
       include("$file_dir_name/../pag/framework_${framework}_specification.php");
 
       ob_start();

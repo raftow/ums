@@ -3,7 +3,8 @@
 // 6/7/2021 :
 // ALTER TABLE `arole` CHANGE `titre_en` `titre_en` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL; 
 // ALTER TABLE `arole` CHANGE `titre_short_en` `titre_short_en` VARCHAR(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL; 
-
+// 21/3/2024 :
+// ALTER TABLE c0ums.arole CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 $file_dir_name = dirname(__FILE__); 
                 
 // old include of afw.php
@@ -845,7 +846,7 @@ class Arole extends AFWObject{
         {
             global $file_dir_name;
         
-              
+              $framework=AfwSession::config("framework_id", 1);
               include("$file_dir_name/../pag/framework_${framework}_specification.php");
               $removed_count = 0;
               $added_count = 0;

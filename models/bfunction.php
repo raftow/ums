@@ -273,7 +273,7 @@ class Bfunction extends AFWObject{
                 
                 if(($this->isToBeInUserStory()) and (!$this->isEmpty()) and (!$this->isInUserStory()))
                 {
-                    $this->generateUserStory($lang, 1, false);  
+                    $this->generateUserStory($lang, 0, false);  
                 }
                 
 		return true;
@@ -284,7 +284,7 @@ class Bfunction extends AFWObject{
                 global $lang;
                 if(($this->isToBeInUserStory()) and (!$this->isEmpty()) and (!$this->isInUserStory()))
                 {
-                    $this->generateUserStory($lang, 1, false);  
+                    $this->generateUserStory($lang, 0, false);  
                 }
         
         }
@@ -368,8 +368,9 @@ class Bfunction extends AFWObject{
              return -1;
         }
         
-        public function generateUserStory($lang="ar", $framework=1, $commit=true)
+        public function generateUserStory($lang="ar", $framework=0, $commit=true)
         {
+                if(!$framework) $framework=AfwSession::config("framework_id", 1);
                 if(!$this->getId()) return array("user story can't be created because bfunction is still empty","");
                 
                 $this_display = $this->getShortDisplay($lang);
@@ -887,14 +888,13 @@ class Bfunction extends AFWObject{
         
         public function isMenu()
         {
-             
+             $framework=AfwSession::config("framework_id", 1);
              if($this->getVal("curr_class_atable_id"))
              {
                  $tbl = $this->het("curr_class_atable_id");
                  if($tbl) $tbl_cat = $tbl->tableCategory();
                  else $tbl_cat = "default";
                  
-                 $framework = 1; // $this->getVal("framework");
                  $framework_file_php = dirname(__FILE__)."/../../pag/framework_${framework}_specification.php";
                  include($framework_file_php);
                  $mode = $this->getVal("file_specification");
@@ -1023,7 +1023,7 @@ class Bfunction extends AFWObject{
         
         }
         
-        protected function getSpecificDataErrors($lang="ar",$show_val=true,$step="all")
+        protected function getSpecificDataErrors($lang="ar",$show_val=true,$step="all",$erroned_attribute=null,$stop_on_first_error=false, $start_step=null, $end_step=null)
         {
               $sp_errors = array();
               
@@ -1127,7 +1127,7 @@ class Bfunction extends AFWObject{
         
         public function getIsMenu()
         {
-                $framework=1;
+                $framework=AfwSession::config("framework_id", 1);
                 
                 if(!$this->getId()) return false;
                 $tableObj = $this->het("curr_class_atable_id");
