@@ -1647,7 +1647,7 @@ class Module extends AFWObject
         return (file_exists($i_file));
     }
 
-    public function genereIniPhp()
+    public function genereIniPhpFile()
     {
         $open_php = "<?php \n";
         // genere ini file
