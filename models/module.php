@@ -101,6 +101,11 @@ class Module extends AFWObject
             $objModule->set("id", $module_id);
             $objModule->set("module_code", $module_code);
             $objModule->insert();
+            $message = "The module $module_code has been created";
+        }
+        else
+        {
+            $message = "The module $module_code has been updated";
         }
 
         include("$file_dir_name/../$module_code/ini.php");
@@ -111,7 +116,7 @@ class Module extends AFWObject
         $objModule->commit();
 
 
-        return $objModule;
+        return [$objModule, $message];
     }
 
     public static function loadByCodes($object_code_arr, $create_if_not_exists_with_name = "", $lang = "ar", $rename_if_exists = false)
@@ -429,14 +434,15 @@ class Module extends AFWObject
     }
 
 
-    public function calcPhp_module()
+    public function calcPhp_module($textArea=true)
     {
         global $MODE_BATCH_LOURD, $MODE_SQL_PROCESS_LOURD;
 
         $MODE_BATCH_LOURD = true;
         $MODE_SQL_PROCESS_LOURD = true;
-
-        $source_php = "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'><?php\n"; // ";
+        $source_php = "";
+        if($textArea) $source_php .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
+        $source_php .= "<?php\n"; // ";
         $tab_info = array();
         $tbf_info = array();
         $role_info = array();
@@ -480,7 +486,8 @@ class Module extends AFWObject
         $source_php .= "\n\t\$tbf_info = " . var_export($tbf_info, true) . ";";
         $source_php .= "\n\t\$role_info = " . var_export($role_info, true) . ";";
 
-        $source_php .= "\n ?></textarea>"; // 
+        $source_php .= "\n ?>";
+        if($textArea) $source_php .= "</textarea>"; // 
 
         return $source_php;
     }
@@ -1640,6 +1647,19 @@ class Module extends AFWObject
         return (file_exists($i_file));
     }
 
+    public function genereIniPhp()
+    {
+        $open_php = "<?php \n";
+        // genere ini file
+        $this_id = $this->id;
+        $currmod = $this->getVal("module_code");
+        $module_def = $open_php;
+        $module_def .= "   \$MODULE='$currmod';\n";
+        $module_def .= "   \$THIS_MODULE_ID = $this_id;\n";
+
+        return $module_def;
+    }
+
     public function installMe($lang = "ar", $create_project = true, $update_files = true)
     {
         global $ROOT_WWW_PATH, $START_GEN_TREE;
@@ -1648,9 +1668,9 @@ class Module extends AFWObject
         $source_path = $START_GEN_TREE;
         // $dest_path = $START_GEN_TREE."php/";
         $dest_path = $ROOT_WWW_PATH;
-        $this_id = $this->id;
+        
         $currmod = $this->getVal("module_code");
-        $open_php = "<?php \n";
+        
         // require_once("$file_dir_name/../lib/afw/afw_copy_motor.php");
 
         if ($create_project) {
@@ -1663,10 +1683,7 @@ class Module extends AFWObject
 
         if ($update_files) {
 
-            // create ini file
-            $module_def = $open_php;
-            $module_def .= "   \$MODULE='$currmod';\n";
-            $module_def .= "   \$THIS_MODULE_ID = $this_id;\n";
+            $module_def = $this->genereIniPhp();
 
             AfwFileSystem::write($dest_path . $currmod . "/ini.php", $module_def . $this->php_ini, false);
 
