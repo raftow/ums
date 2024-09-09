@@ -260,7 +260,7 @@ class Module extends AFWObject
 
     public function getFormuleResult($attribute, $what='value')
     {
-        global $objme;
+        $objme = AfwSession::getUserConnected();
         switch ($attribute) {
 
             case "assrole":
@@ -825,9 +825,7 @@ class Module extends AFWObject
 
     public function select_visibilite_horizontale($dropdown = false)
     {
-        global $me, $objme;
         $this->select_visibilite_horizontale_default();
-        $id_main_sh = 3;
     }
 
 

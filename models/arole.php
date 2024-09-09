@@ -226,7 +226,7 @@ class Arole extends AFWObject{
         
         public static function getOrCreateLookupSubRoleForSubModule($lookupRole, $application_code, $module_id, $subModuleObj)
         {
-           global $lang, $objme;
+           global $lang;
                if(!$lookupRole) throw new AfwRuntimeException("lookupRole is required for Arole::getOrCreateLookupSubRoleForSubModule method");
                
                if($subModuleObj) $subModuleObjId = $subModuleObj->getId();
