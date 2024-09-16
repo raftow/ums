@@ -76,8 +76,8 @@ class Module extends AFWObject
         $module_code = $object_code_arr[0];
 
         $file_dir_name = dirname(__FILE__);
-        include("$file_dir_name/../$module_code/module_config.php");
-        if ($module_code != $MODULE) throw new AfwRuntimeException("reverseByCodes : module_code is not correct [=$MODULE] in module_config file");
+        include("$file_dir_name/../../$module_code/module_config.php");
+        if ($module_code != $MODULE) throw new AfwRuntimeException("reverseByCodes : module_code is not correct [\$MODULE=$MODULE] in $file_dir_name/../$module_code/module_config.php file");
         $module_id = $THIS_MODULE_ID;
         if (!$THIS_MODULE_ID) throw new AfwRuntimeException("reverseByCodes : THIS_MODULE_ID is not defined in module_config file for module $module_code");
 
