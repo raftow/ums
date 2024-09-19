@@ -31,7 +31,7 @@
 				),
 
 			'lang_id' => array('SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 40,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'lang',  'ANSMODULE' => 'pag',  'DEFAUT' => 1,  'SHORTNAME' => 'lang',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'TYPE' => 'enum',  'ANSWER' => 'FUNCTION',   'DEFAUT' => 1,  'SHORTNAME' => 'lang',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 1, 
 				),
 
@@ -41,7 +41,7 @@
 				),
 
 			'country_id' => array('SEARCH' => true, 'QSEARCH' => true, 'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'country',  'ANSMODULE' => 'pag',  'DEFAUT' => 0,  'FGROUP' => '',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'TYPE' => 'FK',  'ANSWER' => 'country',  'ANSMODULE' => 'ums',  'DEFAUT' => 0,  'FGROUP' => '',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, 
 				),
 
@@ -108,7 +108,7 @@
 				),
 
 			'city_id' => array('STEP' => 2, 'QSEARCH' => true, 'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'SHORTNAME' => 'city',  'ANSWER' => 'city',  'ANSMODULE' => 'pag',  'DEFAUT' => 0,  'FGROUP' => 'work_contact',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'TYPE' => 'FK',  'SHORTNAME' => 'city',  'ANSWER' => 'city',  'ANSMODULE' => 'ums',  'DEFAUT' => 0,  'FGROUP' => 'work_contact',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, 
 				),
 
@@ -174,7 +174,7 @@
                                                                 'QEDIT' => false, 'ANSWER' => 'ugroup', 'ANSMODULE' => 'ums', 'TYPE' => 'MFK', 'FGROUP' => 'tech_fields'),
 
                         'sci_id'                        => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'QEDIT' => false, 
-                                                                'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'pag', 'FGROUP' => 'tech_fields'),
+                                                                'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'ums', 'FGROUP' => 'tech_fields'),
 
                         'tech_notes' 	                => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'TYPE' => 'TEXT', 'CATEGORY' => 'FORMULA', "SHOW-ADMIN" => true, 
                                                                 'TOKEN_SEP'=>"§", 'READONLY'=>true, "NO-ERROR-CHECK"=>true, 'FGROUP' => 'tech_fields'),

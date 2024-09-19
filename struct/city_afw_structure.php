@@ -1,45 +1,55 @@
 <?php 
-        class UmsAroleBfAfwStructure
+        class UmsCityAfwStructure
         {
                 public static $DB_STRUCTURE = array(
 
                         
 			'id' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
-				'TYPE' => 'PK',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'TYPE' => 'PK',    'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-		'module_id' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'module',  'SHOW' => false,  'EDIT' => false,  
-				'CATEGORY' => 'SHORTCUT',  'SHORTCUT' => 'bfunction_id.curr_class_module_id',  'SHORTNAME' => 'module',  'ANSMODULE' => 'ums',  'SEARCH-BY-ONE' => '',  'DISPLAY' => false,  'STEP' => 1,  
+			'country_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => false,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
+				'TYPE' => 'FK',  'ANSWER' => 'country',  'ANSMODULE' => 'ums', 'QSEARCH' => true, 
+				'WHERE' => "id = 183", 
+				 'SIZE' => 40,  'DEFAUT' => 0,    'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'arole_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 64,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'arole',  'SHORTNAME' => 'role',  'ANSMODULE' => 'ums',  'DEFAUT' => 0,  
-				'WHERE' => "(§bfunction_id§ = '0' or §module_id§ = 0 or module_id = §module_id§)", 
-				 'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, 
+			'region_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true, 'QSEARCH' => true, 'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
+				'TYPE' => 'FK',  'ANSWER' => 'region',  'ANSMODULE' => 'ums',  'SIZE' => 40,  'DEFAUT' => 0,    'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'bfunction_id' => array(
-				'RELATION' => 'OneToMany',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 64,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'bfunction',  'ANSMODULE' => 'ums',  'SHORTNAME' => 'bf',  'DEFAUT' => 0,  'AUTOCOMPLETE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, 
+			'city_name' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true, 
+				 'EDIT' => true,  'QEDIT' => true,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => true,  
+				'TYPE' => 'TEXT',  'SIZE' => 32,  'QSEARCH' => true,  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'menu' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  
-				'CSS' => 'width_pct_25',  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'YN',  'CHECKBOX' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', ),
+			'city_name_en' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  
+				'TYPE' => 'TEXT',  'SIZE' => 32,  'QSEARCH' => true,  'DISPLAY' => true,  'STEP' => 1,  'UTF8' => true, 
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),
 
-			'avail' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'DEFAUT' => 'Y',  
-				'TYPE' => 'YN',  'QEDIT-ADMIN' => true,  'CHECKBOX' => true,  
-				'CSS' => 'width_pct_25',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 'Y', ),
+			'lookup_code' => array(
+				'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SIZE' => 64,  'QEDIT' => true,    'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'QSEARCH' => true,
+				),
 
-			'source' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 60,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  
-				'TYPE' => 'TEXT',  'UTF8' => false,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+			'moe_code' => array(
+					'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SIZE' => 64,  'QEDIT' => true,    'DISPLAY' => true,  'STEP' => 1,  
+					'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'QSEARCH' => true,
+					),	
+
+			'symbol' => array(
+				'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SIZE' => 5,  'QEDIT' => true,    'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'QSEARCH' => true,
+				),
+
+			'avail' => array(
+				'TYPE' => 'YN',  
+				'CATEGORY' => '',  'SHOW-ADMIN' => true,  'ROLES' => '',  'DEFAUT' => 'Y',    'DISPLAY' => '',  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 

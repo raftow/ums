@@ -1,5 +1,5 @@
 <?php 
-        class UmsAroleBfAfwStructure
+        class UmsDocTypeAfwStructure
         {
                 public static $DB_STRUCTURE = array(
 
@@ -9,37 +9,34 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-		'module_id' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'module',  'SHOW' => false,  'EDIT' => false,  
-				'CATEGORY' => 'SHORTCUT',  'SHORTCUT' => 'bfunction_id.curr_class_module_id',  'SHORTNAME' => 'module',  'ANSMODULE' => 'ums',  'SEARCH-BY-ONE' => '',  'DISPLAY' => false,  'STEP' => 1,  
+			'lookup_code' => array(
+				'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SIZE' => 64,  'QEDIT' => true,  'SHORTNAME' => 'code',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'arole_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 64,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'arole',  'SHORTNAME' => 'role',  'ANSMODULE' => 'ums',  'DEFAUT' => 0,  
-				'WHERE' => "(§bfunction_id§ = '0' or §module_id§ = 0 or module_id = §module_id§)", 
-				 'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, 
+			'titre_short' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+				'TYPE' => 'TEXT',  'UTF8' => true,  'SIZE' => 64,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'bfunction_id' => array(
-				'RELATION' => 'OneToMany',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 64,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'bfunction',  'ANSMODULE' => 'ums',  'SHORTNAME' => 'bf',  'DEFAUT' => 0,  'AUTOCOMPLETE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, 
+			'titre' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+				'TYPE' => 'TEXT',  'UTF8' => true,  'SIZE' => 196,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'menu' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  
-				'CSS' => 'width_pct_25',  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'YN',  'CHECKBOX' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', ),
+			'valid_ext' => array('SEARCH' => true,  'QSEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'SHORT_SIZE' => 120,  'SIZE' => 255,  'MIN-SIZE' => 2,  'CHAR_TEMPLATE' => '',  'MANDATORY' => true,  'UTF8' => true,  
+				'TYPE' => 'TEXT',  'READONLY' => false,  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
+				),
 
-			'avail' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'DEFAUT' => 'Y',  
-				'TYPE' => 'YN',  'QEDIT-ADMIN' => true,  'CHECKBOX' => true,  
-				'CSS' => 'width_pct_25',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 'Y', ),
+		        'extentions' => array('STEP' => 5,  'SIZE' => 255,  'SHOW' => true,  'RETRIEVE' => true,  
+				'CATEGORY' => 'FORMULA',  
+				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),
 
-			'source' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 60,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  
-				'TYPE' => 'TEXT',  'UTF8' => false,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+			'avail' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  
+				'TYPE' => 'YN',  'DEFAUT' => 'Y',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 

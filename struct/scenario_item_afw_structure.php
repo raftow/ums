@@ -1,45 +1,46 @@
 <?php 
-        class UmsAroleBfAfwStructure
+        class UmsScenarioItemAfwStructure
         {
                 public static $DB_STRUCTURE = array(
 
                         
-			'id' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+			'id' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
 				'TYPE' => 'PK',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-		'module_id' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'module',  'SHOW' => false,  'EDIT' => false,  
-				'CATEGORY' => 'SHORTCUT',  'SHORTCUT' => 'bfunction_id.curr_class_module_id',  'SHORTNAME' => 'module',  'ANSMODULE' => 'ums',  'SEARCH-BY-ONE' => '',  'DISPLAY' => false,  'STEP' => 1,  
+			'atable_id' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => false,  'QEDIT' => true,  'EDIT' => true,  
+				'TYPE' => 'INT',  'SIZE' => 40,  'DEFAUT' => 0,  'SHORTNAME' => 'table',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'arole_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 64,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'arole',  'SHORTNAME' => 'role',  'ANSMODULE' => 'ums',  'DEFAUT' => 0,  
-				'WHERE' => "(§bfunction_id§ = '0' or §module_id§ = 0 or module_id = §module_id§)", 
-				 'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, 
+			'step_num' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  
+				'TYPE' => 'INT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'bfunction_id' => array(
-				'RELATION' => 'OneToMany',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 64,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'bfunction',  'ANSMODULE' => 'ums',  'SHORTNAME' => 'bf',  'DEFAUT' => 0,  'AUTOCOMPLETE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, 
+			'step_name_ar' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'QEDIT' => true,  'EDIT' => true,  'UTF8' => true,  'SIZE' => 64,  
+				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'menu' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  
-				'CSS' => 'width_pct_25',  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'YN',  'CHECKBOX' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', ),
+			'step_name_en' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'QEDIT' => true,  'EDIT' => true,  'UTF8' => true,  'SIZE' => 64,  
+				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),
 
-			'avail' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'DEFAUT' => 'Y',  
-				'TYPE' => 'YN',  'QEDIT-ADMIN' => true,  'CHECKBOX' => true,  
-				'CSS' => 'width_pct_25',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 'Y', ),
+			'help_text' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 128,  'UTF8' => true,  
+				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),
 
-			'source' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 60,  'SEARCH-ADMIN' => true,  'EDIT-ADMIN' => true,  
-				'TYPE' => 'TEXT',  'UTF8' => false,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+			'max_order' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 32,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
+				'TYPE' => 'INT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),
+
+			'avail' => array('IMPORTANT' => 'IN',  'SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false,  'QEDIT' => true,  'QEDIT-ADMIN' => false,  'DEFAUT' => 'Y',  'EDIT-ADMIN' => true,  
+				'TYPE' => 'YN',  'SEARCH-BY-ONE' => '',  'DISPLAY' => '',  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
