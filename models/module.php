@@ -561,10 +561,10 @@ class Module extends AFWObject
 
         if (($mode == "mode_tbs") and ($this->isApplication())) {
             $mod_id = $this->getId();
-
+            /*
             $link = array();
             $title = "إدارة جداول التطبيق : " . $this->valTitre_short();
-            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=pag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=N&sel_is_entity=Y";
+            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=N&sel_is_entity=Y";
             $link["TITLE"] = $title;
             $link["UGROUPS"] = array();
             $otherLinksArray[] = $link;
@@ -572,7 +572,7 @@ class Module extends AFWObject
             unset($link);
             $link = array();
             $title = "إنشاء جدول جديد في : " . $this->valTitre_short();
-            $link["URL"] = "main.php?Main_Page=afw_mode_edit.php&cl=Atable&currmod=pag&sel_id_module=$mod_id&sel_is_lookup=N&sel_is_entity=Y";
+            $link["URL"] = "main.php?Main_Page=afw_mode_edit.php&cl=Atable&currmod=p ag&sel_id_module=$mod_id&sel_is_lookup=N&sel_is_entity=Y";
             $link["TITLE"] = $title;
             $link["UGROUPS"] = array();
             $otherLinksArray[] = $link;
@@ -581,18 +581,19 @@ class Module extends AFWObject
             $link = array();
             $mod_id = $this->getId();
             $title = "إدارة الصلاحيات على جداول التطبيق : " . $this->valTitre_short();
-            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=pag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&submode=FGROUP&fgroup=roles_def&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=N";
+            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&submode=FGROUP&fgroup=roles_def&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=N";
             $link["TITLE"] = $title;
             $link["UGROUPS"] = array();
-            $otherLinksArray[] = $link;
+            $otherLinksArray[] = $link;*/
         }
-
+        /*
         if (($mode == "mode_tbs") and ($this->isModule())) {
+            
             $link = array();
             $mod_id = $this->getVal("id_module_parent");
             $smod_id = $this->getId();
             $title = "إدارة جداول الوحدة : " . $this->valTitre_short();
-            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=pag&module_origin=ums&class_origin=Module&id_origin=$smod_id&newo=3&limit=50&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,id_sub_module=$smod_id&sel_id_module=$mod_id&sel_id_sub_module=$smod_id";
+            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p ag&module_origin=ums&class_origin=Module&id_origin=$smod_id&newo=3&limit=50&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,id_sub_module=$smod_id&sel_id_module=$mod_id&sel_id_sub_module=$smod_id";
             $link["TITLE"] = $title;
             $link["UGROUPS"] = array();
             $otherLinksArray[] = $link;
@@ -601,7 +602,7 @@ class Module extends AFWObject
             $mod_id = $this->getVal("id_module_parent");
             $smod_id = $this->getId();
             $title = "إدارة الصلاحيات على جداول الوحدة : " . $this->valTitre_short();
-            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=pag&module_origin=ums&class_origin=Module&id_origin=$smod_id&newo=3&limit=50&ids=all&submode=FGROUP&fgroup=roles_def&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,id_sub_module=$smod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_id_sub_module=$smod_id&sel_is_lookup=N&sel_is_entity=Y";
+            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p ag&module_origin=ums&class_origin=Module&id_origin=$smod_id&newo=3&limit=50&ids=all&submode=FGROUP&fgroup=roles_def&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,id_sub_module=$smod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_id_sub_module=$smod_id&sel_is_lookup=N&sel_is_entity=Y";
             $link["TITLE"] = $title;
             $link["UGROUPS"] = array();
             $otherLinksArray[] = $link;
@@ -612,7 +613,7 @@ class Module extends AFWObject
             $link = array();
             $mod_id = $this->getId();
             $title = "إدارة القوائم الثابتة لتطبيق : " . $this->valTitre_short();
-            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=pag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=Y,is_entity=N&sel_id_module=$mod_id&sel_is_lookup=Y&sel_is_entity=N";
+            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=Y,is_entity=N&sel_id_module=$mod_id&sel_is_lookup=Y&sel_is_entity=N";
             $link["TITLE"] = $title;
             $link["UGROUPS"] = array();
             $otherLinksArray[] = $link;
@@ -620,12 +621,12 @@ class Module extends AFWObject
             $link = array();
             $mod_id = $this->getId();
             $title = "إدارة قوائم الاختيارات لتطبيق : " . $this->valTitre_short();
-            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=pag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=Y,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=Y&sel_is_entity=Y";
+            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=Y,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=Y&sel_is_entity=Y";
             $link["TITLE"] = $title;
             $link["UGROUPS"] = array();
             $otherLinksArray[] = $link;
         }
-
+        */
         if (($mode == "mode_smd") and ($this->isModule() or $this->isApplication())) {
             unset($link);
             $parent_mod_id = $this->getId();
@@ -743,15 +744,15 @@ class Module extends AFWObject
                     $link["UGROUPS"] = array();
                     $otherLinksArray[] = $link;
 
-
+                    /*
                     unset($link);
                     $mod_id = $this->getId();
                     $link = array();
                     $title = "إدارة المهمات";
-                    $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Ptask&currmod=pag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=100&ids=all&fixmtit=$title&fixmdisable=1&fixm=module_id=$mod_id&sel_module_id=$mod_id";
+                    $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Ptask&currmod=p ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=100&ids=all&fixmtit=$title&fixmdisable=1&fixm=module_id=$mod_id&sel_module_id=$mod_id";
                     $link["TITLE"] = $title;
                     $link["UGROUPS"] = array();
-                    $otherLinksArray[] = $link;
+                    $otherLinksArray[] = $link;*/
                 }
             }
             // die("je suis la, id_module_type='".$this->getVal("id_module_type")."'");
@@ -761,6 +762,7 @@ class Module extends AFWObject
                 ($this->getVal("id_module_type") == 8)
             ) {
 
+                $smod_id = $this->getId();
 
                 $link = array();
                 $link["URL"] = "dbgen.php?sql=1&smod=$smod_id&mod=$mod_id";
@@ -1006,188 +1008,7 @@ class Module extends AFWObject
         } else return array("this is empty module (no ID found)", "");
     }
 
-    /*
-        Need review
-        public function genereCrudBFs($lang="ar")
-        {
-               if(false)  // mode afw
-               {
-                       $code_ext = "php";
-                       $fw_code = "afw";
-                       $fw_crud_code = "mode";
-                       $fw_screen_code = "screen";
-               }
-               else
-               {
-                       $code_ext = "java";
-                       $fw_code = "angjs";
-                       $fw_crud_code = "crud";
-                       $fw_screen_code = "screen";
-               }
-               
-               $mod_id = $this->getId();
-               $module = $this->getVal("module_code");
-               
-               $module_bf_dev_complexity = 0.7;
-               
-               $oper_arr = array("search","edit", "insert", "delete","display");
-               
-               $oper_coeff_arr = array("search"=>array("cols_coef"=>0.01, "det_coef"=>0.04), "edit"=>array("cols_coef"=>0.002, "det_coef"=>0.008), "insert"=>array("cols_coef"=>0.02, "det_coef"=>0.08), "delete"=>array("cols_coef"=>0.003, "det_coef"=>0.012),"display"=>array("cols_coef"=>0.01, "det_coef"=>0.06));
-               
-               $oper_prio_arr = array("search"=>6,"edit"=>8, "insert"=>10, "delete"=>2,"display"=>2);
-               
-               if(($module) and ($mod_id) and (intval($mod_id)>0))
-               {
-                       $file_dir_name = dirname(__FILE__); 
-                       
-                       // disable all bfs they will be activated by this generation (except deleted ones)
-                       
-                       $bf = new Bfunction();
-                       $bf_fld_ACTIVE = $bf->fld_ACTIVE();
-                       $bf->select($bf_fld_ACTIVE,'Y');
-                       $bf->select("curr_class_module_id",$mod_id);
-                       $bf->where("(bfunction_code like 'crud-%' or bfunction_code like 'screen-%')");
-                       $bf->set($bf_fld_ACTIVE,'N');
-                       $bf->update(false);
-                       
-                       
-                       $at = new Atable();
-                       $at->where("(id_module=$mod_id or id_sub_module=$mod_id)");
-                       $at->select("avail", 'Y');
-                       $at_list = $at->loadMany();
-                       
-                       
-                       
-                       foreach($at_list as $at_id => $at_item)
-                       {
-                            $count_detail_tables = $at_item->countDetailTables();
-                            $count_cols = $at_item->getAFieldCount();
-                            $atable_prio = $at_item->getTablePriority();
-                            
-                            if(false)  // mode afw
-                            {
-                                $at_item_name = "";
-                            }
-                            else
-                            {
-                                $at_item_name = "_".$at_item->getVal("atable_name");
-                            }
-                            if($at_item->isLookup())
-                            {
-                               $screen_crud_complexity = 0.2;
-                               $screen_crud = "crud";
-                               $fw_mode_code = $fw_crud_code;
-                            }
-                            else
-                            {
-                               $screen_crud_complexity = 1;
-                               $screen_crud = "screen";
-                               $fw_mode_code = $fw_screen_code;
-                            }
-                            foreach($oper_arr as $operation)
-                            {
-                                $bf_complexity = $module_bf_dev_complexity * $screen_crud_complexity * ($count_detail_tables*$oper_coeff_arr[$operation]["det_coef"] + $count_cols*$oper_coeff_arr[$operation]["cols_coef"]);
-                                $bf_priority = $oper_prio_arr[$operation] * $atable_prio;
-                                $operationLabel = $this->operationLabel($operation, $lang, $at_id);
-                                list($bfOperation[$at_id][$operation],$isnew) = Bfunction::getBF(0, "pag", "${fw_code}_${fw_mode_code}_${operation}${at_item_name}.$code_ext", $module, $at_id, "", $operationLabel, 'N', 'N', 1, "$screen_crud-$module-$at_id-$operation",$bf_complexity,$bf_priority);
-                            }        
-                       }
-                       
-                       return array("","");
-               }
-               else return array("this is empty module (ID='$mod_id', CODE='$module')","");
-                       
-        }
-        
-        public function genereConsultBFs($lang="ar")
-        {
-               if(false)  // mode afw
-               {
-                       $code_ext = "php";
-                       $fw_code = "afw";
-                       $fw_crud_code = "mode";
-                       $fw_mode_code = "view";
-               }
-               else
-               {
-                       $code_ext = "java";
-                       $fw_code = "angjs";
-                       $fw_mode_code = "view";
-               }
-               
-               $mod_id = $this->getId();
-               $module = $this->getVal("module_code");
-               $oper_arr = array("consult_","stat_", "report_");
-               $oper_prio_arr = array("consult"=>4,"stat"=>3, "report"=>2);
-               $oper_coeff_arr = array("consult"=>array("cols_coef"=>0.01, "det_coef"=>0.01), "stat"=>array("cols_coef"=>0.03, "det_coef"=>0.03), "report"=>array("cols_coef"=>0.02, "det_coef"=>0.02));
-               
-               $module_bf_dev_complexity = 1.1;
-               
-               
-               
-               if(($module) and ($mod_id) and (intval($mod_id)>0))
-               {
-                       $file_dir_name = dirname(__FILE__); 
-
-                       // disable all bfs they will be activated by this generation (except deleted ones)
-                       
-                       $bf = new Bfunction();
-                       $bf_fld_ACTIVE = $bf->fld_ACTIVE();
-                       $bf->select($bf_fld_ACTIVE,'Y');
-                       $bf->select("curr_class_module_id",$mod_id);
-                       $bf->where("(bfunction_code like 'consult%' or file_specification like '${fw_code}_${fw_mode_code}%')");
-                       $bf->set($bf_fld_ACTIVE,'N');
-                       $bf->update(false);
-                       
-                       
-                       
-                       $at = new Atable();
-                       $at->where("(id_module=$mod_id or id_sub_module=$mod_id)");
-                       $at->select("avail", 'Y');
-                       $at->select("is_lookup", 'N');
-                       $at_list = $at->loadMany();
-                       
-                       
-                       
-                       foreach($at_list as $at_id => $at_item)
-                       {
-                            $count_detail_tables = $at_item->countDetailTables();
-                            $count_cols = $at_item->getAFieldCount();
-                            $atable_prio = $at_item->getTablePriority();
-                            
-                            if(false)  // mode afw
-                            {
-                                $at_item_name = "";
-                            }
-                            else
-                            {
-                                $at_item_name = "_".$at_item->getVal("atable_name");
-                            }
-                            
-                            foreach($oper_arr as $operation)
-                            {
-                                if((($operation != "consult_") or (!$at_item->isDetailTable())) and
-                                   (($operation != "stat_") or ($at_item->isStatTable())) and
-                                   (($operation != "report_") or (!$at_item->isDetailTable()))
-                                   ) 
-                                {
-                                        $operation2 = trim($operation,'_');
-                                        $bf_complexity = $module_bf_dev_complexity * ($count_detail_tables*$oper_coeff_arr[$operation2]["det_coef"] + $count_cols*$oper_coeff_arr[$operation2]["cols_coef"]);
-                                        
-                                        $bf_priority = $oper_prio_arr[$operation2] * $atable_prio;
-                                        $operationLabel = $this->operationLabel($operation, $lang, $at_id);
-                                        list($bfOperation[$at_id][$operation],$isnew) = Bfunction::getBF(0, "pag", "${fw_code}_${fw_mode_code}_${operation2}${at_item_name}.$code_ext", $module, $at_id, "", $operationLabel, 'N', 'N', 1, "consult-$module-$at_id-$operation",$bf_complexity, $bf_priority);
-                                }
-                            }        
-                       }
-                       
-                       return array("","");
-               }
-               else return array("this is empty module (ID='$mod_id', CODE='$module')","");
-                       
-        }
-        */
-
+    
     public function genereWebServicesBFs($lang = "ar")
     {
 
@@ -1676,7 +1497,7 @@ class Module extends AFWObject
             AFWCopyMotor::recurseCopy($source_path . "php/empty", $dest_path . $currmod);
 
             // copy company logo and title
-            AFWCopyMotor::copyFile($dest_path . "external/pic/title-company-pag.png", $dest_path . "external/pic/title-company-$currmod.png");
+            AFWCopyMotor::copyFile($dest_path . "external/pic/title-company.png", $dest_path . "external/pic/title-company-$currmod.png");
         }
 
         if ($update_files) {
@@ -1687,8 +1508,8 @@ class Module extends AFWObject
 
             // no need we should use same logo except if define const CUSTOM_COMPANY_DATA
             // copy company logo and title
-            // AFWCopyMotor::copyFile($source_path."php/external/pic/title-company-pag.png", $dest_path."external/pic/title-company-$currmod.png");
-            // AFWCopyMotor::copyFile($source_path."php/external/pic/logo-company-pag.png", $dest_path."external/pic/logo-company-$currmod.png");
+            // AFWCopyMotor::copyFile($source_path."php/external/pic/title-company.png", $dest_path."external/pic/title-company-$currmod.png");
+            // AFWCopyMotor::copyFile($source_path."php/external/pic/logo-company.png", $dest_path."external/pic/logo-company-$currmod.png");
         }
 
 
@@ -2059,7 +1880,7 @@ class Module extends AFWObject
     {
         $file_dir_name = dirname(__FILE__);
         if(!$framework_id) $framework_id=AfwSession::config("framework_id", 1);
-        require("$file_dir_name/../pag/framework_${framework_id}_specification.php");
+        require("$file_dir_name/../lib/framework_${framework_id}_specification.php");
 
         Bfunction::disableAutoGeneratedBFs($system_id, $this->getId(), $framework_screens_bfcode_starts_with . "-");
     }
@@ -2127,8 +1948,8 @@ class Module extends AFWObject
         if ($id) {
             if ($id_replace == 0) {
                 $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK part of me - not deletable 
-                // pag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."pag.atable where id_module = '$id' and avail='N'");
+                // p ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("delete from $server_db_prefix"."p ag.atable where id_module = '$id' and avail='N'");
                 
                 $obj = new Atable();
                 $obj->where("id_module = '$id'");
@@ -2137,8 +1958,8 @@ class Module extends AFWObject
                     $this->deleteNotAllowedReason = "Used in some Atables(s) as Module";
                     return false;
                 }
-                // pag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."pag.atable where id_sub_module = '$id' and avail='N'");
+                // p ag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("delete from $server_db_prefix"."p ag.atable where id_sub_module = '$id' and avail='N'");
                 
                 $obj = new Atable();
                 $obj->where("id_sub_module = '$id'");
@@ -2213,7 +2034,7 @@ class Module extends AFWObject
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("delete from $server_db_prefix"."ums.module_auser where id_module = '$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("delete from $server_db_prefix"."pag.module_orgunit where id_module = '$id' ");
+                // $this->execQuery("delete from $server_db_prefix"."p ag.module_orgunit where id_module = '$id' ");
                 // sdd.ptask-المشروع	project_module_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("delete from $server_db_prefix"."sdd.ptask where project_module_id = '$id' ");
                 // sdd.ptask-النظام / الـتطبيق	module_id  أنا تفاصيل لها-OneToMany
@@ -2229,12 +2050,12 @@ class Module extends AFWObject
                 $this->execQuery("update $server_db_prefix"."ums.module set id_system='$id_replace' where id_system='$id' ");
                 // bau.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."bau.gfield set module_id='$id_replace' where module_id='$id' ");
-                // pag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."pag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
+                // p ag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
+                //$this->execQuery("update $server_db_prefix"."p ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
                 // bau.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."bau.ptext set module_id='$id_replace' where module_id='$id' ");
-                // pag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."pag.pmessage set module_id='$id_replace' where module_id='$id' ");
+                // p ag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
+                // $this->execQuery("update $server_db_prefix"."p ag.pmessage set module_id='$id_replace' where module_id='$id' ");
                 // ums.job_arole-التطبيق	module_id  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."ums.job_arole set module_id='$id_replace' where module_id='$id' ");
 
@@ -2245,10 +2066,10 @@ class Module extends AFWObject
                 $this->execQuery("update $server_db_prefix"."ums.bfunction set module_mfk=REPLACE(module_mfk, ',$id,', ',') where module_mfk like '%,$id,%' ");
             } else {
                 $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK on me 
-                // pag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."pag.atable set id_module='$id_replace' where id_module='$id' ");
-                // pag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."pag.atable set id_sub_module='$id_replace' where id_sub_module='$id' ");
+                // p ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("update $server_db_prefix"."p ag.atable set id_module='$id_replace' where id_module='$id' ");
+                // p ag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("update $server_db_prefix"."p ag.atable set id_sub_module='$id_replace' where id_sub_module='$id' ");
                 // ums.module-الوحدة الأم	id_module_parent  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix"."ums.module set id_module_parent='$id_replace' where id_module_parent='$id' ");
                 // ums.bfunction-النظام	id_system  أنا تفاصيل لها-OneToMany
@@ -2277,12 +2098,12 @@ class Module extends AFWObject
                 $this->execQuery("update $server_db_prefix"."ums.module set id_system='$id_replace' where id_system='$id' ");
                 // bau.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."bau.gfield set module_id='$id_replace' where module_id='$id' ");
-                // pag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."pag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
+                // p ag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
+                // $this->execQuery("update $server_db_prefix"."p ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
                 // bau.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."bau.ptext set module_id='$id_replace' where module_id='$id' ");
-                // pag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."pag.pmessage set module_id='$id_replace' where module_id='$id' ");
+                // p ag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
+                // $this->execQuery("update $server_db_prefix"."p ag.pmessage set module_id='$id_replace' where module_id='$id' ");
                 // ums.job_arole-التطبيق	module_id  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."ums.job_arole set module_id='$id_replace' where module_id='$id' ");
 

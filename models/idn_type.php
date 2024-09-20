@@ -31,56 +31,14 @@ class IdnType extends AFWObject{
 
 
         
-	public static $DATABASE		= ""; public static $MODULE		    = "pag"; public static $TABLE			= ""; public static $DB_STRUCTURE = null; /* = array(
-                id => array(SHOW => true, RETRIEVE => true, EDIT => true, TYPE => PK),
-
-		
-		lookup_code => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "SIZE" => 64, "QEDIT" => true, SHORTNAME=>code),
-
-		idn_type_name => array(SEARCH => true,  QSEARCH => false,  SHOW => true,  RETRIEVE => true,  
-				EDIT => true,  QEDIT => true,  
-				SIZE => 32,  MANDATORY => true,  UTF8 => true,  
-				TYPE => "TEXT",  READONLY => false, ),
-
-		country_id => array(SHORTNAME => country,  SEARCH => true,  QSEARCH => true,  SHOW => true,  RETRIEVE => true,  
-				EDIT => true,  QEDIT => true,  
-				SIZE => 40,  MANDATORY => true,  UTF8 => false,  
-				TYPE => FK,  ANSWER => country,  ANSMODULE => pag,  AUTOCOMPLETE => true,  
-				RELATION => ManyToOne,  READONLY => false, ),
-
-		idn_type_name_ar => array(SEARCH => true,  QSEARCH => false,  SHOW => true,  RETRIEVE => true,  
-				EDIT => true,  QEDIT => true,  
-				SIZE => 48,  "MIN-SIZE" => 5,  CHAR_TEMPLATE => "ARABIC-CHARS,SPACE",  MANDATORY => true,  UTF8 => true,  
-				TYPE => "TEXT",  READONLY => false, ),
-
-		idn_type_name_en => array(SEARCH => true,  QSEARCH => false,  SHOW => true,  RETRIEVE => true,  
-				EDIT => true,  QEDIT => true,  
-				SIZE => 48,  "MIN-SIZE" => 5,  CHAR_TEMPLATE => "ALPHABETIC,SPACE",  MANDATORY => true,  UTF8 => false,  
-				TYPE => "TEXT",  READONLY => false, ),
-
-		idn_validation_function => array(SEARCH => true,  QSEARCH => false,  SHOW => true,  RETRIEVE => true,  
-				EDIT => true,  QEDIT => true,  
-				SIZE => 32,  MANDATORY => true,  UTF8 => true,  
-				TYPE => "TEXT",  READONLY => false, ),
-
-                
-                id_aut => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                date_aut => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                id_mod => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                date_mod => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                id_valid => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                date_valid => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                avail => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => true, QEDIT => true, "DEFAULT" => 'Y', TYPE => YN),
-                version => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => INT),
-                update_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                delete_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                display_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                sci_id => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => scenario_item, ANSMODULE => pag),
-                tech_notes 	    => array(TYPE => TEXT, CATEGORY => FORMULA, "SHOW-ADMIN" => true, 'STEP' =>"all", TOKEN_SEP=>"§", READONLY=>true, "NO-ERROR-CHECK"=>true),
-	);
-	
-	*/ public function __construct(){
-		parent::__construct("idn_type","id","pag");
+	public static $DATABASE		= ""; 
+        public static $MODULE		    = "ums"; 
+        public static $TABLE			= "idn_type"; 
+        public static $DB_STRUCTURE = null; 
+        
+        
+        public function __construct(){
+		parent::__construct("idn_type","id","ums");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 1;
                 $this->DISPLAY_FIELD = "idn_type_name_ar";
                 $this->ORDER_BY_FIELDS = "lookup_code";
@@ -239,8 +197,8 @@ class IdnType extends AFWObject{
                         
                    
                    // MFK
-                       // pag.country-أنواع الهويات في السعودية	sa_idn_type_mfk  
-                        $this->execQuery("update ${server_db_prefix}pag.country set sa_idn_type_mfk=REPLACE(sa_idn_type_mfk, ',$id,', ',') where sa_idn_type_mfk like '%,$id,%' ");
+                       // ums.country-أنواع الهويات في السعودية	sa_idn_type_mfk  
+                        $this->execQuery("update ${server_db_prefix}ums.country set sa_idn_type_mfk=REPLACE(sa_idn_type_mfk, ',$id,', ',') where sa_idn_type_mfk like '%,$id,%' ");
 
                }
                else
@@ -263,8 +221,8 @@ class IdnType extends AFWObject{
 
                         
                        // MFK
-                       // pag.country-أنواع الهويات في السعودية	sa_idn_type_mfk  
-                         $this->execQuery("update ${server_db_prefix}pag.country set sa_idn_type_mfk=REPLACE(sa_idn_type_mfk, ',$id,', ',$id_replace,') where sa_idn_type_mfk like '%,$id,%' ");
+                       // ums.country-أنواع الهويات في السعودية	sa_idn_type_mfk  
+                         $this->execQuery("update ${server_db_prefix}ums.country set sa_idn_type_mfk=REPLACE(sa_idn_type_mfk, ',$id,', ',$id_replace,') where sa_idn_type_mfk like '%,$id,%' ");
 
                    
                } 

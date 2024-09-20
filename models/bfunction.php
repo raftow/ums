@@ -57,102 +57,13 @@ class Bfunction extends AFWObject{
         public static $BFUNCTION_TYPE_SCREEN_METHOD = 4;
         
         
-	public static $DATABASE		= ""; public static $MODULE		    = "ums"; public static $TABLE			= ""; public static $DB_STRUCTURE = null; /* = array(   
-		id => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "TYPE" => "PK"),
-		id_system            => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "FK", "ANSWER" => "module", "ANSMODULE" => "ums", "SHORTNAME" => system, 
-                                                 "SIZE" => 40, "DEFAULT" => 0, "WHERE"=>"id_module_type in (4,7)", "QEDIT" => false, MANDATORY=>true,),
-		bfunction_type_id => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, MANDATORY=>true,  
-                                              "TYPE" => "FK", "ANSWER" => "bfunction_type", "ANSMODULE" => "ums", 
-                                              "SEARCH-BY-ONE"=>true, "SIZE" => 40, "DEFAULT" => 1, SHORTNAME=>"type"),
-		curr_class_module_id => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "FK", "ANSWER" => "module", "ANSMODULE" => "ums", "SIZE" => 64, "DEFAULT" => 0, 
-                                                "WHERE"=>"id_module_type=5", "QEDIT" => true, "SEARCH-BY-ONE"=>true, MANDATORY=>true,  
-                                                DEPENDENT_OFME=>array("curr_class_atable_id"), RELATION => OneToMany, ),    
-
-
-                curr_class_atable_id => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "QEDIT" => false, "SIZE" => 64, "TYPE" => "FK", "ANSWER" => "atable", "ANSMODULE" => "pag", 
-                                                "DEFAULT" => 0, AUTOCOMPLETE=>true, "SEARCH-BY-ONE"=>true, SHORTNAME=>table,
-                                                WHERE=>"(('§id§'='' or '§id§'='0') or 
-                                                          id_module in (§curr_class_module_id§) or
-                                                          id_module in (select mu.id_module from c0ums.module_auser mu where mu.id_auser = '§ME§' and mu.avail='Y') or 
-                                                          id_module in (select id from c0ums.module where id_system = '§CONTEXT_ID§' and id_module_type=5) )", 
-                                                DEPENDENCY=>curr_class_module_id, RELATION => OneToMany, ),
-
-		bfunction_code => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => true, 
-                        EDIT => true, QEDIT => true, TYPE => TEXT, SIZE => 32, 
-                        QSEARCH=>true, SEARCH=>true, MANDATORY=>true),
-
-
-                parent_bfunction_id => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => false, "SIZE" => 40, 
-                                             "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, 
-                                             "TYPE" => "FK", "ANSWER" => bfunction, "ANSMODULE" => ums, "DEFAULT" => 0),
-                
-                        rbfList => array(TYPE => 'FK', ANSWER => arole_bf, ANSMODULE => ums, 
-                                             CATEGORY => 'ITEMS', ITEM => 'bfunction_id', WHERE=>"avail='Y'", SHOW => false, 
-                                             FORMAT=>'retrieve', 'EDIT' => false, 'ICONS'=>true, 'DELETE-ICON'=>true,),
-                                             
-                        childList => array(TYPE => FK, ANSWER => bfunction, ANSMODULE => ums, 
-                                             CATEGORY => ITEMS, ITEM => 'parent_bfunction_id', WHERE=>'', SHOW => true, 
-                                             FORMAT=>retrieve, EDIT => false, ICONS=>true, 'DELETE-ICON'=>false, BUTTONS=>true, "NO-LABEL"=>false),
-                
-                "titre_short" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE-AR" => true, "EDIT" => true, "UTF8" => true, "SIZE" => 40, "SHORTNAME" => title, "TYPE" => "TEXT", "QEDIT" => true, QSEARCH=>true, SEARCH=>true, MANDATORY=>true, 'STEP' =>2),
-		"titre_short_en" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE-EN" => true, "EDIT" => true, "UTF8" => false, "SIZE" => 40, "SHORTNAME" => title_en, "TYPE" => "TEXT", "QEDIT" => true, QSEARCH=>true, SEARCH=>true, 'STEP' =>2),
-		"titre" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "UTF8" => true, "SIZE" => 255, "TYPE" => "TEXT", "QEDIT" => false, QSEARCH=>true, SEARCH=>true, 'STEP' =>2),
-		"titre_en" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "UTF8" => false, "SIZE" => 255, "TYPE" => "TEXT", "QEDIT" => false, QSEARCH=>true, SEARCH=>true, 'STEP' =>2),
-
-		"file_specification" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "QEDIT" => true, "TYPE" => "TEXT", "SIZE" => 92, QSEARCH=>true, SEARCH=>true, 'STEP' =>2),
-		"direct_access" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => true, "SIZE" => 32, 
-                                         "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "YN", "DEFAULT" => "N", 'STEP' =>2),
-		"bf_specification" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => true, "TYPE" => "TEXT", "SIZE" => 32, QSEARCH=>true, SEARCH=>true, 'STEP' =>2),
-                      is_special => array("TYPE" => "YN", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => false, "QEDIT" => false, "SEARCH"=> false, "CATEGORY" => "FORMULA", "SHORTNAME"=>"special"),
-
-                "call_specification" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" =>false, "TYPE" => "TEXT", "SIZE" => 32, QSEARCH=>true, SEARCH=>true, 'STEP' =>2),
-
-                "module_mfk" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "MFK", "QEDIT" => false, 
-                                         "ANSWER" => "module", "ANSMODULE" => "ums", "HZM-WIDTH"=>4, 
-                                         "WHERE"=>"id_module_type=6 and (id_module_parent=§id_system§ or §id_system§=0)", 'STEP' =>3),
-                
-                arole_mfk	=> array(TYPE => MFK, RETRIEVE =>true,  EDIT => true, READONLY => true, SHOW => true, SEARCH => false, 
-                                         FORMAT => retrieve, CATEGORY => FORMULA, ANSWER => arole, ANSMODULE => ums, 
-                                         "HZM-WIDTH"=>4, FORMULA_USE_CACHE=>true, 'STEP' =>3),
-
-                userStoryList => array(TYPE => FK, ANSWER => user_story, ANSMODULE => bau, CATEGORY => ITEMS, ITEM => 'bfunction_id', WHERE=>'', 
-                                        SHOW => true, FORMAT=>retrieve, EDIT => false, ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, "NO-LABEL"=>true, FGROUP=>userStoryList, 'STEP' =>3, 
-                                        // to avoid infinite loops PILLAR=>true, "ERROR-CHECK"=>true,
-                                        ),
-		
-                tobinus  => array("CATEGORY" => "FORMULA",  "SHOW" => true, "RETRIEVE" => false, "SIZE" => 32, "TYPE" => "YN", "DEFAULT" => "N", FGROUP=>"userStoryList", 'STEP' =>3),
-                tobinus_reason  => array("CATEGORY" => "FORMULA",  "SHOW" => true, "RETRIEVE" => false, "SIZE" => 132, "TYPE" => "TEXT", "DEFAULT" => "N", "PRE"=>true, "TEXT-ALIGN"=>"left", FGROUP=>"userStoryList", 'STEP' =>3),
-                
-                
-                "public" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => false, "SIZE" => 32, 
-                                  "UTF8" => false, "TYPE" => "YN", "DEFAULT" => "N", 'STEP' =>4),
-                                  
-                bf_complexity => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => false, "SIZE" => 32, 
-                                        "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "FLOAT", 'STEP' =>4),
-                                        
-                bf_priority => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => false, "SIZE" => 32, 
-                                         "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "INT", 'STEP' =>4),
-                                         
-                mainGoal => array("SHOW" => true, "SIZE" => 40,  
-                                      "TYPE" => "FK", "ANSWER" => goal, "ANSMODULE" => bau, "NO-ERROR-CHECK"=>true, 
-                                      CATEGORY => "FORMULA",
-                                      "DEFAULT" => 0, 'STEP' =>4),                                                 
-                                
-		"id_aut" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_aut" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"id_mod" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_mod" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"id_valid" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_valid" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"avail" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "DEFAULT" => "Y", "EDIT-ADMIN" => true, "TYPE" => "YN"),
-		"version" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "INT"),
-		"update_groups_mfk" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"delete_groups_mfk" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"display_groups_mfk" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"sci_id" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "scenario_item", "TYPE" => "FK", ANSMODULE => pag, "SIZE" => 40, "DEFAULT" => 0),
-	);
-	        
-	*/ public function __construct(){
+	public static $DATABASE		= ""; 
+        public static $MODULE		    = "ums"; 
+        public static $TABLE			= "bfunction"; 
+        public static $DB_STRUCTURE = null; 
+        
+        
+        public function __construct(){
 		parent::__construct("bfunction","id","ums");
                 //$this->CACHE_SCOPE = "server";
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
@@ -402,7 +313,7 @@ class Bfunction extends AFWObject{
                 else
                 { 
                         $atable_display = $tableObj->getShortDisplay($lang);
-                        /* raf:bau-v2 include("$file_dir_name/../pag/framework_${framework}_specification.php"); */
+                        /* raf:bau-v2 include("$file_dir_name/../lib/framework_${framework}_specification.php"); */
                         
                         $tbl_cat = $tableObj->tableCategory();
                         
@@ -553,61 +464,7 @@ class Bfunction extends AFWObject{
 
         }
         
-        /*
-        public static function getBF($id_sh, $curr_sys, $file, $curr_mod, $curr_cl, $bf_spec, $bf_name, $direct_access, $public, $bf_type=1,$bf_code="",$bf_complexity=0,$bf_priority=0,$reason="")
-        {
-                
-                if(!$curr_mod)
-                {
-                    self::_userError("pag error","missed module of BF");
-                }
-                
-                $id_sh = 0;  // because parameter canceled 
-                $file_dir_name = dirname(__FILE__);
-                
-                
-                
-                
-                
-                $system = Module::getModuleByCode($id_sh, $curr_sys, $reason);
-                if(!$system)
-                {
-                    self::_userError("pag error","module $curr_sys seems to be not pagged or it is not owned by SH $id_sh");
-                }
-                
-                if($curr_mod==$curr_sys) $currmodule =& $system;
-                else
-                {
-                        $currmodule = Module::getModuleByCode($id_sh, $curr_mod, $reason);
-                        if(!$currmodule)
-                        {
-                            self::_userError("pag error","module $curr_mod seems to be not pagged or it is not owned by SH $id_sh");
-                        }
-                }
-                
-                if(intval($curr_cl)>0)
-                {
-                       $currAtable = Atable::getAtableById(intval($curr_cl)); 
-                }
-                else
-                {
-                        $currAtableName = AfwStringHelper::classToTable($curr_cl);
-                        $currAtable = Atable::getAtableByName($currmodule->getId(), $currAtableName);
-                }
-                $bf_new = false;
-                $id_system = $system->getId();
-                $curr_class_module_id = $currmodule->getId();
-                
-                if($currAtable) $curr_class_atable_id = $currAtable->getId();
-                else 
-                {
-                    self::_userError("pag error","table $currAtableName(Cl-Id=$curr_cl) seems to be not pagged or it is not in the module $curr_class_module_id(sh=$id_sh, curr_mod=$curr_mod)");
-                }
-                
-                
-                
-                return Bfunction::getOrCreateBF($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, "", "", "", $direct_access, $public, $bf_type, $bf_code); 
-       }*/
+        
        
        public static function disableAutoGeneratedBFs($id_system, $module_id, $bf_code_starts_with)
        {
@@ -895,7 +752,7 @@ class Bfunction extends AFWObject{
                  if($tbl) $tbl_cat = $tbl->tableCategory();
                  else $tbl_cat = "default";
                  
-                 $framework_file_php = dirname(__FILE__)."/../../pag/framework_${framework}_specification.php";
+                 $framework_file_php = dirname(__FILE__)."/../../lib/framework_${framework}_specification.php";
                  include($framework_file_php);
                  $mode = $this->getVal("file_specification");
                  if(($mode=="qsearch") and ($tbl_cat=="entity") and (!$framework_mode_list[$mode]["menu"][$tbl_cat]))
@@ -1134,7 +991,7 @@ class Bfunction extends AFWObject{
                 if(!$tableObj) return false; 
 
                 $file_dir_name = dirname(__FILE__);
-                include("$file_dir_name/../pag/framework_${framework}_specification.php");
+                include("$file_dir_name/../lib/framework_${framework}_specification.php");
                 
                 $tbl_cat = $tableObj->tableCategory();
                 
@@ -1258,7 +1115,7 @@ class Bfunction extends AFWObject{
         
         public function beforeDelete($id,$id_replace) 
         {
-            
+                $server_db_prefix = AfwSession::config("db_prefix","c0");
  
             if($id)
             {   
@@ -1267,46 +1124,36 @@ class Bfunction extends AFWObject{
                    $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - not deletable 
  
  
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - deletable 
                        // spp.ticket-الوظيفة الالكترونية	bfunction_id  أنا تفاصيل لها-OneToMany
-                        $this->execQuery("delete from ${server_db_prefix}spp.ticket where bfunction_id = '$id' ");
+                       // $this->execQuery("delete from ${server_db_prefix}spp.ticket where bfunction_id = '$id' ");
                        // ums.arole_bf-الوظيفة	bfunction_id  أنا تفاصيل لها-OneToMany
-                        $this->execQuery("delete from ${server_db_prefix}ums.arole_bf where bfunction_id = '$id' ");
+
+
                        // bau.user_story-الوظيفة العملية	bfunction_id  أنا تفاصيل لها-OneToMany
-                        $this->execQuery("delete from ${server_db_prefix}bau.user_story where bfunction_id = '$id' ");
+                       // $this->execQuery("delete from ${server_db_prefix}bau.user_story where bfunction_id = '$id' ");
  
  
-                   // FK not part of me - replaceable 
+                       // FK not part of me - replaceable 
                        // ums.bfunction-الوظيفة العملية الأم	parent_bfunction_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}ums.bfunction set parent_bfunction_id='$id_replace' where parent_bfunction_id='$id' ");
-                       // pag.afield-شاشة الواجهة	fe_bfunction_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}pag.afield set fe_bfunction_id='$id_replace' where fe_bfunction_id='$id' ");
-                       // pag.afield-شاشة الادارة	be_bfunction_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}pag.afield set be_bfunction_id='$id_replace' where be_bfunction_id='$id' ");
+                        
  
  
- 
-                   // MFK
+                       // MFK
                        // ums.arole-ما في القائمة من وظائف خاصة (غير الكرود)	bfunction_mfk  
                         $this->execQuery("update ${server_db_prefix}ums.arole set bfunction_mfk=REPLACE(bfunction_mfk, ',$id,', ',') where bfunction_mfk like '%,$id,%' ");
  
                }
                else
                {
-                        $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK on me 
+                         // FK on me 
                        // spp.ticket-الوظيفة الالكترونية	bfunction_id  أنا تفاصيل لها-OneToMany
-                        $this->execQuery("update ${server_db_prefix}spp.ticket set bfunction_id='$id_replace' where bfunction_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}spp.ticket set bfunction_id='$id_replace' where bfunction_id='$id' ");
                        // ums.arole_bf-الوظيفة	bfunction_id  أنا تفاصيل لها-OneToMany
                         $this->execQuery("update ${server_db_prefix}ums.arole_bf set bfunction_id='$id_replace' where bfunction_id='$id' ");
                        // bau.user_story-الوظيفة العملية	bfunction_id  أنا تفاصيل لها-OneToMany
-                        $this->execQuery("update ${server_db_prefix}bau.user_story set bfunction_id='$id_replace' where bfunction_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}bau.user_story set bfunction_id='$id_replace' where bfunction_id='$id' ");
                        // ums.bfunction-الوظيفة العملية الأم	parent_bfunction_id  حقل يفلتر به-ManyToOne
                         $this->execQuery("update ${server_db_prefix}ums.bfunction set parent_bfunction_id='$id_replace' where parent_bfunction_id='$id' ");
-                       // pag.afield-شاشة الواجهة	fe_bfunction_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}pag.afield set fe_bfunction_id='$id_replace' where fe_bfunction_id='$id' ");
-                       // pag.afield-شاشة الادارة	be_bfunction_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}pag.afield set be_bfunction_id='$id_replace' where be_bfunction_id='$id' ");
- 
  
                         // MFK
                        // ums.arole-ما في القائمة من وظائف خاصة (غير الكرود)	bfunction_mfk  

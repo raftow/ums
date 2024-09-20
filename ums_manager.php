@@ -314,7 +314,7 @@ class UmsManager extends AFWRoot
         $create_with_names_if_not_exists = null
     ) {
         if (!$module_caller) {
-            $module_caller = 'pag';
+            $module_caller = 'ums';
         } // script commun reutilise par les autres modules
         list($module_id, $system_id) = UmsManager::decodeModule($module_caller);
         AfwSession::log(

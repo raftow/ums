@@ -4,14 +4,14 @@
     if($objme) $iamAdmin = $objme->isAdmin();
     else $iamAdmin = false;
 
-    if(!$a) $a = "pag";
+    if(!$a) $a = "ums";
 
     if($r=="control")
     {
           $s12 = "s12";
           $out_scr .= "<h3> لوحة التحكم </h3>"; 
           $out_scr .= "<div id='menu-item-control-options' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
-                                <a class='hzm3-button hzm3-light-grey hzm3-block' href='main.php?Main_Page=toggle_option.php&My_Module=pag' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
+                                <a class='hzm3-button hzm3-light-grey hzm3-block' href='main.php?Main_Page=toggle_option.php&My_Module=ums' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
                                     <div class=\"hzm-width-100 hzm-text-center hzm_margin_bottom \">
                                       <div class=\"hzm-vertical-align hzm-container-center hzm-custom hzm-custom-icon-container only-border border-primary\">
                                         <i class=\"hzm-container-center hzm-vertical-align-middle hzm-icon-settings\"></i>

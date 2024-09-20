@@ -59,12 +59,12 @@
 
       if($bfrm_submit)
       {
-           list($added_count, $removed_count, $menu_added_count, $menu_removed_count) = $aroleObj->saveTableRightsMatrice($framework, $_POST, $subm);
+           list($added_count, $removed_count, $menu_added_count, $menu_removed_count) = saveTableRightsMatrice($aroleObj, $framework, $_POST, $subm);
            $_SESSION["success"] = "added records:$added_count, removed records:$removed_count, menu_added:$menu_added_count, menu_removed:$menu_removed_count";
       }
 
       
-      $tbrg_mat = $aroleObj->getTableRightsMatrice($framework, $subm);
+      $tbrg_mat = getTableRightsMatrice($aroleObj, $framework, $subm);
 
       $aroleAllBFList = $aroleObj->getAllBFs();
       //die("<br> var_export of aroleAllBFList".var_export($aroleAllBFList,true));
@@ -82,7 +82,7 @@
       
       
       $framework=AfwSession::config("framework_id", 1);
-      include("$file_dir_name/../pag/framework_${framework}_specification.php");
+      include("$file_dir_name/../lib/framework_${framework}_specification.php");
 
       ob_start();
 

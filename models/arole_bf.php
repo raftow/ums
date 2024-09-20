@@ -26,54 +26,9 @@ class AroleBf extends AFWObject{
 	public static $DATABASE		= ""; 
     public static $MODULE		    = "ums"; 
     public static $TABLE			= ""; 
-    public static $DB_STRUCTURE = null; /* = array(
-                "id" => array("SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "TYPE" => "PK"),
-
-        module_id     => array("TYPE" => "FK", "ANSWER" => "module",  
-                    SHOW => false, EDIT => false,            
-                    CATEGORY=>SHORTCUT, SHORTCUT=>"bfunction_id.curr_class_module_id", 
-                    SHORTNAME=>module, ANSMODULE => ums),
-
-		arole_id => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "QEDIT" => true, 
-                                    SIZE => 64, "SEARCH-ADMIN" => true, SHOW => true, "EDIT-ADMIN" => true, "UTF8" => false, 
-                                    TYPE => FK, ANSWER => arole, SHORTNAME=>role, ANSMODULE => ums, DEFAUT => 0,
-                                    WHERE=>"(§bfunction_id§ = '0' or §module_id§ = 0 or module_id = §module_id§)"),
-
-		bfunction_id => array(RELATION => OneToMany, SEARCH => true, SHOW => true, RETRIEVE => true, 
-                                        EDIT => true, QEDIT => true, 
-                                        SIZE => 64, "SEARCH-ADMIN" => true, SHOW => true, "EDIT-ADMIN" => true, "UTF8" => false, 
-                                        TYPE => FK, ANSWER => bfunction, ANSMODULE => ums,                                         
-                                        SHORTNAME=>bf, DEFAUT => 0, AUTOCOMPLETE=>true),
-
-		menu => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => true, 
-                        "EDIT" => true, "QEDIT" => true, CSS=> width_pct_25, 
-                        "SEARCH-ADMIN" => true, SHOW => true, "EDIT-ADMIN" => true, 
-                        "UTF8" => false, "TYPE" => "YN", CHECKBOX=>true),
-
-        avail => array(SHOW => true, "RETRIEVE" => false, EDIT => true, 
-                        DEFAUT => "Y", "TYPE" => "YN", "QEDIT-ADMIN" => true, CHECKBOX=>true, CSS=> width_pct_25),                        
-        
-        source => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => true, 
-                    "EDIT" => true, "QEDIT" => true, 
-                    "SIZE" => 60, "SEARCH-ADMIN" => true, SHOW => true, "EDIT-ADMIN" => true,  
-                    "TYPE" => "TEXT", "UTF8" => false,),
-
-
-                "id_aut" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums"),
-                "date_aut" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "TYPE" => "DATETIME"),
-                "id_mod" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums"),
-                "date_mod" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "TYPE" => "DATETIME"),
-                "id_valid" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums"),
-                "date_valid" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "TYPE" => "DATETIME"),
-                
-                "version" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "TYPE" => "INT"),
-                "update_groups_mfk" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-                "delete_groups_mfk" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-                "display_groups_mfk" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-                "sci_id" => array(SHOW => true, HIDE_IF_NEW => true, STEP => 99,"RETRIEVE" => false, "QEDIT" => false, "TYPE" => "FK", "ANSWER" => "scenario_item", "ANSMODULE" => "pag"),
-	);
-	
-	*/ public function __construct()
+    public static $DB_STRUCTURE = null; 
+    
+    public function __construct()
         {
 		parent::__construct("arole_bf","id","ums");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;

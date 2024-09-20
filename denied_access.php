@@ -76,6 +76,6 @@ Please contact administrator.<br>
         echo AfwSession::logSessionData(true);
         echo "<br>\n".AfwShowHelper::showObject($objme,"html");
 }
-include("$file_dir_name/../pag/footer.php");
+
 
 ?>

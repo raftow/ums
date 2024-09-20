@@ -93,7 +93,7 @@
 				),
 
 			'id_pm' => array('SHOW' => true,  'SHORTNAME' => 'domain',  'RETRIEVE' => false,  'EDIT' => true,  
-				'TYPE' => 'FK',  'ANSWER' => 'domain',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'INT', 
 				'WHERE' => "", 
 				 'QEDIT' => true,  
 				'RELATION' => 'OneToMany',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -118,12 +118,12 @@
 				),
 
 			'dbengine_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 32,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'dbengine',  'ANSMODULE' => 'pag',  'DEFAUT' => 1,  'SHORTNAME' => 'engine',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'TYPE' => 'INT',  'DEFAUT' => 1,  'SHORTNAME' => 'engine',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 			'dbsystem_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 32,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'FK',  'ANSWER' => 'dbsystem',  'ANSMODULE' => 'pag',  'DEFAUT' => 1,  'SHORTNAME' => 'system',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'TYPE' => 'INT', 'DEFAUT' => 1,  'SHORTNAME' => 'system',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
@@ -212,9 +212,10 @@
 				 'FGROUP' => 'aroles',  'STEP' => 7,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
-
+/*
+		@todo rafik, this below if used please move to p a g mdoule not in ums because should be independant of p a g module
 		'tbs' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => '',  'SHORTNAME' => 'tables',  
 				'WHERE' => "(id_sub_module = '§id§' or id_module = '§id§' ) and is_lookup='N'", 
 				 'SHOW' => true,  'ROLES' => '',  'FORMAT' => 'retrieve',  'EDIT' => false,  'FGROUP' => 'tbs',  
@@ -225,7 +226,7 @@
 				),
 
 		'lkps' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => '',  'SHORTNAME' => 'lookups',  
 				'WHERE' => "(id_sub_module = '§id§' or id_module = '§id§' ) and is_lookup='Y' ", 
 				 'SHOW' => true,  'ROLES' => '',  'FORMAT' => 'retrieve',  'EDIT' => false,  
@@ -235,7 +236,7 @@
 				),
 
 		'tome' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
 				'CATEGORY' => 'FORMULA',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -243,7 +244,7 @@
 				),
 
 		'anst' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
 				'CATEGORY' => 'FORMULA',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -251,7 +252,7 @@
 				),
 
 		'ext_tome' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
 				'CATEGORY' => 'FORMULA',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -259,12 +260,12 @@
 				),
 
 		'ext_anst' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
 				'CATEGORY' => 'FORMULA',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),*/
 
 			'main_goal_id' => array('SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,  
 				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  'NO-ERROR-CHECK' => true,  
@@ -304,28 +305,28 @@
 				),
 
 			'id_analyst' => array('SHOW' => true,  'EDIT' => true,  'QEDIT' => false,  'RETRIEVE' => true,  
-				'TYPE' => 'FK',  'SHORTNAME' => 'bmjob',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'pag',  'DEFAUT' => 53,  'SIZE' => 40,  
+				'TYPE' => 'FK',  'SHORTNAME' => 'bmjob',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'ums',  'DEFAUT' => 53,  'SIZE' => 40,  
 				'WHERE' => "id_domain in (1,3,§id_pm§)", 
 				 'FGROUP' => 'jobroles_def',  'STEP' => 13,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 			'id_hd' => array('SHOW' => true,  'EDIT' => true,  'QEDIT' => false,  'RETRIEVE' => false,  
-				'TYPE' => 'FK',  'SHORTNAME' => 'mmjob',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'pag',  'DEFAUT' => 53,  'SIZE' => 40,  
+				'TYPE' => 'FK',  'SHORTNAME' => 'mmjob',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'ums',  'DEFAUT' => 53,  'SIZE' => 40,  
 				'WHERE' => "id_domain in (1,3,§id_pm§)", 
 				 'FGROUP' => 'jobroles_def',  'STEP' => 13,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 			'id_br' => array('SHOW' => true,  'EDIT' => true,  'QEDIT' => false,  'RETRIEVE' => true,  
-				'TYPE' => 'FK',  'SHORTNAME' => 'smjob',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'pag',  'DEFAUT' => 53,  'SIZE' => 40,  
+				'TYPE' => 'FK',  'SHORTNAME' => 'smjob',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'ums',  'DEFAUT' => 53,  'SIZE' => 40,  
 				'WHERE' => "id_domain in (1,3,§id_pm§)", 
 				 'FGROUP' => 'jobroles_def',  'STEP' => 13,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 			'jobrole_mfk' => array('SEARCH' => false,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,  'UTF8' => false,  
-				'TYPE' => 'MFK',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'pag',  'SHORTNAME' => 'dispjobs',  
+				'TYPE' => 'MFK',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'ums',  'SHORTNAME' => 'dispjobs',  
 				'WHERE' => "id_domain in (1,3,§id_pm§)", 
 				 'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'FGROUP' => 'jobroles_def',  'STEP' => 13,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 

@@ -1774,8 +1774,8 @@ class Auser extends AFWObject{
                    // FK not part of me - replaceable 
                        // bau.ptext-تحرير	author_id  حقل يفلتر به-ManyToOne
                         $this->execQuery("update ${server_db_prefix}bau.ptext set author_id='$id_replace' where author_id='$id' ");
-                       // pag.afile-صاحب الملف	owner_id  غير معروفة-unkn
-                        $this->execQuery("update ${server_db_prefix}pag.afile set owner_id='$id_replace' where owner_id='$id' ");
+                       // ums.afile-صاحب الملف	owner_id  غير معروفة-unkn
+                        $this->execQuery("update ${server_db_prefix}ums.afile set owner_id='$id_replace' where owner_id='$id' ");
                        // ums.module_auser-الموظف	id_auser  غير معروفة-unkn
                         $this->execQuery("delete from ${server_db_prefix}ums.module_auser where id_auser='$id' ");
                        // spp.ticket_followup-المستخدم المتابع	auser_id  حقل يفلتر به-ManyToOne
@@ -1802,13 +1802,6 @@ class Auser extends AFWObject{
                         $this->execQuery("update ${server_db_prefix}hrm.orgunit set id_responsible='$id_replace' where id_responsible='$id' ");
  
  
- 
-                   // MFK
-                       // pag.atable-الموظف(ون) المكلف(ون) بتحديث البيانات	data_auser_mfk  
-                        $this->execQuery("update ${server_db_prefix}pag.atable set data_auser_mfk=REPLACE(data_auser_mfk, ',$id,', ',') where data_auser_mfk like '%,$id,%' ");
-                       // bau.ptext-بمساعدة	authors_mfk  
-                        $this->execQuery("update ${server_db_prefix}bau.ptext set authors_mfk=REPLACE(authors_mfk, ',$id,', ',') where authors_mfk like '%,$id,%' ");
- 
                }
                else
                {
@@ -1822,8 +1815,8 @@ class Auser extends AFWObject{
                        // $this->execQuery("update ${server_db_prefix}sched.gen_report_receiver set auser_id='$id_replace' where auser_id='$id' ");
                        // bau.ptext-تحرير	author_id  حقل يفلتر به-ManyToOne
                         $this->execQuery("update ${server_db_prefix}bau.ptext set author_id='$id_replace' where author_id='$id' ");
-                       // pag.afile-صاحب الملف	owner_id  غير معروفة-unkn
-                        $this->execQuery("update ${server_db_prefix}pag.afile set owner_id='$id_replace' where owner_id='$id' ");
+                       // ums.afile-صاحب الملف	owner_id  غير معروفة-unkn
+                        $this->execQuery("update ${server_db_prefix}ums.afile set owner_id='$id_replace' where owner_id='$id' ");
                        // ums.module_auser-الموظف	id_auser  غير معروفة-unkn
                         $this->execQuery("update ${server_db_prefix}ums.module_auser set id_auser='$id_replace' where id_auser='$id' ");
                        // spp.ticket_followup-المستخدم المتابع	auser_id  حقل يفلتر به-ManyToOne
@@ -1850,12 +1843,7 @@ class Auser extends AFWObject{
                         $this->execQuery("update ${server_db_prefix}hrm.orgunit set id_responsible='$id_replace' where id_responsible='$id' ");
  
  
-                        // MFK
-                       // pag.atable-الموظف(ون) المكلف(ون) بتحديث البيانات	data_auser_mfk  
-                       // $this->execQuery("update ${server_db_prefix}pag.atable set data_auser_mfk=REPLACE(data_auser_mfk, ',$id,', ',$id_replace,') where data_auser_mfk like '%,$id,%' ");
-                       // bau.ptext-بمساعدة	authors_mfk  
-                       // $this->execQuery("update ${server_db_prefix}bau.ptext set authors_mfk=REPLACE(authors_mfk, ',$id,', ',$id_replace,') where authors_mfk like '%,$id,%' ");
- 
+                        
  
                } 
                return true;

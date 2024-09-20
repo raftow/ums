@@ -13,7 +13,7 @@
 				'TYPE' => 'FK',  'ANSWER' => 'module',  'ANSMODULE' => 'ums',  'SEARCH-BY-ONE' => true,  
 				'WHERE' => "id_module_type in (4,7)", 
 				 
-				'CATEGORY' => 'FORMULA',  'FIELD-FORMULA' => 'fnGetModuleSystemId(module_id)',  'FORMULA_MODULE' => 'pag',  
+				'CATEGORY' => 'FORMULA',  'FIELD-FORMULA' => 'fnGetModuleSystemId(module_id)',  'FORMULA_MODULE' => 'ums',  
 				'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),

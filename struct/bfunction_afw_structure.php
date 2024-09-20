@@ -33,7 +33,7 @@
 				),
 
 			'curr_class_atable_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 64,  
-				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'pag',  'DEFAUT' => 0,  'AUTOCOMPLETE' => true,  'SEARCH-BY-ONE' => true,  'SHORTNAME' => 'table',  
+				'TYPE' => 'INT', 'DEFAUT' => 0,  'AUTOCOMPLETE' => true,  'SEARCH-BY-ONE' => true,  'SHORTNAME' => 'table',  
 				'WHERE' => "(('§id§'='' or '§id§'='0') or 
                                                           id_module in (§curr_class_module_id§) or
                                                           id_module in (select mu.id_module from c0ums.module_auser mu where mu.id_auser = '§ME§' and mu.avail='Y') or 
