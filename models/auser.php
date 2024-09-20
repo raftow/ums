@@ -1772,8 +1772,8 @@ class Auser extends AFWObject{
  
  
                    // FK not part of me - replaceable 
-                       // bau.ptext-تحرير	author_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}bau.ptext set author_id='$id_replace' where author_id='$id' ");
+                       // b au.ptext-تحرير	author_id  حقل يفلتر به-ManyToOne
+                       // $this->execQuery("update ${server_db_prefix}b au.ptext set author_id='$id_replace' where author_id='$id' ");
                        // ums.afile-صاحب الملف	owner_id  غير معروفة-unkn
                         $this->execQuery("update ${server_db_prefix}ums.afile set owner_id='$id_replace' where owner_id='$id' ");
                        // ums.module_auser-الموظف	id_auser  غير معروفة-unkn
@@ -1813,8 +1813,8 @@ class Auser extends AFWObject{
                        // $this->execQuery("update ${server_db_prefix}sched.schedule_receiver set auser_id='$id_replace' where auser_id='$id' ");
                        // sched.gen_report_receiver-المستخدم	auser_id  أنا تفاصيل لها-OneToMany
                        // $this->execQuery("update ${server_db_prefix}sched.gen_report_receiver set auser_id='$id_replace' where auser_id='$id' ");
-                       // bau.ptext-تحرير	author_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}bau.ptext set author_id='$id_replace' where author_id='$id' ");
+                       // b au.ptext-تحرير	author_id  حقل يفلتر به-ManyToOne
+                       // $this->execQuery("update ${server_db_prefix}b au.ptext set author_id='$id_replace' where author_id='$id' ");
                        // ums.afile-صاحب الملف	owner_id  غير معروفة-unkn
                         $this->execQuery("update ${server_db_prefix}ums.afile set owner_id='$id_replace' where owner_id='$id' ");
                        // ums.module_auser-الموظف	id_auser  غير معروفة-unkn

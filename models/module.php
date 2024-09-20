@@ -532,18 +532,18 @@ class Module extends AFWObject
             $link["UGROUPS"] = array();
             $otherLinksArray[] = $link;
         }
-
+        /*
         if (($mode == "mode_applicationGoalList") or ($mode == "mode_goals_def")) {
             unset($link);
             $my_id = $this->getId();
             $link = array();
             $title = "إدارة الأهداف ";
             $title_detailed = $title . "لـ : " . $displ;
-            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Goal&currmod=bau&id_origin=$my_id&class_origin=Module&module_origin=ums&newo=-1&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=module_id=$my_id&sel_module_id=$my_id";
+            $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Goal&currmod=b au&id_origin=$my_id&class_origin=Module&module_origin=ums&newo=-1&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=module_id=$my_id&sel_module_id=$my_id";
             $link["TITLE"] = $title;
             $link["UGROUPS"] = array();
             $otherLinksArray[] = $link;
-        }
+        }*/
 
 
         if (($mode == "mode_aroles") or ($mode == "mode_allRoles")) {
@@ -702,16 +702,16 @@ class Module extends AFWObject
                         $link["TITLE"] = "توليد ترجمة قائمة الاختيارات " . $this->getDisplay();
                         $link["UGROUPS"] = array();
                         $otherLinksArray[] = $link;
-
+                        /*
                         unset($link);
                         $my_id = $this->getId();
                         $link = array();
                         $title = "إدارة قصص المستخدم ";
                         $title_detailed = $title . "لـ : " . $displ;
-                        $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=UserStory&currmod=bau&id_origin=$my_id&class_origin=Module&module_origin=ums&newo=-1&limit=60&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=module_id=$my_id&sel_module_id=$my_id";
+                        $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=UserStory&currmod=b au&id_origin=$my_id&class_origin=Module&module_origin=ums&newo=-1&limit=60&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=module_id=$my_id&sel_module_id=$my_id";
                         $link["TITLE"] = $title;
                         $link["UGROUPS"] = array();
-                        $otherLinksArray[] = $link;
+                        $otherLinksArray[] = $link;*/
 
                         unset($link);
                         $parent_mod_id = $this->getId();
@@ -2008,9 +2008,8 @@ class Module extends AFWObject
                     $this->deleteNotAllowedReason = "Used in some Aroles(s) as Module";
                     return false;
                 }
-                // bau.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."bau.goal where system_id = '$id' and avail='N'");
-                require_once "../bau/goal.php";
+                // b au.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("delete from $server_db_prefix"."b au.goal where system_id = '$id' and avail='N'");
                 $obj = new Goal();
                 $obj->where("system_id = '$id'");
                 $nbRecords = $obj->count();
@@ -2018,9 +2017,9 @@ class Module extends AFWObject
                     $this->deleteNotAllowedReason = "Used in some Goals(s) as System";
                     return false;
                 }
-                // bau.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."bau.goal where module_id = '$id' and avail='N'");
-                require_once "../bau/goal.php";
+                // b au.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("delete from $server_db_prefix"."b au.goal where module_id = '$id' and avail='N'");
+                // require_once "../b au/goal.php";
                 $obj = new Goal();
                 $obj->where("module_id = '$id'");
                 $nbRecords = $obj->count();
@@ -2039,21 +2038,21 @@ class Module extends AFWObject
                 $this->execQuery("delete from $server_db_prefix"."sdd.ptask where project_module_id = '$id' ");
                 // sdd.ptask-النظام / الـتطبيق	module_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("delete from $server_db_prefix"."sdd.ptask where module_id = '$id' ");
-                // bau.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."bau.user_story where system_id = '$id' ");
-                // bau.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."bau.user_story where module_id = '$id' ");
+                // b au.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("delete from $server_db_prefix"."b au.user_story where system_id = '$id' ");
+                // b au.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("delete from $server_db_prefix"."b au.user_story where module_id = '$id' ");
 
 
                 // FK not part of me - replaceable 
                 // ums.module-النظام	id_system  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."ums.module set id_system='$id_replace' where id_system='$id' ");
-                // bau.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."bau.gfield set module_id='$id_replace' where module_id='$id' ");
+                // b au.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
+                // $this->execQuery("update $server_db_prefix"."b au.gfield set module_id='$id_replace' where module_id='$id' ");
                 // p ag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
                 //$this->execQuery("update $server_db_prefix"."p ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
-                // bau.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."bau.ptext set module_id='$id_replace' where module_id='$id' ");
+                // b au.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
+                // $this->execQuery("update $server_db_prefix"."b au.ptext set module_id='$id_replace' where module_id='$id' ");
                 // p ag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
                 // $this->execQuery("update $server_db_prefix"."p ag.pmessage set module_id='$id_replace' where module_id='$id' ");
                 // ums.job_arole-التطبيق	module_id  حقل يفلتر به-ManyToOne
@@ -2078,10 +2077,10 @@ class Module extends AFWObject
                 $this->execQuery("update $server_db_prefix"."ums.bfunction set curr_class_module_id='$id_replace' where curr_class_module_id='$id' ");
                 // ums.arole-التطبيق	module_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix"."ums.arole set module_id='$id_replace' where module_id='$id' ");
-                // bau.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."bau.goal set system_id='$id_replace' where system_id='$id' ");
-                // bau.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."bau.goal set module_id='$id_replace' where module_id='$id' ");
+                // b au.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("update $server_db_prefix"."b au.goal set system_id='$id_replace' where system_id='$id' ");
+                // b au.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("update $server_db_prefix"."b au.goal set module_id='$id_replace' where module_id='$id' ");
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix"."ums.module_auser set id_module='$id_replace' where id_module='$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
@@ -2090,18 +2089,18 @@ class Module extends AFWObject
                 $this->execQuery("update $server_db_prefix"."sdd.ptask set project_module_id='$id_replace' where project_module_id='$id' ");
                 // sdd.ptask-النظام / الـتطبيق	module_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix"."sdd.ptask set module_id='$id_replace' where module_id='$id' ");
-                // bau.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."bau.user_story set system_id='$id_replace' where system_id='$id' ");
-                // bau.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."bau.user_story set module_id='$id_replace' where module_id='$id' ");
+                // b au.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("update $server_db_prefix"."b au.user_story set system_id='$id_replace' where system_id='$id' ");
+                // b au.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
+                  $this->execQuery("update $server_db_prefix"."b au.user_story set module_id='$id_replace' where module_id='$id' ");
                 // ums.module-النظام	id_system  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."ums.module set id_system='$id_replace' where id_system='$id' ");
-                // bau.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."bau.gfield set module_id='$id_replace' where module_id='$id' ");
+                // b au.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
+                // $this->execQuery("update $server_db_prefix"."b au.gfield set module_id='$id_replace' where module_id='$id' ");
                 // p ag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
                 // $this->execQuery("update $server_db_prefix"."p ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
-                // bau.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."bau.ptext set module_id='$id_replace' where module_id='$id' ");
+                // b au.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
+                // $this->execQuery("update $server_db_prefix"."b au.ptext set module_id='$id_replace' where module_id='$id' ");
                 // p ag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
                 // $this->execQuery("update $server_db_prefix"."p ag.pmessage set module_id='$id_replace' where module_id='$id' ");
                 // ums.job_arole-التطبيق	module_id  حقل يفلتر به-ManyToOne
@@ -2130,7 +2129,6 @@ class Module extends AFWObject
     {
         $server_db_prefix = AfwSession::config("db_prefix", "c0");
         $file_dir_name = dirname(__FILE__);
-        // require_once("$file_dir_name/../bau/user_story.php");
         /*
                 $application = $this->getParentApplication();
                 if(!$application) throw new AfwRuntimeException("no parent application for this module : $this");*/
@@ -2146,13 +2144,14 @@ class Module extends AFWObject
         $ustr0->where("(system_id = $system_id or module_id = $module_id)");
         $ustr0->select("source", "auto-generated");
         $ustr0->logicDelete(true, false);
-
+        
+        /*
         $ustr0->resetUpdates();
         $ustr0->set("user_story_goal_id", 0, true);
         $ustr0->select("source", "auto-generated");
         $ustr0->where("(system_id = $system_id or module_id = $module_id)");
-        $ustr0->where("user_story_goal_id not in (select id from $server_db_prefix"."bau.goal where system_id=$my_system_id and goal_code like 'manual%')");
-        $ustr0->update(false);
+        $ustr0->where("user_story_goal_id not in (select id from $server_db_prefix"."b au.goal where system_id=$my_system_id and goal_code like 'manual%')");
+        $ustr0->update(false);*/
 
         // throw new AfwRuntimeException("see my query : ",array("SQL"=>true));
 
@@ -2262,7 +2261,7 @@ class Module extends AFWObject
         $category_id = 4;
 
         $file_dir_name = dirname(__FILE__);
-        // require_once("$file_dir_name/../bau/r_a_m_object_type.php");
+        
         $moduleTypeObj = $this->getType();
         $lookup_code = $moduleTypeObj->getVal("lookup_code");
         $typeObj = RAMObjectType::loadByMainIndex($lookup_code);
@@ -2417,7 +2416,7 @@ class Module extends AFWObject
         $goalObj = null;
 
         if ($this->getId() and $this->getVal("id_system")) {
-            // require_once("$file_dir_name/../bau/goal.php");
+            
             $goal_code = strtoupper($code_jr);
 
             $goalObj = Goal::loadByMainIndex($this->getVal("id_system"), $this->getId(), $goal_code, $create_obj_if_not_found);
@@ -2481,7 +2480,7 @@ class Module extends AFWObject
         $goalObj = null;
 
         if ($this->getId() and $this->getVal("id_system")) {
-            // require_once("$file_dir_name/../bau/goal.php");
+            
             $goal_code = strtoupper($code_jr);
             $goalObj = Goal::loadByMainIndex($this->getVal("id_system"), $this->getId(), $goal_code, $create_obj_if_not_found);
             if ($goalObj->is_new or $always_update_name) {

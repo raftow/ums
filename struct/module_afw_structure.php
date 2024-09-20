@@ -265,17 +265,17 @@
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),*/
+				),
 
 			'main_goal_id' => array('SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,  
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  'NO-ERROR-CHECK' => true,  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  'NO-ERROR-CHECK' => true,  
 				'WHERE' => "jobrole_id = §id_br§ and module_id in (§id_module_parent§,§id§)", 
 				 'DEFAUT' => 0,  'FGROUP' => 'goals_def',  'STEP' => 11,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'applicationGoalList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'module_id',  
 				'WHERE' => "", 
 				 'FGROUP' => 'goals_def',  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 11,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -283,7 +283,7 @@
 				),
 
 		'goalConcernList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'application_id',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 11,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -291,18 +291,18 @@
 				),
 
 		'otherGoalList' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'MFK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => false,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  'READONLY' => true,  'PHP_FORMULA' => 'list_extract.goalConcernList.goal_id.',  'STEP' => 11,  'SEARCH-BY-ONE' => '',  'DISPLAY' => false,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'userStoryList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'module_id',  'PILLAR' => false,  
 				'WHERE' => "", 
 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'NO-LABEL' => true,  'FGROUP' => 'userStoryList',  'STEP' => 12,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),*/
 
 			'id_analyst' => array('SHOW' => true,  'EDIT' => true,  'QEDIT' => false,  'RETRIEVE' => true,  
 				'TYPE' => 'FK',  'SHORTNAME' => 'bmjob',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'ums',  'DEFAUT' => 53,  'SIZE' => 40,  

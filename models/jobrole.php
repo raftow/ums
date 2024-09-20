@@ -153,18 +153,18 @@ class Jobrole extends AFWObject
                $link["UGROUPS"] = array();
                $otherLinksArray[] = $link;
           }
-
+          /*
           if ($mode == "mode_jobGoalList") {
                unset($link);
                $my_id = $this->getId();
                $link = array();
                $title = "إدارة  أهداف المسؤولية الوظيفية";
                $title_detailed = $title . " : " . $displ;
-               $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Goal&currmod=bau&id_origin=$my_id&class_origin=Jobrole&module_origin=ums&newo=4&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=jobrole_id=$my_id&sel_jobrole_id=$my_id";
+               $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Goal&currmod=b au&id_origin=$my_id&class_origin=Jobrole&module_origin=ums&newo=4&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=jobrole_id=$my_id&sel_jobrole_id=$my_id";
                $link["TITLE"] = $title;
                $link["UGROUPS"] = array();
                $otherLinksArray[] = $link;
-          }
+          }*/
 
           return $otherLinksArray;
      }
@@ -314,7 +314,6 @@ class Jobrole extends AFWObject
 
                case "statsGoal":
                     if ($this->statsGoal) return $this->statsGoal;
-                    // require_once("$file_dir_name/../bau/goal.php");
                     $this->statsGoal = new Goal();
                     $this_id = $this->getId();
                     $this->statsGoal->where("avail='Y' and jobrole_id = $this_id and goal_code = 'stats'");
@@ -326,7 +325,6 @@ class Jobrole extends AFWObject
 
                case "lookupGoal":
                     if ($this->lookupGoal) return $this->lookupGoal;
-                    // require_once("$file_dir_name/../bau/goal.php");
                     $this->lookupGoal = new Goal();
                     $this_id = $this->getId();
                     $this->lookupGoal->where("avail='Y' and jobrole_id = $this_id and goal_code like 'lookup%'");
@@ -338,7 +336,6 @@ class Jobrole extends AFWObject
 
                case "mainGoal":
                     if ($this->mainGoal) return $this->mainGoal;
-                    // require_once("$file_dir_name/../bau/goal.php");
                     $this->mainGoal = new Goal();
                     $this_id = $this->getId();
                     $jobrole_code = $this->getVal("jobrole_code");
@@ -389,7 +386,6 @@ class Jobrole extends AFWObject
           $file_dir_name = dirname(__FILE__);
 
           if ($this->mainGoal) return $this->mainGoal;
-          // require_once("$file_dir_name/../bau/goal.php");
           $this->mainGoal = new Goal();
           $this_id = $this->getId();
           $jobrole_code = $this->getVal("jobrole_code");
@@ -449,7 +445,6 @@ class Jobrole extends AFWObject
           $category_id = 3;
 
           // $file_dir_name = dirname(__FILE__); 
-          // // require_once("$file_dir_name/../bau/r_a_m_object_type.php");
           // $orgTypeObj = $this->getOrgType();
           // $lookup_code = $orgTypeObj->getVal("lookup_code");
           //$typeObj = RAMObjectType::loadByMainIndex($lookup_code); 
@@ -475,7 +470,6 @@ class Jobrole extends AFWObject
      public function findGoalWithCodeEndsWith($suffix, $atable_id = 0)
      {
           $file_dir_name = dirname(__FILE__);
-          // require_once("$file_dir_name/../bau/goal_concern.php");
           if ($atable_id) $goalListMatrix[] = GoalConcern::getJobRoleGoalListUsingTable($this->id, $atable_id);
           if (!$atable_id) $goalListMatrix[] = $this->get("jobGoalList");
           if (!$atable_id) $goalListMatrix[] = $this->get("otherGoalList");
@@ -515,7 +509,6 @@ class Jobrole extends AFWObject
 
 
                $file_dir_name = dirname(__FILE__);
-               // require_once("$file_dir_name/../bau/goal.php");
                $goalObj = Goal::loadByMainIndex($system_id, $module_id, $goal_code, $create_obj_if_not_found = true);
 
                $action = "created";
@@ -574,9 +567,8 @@ class Jobrole extends AFWObject
           if ($id) {
                if ($id_replace == 0) {
                     $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK part of me - not deletable 
-                    // bau.goal-المسؤولية الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("delete from ".$server_db_prefix."bau.goal where jobrole_id = '$id' and avail='N'");
-                    // require_once "../bau/goal.php";
+                    // b au.goal-المسؤولية الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
+                    // $this->execQuery("delete from ".$server_db_prefix."b au.goal where jobrole_id = '$id' and avail='N'");
                     $obj = new Goal();
                     $obj->where("jobrole_id = '$id'");
                     $nbRecords = $obj->count();
@@ -591,10 +583,10 @@ class Jobrole extends AFWObject
                     $this->execQuery("delete from ".$server_db_prefix."ums.job_arole where jobrole_id = '$id' ");
                     // sdd.job_permission-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
                     // $this->execQuery("delete from ".$server_db_prefix."sdd.job_permission where jobrole_id = '$id' ");
-                    // bau.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("delete from ".$server_db_prefix."bau.user_story where jobrole_id = '$id' ");
-                    // bau.goal_concern-المسؤولية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("delete from ".$server_db_prefix."bau.goal_concern where jobrole_id = '$id' ");
+                    // b au.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
+                    // $this->execQuery("delete from ".$server_db_prefix."b au.user_story where jobrole_id = '$id' ");
+                    // b au.goal_concern-المسؤولية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
+                    // $this->execQuery("delete from ".$server_db_prefix."b au.goal_concern where jobrole_id = '$id' ");
 
 
                     // FK not part of me - replaceable 
@@ -621,16 +613,16 @@ class Jobrole extends AFWObject
 
                } else {
                     $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK on me 
-                    // bau.goal-المسؤولية الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("update ".$server_db_prefix."bau.goal set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    // b au.goal-المسؤولية الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
+                    $this->execQuery("update ".$server_db_prefix."b au.goal set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // ums.job_arole-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
                     $this->execQuery("update ".$server_db_prefix."ums.job_arole set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // sdd.job_permission-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
                     // $this->execQuery("update ".$server_db_prefix."sdd.job_permission set jobrole_id='$id_replace' where jobrole_id='$id' ");
-                    // bau.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("update ".$server_db_prefix."bau.user_story set jobrole_id='$id_replace' where jobrole_id='$id' ");
-                    // bau.goal_concern-المسؤولية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("update ".$server_db_prefix."bau.goal_concern set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    // b au.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
+                    // $this->execQuery("update ".$server_db_prefix."b au.user_story set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    // b au.goal_concern-المسؤولية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
+                    // $this->execQuery("update ".$server_db_prefix."b au.goal_concern set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // ums.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
                     $this->execQuery("update ".$server_db_prefix."ums.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // ums.module-وظيفة مسؤول الأعمال	id_analyst  حقل يفلتر به-ManyToOne

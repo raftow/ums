@@ -129,14 +129,14 @@
 				'CATEGORY' => 'FORMULA',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  'HZM-WIDTH' => 4,  'FORMULA_USE_CACHE' => true,  'STEP' => 3,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
-
+		/*		
 		'userStoryList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'bfunction_id',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => true,  'FGROUP' => 'userStoryList',  'STEP' => 3,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),*/
 
 		'tobinus' => array(
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'RETRIEVE' => false,  'SIZE' => 32,  
@@ -164,12 +164,12 @@
 				'TYPE' => 'INT',  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
-
+				/*
 		'mainGoal' => array('SHOW' => true,  'SIZE' => 40,  
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  'NO-ERROR-CHECK' => true,  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  'NO-ERROR-CHECK' => true,  
 				'CATEGORY' => 'FORMULA',  'DEFAUT' => 0,  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),*/
 
 			'avail' => array('IMPORTANT' => 'IN',  'SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false,  'DEFAUT' => 'Y',  'EDIT-ADMIN' => true,  
 				'TYPE' => 'YN',  'SEARCH-BY-ONE' => '',  'DISPLAY' => '',  'STEP' => 1,  

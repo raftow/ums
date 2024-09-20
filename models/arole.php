@@ -141,9 +141,6 @@ class Arole extends AFWObject{
         
         public function getParentGoal()
         {
-               // $file_dir_name = dirname(__FILE__);
-               // require_once("$file_dir_name/../bau/goal.php");
-               
                $goal = new Goal();
                $goal->set("goal_name_ar","لا يوجد");
                $goal->set("goal_name_en","Not found");
@@ -818,8 +815,8 @@ class Arole extends AFWObject{
                         $this->execQuery("delete from ${server_db_prefix}ums.job_arole where arole_id = '$id' ");
                        // ums.arole_bf-الصلاحية	arole_id  أنا تفاصيل لها-OneToMany
                         $this->execQuery("delete from ${server_db_prefix}ums.arole_bf where arole_id = '$id' ");
-                       // bau.user_story-الصلاحية المستخدمة	arole_id  أنا تفاصيل لها-OneToMany
-                        $this->execQuery("delete from ${server_db_prefix}bau.user_story where arole_id = '$id' ");
+                       // b au.user_story-الصلاحية المستخدمة	arole_id  أنا تفاصيل لها-OneToMany
+                       // $this->execQuery("delete from ${server_db_prefix}b au.user_story where arole_id = '$id' ");
 
                    
                    // FK not part of me - replaceable 
@@ -844,8 +841,8 @@ class Arole extends AFWObject{
                         $this->execQuery("update ${server_db_prefix}ums.job_arole set arole_id='$id_replace' where arole_id='$id' ");
                        // ums.arole_bf-الصلاحية	arole_id  أنا تفاصيل لها-OneToMany
                         $this->execQuery("update ${server_db_prefix}ums.arole_bf set arole_id='$id_replace' where arole_id='$id' ");
-                       // bau.user_story-الصلاحية المستخدمة	arole_id  أنا تفاصيل لها-OneToMany
-                        $this->execQuery("update ${server_db_prefix}bau.user_story set arole_id='$id_replace' where arole_id='$id' ");
+                       // b au.user_story-الصلاحية المستخدمة	arole_id  أنا تفاصيل لها-OneToMany
+                       // $this->execQuery("update ${server_db_prefix}b au.user_story set arole_id='$id_replace' where arole_id='$id' ");
 
                         
                         // MFK
@@ -882,8 +879,7 @@ class Arole extends AFWObject{
         {
                   $category_id = 5;
 
-                  // $file_dir_name = dirname(__FILE__); 
-                  // require_once("$file_dir_name/../bau/r_a_m_object_type.php");
+                  
                   $typeObj = $this->getType();
                   $lookup_code = $typeObj->getVal("lookup_code");
                   $typeObj = RAMObjectType::loadByMainIndex($lookup_code); 

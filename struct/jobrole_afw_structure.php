@@ -58,9 +58,9 @@
 				'CATEGORY' => 'FORMULA',  'SUPER_CATEGORY' => 'ITEMS',  'SHOW' => true,  'FORMAT' => 'tree',  'LINK_COL' => 'parent_arole_id',  'ITEMS_COL' => 'childList',  'FEUILLE_COL' => 'rbfList',  'FEUILLE_COND_METHOD' => '_isMenu',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
-
+		/*		
 		'jobGoalList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'jobrole_id',  'SHORTNAME' => 'goals',  'MANDATORY' => true,  'ERROR-CHECK' => true,  
 				'WHERE' => "", 
 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -68,7 +68,7 @@
 				),
 
 		'goalConcernList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'jobrole_id',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -76,34 +76,34 @@
 				),
 
 		'otherGoalList' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'MFK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => false,  'RETRIEVE' => false,  'EDIT' => false,  'QEDIT' => false,  'READONLY' => true,  'PHP_FORMULA' => 'list_extract.goalConcernList.goal_id.',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => false,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),*/
 
 		'mainApplication' => array(
 				'TYPE' => 'FK',  'ANSWER' => 'module',  'ANSMODULE' => 'ums',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
-
+/*
 		'mainGoal' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'lookupGoal' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'statsGoal' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),*/
 
 		'is_finished' => array(
 				'TYPE' => 'YN',  

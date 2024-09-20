@@ -71,13 +71,14 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
+		/*		
 		'goal_id' => array('IMPORTANT' => 'IN',  'EDIT' => false,  'QEDIT' => false,  'SHOW' => true,  'READONLY' => true,  
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
 				'WHERE-SEARCH' => "", 
 				 
 				'CATEGORY' => 'FORMULA',  'PHP_FORMULA' => 'method...getParentGoal',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),*/
 
 		'childList' => array(
 				'TYPE' => 'FK',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  
@@ -126,14 +127,15 @@
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
-
+				
+		/*
 		'userStoryList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'bau',  
+				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'arole_id',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 5,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),*/
 
 		'auser_mfk' => array('STEP' => 6,  
 				'TYPE' => 'MFK',  'EDIT' => true,  'QEDIT' => false,  'SHOW' => true,  'READONLY' => true,  'FORMAT' => 'retreive',  

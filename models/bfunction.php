@@ -223,7 +223,7 @@ class Bfunction extends AFWObject{
                 $ustr0->set("user_story_goal_id", 0, true);
                 $ustr0->select("bfunction_id",$this->getId());
                 $ustr0->where("source not like '%-manual'");
-                //$ustr0->where("user_story_goal_id not in (select id from ${server_db_prefix}bau.goal where system_id=$system_id and goal_code like 'manual%')");
+                //$ustr0->where("user_story_goal_id not in (select id from ${server_db_prefix}b au.goal where system_id=$system_id and goal_code like 'manual%')");
                 $count_affected += $ustr0->update(false);
                 
                 $ustr0->resetUpdates();
@@ -313,7 +313,7 @@ class Bfunction extends AFWObject{
                 else
                 { 
                         $atable_display = $tableObj->getShortDisplay($lang);
-                        /* raf:bau-v2 include("$file_dir_name/../lib/framework_${framework}_specification.php"); */
+                        /* raf:b au-v2 include("$file_dir_name/../lib/framework_${framework}_specification.php"); */
                         
                         $tbl_cat = $tableObj->tableCategory();
                         
@@ -357,7 +357,7 @@ class Bfunction extends AFWObject{
                              $errors[]  = "[$bfOperation] is unkownm operation code";
                         }
                         
-                        /* raf:bau-v2                
+                        /* raf:b au-v2                
                         $jrl_code = $framework_mode_list[$bfOperation]["categories"][$tbl_cat];
                         $goal_code = $framework_mode_list[$bfOperation]["goals"][$tbl_cat];
                         list($goal_code_type, $goal_code_value) = explode(":",$goal_code);
@@ -1129,8 +1129,8 @@ class Bfunction extends AFWObject{
                        // ums.arole_bf-الوظيفة	bfunction_id  أنا تفاصيل لها-OneToMany
 
 
-                       // bau.user_story-الوظيفة العملية	bfunction_id  أنا تفاصيل لها-OneToMany
-                       // $this->execQuery("delete from ${server_db_prefix}bau.user_story where bfunction_id = '$id' ");
+                       // b au.user_story-الوظيفة العملية	bfunction_id  أنا تفاصيل لها-OneToMany
+                       // $this->execQuery("delete from ${server_db_prefix}b au.user_story where bfunction_id = '$id' ");
  
  
                        // FK not part of me - replaceable 
@@ -1150,8 +1150,8 @@ class Bfunction extends AFWObject{
                        // $this->execQuery("update ${server_db_prefix}spp.ticket set bfunction_id='$id_replace' where bfunction_id='$id' ");
                        // ums.arole_bf-الوظيفة	bfunction_id  أنا تفاصيل لها-OneToMany
                         $this->execQuery("update ${server_db_prefix}ums.arole_bf set bfunction_id='$id_replace' where bfunction_id='$id' ");
-                       // bau.user_story-الوظيفة العملية	bfunction_id  أنا تفاصيل لها-OneToMany
-                       // $this->execQuery("update ${server_db_prefix}bau.user_story set bfunction_id='$id_replace' where bfunction_id='$id' ");
+                       // b au.user_story-الوظيفة العملية	bfunction_id  أنا تفاصيل لها-OneToMany
+                       // $this->execQuery("update ${server_db_prefix}b au.user_story set bfunction_id='$id_replace' where bfunction_id='$id' ");
                        // ums.bfunction-الوظيفة العملية الأم	parent_bfunction_id  حقل يفلتر به-ManyToOne
                         $this->execQuery("update ${server_db_prefix}ums.bfunction set parent_bfunction_id='$id_replace' where parent_bfunction_id='$id' ");
  
