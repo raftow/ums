@@ -245,13 +245,19 @@ class Bfunction extends AFWObject{
         
         public function isEnumOrLookup()
         {
-              $tableObj = $this->het("curr_class_atable_id");
+              $tableObj = $this->getCurrTable();
               return ($tableObj and $tableObj->isEnumOrLookup());
+        }
+        
+        public function getCurrTable()
+        {
+                $tableObj_id = $this->getVal("curr_class_atable_id");
+                return Atable::loadById($tableObj_id);
         }
         
         public function enumLookupModule()
         {
-                $tableObj = $this->het("curr_class_atable_id");
+                $tableObj = $this->getCurrTable();
                 
                 if($tableObj and $tableObj->isEnumOrLookup())
                 {
@@ -287,7 +293,7 @@ class Bfunction extends AFWObject{
                 $this_display = $this->getShortDisplay($lang);
                 
                 
-                $tableObj = $this->het("curr_class_atable_id");
+                $tableObj = $this->getCurrTable();
                 $system_id = $this->getVal("id_system");
                 if(!$system_id) $system_id = 1;
                 $module_id = $this->getVal("curr_class_module_id");
@@ -730,9 +736,9 @@ class Bfunction extends AFWObject{
         
         public function getMyMainGoal()
         {
-             $tbl = $this->het("curr_class_atable_id");
-                 if($tbl) return $tbl->getMyMainGoal();
-                 else return "";
+                $tbl = $this->getCurrTable();
+                if($tbl) return $tbl->getMyMainGoal();
+                else return "";
         }
         
         public function isSpecial()
@@ -748,7 +754,7 @@ class Bfunction extends AFWObject{
              $framework=AfwSession::config("framework_id", 1);
              if($this->getVal("curr_class_atable_id"))
              {
-                 $tbl = $this->het("curr_class_atable_id");
+                 $tbl = $this->getCurrTable();
                  if($tbl) $tbl_cat = $tbl->tableCategory();
                  else $tbl_cat = "default";
                  
@@ -780,8 +786,8 @@ class Bfunction extends AFWObject{
                   $this_id = $this->getId();
                   $bf_specification = $this->getVal("bf_specification");
                   $file_specification = $this->getVal("file_specification");
-                  $tableObj_id = $this->getVal("curr_class_atable_id");
-                  $tableObj = $this->get("curr_class_atable_id");
+                  $tableObj = $this->getCurrTable();
+                  $tableObj_id = $tableObj->id;
                   $tableObj_name = $tableObj->getVal("atable_name");
                   $cl = $tableObj->getTableClass();
                   $currmod_obj = $tableObj->hetModule();
@@ -856,25 +862,25 @@ class Bfunction extends AFWObject{
         
         public function getPhpCode()
         {
-             $this_id = $this->getId();
-             
-             if($this->_isSpecial())
-             {
-                 return $this->getVal("bfunction_code");
-             }
-             else
-             {
-                  $tbl = $this->het("curr_class_atable_id");
-                  if($tbl)
-                  {
-                       $my_upper_atable_name = strtoupper($tbl->getVal("atable_name"));
-                       $my_upper_mode = strtoupper($this->getVal("file_specification")); 
-                  
-                       return "BF_${my_upper_mode}_$my_upper_atable_name";
-                  
-                  }
-                  else throw new AfwRuntimeException("BF $this_id is not special and has no table class defined !");
-             }
+                $this_id = $this->getId();
+                
+                if($this->_isSpecial())
+                {
+                        return $this->getVal("bfunction_code");
+                }
+                else
+                {
+                        $tbl = $this->getCurrTable();;
+                        if($tbl)
+                        {
+                        $my_upper_atable_name = strtoupper($tbl->getVal("atable_name"));
+                        $my_upper_mode = strtoupper($this->getVal("file_specification")); 
+                        
+                        return "BF_${my_upper_mode}_$my_upper_atable_name";
+                        
+                        }
+                        else throw new AfwRuntimeException("BF $this_id is not special and has no table class defined !");
+                }
              
              
         
@@ -913,7 +919,7 @@ class Bfunction extends AFWObject{
         {
              $listBFTypes = self::listUserStoriesBFTypes();
              
-             $myTable = $this->het("curr_class_atable_id");
+             $myTable = $this->getCurrTable();
              $bf_type = $this->getVal("bfunction_type_id");
              
              if(!$myTable) return ($listBFTypes[$bf_type]>0);
@@ -936,7 +942,7 @@ class Bfunction extends AFWObject{
         {
              $listBFTypes = self::listUserStoriesBFTypes();
              
-             $myTable = $this->het("curr_class_atable_id");
+             $myTable = $this->getCurrTable();
              $bf_type = $this->getVal("bfunction_type_id");
              
              if(!$myTable)
@@ -987,7 +993,7 @@ class Bfunction extends AFWObject{
                 $framework=AfwSession::config("framework_id", 1);
                 
                 if(!$this->getId()) return false;
-                $tableObj = $this->het("curr_class_atable_id");
+                $tableObj = $this->getCurrTable();
                 if(!$tableObj) return false; 
 
                 $file_dir_name = dirname(__FILE__);
@@ -1234,7 +1240,8 @@ class Bfunction extends AFWObject{
         {
                 global $MENU_ICONS;
                 $icon_table = "";
-                $tableObj = $this->het("table");
+                $tableObj = $this->getCurrTable();
+                
                 if($tableObj)
                 {
                         $icon_table = $tableObj->icon;
