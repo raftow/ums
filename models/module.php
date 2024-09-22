@@ -2372,7 +2372,14 @@ class Module extends AFWObject
         $appCode = $this->getVal("module_code");
 
         $code_jr = $appCode . "-lookup";
-        $domain = $this->hetDomain();
+        $domain = null;
+        if(AfwSession::config("MODE_DEVELOPMENT",false))
+        {                            
+            $id_pm = $this->getVal("id_pm");
+            AfwAutoLoader::addModule("p"."ag");
+            $domain = Domain::loadById($id_pm);
+        }
+        
         if ((!$domain) or (!$domain->getId())) {
             return null;
         }
@@ -2394,7 +2401,15 @@ class Module extends AFWObject
 
     public function updateLookupGoal($jrObj = null, $create_obj_if_not_found = true, $always_update_name = false)
     {
-        $domain = $this->hetDomain();
+        
+        $domain = null;
+        if(AfwSession::config("MODE_DEVELOPMENT",false))
+        {                            
+            $id_pm = $this->getVal("id_pm");
+            AfwAutoLoader::addModule("p"."ag");
+            $domain = Domain::loadById($id_pm);
+        }
+        
         if ((!$domain) or (!$domain->getId())) {
             return null;
         }
@@ -2598,6 +2613,11 @@ class Module extends AFWObject
         if($attribute=="smjob") return "id_br";
         if($attribute=="dispjobs") return "jobrole_mfk";
         return $attribute;
+    }
+
+    public function getSystem()
+    {
+
     }
 
 

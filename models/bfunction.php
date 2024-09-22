@@ -985,7 +985,14 @@ class Bfunction extends AFWObject{
 
         public function isInUserStory()
         {
-             return count($this->get("userStoryList"));
+                if(!$this->id) return false;
+                
+                if(AfwSession::config("MODE_DEVELOPMENT",false))
+                {                            
+                    AfwAutoLoader::addModule("b"."au");   
+                    return count(UserStory::loadAll($this->id));
+                }
+                else return true;
         }
         
         public function getIsMenu()

@@ -74,7 +74,7 @@ class Jobrole extends AFWObject
                      $id = " ($id)";
                 }*/
 
-          $domain = $this->hetDomain();
+          // $domain = $this->hetDomain();
 
           if ($lang == "ar") $fn = trim($this->valtitre_short());
           if ($lang == "en") $fn = trim($this->valtitre_short_en());
@@ -94,7 +94,7 @@ class Jobrole extends AFWObject
                      $id = " ($id)";
                 }*/
 
-          $domain = $this->hetDomain();
+          $domain = null; //$this->hetDomain();
 
           if ($lang == "ar") $fn = trim($this->valtitre_short());
           if ($lang == "en") $fn = trim($this->valtitre_short_en());
@@ -264,7 +264,7 @@ class Jobrole extends AFWObject
 
           switch ($attribute) {
                case "mainApplication":
-                    $domainObj = $this->hetDomain();
+                    $domainObj = null; // $this->hetDomain();
                     $mainApplication = null;
                     if ($domainObj)  $mainApplication = $domainObj->get("mainApplication");
 
