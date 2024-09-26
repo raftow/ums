@@ -7,7 +7,7 @@
 // alter table  module_auser change id_auser id_auser bigint NOT NULL;
 
 
-$file_dir_name = dirname(__FILE__); 
+ 
                 
 // old include of afw.php
 
@@ -128,7 +128,7 @@ class ModuleAuser extends AFWObject{
                $userItem = $this->getUser();
                $moduleItem = $this->getModule();
                $moduleCode = $moduleItem->getVal("module_code");
-               $tableList = $moduleItem->get("tbs");
+               $tableList = $moduleItem->getAllMyTables(true);
                $myId = $this->id;
 
                $html = "<div class='mau-rights mau-on-$moduleCode'>";

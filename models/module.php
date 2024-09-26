@@ -866,20 +866,26 @@ class Module extends AFWObject
 
 
 
-    public function getAllMyTables()
+    public function getAllMyTables($only_entities=false)
     {
         $file_dir_name = dirname(__FILE__);
+        if(file_exists($file_dir_name.'/../../pag/index.php'))
+        {
+            AfwAutoLoader::addModule("p"."ag");
+            $at = new Atable();
+
+            $mod_id = $this->getId();
+
+            if (($mod_id) and (intval($mod_id) > 0)) 
+            {
+                $at->where("(id_sub_module = '$mod_id' or id_module = '$mod_id')");
+                $at->select("avail", 'Y');
+                if($only_entities) $at->select("is_lookup", 'N');
+                return $at->loadMany();
+            } 
+        }
         
-
-        $at = new Atable();
-
-        $mod_id = $this->getId();
-
-        if (($mod_id) and (intval($mod_id) > 0)) {
-            $at->where("(id_sub_module = '$mod_id' or id_module = '$mod_id')");
-            $at->select("avail", 'Y');
-            return $at->loadMany();
-        } else return array();
+        return array();
     }
 
 

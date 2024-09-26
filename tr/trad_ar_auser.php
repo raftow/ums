@@ -49,8 +49,9 @@ $trad["auser"]["work_contact"] = "معلومات الاتصال";
 
 $trad["auser"]["step1"] = "بيانات المستخدم";
 $trad["auser"]["step2"] = "بيانات التواصل";
-$trad["auser"]["step3"] = "الصلاحيات";
+$trad["auser"]["step3"] = "اعداد الصلاحيات";
 $trad["auser"]["step4"] = "برمجيات";
+$trad["auser"]["step5"] = "مشاهدة الصلاحيات";
 
 $trad["auser"]["php"] = "برمجيات الصلاحيات";
 

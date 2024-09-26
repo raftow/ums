@@ -63,7 +63,7 @@ class Auser extends AFWObject{
 
         public static $DATABASE		= ""; 
         public static $MODULE		    = "ums"; 
-        public static $TABLE			= ""; 
+        public static $TABLE			= "auser"; 
         
         public static $DB_STRUCTURE = null; 
         
@@ -78,7 +78,7 @@ class Auser extends AFWObject{
                 $this->popup = false;
                 $this->UNIQUE_KEY = array('email');
                 $this->editByStep = true;
-                $this->editNbSteps = 4;
+                $this->editNbSteps = 5;
                 $this->showQeditErrors = true;
                 $this->showRetrieveErrors = true;
                 $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;

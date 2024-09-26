@@ -13,7 +13,7 @@
 			'email' => array(
 				'TYPE' => 'TEXT',  'EDIT' => true,  'MANDATORY' => true,  'SHOW' => true,  'RETRIEVE' => true, 'QSEARCH' => true, 'SEARCH' => true, 
 				'ROLES' => '',  'DEFAUT' => '',  'SIZE' => 64,  'FORMAT' => 'he',  'FGROUP' => '',  'READONLY' => false, 
-				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'UTF8' => true,  'STEP' => 1,  
+				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true,  'DEFAUT' => '', 
 				),
 
@@ -120,7 +120,7 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-		'rights' => array('STEP' => 3,  
+		'rights' => array('STEP' => 5,  
 				'TYPE' => 'TEXT',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true, 'MINIBOX' => true,  'READONLY' => true,  'CAN-BE-SETTED' => false,  'SIZE' => 255,  'INPUT_WIDE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
