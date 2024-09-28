@@ -10,9 +10,10 @@ $file_dir_name = dirname(__FILE__);
 
 // 23/1/2023
 // ALTER TABLE `bfunction` CHANGE `id_system` `id_system` INT(11) NOT NULL DEFAULT '0';
-	
+// 27/9/2024
+// ALTER TABLE `bfunction` ADD `hierarchy_level_enum` SMALLINT NOT NULL DEFAULT '999' AFTER `bfunction_code`;	
 
-class Bfunction extends AFWObject{
+class Bfunction extends UmsObject{
 
         // PROCESS - إجراء  
         public static $BFUNCTION_TYPE_PROCESS = 2; 
@@ -65,21 +66,7 @@ class Bfunction extends AFWObject{
         
         public function __construct(){
 		parent::__construct("bfunction","id","ums");
-                //$this->CACHE_SCOPE = "server";
-                $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
-                // $this->copypast = true;
-                $this->DISPLAY_FIELD = "titre_short";
-                $this->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(file_specification), '', file_specification) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre), '', titre))";
-                $this->ORDER_BY_FIELDS = "titre_short";
-                $this->UNIQUE_KEY = array('curr_class_module_id','bfunction_code');
-                
-                $this->editByStep = true;
-                $this->editNbSteps = 4;
-                $this->showQeditErrors = false;
-                $this->showRetrieveErrors = true;
-                
-                // do not hide id in display and retrieve mode(s)
-                $this->showId = true;
+                UmsBfunctionAfwStructure::initInstance($this);
 	}
         
         public static function loadByUK($uk_vals)
@@ -251,8 +238,12 @@ class Bfunction extends AFWObject{
         
         public function getCurrTable()
         {
-                $tableObj_id = $this->getVal("curr_class_atable_id");
-                return Atable::loadById($tableObj_id);
+                if(self::pagIsThere())
+                {
+                        $tableObj_id = $this->getVal("curr_class_atable_id");
+                        return Atable::loadById($tableObj_id);
+                }
+                
         }
         
         public function enumLookupModule()
@@ -697,7 +688,7 @@ class Bfunction extends AFWObject{
         
         public function getFormuleResult($attribute, $what='value') 
         {
-            // global $me, $URL_RACINE_SITE;    
+            global $lang;    
                
 	       switch($attribute) 
                {
@@ -708,8 +699,10 @@ class Bfunction extends AFWObject{
                         $sql_cond = "avail='Y' and id in (select arole_id from c0ums.arole_bf where bfunction_id='$bf_id' and avail='Y')"; // obsolete : bfunction_mfk like '%,$bf_id,%' or 
                         $rl->where($sql_cond); 
                         $rl_list = $rl->loadMany();
-                        // die("sql_cond=$sql_cond => ".var_export($rl_list,true));
-                        return $rl_list; 
+
+                        $return = AfwFormatHelper::decodeObjectList($rl_list,$what,$lang, $implodeSeparator=","); 
+                        // if($what != "value") die("arole_mfk as $what return ".var_export($return,true));
+                        return $return;
                     break;
                     
                     case "is_special" :

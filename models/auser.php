@@ -26,7 +26,9 @@ ALTER TABLE `auser` CHANGE `address` `address` VARCHAR(128) CHARACTER SET utf8 C
                     CHANGE `twitter_id` `twitter_id` VARCHAR(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL; 
 
 */
-
+// rafik 27/9/2024
+// ALTER TABLE `auser` ADD `hierarchy_level_enum` SMALLINT NOT NULL DEFAULT '999' AFTER `lang_id`;
+        
 
 $file_dir_name = dirname(__FILE__); 
                
@@ -34,7 +36,7 @@ $file_dir_name = dirname(__FILE__);
 // AfwAutoLoader::init();
 
 
-class Auser extends AFWObject{
+class Auser extends UmsObject{
         
         private $myEmployeeObj = null;
         private $myEmployeeId = null;
@@ -70,19 +72,7 @@ class Auser extends AFWObject{
         public function __construct()
         {
                 parent::__construct("auser","id","ums");
-                $U_INDEXES[] = array("");
-                $this->copypast = true;
-                $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 20;
-                $this->ORDER_BY_FIELDS = "firstname,lastname";
-                $this->FORMULA_DISPLAY_FIELD = "concat(IF(ISNULL(firstname), '', firstname) , ' ' , IF(ISNULL(f_firstname), '', f_firstname) , ' ' , IF(ISNULL(lastname), '', lastname))";
-                $this->popup = false;
-                $this->UNIQUE_KEY = array('email');
-                $this->editByStep = true;
-                $this->editNbSteps = 5;
-                $this->showQeditErrors = true;
-                $this->showRetrieveErrors = true;
-                $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
-                
+                UmsAuserAfwStructure::initInstance($this);
         }
         
         public static function robot($robot_id, $robot_code, $robot_name)

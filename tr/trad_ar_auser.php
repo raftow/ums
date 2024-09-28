@@ -54,5 +54,7 @@ $trad["auser"]["step4"] = "برمجيات";
 $trad["auser"]["step5"] = "مشاهدة الصلاحيات";
 
 $trad["auser"]["php"] = "برمجيات الصلاحيات";
+$trad["auser"]["hierarchy_level_enum"] = "المستوى في الهيكل الوظيفي";
+
 
 ?>   

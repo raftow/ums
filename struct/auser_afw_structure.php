@@ -1,7 +1,27 @@
 <?php 
-        class UmsAuserAfwStructure
+		class UmsAuserAfwStructure
         {
-                public static $DB_STRUCTURE = array(
+			public static function initInstance($obj)
+			{
+				if($obj instanceof Auser)
+				{
+					$obj->copypast = true;
+					$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 20;
+					$obj->ORDER_BY_FIELDS = "firstname,lastname";
+					$obj->FORMULA_DISPLAY_FIELD = "concat(IF(ISNULL(firstname), '', firstname) , ' ' , IF(ISNULL(f_firstname), '', f_firstname) , ' ' , IF(ISNULL(lastname), '', lastname))";
+					$obj->popup = false;
+					$obj->UNIQUE_KEY = array('email');
+					$obj->editByStep = true;
+					$obj->editNbSteps = 5;
+					$obj->showQeditErrors = true;
+					$obj->showRetrieveErrors = true;
+					$obj->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
+				}				
+			}
+
+			
+
+            public static $DB_STRUCTURE = array(
 
                         
 			'id' => array(
@@ -31,7 +51,7 @@
 				),
 
 			'lang_id' => array('SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 40,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-				'TYPE' => 'enum',  'ANSWER' => 'FUNCTION',   'DEFAUT' => 1,  'SHORTNAME' => 'lang',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'TYPE' => 'ENUM',  'ANSWER' => 'FUNCTION', 'FUNCTION_COL_NAME'=>'language_enum',  'DEFAUT' => 1,  'SHORTNAME' => 'lang',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 1, 
 				),
 
@@ -75,6 +95,12 @@
 				'TYPE' => 'TEXT',  'MANDATORY' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
 				),
+
+			'hierarchy_level_enum' => array('SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 40,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
+				'TYPE' => 'ENUM',  'ANSWER' => 'FUNCTION',   'DEFAUT' => 1,  'SHORTNAME' => 'lang',  
+				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  'MANDATORY' => true,
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 1, 
+				),	
 
 			'pwd' => array(
 				'TYPE' => 'TEXT',  'DEFAUT' => true,  'SHOW-ADMIN' => true,  'READONLY' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => '',  'STEP' => 1,  

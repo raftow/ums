@@ -1,9 +1,30 @@
 <?php 
         class UmsBfunctionAfwStructure
         {
-                public static $DB_STRUCTURE = array(
-
-                        
+            public static function initInstance($obj)
+			{
+				if($obj instanceof Bfunction)
+				{
+					//$obj->CACHE_SCOPE = "server";
+					$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
+					// $obj->copypast = true;
+					$obj->DISPLAY_FIELD = "titre_short";
+					$obj->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(file_specification), '', file_specification) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre), '', titre))";
+					$obj->ORDER_BY_FIELDS = "titre_short";
+					$obj->UNIQUE_KEY = array('curr_class_module_id','bfunction_code');
+					
+					$obj->editByStep = true;
+					$obj->editNbSteps = 4;
+					$obj->showQeditErrors = false;
+					$obj->showRetrieveErrors = true;
+					
+					// do not hide id in display and retrieve mode(s)
+					$obj->showId = true;
+				}				
+			}    
+			
+			public static $DB_STRUCTURE = array(
+            
 			'id' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
 				'TYPE' => 'PK',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
@@ -117,16 +138,25 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
+			'hierarchy_level_enum' => array('SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 40,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
+				'TYPE' => 'ENUM',  'ANSWER' => 'FUNCTION',   'DEFAUT' => 1,  'SHORTNAME' => 'lang',  
+				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 3,  'MANDATORY' => true,
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 1, 
+				'CSS' => 'width_pct_25',
+				),
+
 			'module_mfk' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  
 				'TYPE' => 'MFK',  'QEDIT' => false,  'ANSWER' => 'module',  'ANSMODULE' => 'ums',  'HZM-WIDTH' => 4,  
 				'WHERE' => "id_module_type=6 and (id_module_parent=§id_system§ or §id_system§=0)", 
 				 'STEP' => 3,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_75',
 				),
 
-		'arole_mfk' => array(
-				'TYPE' => 'MFK',  'RETRIEVE' => true,  'EDIT' => true,  'READONLY' => true,  'SHOW' => true,  'SEARCH' => false,  'FORMAT' => 'retrieve',  
-				'CATEGORY' => 'FORMULA',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  'HZM-WIDTH' => 4,  'FORMULA_USE_CACHE' => true,  'STEP' => 3,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+			'arole_mfk' => array(
+				'TYPE' => 'MFK',  'RETRIEVE' => true,  'EDIT' => true,  'READONLY' => true,  'SHOW' => true,  
+				'SEARCH' => false,  'FORMAT' => 'retrieve',  
+				'CATEGORY' => 'FORMULA',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  'HZM-WIDTH' => 4,  
+				'FORMULA_USE_CACHE' => true,  'STEP' => 3,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 		/*		

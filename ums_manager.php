@@ -48,47 +48,16 @@ class UmsManager extends AFWRoot
 
     public static function decodeModuleCodeOrIdToModuleCode($module)
     {
-        //self::lookIfInfiniteLoop(1000, "decodeModuleCodeOrIdToModuleCode");
-        $module_id = null;
-
-        if(is_numeric($module))
-        {
-            $module_id = $module;
-            $module = null;
-        }
-
-        if($module_id)
-        {
-            $file_modules_all = dirname(__FILE__)."/../external/chsys/modules_all.php"; 
-            if(file_exists($file_modules_all))
-            {
-                include($file_modules_all);
-                // die("from your $file_modules_all file, mod_info = ".var_export($mod_info,true));
-                $module = $mod_info['m'.$module_id]["code"];
-            }
-            // else die("check your $file_modules_all file");
-        }
-
-        return $module;
+        if(!is_numeric($module)) return $module;
+        
+        return AfwPrevilege::moduleCodeOfModuleId($module);
     }
 
     public static function decodeModuleCodeOrIdToModuleId($module)
     {
-        if(is_numeric($module))
-        {
-            return $module;
-        }
-
-        $module_id = 0;
-
-        $file_ums_dir_name = dirname(__FILE__); 
-        if(file_exists("$file_ums_dir_name/../external/chsys/modules_all.php"))
-        {
-                include("$file_ums_dir_name/../external/chsys/modules_all.php");
-                $module_id = $mod_info[$module]["id"];
-        }
-
-        return $module_id;
+        if(is_numeric($module)) return $module;
+        
+        return AfwPrevilege::moduleIdOfModuleCode($module);
     }
 
 
@@ -111,18 +80,17 @@ class UmsManager extends AFWRoot
         if(!$module_code) AfwSession::pushError("No module code for module $module check your php file chsys->modules->all");    
         else
         {
-                $module_sys_file =  dirname(__FILE__)."/../external/chsys/module_$module_code.php";
-                if(file_exists($module_sys_file))
+            list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
+            if($found)
+            {
+                $role_data = $role_info[$role_id];
+                if($role_data)
                 {
-                        include($module_sys_file);
-                        $role_data = $role_info[$role_id];
-                        if($role_data)
-                        {
-                                return array($role_data["name"][$lang], $role_data["menu"], $role_data);
-                        }
-                        else AfwSession::pushWarning("Missed role_info[$role_id] data in module_$module_code file");    
+                        return array($role_data["name"][$lang], $role_data["menu"], $role_data);
                 }
-                else AfwSession::pushWarning("System need cache optimisation by creating module_$module_code file <!-- file not found $module_sys_file -->");    
+                else AfwSession::pushWarning("Missed role_info[$role_id] data in module_$module_code file");    
+            }
+            else AfwSession::pushWarning("System need cache optimisation by creating module_$module_code file <!-- file not found $module_sys_file -->");    
                 
         }
     }
@@ -167,21 +135,18 @@ class UmsManager extends AFWRoot
         $file_dir_name = dirname(__FILE__); 
         if(!$ignore_cache)
         {
-            $chsys_modules_all = "$file_dir_name/../external/chsys/modules_all.php";
-            include($chsys_modules_all);
-            $module_code = $mod_info["m$module_id"]['code']; 
-            if(!$module_code) throw new AfwRuntimeException("the file $chsys_modules_all doen't contain \$mod_info[m$module_id][code]");
-
-            $module_sys_file = "$file_dir_name/../external/chsys/module_$module_code.php";
-            if(file_exists($module_sys_file))
+            $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id); 
+            if(!$module_code) throw new AfwRuntimeException("the file chsys modules_all doen't contain mod_info[m$module_id][code]");
+            
+            list($found, $role_info, $tab_info, $tbf_info) = AfwPrevilege::loadModulePrevileges($module_code);
+            
+            if($found)
             {
-                include($module_sys_file);
                 if(count($tab_info)>0)
                 {
                     $object_table = $tab_info[$curr_class_atable_id]["name"];
                     $bf_id = $tbf_info[$object_table][$operation]["id"];
-
-                    if(($bf_id>0) or  ($bf_id === -1))
+                    if(($bf_id>0) or ($bf_id === -1))
                     {
                         return $bf_id;
                     }
