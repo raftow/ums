@@ -1,19 +1,10 @@
 <?php
-
-$file_dir_name = dirname(__FILE__); 
-                
-// old include of afw.php
-
-
-// old	
-// alter table c0ums.bfunction add   parent_bfunction_id int(11) DEFAULT NULL  after bfunction_type_id;
-
-// 23/1/2023
-// ALTER TABLE `bfunction` CHANGE `id_system` `id_system` INT(11) NOT NULL DEFAULT '0';
-// 27/9/2024
-// ALTER TABLE `bfunction` ADD `hierarchy_level_enum` SMALLINT NOT NULL DEFAULT '999' AFTER `bfunction_code`;	
-
 class Bfunction extends UmsObject{
+
+        public function __construct(){
+		parent::__construct("bfunction","id","ums");
+                UmsBfunctionAfwStructure::initInstance($this);
+	}
 
         // PROCESS - إجراء  
         public static $BFUNCTION_TYPE_PROCESS = 2; 
@@ -64,10 +55,7 @@ class Bfunction extends UmsObject{
         public static $DB_STRUCTURE = null; 
         
         
-        public function __construct(){
-		parent::__construct("bfunction","id","ums");
-                UmsBfunctionAfwStructure::initInstance($this);
-	}
+        
         
         public static function loadByUK($uk_vals)
         {
@@ -1308,4 +1296,13 @@ class Bfunction extends UmsObject{
                                                                                   
                 
 }
+// old	
+// alter table c0ums.bfunction add   parent_bfunction_id int(11) DEFAULT NULL  after bfunction_type_id;
+
+// 23/1/2023
+// ALTER TABLE `bfunction` CHANGE `id_system` `id_system` INT(11) NOT NULL DEFAULT '0';
+// 27/9/2024
+// ALTER TABLE `bfunction` ADD `hierarchy_level_enum` SMALLINT NOT NULL DEFAULT '999' AFTER `bfunction_code`;	
+
+
 ?>

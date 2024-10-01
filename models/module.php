@@ -6,6 +6,12 @@
 class Module extends UmsObject
 {
 
+    public function __construct()
+    {
+        parent::__construct("module", "id", "ums");
+        UmsModuleAfwStructure::initInstance($this);
+    }
+
     // APPLICATION - application  
     public static $MODULE_TYPE_APPLICATION = 5;
 
@@ -44,11 +50,7 @@ class Module extends UmsObject
     public static $TABLE            = "";
     public static $DB_STRUCTURE = null;
 
-    public function __construct()
-    {
-        parent::__construct("module", "id", "ums");
-        UmsModuleAfwStructure::initInstance($this);
-    }
+    
 
     public static function loadByMainIndex($module_code, $create_obj_if_not_found = false)
     {
@@ -71,10 +73,12 @@ class Module extends UmsObject
 
     public static function reverseByCodes($object_code_arr)
     {
-        $obj = new Module();
+        
+        $message_arr = [];
+        
         if (count($object_code_arr) != 1) throw new AfwRuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
         $module_code = $object_code_arr[0];
-
+        // 1. reverse the config file
         $file_dir_name = dirname(__FILE__);
         include("$file_dir_name/../../$module_code/module_config.php");
         if ($module_code != $MODULE) throw new AfwRuntimeException("reverseByCodes : module_code is not correct [\$MODULE=$MODULE] in $file_dir_name/../$module_code/module_config.php file");
@@ -101,20 +105,97 @@ class Module extends UmsObject
             $objModule->set("id", $module_id);
             $objModule->set("module_code", $module_code);
             $objModule->insert();
-            $message = "The module $module_code has been created";
+            $message_arr[] = self::prepareLog("The module $module_code has been created");
         }
         else
         {
-            $message = "The module $module_code has been updated";
+            $message_arr[] = self::prepareLog("The module $module_code has been updated");
         }
-
-        include("$file_dir_name/../$module_code/ini.php");
+        // 2. reverse the ini file
+        include("$file_dir_name/../../$module_code/ini.php");
 
         $objModule->set("titre_short_en", $NOM_SITE["en"]);
         $objModule->set("titre_short", $NOM_SITE["ar"]);
         $objModule->set("id_module_type", 5);
         $objModule->commit();
+        $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
 
+        // 3. reverse the previleges file
+        AfwAutoLoader::addModule("p"."ag");
+
+        $file_previleges = "$file_dir_name/../../$module_code/previleges.php";
+        if(!file_exists($file_previleges))
+        {
+            $message_arr[] = self::prepareLog("Error : The file $file_previleges not found");
+        }
+        else
+        {
+            include($file_previleges);
+            
+            foreach($tab_info as $tab_id => $tab_info_row)
+            {
+                if(AfwSession::hasOption('CHECK_ERRORS')) break;
+                $or_another_case = "";
+                $atable_name = $tab_info_row["name"];
+                $tbl = Atable::loadByMainIndex($module_id, $atable_name);
+                if(!$tbl)
+                {
+                    // my be the atable_name has changed so we try with ID
+                    $tbl = Atable::loadById($tab_id);
+                    // check if this $tbl found by ID is inside the module otherwise ignore it
+                    if($tbl and ($tbl->getVal("id_module") != $module_id))
+                    {
+                        $tbl = null;
+                        $or_another_case = "or not in the same module $module_code";
+                    }
+                }
+                if($tbl)
+                {
+                    $atable_name = $tbl->getVal("atable_name");
+                    $table_file_name = "$file_dir_name/../../$module_code/models/$atable_name.php";
+                    if(!file_exists($table_file_name))
+                    {
+                        $message_arr[] = self::prepareLog("Error : The table file $table_file_name not found");
+                        $tblFieldsCount = 0;
+                    }
+                    else
+                    {
+                        $tblFieldsCount = $tbl->getNbFieldsInMode("all");
+                    }
+
+                    if(!$tblFieldsCount)
+                    {
+                        
+                        if($tbl->forceDelete())
+                        {
+                            $message_arr[] = self::prepareLog("The table $atable_name is obsolete and deleted");
+                        }
+                        else
+                        {
+                            $tbl_id = $tbl->id;
+                            $message_arr[] = self::prepareLog("Warning : The table $atable_name / $tbl_id is obsolete and can't be deleted : ".$tbl->deleteNotAllowedReason);
+                        }
+                        
+                    }
+                    else
+                    {
+                            // $tbl->reverseMe($module_code);
+                            $message_arr[] = self::prepareLog("The table $atable_name is to be reversed");
+                    }
+                }
+                else
+                {
+                    $message_arr[] = self::prepareLog("Error : The table $tab_id / $atable_name not found $or_another_case");
+                }
+                unset($tbl);
+            }
+            //throw new AfwRuntimeException("reverseByCodes chbiha hona");
+            foreach($tbf_info as $tbf_info_row)
+            {
+
+            }
+        }
+        $message = implode("<br>\n", $message_arr);
 
         return [$objModule, $message];
     }
@@ -1960,10 +2041,11 @@ class Module extends UmsObject
 
     public function beforeDelete($id, $id_replace)
     {
-
-
+        AfwAutoLoader::addModule("b"."au");
+        AfwAutoLoader::addModule("p"."ag");
         if ($id) {
-            if ($id_replace == 0) {
+            if ($id_replace == 0) 
+            {
                 $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK part of me - not deletable 
                 // p"."ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("delete from $server_db_prefix"."p"."ag.atable where id_module = '$id' and avail='N'");
@@ -2050,28 +2132,28 @@ class Module extends UmsObject
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("delete from $server_db_prefix"."ums.module_auser where id_module = '$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("delete from $server_db_prefix"."p"."ag.module_orgunit where id_module = '$id' ");
+                $this->execQuery("delete from $server_db_prefix"."ums.module_orgunit where id_module = '$id' ");
                 // sdd.ptask-المشروع	project_module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."sdd.ptask where project_module_id = '$id' ");
+                // $this->execQuery("delete from $server_db_prefix"."sdd.ptask where project_module_id = '$id' ");
                 // sdd.ptask-النظام / الـتطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."sdd.ptask where module_id = '$id' ");
+                // $this->execQuery("delete from $server_db_prefix"."sdd.ptask where module_id = '$id' ");
                 // b au.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("delete from $server_db_prefix"."b au.user_story where system_id = '$id' ");
+                $this->execQuery("delete from $server_db_prefix"."b"."au.user_story where system_id = '$id' ");
                 // b au.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("delete from $server_db_prefix"."b au.user_story where module_id = '$id' ");
+                $this->execQuery("delete from $server_db_prefix"."b"."au.user_story where module_id = '$id' ");
 
 
                 // FK not part of me - replaceable 
                 // ums.module-النظام	id_system  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."ums.module set id_system='$id_replace' where id_system='$id' ");
                 // b au.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
-                // $this->execQuery("update $server_db_prefix"."b au.gfield set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."b"."au.gfield set module_id='$id_replace' where module_id='$id' ");
                 // p"."ag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
-                //$this->execQuery("update $server_db_prefix"."p"."ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."p"."ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
                 // b au.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                // $this->execQuery("update $server_db_prefix"."b au.ptext set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."b"."au.ptext set module_id='$id_replace' where module_id='$id' ");
                 // p"."ag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                // $this->execQuery("update $server_db_prefix"."p"."ag.pmessage set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."p"."ag.pmessage set module_id='$id_replace' where module_id='$id' ");
                 // ums.job_arole-التطبيق	module_id  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."ums.job_arole set module_id='$id_replace' where module_id='$id' ");
 
@@ -2083,9 +2165,9 @@ class Module extends UmsObject
             } else {
                 $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK on me 
                 // p"."ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("update $server_db_prefix"."p"."ag.atable set id_module='$id_replace' where id_module='$id' ");
+                $this->execQuery("update $server_db_prefix"."p"."ag.atable set id_module='$id_replace' where id_module='$id' ");
                 // p"."ag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("update $server_db_prefix"."p"."ag.atable set id_sub_module='$id_replace' where id_sub_module='$id' ");
+                $this->execQuery("update $server_db_prefix"."p"."ag.atable set id_sub_module='$id_replace' where id_sub_module='$id' ");
                 // ums.module-الوحدة الأم	id_module_parent  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix"."ums.module set id_module_parent='$id_replace' where id_module_parent='$id' ");
                 // ums.bfunction-النظام	id_system  أنا تفاصيل لها-OneToMany
@@ -2095,31 +2177,31 @@ class Module extends UmsObject
                 // ums.arole-التطبيق	module_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix"."ums.arole set module_id='$id_replace' where module_id='$id' ");
                 // b au.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("update $server_db_prefix"."b au.goal set system_id='$id_replace' where system_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."b"."au.goal set system_id='$id_replace' where system_id='$id' ");
                 // b au.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("update $server_db_prefix"."b au.goal set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."b"."au.goal set module_id='$id_replace' where module_id='$id' ");
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix"."ums.module_auser set id_module='$id_replace' where id_module='$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("update $server_db_prefix"."ums.module_orgunit set id_module='$id_replace' where id_module='$id' ");
+                $this->execQuery("update $server_db_prefix"."ums.module_orgunit set id_module='$id_replace' where id_module='$id' ");
                 // sdd.ptask-المشروع	project_module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."sdd.ptask set project_module_id='$id_replace' where project_module_id='$id' ");
+                // $this->execQuery("update $server_db_prefix"."sdd.ptask set project_module_id='$id_replace' where project_module_id='$id' ");
                 // sdd.ptask-النظام / الـتطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."sdd.ptask set module_id='$id_replace' where module_id='$id' ");
+                // $this->execQuery("update $server_db_prefix"."sdd.ptask set module_id='$id_replace' where module_id='$id' ");
                 // b au.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("update $server_db_prefix"."b au.user_story set system_id='$id_replace' where system_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."b"."au.user_story set system_id='$id_replace' where system_id='$id' ");
                 // b au.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
-                  $this->execQuery("update $server_db_prefix"."b au.user_story set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."b"."au.user_story set module_id='$id_replace' where module_id='$id' ");
                 // ums.module-النظام	id_system  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."ums.module set id_system='$id_replace' where id_system='$id' ");
                 // b au.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
-                // $this->execQuery("update $server_db_prefix"."b au.gfield set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."b"."au.gfield set module_id='$id_replace' where module_id='$id' ");
                 // p"."ag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
-                // $this->execQuery("update $server_db_prefix"."p"."ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."p"."ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
                 // b au.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                // $this->execQuery("update $server_db_prefix"."b au.ptext set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."b"."au.ptext set module_id='$id_replace' where module_id='$id' ");
                 // p"."ag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                // $this->execQuery("update $server_db_prefix"."p"."ag.pmessage set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix"."p"."ag.pmessage set module_id='$id_replace' where module_id='$id' ");
                 // ums.job_arole-التطبيق	module_id  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix"."ums.job_arole set module_id='$id_replace' where module_id='$id' ");
 
@@ -2643,3 +2725,16 @@ class Module extends UmsObject
 
 */
 }
+
+/*
+ALTER TABLE `module` 
+    CHANGE `avail` `avail` CHAR(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Y', 
+    CHANGE `update_groups_mfk` `update_groups_mfk` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL, 
+    CHANGE `delete_groups_mfk` `delete_groups_mfk` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL, 
+    CHANGE `display_groups_mfk` `display_groups_mfk` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL, 
+    CHANGE `titre_en` `titre_en` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL, 
+    CHANGE `jobrole_mfk` `jobrole_mfk` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL, 
+    CHANGE `titre_short_en` `titre_short_en` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL, 
+    CHANGE `module_code` `module_code` VARCHAR(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL, 
+    CHANGE `web` `web` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+*/

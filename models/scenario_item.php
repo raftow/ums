@@ -5,7 +5,7 @@ class ScenarioItem extends AFWObject{
 
 	public static $DATABASE		= ""; 
         public static $MODULE		    = "ums"; 
-        public static $TABLE			= ""; 
+        public static $TABLE			= "scenario_item"; 
         
         public static $DB_STRUCTURE = null; 
         

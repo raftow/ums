@@ -21,7 +21,19 @@ class UmsObject extends AFWObject{
             return self::training_period()[$lang][$training_period_enum];            
         }
         
+        public static function prepareLog($log)
+        {
 
+            global $immediate_output, $immediate_output_nb;
+            if($immediate_output) 
+            {  
+                if(!$immediate_output_nb) $immediate_output_nb = 0;
+                echo $log; 
+                $immediate_output_nb++; 
+                if($immediate_output_nb>50) throw new AfwRuntimeException("MAX OUTPUT REACHED");
+            }
+            return $log;
+        }
         
         
         public static function list_of_training_period_enum()
