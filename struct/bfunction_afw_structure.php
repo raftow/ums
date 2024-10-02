@@ -11,7 +11,8 @@
 					$obj->DISPLAY_FIELD = "titre_short";
 					$obj->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(file_specification), '', file_specification) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre), '', titre))";
 					$obj->ORDER_BY_FIELDS = "titre_short";
-					$obj->UNIQUE_KEY = array('curr_class_module_id','bfunction_code');
+					// $obj->UNIQUE_KEY = array('curr_class_module_id','bfunction_code');
+					$obj->UNIQUE_KEY = array('id_system','curr_class_module_id','curr_class_atable_id','file_specification','bfunction_code', 'bf_specification');
 					
 					$obj->editByStep = true;
 					$obj->editNbSteps = 4;

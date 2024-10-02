@@ -95,6 +95,43 @@ class Bfunction extends UmsObject{
            
         }
 
+        public static function loadByBusinessIndex($id_system, $curr_class_module_id, $curr_class_atable_id, $file_specification, $bf_specification="", $create_obj_if_not_found=false)
+        {
+           if(!$id_system) throw new AfwRuntimeException("loadByMainIndex : id_system is mandatory field");
+           if(!$curr_class_module_id) throw new AfwRuntimeException("loadByMainIndex : curr_class_module_id is mandatory field");
+           if(!$curr_class_atable_id) throw new AfwRuntimeException("loadByMainIndex : curr_class_atable_id is mandatory field");
+           if(!$file_specification) throw new AfwRuntimeException("loadByMainIndex : file_specification is mandatory field");
+
+
+           $obj = new Bfunction();
+           $obj->select("id_system",$id_system);
+           $obj->select("curr_class_module_id",$curr_class_module_id);
+           $obj->select("curr_class_atable_id",$curr_class_atable_id);
+           $obj->select("file_specification",$file_specification);
+           $obj->select("bf_specification",$bf_specification);
+
+           if($obj->load())
+           {
+                if($create_obj_if_not_found) $obj->activate();
+                return $obj;
+           }
+           elseif($create_obj_if_not_found)
+           {
+                $obj->set("id_system",$id_system);
+                $obj->set("curr_class_module_id",$curr_class_module_id);
+                $obj->set("curr_class_atable_id",$curr_class_atable_id);
+                $obj->set("file_specification",$file_specification);
+                $obj->set("bf_specification",$bf_specification);
+
+                $obj->insertNew();
+                if(!$obj->id) return null; // means beforeInsert rejected insert operation
+                $obj->is_new = true;
+                return $obj;
+           }
+           else return null;
+           
+        }
+
         
 
         public function getShortDisplay($lang="ar")
@@ -582,7 +619,8 @@ class Bfunction extends UmsObject{
                         // $_SESSION["BFS"]["BF-BYID-$id_bf"] =& $bf;
                         $bf_new = true;
                 }
-                else
+                
+                if($bf)
                 {
                         $bf->set("direct_access",$direct_access);
                         $bf->set("public",$public);
@@ -642,7 +680,7 @@ class Bfunction extends UmsObject{
         public static function getBfunction($id_system, $file_specification, $curr_class_module_id, $curr_class_atable_id, $bf_specification="")
         {
                 
-                global $getBfunction;
+                global $getBfunction, $gloablBFS;
                 if(!$getBfunction) $getBfunction = 0;
                 else $getBfunction++;
                 
@@ -652,8 +690,8 @@ class Bfunction extends UmsObject{
                 }
 
                 
-                /* if($_SESSION["BFS"]["BF-$id_system-$file_specification-$curr_class_module_id-$curr_class_atable_id-$bf_specification"]) 
-                   return $_SESSION["BFS"]["BF-$id_system-$file_specification-$curr_class_module_id-$curr_class_atable_id-$bf_specification"];*/ 
+                 if($gloablBFS["BF-$id_system-$file_specification-$curr_class_module_id-$curr_class_atable_id-$bf_specification"]) 
+                   return $gloablBFS["BF-$id_system-$file_specification-$curr_class_module_id-$curr_class_atable_id-$bf_specification"]; 
                 
                 $bf = new Bfunction();
                 $bf->select("id_system",$id_system);
@@ -667,7 +705,7 @@ class Bfunction extends UmsObject{
                 
                 if($bf->load()) 
                 {
-                      // $_SESSION["BFS"]["BF-$id_system-$file_specification-$curr_class_module_id-$curr_class_atable_id-$bf_specification"] =& $bf;
+                      $gloablBFS["BF-$id_system-$file_specification-$curr_class_module_id-$curr_class_atable_id-$bf_specification"] =& $bf;
                       return $bf;
                 }
                 else return null;
@@ -1291,6 +1329,16 @@ class Bfunction extends UmsObject{
                 if($attribute=="title_en") return "titre_short_en";
                 if($attribute=="special") return "is_special";
                 return $attribute;
+        }
+
+        public function getScenarioItemId($currstep)
+        {
+                if($currstep == 1) return 115;
+                if($currstep == 2) return 116;
+                if($currstep == 3) return 117;
+                if($currstep == 4) return 118;
+
+                return 0;
         }
                                 
                                                                                   

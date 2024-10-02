@@ -73,7 +73,7 @@ class Module extends UmsObject
 
     public static function reverseByCodes($object_code_arr)
     {
-        
+        $bf_added = 0;
         $message_arr = [];
         
         if (count($object_code_arr) != 1) throw new AfwRuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
@@ -119,7 +119,7 @@ class Module extends UmsObject
         $objModule->set("id_module_type", 5);
         $objModule->commit();
         $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
-
+        $id_system = $objModule->getVal("id_system");
         // 3. reverse the previleges file
         AfwAutoLoader::addModule("p"."ag");
 
@@ -189,12 +189,59 @@ class Module extends UmsObject
                 }
                 unset($tbl);
             }
-            //throw new AfwRuntimeException("reverseByCodes chbiha hona");
-            foreach($tbf_info as $tbf_info_row)
+            // $tbf_info structure
+            /*
+             'arole' => [
+                'id' => '1409',
+                'display' => [
+                    'id' => '102858',
+                ],
+                'search' => [
+                    'id' => '102859',
+                ],
+                    
+            */
+
+            foreach($tbf_info as $table_name => $tbf_info_row)
             {
+                $tbl = Atable::loadByMainIndex($module_id, $table_name);
+                $old_tab_id = $tbf_info_row['id'];
+                $tab_id = $tbl->id;
+                unset($tbf_info_row['id']);
+                foreach($tbf_info_row as $mode => $tbf_mode_row)
+                {
+                    if($tbf_mode_row['id']>0)
+                    {
+                        //$message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name will have mode $mode");
+                        $bf_specification = "";
+                        $file_specification = $mode;
+                        
+                        //$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
+                        $bf_row = $tbl->createModeScreen($mode);
+                        $bf_id = $bf_row["id"];
+                        $bfObj = $bf_row["bf"];
+                        if($bfObj->is_new) 
+                        {
+                            $bf_added++;
+                            $message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name has added the mode $mode");
+                        }
+                        else
+                        {
+                            $message_arr[] = self::prepareLog("Success : The table $tab_id / $table_name already have mode $mode");
+                        }
+                    }
+                    else
+                    {
+                        // @todo
+                        // we dont disable a BF already created except if it is previleges file of developer owner of this BF
+                        // this s to avoid loose BFs when developer do reverse engineering before do git pull of previleges file
+                    }
+                }
 
             }
         }
+        $message_arr[] = self::prepareLog("Info : $bf_added BF(s) added");
+
         $message = implode("<br>\n", $message_arr);
 
         return [$objModule, $message];
