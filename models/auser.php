@@ -41,7 +41,7 @@ class Auser extends UmsObject{
         private $myEmployeeObj = null;
         private $myEmployeeId = null;
         private $myModules = null;
-        
+        private $iCanDoOperationArray = [];
 
         public static $MAX_USERS_CRM_START = 1000000;
         
@@ -643,6 +643,7 @@ class Auser extends UmsObject{
         
         public function iCanDoOperationOnObjClass($myObj,$operation_sql)
         {
+             // return true;   
              global $lang;
              
              if($operation_sql=="update") $operation_sql = "edit";
@@ -687,6 +688,11 @@ class Auser extends UmsObject{
         
         public function iCanDoOperation($module_code,$table,$operation_sql, $ignore_cache=false)
         {
+                if(isset($this->iCanDoOperationArray["$module_code-$table-$operation_sql"]))
+                {
+                        return $this->iCanDoOperationArray["$module_code-$table-$operation_sql"];
+                }
+                // return true;
                 if($operation_sql=="update") $operation = "edit";
                 elseif($operation_sql=="view") $operation = "display";
                 else $operation = $operation_sql;
@@ -725,6 +731,8 @@ class Auser extends UmsObject{
                 {
                         AfwSession::debuggLog();    
                 }*/
+
+                $this->iCanDoOperationArray["$module_code-$table-$operation_sql"] = $return;
                 return $return;
         
         }
@@ -737,6 +745,7 @@ class Auser extends UmsObject{
         
         public function iCanDoBFCode($curr_class_module_id, $bfCode)
         {
+               // return true; 
                $bfObj = Bfunction::loadByMainIndex($curr_class_module_id, $bfCode);
                return $this->iCanDoBF($bfObj);
                
@@ -744,6 +753,7 @@ class Auser extends UmsObject{
         
         public function iCanDoBF($bfObj)
         {
+                // return true;
                 global $file_dir_name;
                 
                 AfwSession::contextLog("iCanDoBF : start of iCanDoBF find BF [$bfObj]", "iCanDo");
