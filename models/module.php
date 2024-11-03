@@ -2093,7 +2093,7 @@ class Module extends UmsObject
         if ($id) {
             if ($id_replace == 0) 
             {
-                $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK part of me - not deletable 
+                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - not deletable 
                 // p"."ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("delete from $server_db_prefix"."p"."ag.atable where id_module = '$id' and avail='N'");
                 
@@ -2175,7 +2175,7 @@ class Module extends UmsObject
                 }
 
 
-                $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK part of me - deletable 
+                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - deletable 
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("delete from $server_db_prefix"."ums.module_auser where id_module = '$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
@@ -2210,7 +2210,7 @@ class Module extends UmsObject
                 // ums.bfunction-الوحدات المعنية	module_mfk  
                 $this->execQuery("update $server_db_prefix"."ums.bfunction set module_mfk=REPLACE(module_mfk, ',$id,', ',') where module_mfk like '%,$id,%' ");
             } else {
-                $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK on me 
+                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK on me 
                 // p"."ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix"."p"."ag.atable set id_module='$id_replace' where id_module='$id' ");
                 // p"."ag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
@@ -2273,7 +2273,7 @@ class Module extends UmsObject
 
     public function resetAllGeneratedUserStories()
     {
-        $server_db_prefix = AfwSession::config("db_prefix", "c0");
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
         $file_dir_name = dirname(__FILE__);
         /*
                 $application = $this->getParentApplication();
@@ -2768,7 +2768,7 @@ class Module extends UmsObject
 
 
     /*
-  mysqldump -h 127.0.0.1 -u root --databases -p --single-transaction c0bau  > /var/www/html/sql/20171128_c0bau.sql
+  mysqldump -h 127.0.0.1 -u root --databases -p --single-transaction ".$server_db_prefix."bau  > /var/www/html/sql/20171128_".$server_db_prefix."bau.sql
 
 */
 }

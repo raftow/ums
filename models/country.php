@@ -184,10 +184,10 @@ class Country extends AFWObject{
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - not deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - not deletable 
  
  
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - deletable 
  
  
                    // FK not part of me - replaceable 
@@ -208,7 +208,7 @@ class Country extends AFWObject{
                }
                else
                {
-                        $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK on me 
+                        $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK on me 
                        // ums.city-البلد	country_id  غير معروفة-unkn
                         $this->execQuery("update ${server_db_prefix}ums.city set country_id='$id_replace' where country_id='$id' ");
                        // ums.idn_type-البلد	country_id  غير معروفة-unkn

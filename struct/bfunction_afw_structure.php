@@ -58,8 +58,8 @@
 				'TYPE' => 'INT', 'DEFAUT' => 0,  'AUTOCOMPLETE' => true,  'SEARCH-BY-ONE' => true,  'SHORTNAME' => 'table',  
 				'WHERE' => "(('§id§'='' or '§id§'='0') or 
                                                           id_module in (§curr_class_module_id§) or
-                                                          id_module in (select mu.id_module from c0ums.module_auser mu where mu.id_auser = '§ME§' and mu.avail='Y') or 
-                                                          id_module in (select id from c0ums.module where id_system = '§CONTEXT_ID§' and id_module_type=5) )", 
+                                                          id_module in (select mu.id_module from §DBPREFIX§ums.module_auser mu where mu.id_auser = '§ME§' and mu.avail='Y') or 
+                                                          id_module in (select id from §DBPREFIX§ums.module where id_system = '§CONTEXT_ID§' and id_module_type=5) )", 
 				 'DEPENDENCY' => 'curr_class_module_id',  
 				'RELATION' => 'OneToMany',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 

@@ -130,7 +130,7 @@ class DocType extends AFWObject{
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); 
                    // FK part of me - not deletable 
  
  
@@ -150,7 +150,7 @@ class DocType extends AFWObject{
                }
                else
                {
-                        $server_db_prefix = AfwSession::config("db_prefix","c0"); 
+                        $server_db_prefix = AfwSession::config("db_prefix","default_db_"); 
                         // FK on me 
                        // ums.afile-نوع المستند	doc_type_id  حقل يفلتر به-ManyToOne
                         $this->execQuery("update ${server_db_prefix}ums.afile set doc_type_id='$id_replace' where doc_type_id='$id' ");

@@ -49,7 +49,7 @@ $debugg_after_ldap = true;
 $debugg_after_golden_or_db = true;
 $debugg_after_session_created = true;
 
-$server_db_prefix = AfwSession::config("db_prefix","c0");
+$server_db_prefix = AfwSession::config("db_prefix","default_db_");
 $check_employee_from_external_system = AfwSession::config("check_employee_from_external_system",false);
 $all_users_are_internal = AfwSession::config("all_users_are_internal",false);
 $login_dbg = array();

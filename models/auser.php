@@ -1086,7 +1086,7 @@ class Auser extends UmsObject{
                 if($this->myEmployeeObj) return $this->myEmployeeObj;
                 
                 
-                //die("select * from c0hrm.employee where auser_id = ".$this->getId());
+                //die("select * from ".$server_db_prefix."hrm.employee where auser_id = ".$this->getId());
                 $this->myEmployeeObj = new Employee();
                 $this->myEmployeeObj->select("auser_id",$this->getId());
                 //if($company_id) $empl->select("id_sh_org",$company_id);
@@ -1759,10 +1759,10 @@ class Auser extends UmsObject{
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - not deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - not deletable 
  
  
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - deletable 
                        // ria.family_relation-الولي	resp_rea_user_id  أنا تفاصيل لها-OneToMany
                        // $this->execQuery("delete from ${server_db_prefix}ria.family_relation where resp_rea_user_id = '$id' ");
                        // sched.schedule_receiver-المستخدم	auser_id  أنا تفاصيل لها-OneToMany
@@ -1805,7 +1805,7 @@ class Auser extends UmsObject{
                }
                else
                {
-                        $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK on me 
+                        $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK on me 
                        
                        // ria.family_relation-الولي	resp_rea_user_id  أنا تفاصيل لها-OneToMany
                        // $this->execQuery("update ${server_db_prefix}ria.family_relation set resp_rea_user_id='$id_replace' where resp_rea_user_id='$id' ");

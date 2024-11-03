@@ -1,15 +1,15 @@
 <?php
 // ------------------------------------------------------------------------------------
-// mysql> alter table c0ums.city change  id_valid id_valid int NULL;
-// mysql> alter table c0ums.city change date_valid date_valid datetime NULL;
+// mysql> alter table ".$server_db_prefix."ums.city change  id_valid id_valid int NULL;
+// mysql> alter table ".$server_db_prefix."ums.city change date_valid date_valid datetime NULL;
 
 // for cities without symbol we take same symbol as nearest city 
 // في حال عدم وجود مدينتكم في القائمة أدناه نرجو تكرمكم بتعيين المدينة الأقرب، حيث ان الهدف من ذلك هو تحديد فرع الوزارة الذي يخدم هذه المدينة.
 // مثال: مدينة الخبر تتبع منطقة الشرقية الفرع الأقرب لها فرع الوزارة بالدمام يتم تعيين مدينة الدمام
-// MariaDB [c0license]> create table c0ums.tmp_city as select * from c0ums.city;
-// MariaDB [c0license]> update c0ums.city c set symbol = (select min(symbol) from c0ums.tmp_city c2 where c2.region_id = c.region_id) where symbol is null;
-// alter table c0ums.city add unique index ui(lookup_code);
-// alter table c0ums.city add moe_code varchar(10);
+// MariaDB [".$server_db_prefix."license]> create table ".$server_db_prefix."ums.tmp_city as select * from ".$server_db_prefix."ums.city;
+// MariaDB [".$server_db_prefix."license]> update ".$server_db_prefix."ums.city c set symbol = (select min(symbol) from ".$server_db_prefix."ums.tmp_city c2 where c2.region_id = c.region_id) where symbol is null;
+// alter table ".$server_db_prefix."ums.city add unique index ui(lookup_code);
+// alter table ".$server_db_prefix."ums.city add moe_code varchar(10);
                 
 $file_dir_name = dirname(__FILE__); 
                 

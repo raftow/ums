@@ -18,7 +18,7 @@
 			'module_id' => array('IMPORTANT' => 'IN',  'SEARCH' => false,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 40,  'UTF8' => false,  
 				'TYPE' => 'FK',  'ANSWER' => 'module',  'ANSMODULE' => 'ums',  'MANDATORY' => true,  'DEFAUT' => 0,  
 				'RELATION' => 'OneToMany',  
-				'WHERE' => "id_module_type=5 and id_pm in (select id_domain from c0pag.jobrole where id = §jobrole_id§)", 
+				'WHERE' => "id_module_type=5 and id_pm in (select id_domain from §DBPREFIX§pag.jobrole where id = §jobrole_id§)", 
 				 'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
 				),

@@ -454,7 +454,7 @@ class Bfunction extends UmsObject{
                                
                               //$ustr->beforeMAJ($ustr->getId(), array());
                               
-                              // @todo : check : id in (select arole_id from c0ums.job_arole where jobrole_id = §jobrole_id§ and module_id = §module_id§ and avail='Y')
+                              // @todo : check : id in (select arole_id from ".$server_db_prefix."ums.job_arole where jobrole_id = §jobrole_id§ and module_id = §module_id§ and avail='Y')
                               $jroleObj->optimG ettingItems["jobAroleList"] = true;
                               $jroleObj->optimG ettingItems["roles"] = true; 
                               
@@ -496,7 +496,7 @@ class Bfunction extends UmsObject{
                
                $rbf = new AroleBf();
                
-               $rbf->where("bfunction_id in (select id from c0ums.bfunction 
+               $rbf->where("bfunction_id in (select id from ".$server_db_prefix."ums.bfunction 
                                                 where id_system='$id_system' 
                                                   and curr_class_module_id='$module_id' 
                                                   and bfunction_code like '$bf_code_starts_with%') 
@@ -722,7 +722,7 @@ class Bfunction extends UmsObject{
                         $rl = new Arole();
                         
                         $bf_id = $this->getId();
-                        $sql_cond = "avail='Y' and id in (select arole_id from c0ums.arole_bf where bfunction_id='$bf_id' and avail='Y')"; // obsolete : bfunction_mfk like '%,$bf_id,%' or 
+                        $sql_cond = "avail='Y' and id in (select arole_id from ".$server_db_prefix."ums.arole_bf where bfunction_id='$bf_id' and avail='Y')"; // obsolete : bfunction_mfk like '%,$bf_id,%' or 
                         $rl->where($sql_cond); 
                         $rl_list = $rl->loadMany();
 
@@ -1147,13 +1147,13 @@ class Bfunction extends UmsObject{
         
         public function beforeDelete($id,$id_replace) 
         {
-                $server_db_prefix = AfwSession::config("db_prefix","c0");
+                $server_db_prefix = AfwSession::config("db_prefix","default_db_");
  
             if($id)
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - not deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - not deletable 
  
  
                        // spp.ticket-الوظيفة الالكترونية	bfunction_id  أنا تفاصيل لها-OneToMany
@@ -1345,7 +1345,7 @@ class Bfunction extends UmsObject{
                 
 }
 // old	
-// alter table c0ums.bfunction add   parent_bfunction_id int(11) DEFAULT NULL  after bfunction_type_id;
+// alter table ".$server_db_prefix."ums.bfunction add   parent_bfunction_id int(11) DEFAULT NULL  after bfunction_type_id;
 
 // 23/1/2023
 // ALTER TABLE `bfunction` CHANGE `id_system` `id_system` INT(11) NOT NULL DEFAULT '0';
