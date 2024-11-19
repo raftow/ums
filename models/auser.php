@@ -1446,14 +1446,17 @@ class Auser extends UmsObject{
         
         
         
-        public function showICanDoLog()
+        public function showICanDoLog($echo=false)
         {
-                   echo "<br>iCanDoOperationLog <br>";
-                   echo $this->showArr($this->iCanDoOperationLog);
+                $return_log = "<br>iCanDoOperationLog <br>";
+                $return_log .= $this->showArr($this->iCanDoOperationLog);
                    
-                   echo "<br>iCanDoBFLog <br>";
-                   echo $this->showArr($this->iCanDoBFLog);
-        
+                $return_log .= "<br>iCanDoBFLog <br>";
+                $return_log .= $this->showArr($this->iCanDoBFLog);
+
+                if($echo) echo $return_log;
+
+                return $return_log;        
         }
         
         public function getUserInfos()

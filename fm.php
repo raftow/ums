@@ -4,8 +4,19 @@
     if($objme) $iamAdmin = $objme->isAdmin();
     else $iamAdmin = false;
 
-    if(!$a) $a = "ums";
-
+    if(!$a)
+    {
+      $module = $a = "ums";      
+    } 
+    else
+    {
+      $module_id = $a;
+      if($module_id)
+      {
+        $module = UmsManager::decodeModuleCodeOrIdToModuleCode($module_id);
+      }
+    }
+    
     if($r=="control")
     {
           $s12 = "s12";
@@ -65,6 +76,9 @@
     {
             
           list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($a, $r, $lang);
+          /**
+           * @var array $menu_folder
+           */
           if($role_item_display and $menu_folder)
           {
             $out_scr .= "<h3>".$role_item_display."</h3>";
@@ -80,6 +94,8 @@
                 if((!$menu_item_icon) and $menu_icons_arr[$menu_item_id]) $menu_item_icon = $menu_icons_arr[$menu_item_id];
                 if(!$menu_item_icon) $menu_item_icon = "globe icon-$menu_item_id";
                 $menu_item_title = $menu_folder_item["menu_name"];
+                $menu_item_title = AfwReplacement::trans_replace($menu_item_title, $module, $lang);
+                
                 $menu_item_page = $menu_folder_item["page"]."&r=$r";
                 $menu_item_css = $menu_folder_item["css"];
 
@@ -100,6 +116,9 @@
                 if(($iamAdmin) or (!$menu_sub_folder["need_admin"]))
                 {
                         $menu_folder_title = $menu_sub_folder["menu_name"];
+                        
+                        $menu_folder_title = AfwReplacement::trans_replace($menu_folder_title, $module, $lang);
+
                         $menu_folder_id = $menu_sub_folder["id"];
                         $menu_folder_page = $menu_sub_folder["page"];
                         $menu_folder_css = $menu_sub_folder["css"];                        

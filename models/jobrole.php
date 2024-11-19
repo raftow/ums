@@ -476,7 +476,7 @@ class Jobrole extends AFWObject
           foreach ($goalListMatrix as $goalList) {
                foreach ($goalList as $goalItem) {
                     $goalItemCode = $goalItem->getVal("goal_code");
-                    if (se_termine_par($goalItemCode, $suffix)) return $goalItem;
+                    if (AfwStringHelper::stringStartsWith($goalItemCode, $suffix)) return $goalItem;
                }
           }
 
