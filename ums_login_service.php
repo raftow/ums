@@ -87,7 +87,7 @@ class UmsLoginService extends AFWRoot
             // 
             if ($user_connected) {        // load infos from HR
                     $emp_num = "00";
-                    $hasseb_num = left_complete_len($emp_num, 7, "0");
+                    $hasseb_num = AfwStringHelper::left_complete_len($emp_num, 7, "0");
 
                     if ($username) {
                             $check_employee_from_external_system = AfwSession::config("check_employee_from_external_system", false);
@@ -167,7 +167,7 @@ class UmsLoginService extends AFWRoot
                             if ($user_connected) {
                                     $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
                                     //die("rafik 5 : user is connected");
-                                    $user_infos = recup_row("select id, avail, firstname, email 
+                                    $user_infos = AfwDatabase::db_recup_row("select id, avail, firstname, email 
                                                             from $server_db_prefix" . "ums.auser 
                                                             where avail = 'Y' and username='$username' limit 1");
                                     //die("rafik 6 : user_infos is ".var_export($user_infos,true));        
