@@ -71,6 +71,32 @@ class Module extends UmsObject
         } else return null;
     }
 
+    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $update_if_exists=false)
+    {
+        $bf_added = 0;
+        $message_arr = [];
+        
+        if (count($object_code_arr) != 1) throw new AfwRuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
+        $module_code = $object_code_arr[0];
+        $objModule = self::loadByMainIndex($module_code,true);
+
+        if(!$objModule) $message = "Strange Error happened because Module::loadByMainIndex($module_code) failed !!";
+        else
+        {
+            if((!$objModule->is_new) and (!$update_if_exists))
+            {
+                throw new AfwRuntimeException("This module already exists");
+            }
+            $objModule->set("titre_short_en", $object_name_en);
+            $objModule->set("titre_short", $object_name_ar);
+            $objModule->commit();
+
+            $message = "successfully done";
+        }
+
+        return [$objModule  , $message];
+    }
+
     public static function reverseByCodes($object_code_arr)
     {
         $bf_added = 0;

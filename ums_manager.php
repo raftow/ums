@@ -353,6 +353,7 @@ class UmsManager extends AFWRoot
         $mode = 'display',
         $create_if_not_exists = false
     ) {
+        if(!$auser) throw new AfwRuntimeException("second param auser of UmsManager::getAllowedBFMethods is required");
         //if($mode=="all") $code_pbm_to_check = "xc183A";
         // else $code_pbm_to_check = "xxyxx";
         // if(!$pbm_arr[$code_pbm_to_check]) throw new AfwRuntimeException("pb code $code_pbm_to_check not found, pbm_arr = ".var_export($pbm_arr,true));

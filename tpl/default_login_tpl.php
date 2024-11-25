@@ -4,7 +4,7 @@
                 <div class="modal-header">
                         <div>
                                 <a href="index.php" title="الرئيسسة">
-                                        <img src="../[module]/pic/logo[xmodule].png" alt="[login_by_sentence]" title="[login_by_sentence]"></a>
+                                        <img src="../[module]/pic/logo.png" alt="[login_by_sentence]" title="[login_by_sentence]"></a>
                                         
                                 <h2 class='title_login'>[login_title]</h2>        
                         </div>

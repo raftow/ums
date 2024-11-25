@@ -2086,6 +2086,7 @@ class Auser extends UmsObject{
                 // @todo see in uploaded files of this user if there are picture
 
                 // use initials like RB for Rafik BOUBAKER
+                
                 $initials = AfwStringHelper::initialsOfName($this->getVal("username"));                
                 $html = "<div class='user-account'>$initials</div>";
                 return $html;
