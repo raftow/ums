@@ -76,6 +76,8 @@ class UmsLoginService extends AFWRoot
             $debugg_after_session_created = AfwSession::config("debugg_after_session_created", true);
             $debugg_login_in_file = AfwSession::config("debugg_login_in_file", false);
             $x_module_means_company = AfwSession::config("x_module_means_company", false);
+            $required_modules = AfwSession::config("required_modules", []);
+            // die("dbg x_module_means_company=$x_module_means_company ".AfwSession::log_config());
             $uri_module = AfwUrlManager::currentURIModule();
             $main_module = AfwSession::config("main_module", "");
 
@@ -146,7 +148,7 @@ class UmsLoginService extends AFWRoot
                             } else {
                                     $employee_org_id = 0;
                                     if ($email) {
-                                            if ($x_module_means_company and ($main_module != $uri_module)) {
+                                            if ($x_module_means_company and ($main_module != $uri_module) and (!in_array($uri_module, $required_modules))) {
 
                                                     // die("trying to find company with hrm code - $uri_module");
                                                     $employeeOrg = Orgunit::loadByHRMCode($uri_module);
