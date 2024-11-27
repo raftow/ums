@@ -30,13 +30,15 @@ else
 $logbl = substr(md5($_SERVER["HTTP_USER_AGENT"] . "-" . date("Y-m-d")),0,10);
 $uri_module = AfwUrlManager::currentURIModule();
 $xmodule = AfwSession::getCurrentlyExecutedModule();
-
+$site_name = AfwSession::getCurrentSiteName($lang);
 $tokens["module"] = $uri_module;
 $tokens["xmodule"] = $xmodule;
 $tokens["login_by_sentence"] = AFWObject::translateCompanyMessage("You can authenticate by your usual user-name and password", $uri_module, $lang, $company);
 $tokens["login_by"] = AFWObject::translateCompanyMessage("User-name", $uri_module, $lang, $company);
 $tokens["password_label"] = AFWObject::translateCompanyMessage("password", $uri_module, $lang, $company);
+$tokens["company"] = AfwSession::currentCompany();
 $tokens["login_title"] = $site_name;
+$tokens["site_name"] = $site_name;
 $tokens["message"] = $msg;
 $tokens["no_message_s"] = $msg ? "" : "<!-- ";
 $tokens["no_message_e"] = $msg ? "" : " -->";
