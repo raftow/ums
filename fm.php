@@ -76,6 +76,7 @@
     {
             
           list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($a, $r, $lang);
+          $role_item_display = AfwReplacement::trans_replace($role_item_display, $module, $lang);
           /**
            * @var array $menu_folder
            */

@@ -152,7 +152,7 @@ class Module extends UmsObject
         $file_previleges = "$file_dir_name/../../$module_code/previleges.php";
         if(!file_exists($file_previleges))
         {
-            $message_arr[] = self::prepareLog("Error : The file $file_previleges not found");
+            $message_arr[] = self::prepareLog("Warning : The file $file_previleges not found");
         }
         else
         {

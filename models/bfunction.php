@@ -149,8 +149,9 @@ class Bfunction extends UmsObject{
                 
 
                 $curr_class_module_id = $this->getVal("curr_class_module_id");
+                $curr_class_module_code = AfwPrevilege::moduleCodeOfModuleId($curr_class_module_id);
                 
-                return AfwReplacement::replace($fn, $curr_class_module_id, $lang);
+                return AfwReplacement::trans_replace($fn, $curr_class_module_code, $lang);
         }
         
         
@@ -714,7 +715,8 @@ class Bfunction extends UmsObject{
         
         public function getFormuleResult($attribute, $what='value') 
         {
-            global $lang;    
+            global $lang;   
+            $server_db_prefix = AfwSession::config("db_prefix","default_db_"); 
                
 	       switch($attribute) 
                {

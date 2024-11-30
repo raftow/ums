@@ -104,9 +104,6 @@ class ModuleOrgunit extends AFWObject{
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - not deletable 
-
-                        
                    $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - deletable 
 
                    

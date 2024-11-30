@@ -648,6 +648,8 @@ class Auser extends UmsObject{
              
              if($operation_sql=="update") $operation_sql = "edit";
              elseif($operation_sql=="view") $operation_sql = "display";
+             elseif($operation_sql=="search") $operation_sql = "display";
+             elseif($operation_sql=="qsearch") $operation_sql = "display";
              
              if($operation_sql=="edit") 
              {
