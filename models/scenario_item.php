@@ -75,8 +75,6 @@ class ScenarioItem extends AFWObject{
         {
                 $objme = AfwSession::getUserConnected();
              
-                // old require of common_string
-                
                 if($this->getVal("step_num")=="") {
                         
                         $this->set("step_num",$this->getNextStepNum());

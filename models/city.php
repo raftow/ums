@@ -33,7 +33,7 @@ class City extends AFWObject{
                 $this->UNIQUE_KEY = array('lookup_code');
                 $this->public_display = true;
                 /*
-                $btr_html = _back_trace();
+                $btr_html = AfwRunHelper::show_back_trace();
                 global $city_construcotr_counter;
                 if(!$city_construcotr_counter) $city_construcotr_counter = 0;
                 $city_construcotr_counter++;

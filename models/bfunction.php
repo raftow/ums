@@ -185,7 +185,7 @@ class Bfunction extends UmsObject{
         
         public function beforeMAJ($id, $fields_updated) 
         {
-              global $lang;  //// old require of common_string
+              global $lang;  
                 
                 if(!$this->getVal("titre")) {
                            $this->set("titre",$this->getVal("titre_short"));
@@ -1275,18 +1275,18 @@ class Bfunction extends UmsObject{
                         $icon_table = $tableObj->icon;
                 }
 
-                if(contient($this->bfunction_code,"search"))
+                if(AfwStringHelper::stringContain($this->bfunction_code,"search"))
                 {
                         return $icon_table ? $icon_table."s hzm-icon-search" : "search";
                 } 
 
-                if(contient($this->bfunction_code,"stats"))
+                if(AfwStringHelper::stringContain($this->bfunction_code,"stats"))
                 {
                         return $icon_table ? $icon_table."s hzm-icon-stats" : "stats";
                 }
                 
-                if(contient($this->bfunction_code,"edit")) return $icon_table ? $icon_table : "edit";
-                if(contient($this->bfunction_code,"delete")) return "delete";
+                if(AfwStringHelper::stringContain($this->bfunction_code,"edit")) return $icon_table ? $icon_table : "edit";
+                if(AfwStringHelper::stringContain($this->bfunction_code,"delete")) return "delete";
 
                 return $MENU_ICONS["BF-".$this->id]." bficon-".$this->id." bfc-".$this->bfunction_code;
         }

@@ -38,7 +38,7 @@ AfwSession::initConfig($config_arr);
 AfwSession::startSession();
 
 require_once ("$file_dir_name/../external/db.php");*/
-// here old require of common.php
+// 
 
 
 

@@ -535,7 +535,7 @@ class Jobrole extends AFWObject
 
      public function beforeMAJ($id, $fields_updated)
      {
-          global $lang;  //// old require of common_string
+          global $lang;  
 
           if (!$this->getVal("titre")) {
                $this->set("titre", $this->getVal("titre_short"));
