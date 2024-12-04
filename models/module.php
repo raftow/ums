@@ -71,7 +71,7 @@ class Module extends UmsObject
         } else return null;
     }
 
-    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $update_if_exists=false)
+    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists=false)
     {
         $bf_added = 0;
         $message_arr = [];
@@ -87,8 +87,13 @@ class Module extends UmsObject
             {
                 throw new AfwRuntimeException("This module already exists");
             }
+            if(!$object_title_en) $object_title_en = $object_name_en;
+            if(!$object_title_ar) $object_title_ar = $object_name_ar;
+            
             $objModule->set("titre_short_en", $object_name_en);
             $objModule->set("titre_short", $object_name_ar);
+            $objModule->set("titre_en", $object_title_en);
+            $objModule->set("titre", $object_title_ar);
             $objModule->commit();
 
             $message = "successfully done";
