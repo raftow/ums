@@ -4447,3 +4447,7 @@ tr.application_model_field.csr_step_num.hzm_row__1>td.hzm_col_afw_screen_model_i
     background-color: red !important;
     min-height: fit-content;
 }
+
+div.hzm_data.hzm_data_php_rbf.form-control.inputreadonly {
+    min-height: 200px !important;
+}

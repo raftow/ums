@@ -98,15 +98,23 @@
 				'TYPE' => 'FK',  'ANSWER' => 'arole_bf',  'ANSMODULE' => 'ums',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'arole_id',  
 				'WHERE' => "me.menu='Y' and me.avail='Y'", 
-				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				 'SHOW' => true,  'FORMAT' => 'retrieve',  
+				 'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  
+				 'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+				),				
 
 		'rbfListCount' => array('IMPORTANT' => 'IN',  'EDIT' => true,  'QEDIT' => true,  'SHOW' => true,  'READONLY' => true,  
 				'TYPE' => 'INT',  
 				'CATEGORY' => 'FORMULA',  'PHP_FORMULA' => 'count.rbfList',  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
+
+		'php_rbf' => array(
+				'TYPE' => 'TEXT',  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true,  'QEDIT' => false,  'READONLY' => true,  'RETRIEVE' => false,  'PRE' => true,  
+				'CSS' => 'width_pct_100',  'SHORTNAME' => 'php',  'TEXT-ALIGN' => 'left',  'FGROUP' => 'generation',  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', ),
 
 		'all_rbfList' => array(
 				'TYPE' => 'FK',  'ANSWER' => 'arole_bf',  'ANSMODULE' => 'ums',  

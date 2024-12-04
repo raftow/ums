@@ -32,6 +32,7 @@ class AroleBf extends AFWObject{
         {
 		parent::__construct("arole_bf","id","ums");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
+                $this->UNIQUE_KEY = ["arole_id", "bfunction_id"];
                 $this->DISPLAY_FIELD = "";
                 $this->ORDER_BY_FIELDS = "";
                 $this->after_save_edit = array("class"=>'Arole',"attribute"=>'arole_id', "currmod"=>'ums',"currstep"=>4);
@@ -46,6 +47,31 @@ class AroleBf extends AFWObject{
                 return $obj;
            }
            else return null;
+        }
+
+        public static function loadByMainIndex($arole_id, $bfunction_id,$create_obj_if_not_found=false)
+        {
+           $obj = new AroleBf();
+           $obj->select("arole_id",$arole_id);
+           $obj->select("bfunction_id",$bfunction_id);
+
+           if($obj->load())
+           {
+                if($create_obj_if_not_found) $obj->activate();
+                return $obj;
+           }
+           elseif($create_obj_if_not_found)
+           {
+                $obj->set("arole_id",$arole_id);
+                $obj->set("bfunction_id",$bfunction_id);
+
+                $obj->insertNew();
+                if(!$obj->id) return null; // means beforeInsert rejected insert operation
+                $obj->is_new = true;
+                return $obj;
+           }
+           else return null;
+           
         }
         
         public function getDisplay($lang = 'ar')
