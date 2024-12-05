@@ -146,12 +146,19 @@ class Bfunction extends UmsObject{
                 $fn = trim($this->getVal("titre_short$lang_suffix"));
                 if(!$fn) $fn = trim($this->getVal("titre$lang_suffix"));
                 if(!$fn) $fn = "bf.".$this->id;
-                
+                else
+                {
+                        $curr_class_module_id = $this->getVal("curr_class_module_id");
+                        $curr_class_module_code = AfwPrevilege::moduleCodeOfModuleId($curr_class_module_id);
+                        if($curr_class_module_code)
+                        {
+                                $fn = AfwReplacement::trans_replace($fn, $curr_class_module_code, $lang);
+                        }
+                }
 
-                $curr_class_module_id = $this->getVal("curr_class_module_id");
-                $curr_class_module_code = AfwPrevilege::moduleCodeOfModuleId($curr_class_module_id);
                 
-                return AfwReplacement::trans_replace($fn, $curr_class_module_code, $lang);
+                return $fn;
+                
         }
         
         

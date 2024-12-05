@@ -461,10 +461,10 @@ class Arole extends AFWObject
                 }
 
                 return $bfList;
-                break;
+                break;            
         }
 
-        return AfwFormulaHelper::calculateFormulaResult($this,$attribute, $what);
+        return AfwFormulaHelper::calculateFormulaResult($this, $attribute, $what);
     }
 
 
@@ -715,6 +715,104 @@ class Arole extends AFWObject
 
 
 
+	public function getTableRightsMatrice($framework, $subModId = 0)
+    {
+        global $file_dir_name;
+
+        include_once("$file_dir_name/../pag/atable.php");
+        $this_id = $this->getId();
+        $matriceArr = array();
+        $moduleObj = $this->hetModule();
+        if ($moduleObj) {
+            $moduleId = $moduleObj->getId();
+            $moduleCode = $moduleObj->getVal("module_code");
+
+            $at = new Atable();
+            $at->select("id_module", $moduleId);
+            if ($subModId) $at->select("id_sub_module", $subModId);
+            $at->select("avail", 'Y');
+            $atableList = $at->loadMany($limit = "", $order_by = "id_sub_module asc, titre_short asc");
+
+            foreach ($atableList as $atableId => $atableObj) {
+                $matriceArr[$atableId]["obj"] = $atableObj;
+
+                $tbl_name = $atableObj->getVal("atable_name");
+                $cat = $atableObj->tableCategory();
+                $bf_arr = $atableObj->createFrameWorkScreens($framework, false);
+
+                foreach ($bf_arr as $bf_id => $bf_data) {
+                    if ($bf_id > 0) {
+                        $bf = $bf_data["bf"];
+                        $bf_new = $bf_data["bf_new"];
+                        $menu = $bf_data["menu"];
+                        $framework_mode = $bf_data["mode"];
+                        if ($menu) $arole_id = -1;
+                        else $arole_id = $this->getId();
+                        if (!$bf) {
+                            $this->throwError("role:$this_id, module:$moduleCode($moduleId), table($tbl_name/id=$atableId/cat=$cat) : createFrameWorkScreens has created null BF for framework mode : $framework_mode");
+                        }
+                        $matriceArr[$atableId][$framework_mode] = array("bf" => $bf, "arole_id" => $arole_id, "menu" => $menu);
+                    }
+                }
+            }
+        } else $matriceArr["error"] = "module not defined for role : $this";
+
+        return  $matriceArr;
+    }
+
+
+    public function saveTableRightsMatrice($framework, $data_posted, $subModId)
+    {
+        global $file_dir_name;
+
+        require_once("$file_dir_name/../pag/atable.php");
+        include("$file_dir_name/../pag/framework_${framework}_specification.php");
+        $removed_count = 0;
+        $added_count = 0;
+        $menu_removed_count = 0;
+        $menu_added_count = 0;
+
+        $moduleObj = $this->hetModule();
+        if ($moduleObj) {
+            $moduleId = $moduleObj->getId();
+            $moduleCode = $moduleObj->getVal("module_code");
+
+            $at = new Atable();
+            $at->select("id_module", $moduleId);
+            $at->select("id_sub_module", $subModId);
+            $at->select("avail", 'Y');
+            $atableList = $at->loadMany($limit = "", $order_by = "id_sub_module asc, titre_short asc");
+
+            foreach ($atableList as $atableId => $atableObj) {
+                $cat = $atableObj->tableCategory();
+
+                foreach ($framework_mode_list as $framework_mode => $framework_mode_item) {
+                    $checkbox_name = "chk_" . $framework_mode . "_" . $atableId;
+                    $bf_id_input_name = "bf_id_" . $framework_mode . "_" . $atableId;
+
+                    $bf_old_checked = $data_posted["old_" . $checkbox_name];
+                    $bf_checked = $data_posted[$checkbox_name];
+                    $bf_id = $data_posted[$bf_id_input_name];
+
+                    //if($checkbox_name == "chk_qsearch_25") die("old:$bf_old_checked != new:$bf_checked");
+
+                    if (($bf_old_checked != $bf_checked) and ($bf_id > 0)) {
+                        if ($bf_checked) {
+                            $menu_added = $this->addBF($bf_id);
+                            $added_count++;
+                            if ($menu_added) $menu_added_count++;
+                        } else {
+                            $menu_removed = $this->removeBF($bf_id);
+                            $removed_count++;
+                            if ($menu_removed) $menu_removed_count++;
+                        }
+                    }
+                }
+            }
+        } else $this->throwError("module not defined for role : $this");
+
+        return array($added_count, $removed_count, $menu_added_count, $menu_removed_count);
+    }
 
 
     public function beforeDelete($id, $id_replace)
@@ -842,29 +940,56 @@ class Arole extends AFWObject
 
 
     public function calcPhp_rbf()
-    {
-        $module_id = $this->getVal("module_id");
-        $role_code = $this->getVal("role_code");
-        $php_code = "\t\$aroleObj = Arole::loadByMainIndex($module_id, $role_code,true);\n";
+        {
+            $module_id = $this->getVal("module_id");
+            $role_code = $this->getVal("role_code");
+            $titre_short_en = $this->getVal("titre_short_en");
+            $titre_short = $this->getVal("titre_short");
+            $titre_en = $this->getVal("titre_en");
+            $titre = $this->getVal("titre");
+            $php_code = "\t\$aroleObj = Arole::loadByMainIndex($module_id, '$role_code', true);\n";
+            $php_code .= "\t\$aroleObj->set('titre_short_en','$titre_short_en');\n";
+            $php_code .= "\t\$aroleObj->set('titre_short','$titre_short');\n";
+            $php_code .= "\t\$aroleObj->set('titre_en','$titre_en');\n";
+            $php_code .= "\t\$aroleObj->set('titre','$titre');\n";
+            $bfList = array();
+            $rbfList = $this->get("rbfList");
+            foreach ($rbfList as $rbf_id => $rbfItem) {
+                // bfunction_id can be new so import it also by same method
+                $bfItem = $rbfItem->get("bfunction_id");
+                $id_system = $bfItem->getVal("id_system");
+                $curr_class_module_id = $bfItem->getVal("curr_class_module_id");
+                if ($module_id != $curr_class_module_id) throw new RuntimeException("calcPhp_rbf module_id != curr_class_module_id $module_id != $curr_class_module_id for : <br>\n $bfItem");
+                $curr_class_atable_id = $bfItem->getVal("curr_class_atable_id");
+                if(!$curr_class_atable_id) $curr_class_atable_id = 0;
+                if($curr_class_atable_id>0)
+                {
+                    $curr_class_atableObj = $bfItem->het("curr_class_atable_id");
+                    if($curr_class_atableObj)
+                    {
+                        $id_module = $curr_class_atableObj->getVal("id_module");
+                        $atable_name = $curr_class_atableObj->getVal("atable_name");
 
-        $bfList = array();
-        $rbfList = $this->get("rbfList");
-        foreach ($rbfList as $rbf_id => $rbfItem) {
-            // bfunction_id can be new so import it also by same method
-            $bfItem = $rbfItem->get("bfunction_id");
-            $id_system = $bfItem->getVal("id_system");
-            $curr_class_module_id = $bfItem->getVal("curr_class_module_id");
-            if ($module_id != $curr_class_module_id) throw new AfwRuntimeException("calcPhp_rbf module_id != curr_class_module_id $module_id != $curr_class_module_id for : <br>\n $bfItem");
-            $curr_class_atable_id = $bfItem->getVal("curr_class_atable_id");
-            $file_specification = $bfItem->getVal("file_specification");
-            $bf_specification = $bfItem->getVal("bf_specification");
-            $php_code .= "\t\$objBF = Bfunction::loadByBusinessIndex($id_system, $curr_class_module_id, $curr_class_atable_id, '$file_specification', '$bf_specification', true);\n";
-            $arole_id = $rbfItem->getVal("arole_id");
-            $this_id = $this->id;
-            if ($arole_id != $this_id) throw new AfwRuntimeException("calcPhp_rbf arole_id != this_id $arole_id != $this_id for : <br>\n $this");
-            $php_code .= "\tAroleBf::loadByMainIndex(\$aroleObj->id, \$objBF->id, true);\n";
+                        $php_code .= "\t\$newAtableObj = Atable::loadByMainIndex($id_module, '$atable_name');\n";
+                        $php_code .= "\tif(\$newAtableObj) \$newAtableObj_id = \$newAtableObj->id;\n";
+                        $php_code .= "\telse \$newAtableObj_id = -2; // not found table in destination\n";
+                    }
+                    else 
+                    {
+                        $php_code .= "\t\$newAtableObj_id = -1; // delete table seems\n";
+                    }
+                }
+                else $php_code .= "\t\$newAtableObj_id = 0; // bf not related to table seems\n";
+
+                $file_specification = $bfItem->getVal("file_specification");
+                $bf_specification = $bfItem->getVal("bf_specification");
+                $php_code .= "\t\$objBF = Bfunction::loadByBusinessIndex($id_system, \$newAtableObj_id, $curr_class_atable_id, '$file_specification', '$bf_specification', true);\n";
+                $arole_id = $rbfItem->getVal("arole_id");
+                $this_id = $this->id;
+                if ($arole_id != $this_id) throw new RuntimeException("calcPhp_rbf arole_id != this_id $arole_id != $this_id for : <br>\n $this");
+                $php_code .= "\tAroleBf::loadByMainIndex(\$aroleObj->id, \$objBF->id, true);\n";
+            }
+
+            return $php_code;
         }
-
-        return $php_code;
-    }
 }
