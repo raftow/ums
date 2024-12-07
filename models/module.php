@@ -102,7 +102,24 @@ class Module extends UmsObject
         return [$objModule  , $message];
     }
 
-    public static function reverseByCodes($object_code_arr)
+
+
+    public static function repareByCodes($object_code_arr, $restriction)
+    {
+        global $mode_pag_me;
+        list($objModule, $message) = self::reverseByCodes($object_code_arr, ($restriction=="reverse"));
+        
+        if($objModule) 
+        {
+            $mode_pag_me = false;
+            $cnt = $objModule->repareMe('en');            
+            $message .= "\n and $cnt attributes have been repared";
+        }
+
+        return [$objModule  , $message];
+    }
+
+    public static function reverseByCodes($object_code_arr, $doReverse=true)
     {
         $bf_added = 0;
         $message_arr = [];
@@ -142,136 +159,140 @@ class Module extends UmsObject
         {
             $message_arr[] = self::prepareLog("The module $module_code has been updated");
         }
-        // 2. reverse the ini file
-        include("$file_dir_name/../../$module_code/ini.php");
 
-        $objModule->set("titre_short_en", $NOM_SITE["en"]);
-        $objModule->set("titre_short", $NOM_SITE["ar"]);
-        $objModule->set("id_module_type", 5);
-        $objModule->commit();
-        $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
-        $id_system = $objModule->getVal("id_system");
-        // 3. reverse the previleges file
-        AfwAutoLoader::addModule("p"."ag");
+        if($objModule and $doReverse)
+        {
+            // 2. reverse the ini file
+            include("$file_dir_name/../../$module_code/ini.php");
 
-        $file_previleges = "$file_dir_name/../../$module_code/previleges.php";
-        if(!file_exists($file_previleges))
-        {
-            $message_arr[] = self::prepareLog("Warning : The file $file_previleges not found");
-        }
-        else
-        {
-            include($file_previleges);
-            
-            foreach($tab_info as $tab_id => $tab_info_row)
+            $objModule->set("titre_short_en", $NOM_SITE["en"]);
+            $objModule->set("titre_short", $NOM_SITE["ar"]);
+            $objModule->set("id_module_type", 5);
+            $objModule->commit();
+            $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
+            $id_system = $objModule->getVal("id_system");
+            // 3. reverse the previleges file
+            AfwAutoLoader::addModule("p"."ag");
+
+            $file_previleges = "$file_dir_name/../../$module_code/previleges.php";
+            if(!file_exists($file_previleges))
             {
-                if(AfwSession::hasOption('CHECK_ERRORS')) break;
-                $or_another_case = "";
-                $atable_name = $tab_info_row["name"];
-                $tbl = Atable::loadByMainIndex($module_id, $atable_name);
-                if(!$tbl)
+                $message_arr[] = self::prepareLog("Warning : The file $file_previleges not found");
+            }
+            else
+            {
+                include($file_previleges);
+                
+                foreach($tab_info as $tab_id => $tab_info_row)
                 {
-                    // my be the atable_name has changed so we try with ID
-                    $tbl = Atable::loadById($tab_id);
-                    // check if this $tbl found by ID is inside the module otherwise ignore it
-                    if($tbl and ($tbl->getVal("id_module") != $module_id))
+                    if(AfwSession::hasOption('CHECK_ERRORS')) break;
+                    $or_another_case = "";
+                    $atable_name = $tab_info_row["name"];
+                    $tbl = Atable::loadByMainIndex($module_id, $atable_name);
+                    if(!$tbl)
                     {
-                        $tbl = null;
-                        $or_another_case = "or not in the same module $module_code";
-                    }
-                }
-                if($tbl)
-                {
-                    $atable_name = $tbl->getVal("atable_name");
-                    $table_file_name = "$file_dir_name/../../$module_code/models/$atable_name.php";
-                    if(!file_exists($table_file_name))
-                    {
-                        $message_arr[] = self::prepareLog("Error : The table file $table_file_name not found");
-                        $tblFieldsCount = 0;
-                    }
-                    else
-                    {
-                        $tblFieldsCount = $tbl->getNbFieldsInMode("all");
-                    }
-
-                    if(!$tblFieldsCount)
-                    {
-                        
-                        if($tbl->forceDelete())
+                        // my be the atable_name has changed so we try with ID
+                        $tbl = Atable::loadById($tab_id);
+                        // check if this $tbl found by ID is inside the module otherwise ignore it
+                        if($tbl and ($tbl->getVal("id_module") != $module_id))
                         {
-                            $message_arr[] = self::prepareLog("The table $atable_name is obsolete and deleted");
+                            $tbl = null;
+                            $or_another_case = "or not in the same module $module_code";
+                        }
+                    }
+                    if($tbl)
+                    {
+                        $atable_name = $tbl->getVal("atable_name");
+                        $table_file_name = "$file_dir_name/../../$module_code/models/$atable_name.php";
+                        if(!file_exists($table_file_name))
+                        {
+                            $message_arr[] = self::prepareLog("Error : The table file $table_file_name not found");
+                            $tblFieldsCount = 0;
                         }
                         else
                         {
-                            $tbl_id = $tbl->id;
-                            $message_arr[] = self::prepareLog("Warning : The table $atable_name / $tbl_id is obsolete and can't be deleted : ".$tbl->deleteNotAllowedReason);
+                            $tblFieldsCount = $tbl->getNbFieldsInMode("all");
                         }
-                        
-                    }
-                    else
-                    {
-                            // $tbl->reverseMe($module_code);
-                            $message_arr[] = self::prepareLog("The table $atable_name is to be reversed");
-                    }
-                }
-                else
-                {
-                    $message_arr[] = self::prepareLog("Error : The table $tab_id / $atable_name not found $or_another_case");
-                }
-                unset($tbl);
-            }
-            // $tbf_info structure
-            /*
-             'arole' => [
-                'id' => '1409',
-                'display' => [
-                    'id' => '102858',
-                ],
-                'search' => [
-                    'id' => '102859',
-                ],
-                    
-            */
 
-            foreach($tbf_info as $table_name => $tbf_info_row)
-            {
-                $tbl = Atable::loadByMainIndex($module_id, $table_name);
-                $old_tab_id = $tbf_info_row['id'];
-                $tab_id = $tbl->id;
-                unset($tbf_info_row['id']);
-                foreach($tbf_info_row as $mode => $tbf_mode_row)
-                {
-                    if($tbf_mode_row['id']>0)
-                    {
-                        //$message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name will have mode $mode");
-                        $bf_specification = "";
-                        $file_specification = $mode;
-                        
-                        //$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
-                        $bf_row = $tbl->createModeScreen($mode);
-                        $bf_id = $bf_row["id"];
-                        $bfObj = $bf_row["bf"];
-                        if($bfObj->is_new) 
+                        if(!$tblFieldsCount)
                         {
-                            $bf_added++;
-                            $message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name has added the mode $mode");
+                            
+                            if($tbl->forceDelete())
+                            {
+                                $message_arr[] = self::prepareLog("The table $atable_name is obsolete and deleted");
+                            }
+                            else
+                            {
+                                $tbl_id = $tbl->id;
+                                $message_arr[] = self::prepareLog("Warning : The table $atable_name / $tbl_id is obsolete and can't be deleted : ".$tbl->deleteNotAllowedReason);
+                            }
+                            
                         }
                         else
                         {
-                            $message_arr[] = self::prepareLog("Success : The table $tab_id / $table_name already have mode $mode");
+                                // $tbl->reverseMe($module_code);
+                                $message_arr[] = self::prepareLog("The table $atable_name is to be reversed");
                         }
                     }
                     else
                     {
-                        // @todo
-                        // we dont disable a BF already created except if it is previleges file of developer owner of this BF
-                        // this s to avoid loose BFs when developer do reverse engineering before do git pull of previleges file
+                        $message_arr[] = self::prepareLog("Error : The table $tab_id / $atable_name not found $or_another_case");
                     }
+                    unset($tbl);
                 }
+                // $tbf_info structure
+                /*
+                'arole' => [
+                    'id' => '1409',
+                    'display' => [
+                        'id' => '102858',
+                    ],
+                    'search' => [
+                        'id' => '102859',
+                    ],
+                        
+                */
 
+                foreach($tbf_info as $table_name => $tbf_info_row)
+                {
+                    $tbl = Atable::loadByMainIndex($module_id, $table_name);
+                    $old_tab_id = $tbf_info_row['id'];
+                    $tab_id = $tbl->id;
+                    unset($tbf_info_row['id']);
+                    foreach($tbf_info_row as $mode => $tbf_mode_row)
+                    {
+                        if($tbf_mode_row['id']>0)
+                        {
+                            //$message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name will have mode $mode");
+                            $bf_specification = "";
+                            $file_specification = $mode;
+                            
+                            //$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
+                            $bf_row = $tbl->createModeScreen($mode);
+                            $bf_id = $bf_row["id"];
+                            $bfObj = $bf_row["bf"];
+                            if($bfObj->is_new) 
+                            {
+                                $bf_added++;
+                                $message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name has added the mode $mode");
+                            }
+                            else
+                            {
+                                $message_arr[] = self::prepareLog("Success : The table $tab_id / $table_name already have mode $mode");
+                            }
+                        }
+                        else
+                        {
+                            // @todo
+                            // we dont disable a BF already created except if it is previleges file of developer owner of this BF
+                            // this s to avoid loose BFs when developer do reverse engineering before do git pull of previleges file
+                        }
+                    }
+
+                }
             }
+            $message_arr[] = self::prepareLog("Info : $bf_added BF(s) added");
         }
-        $message_arr[] = self::prepareLog("Info : $bf_added BF(s) added");
 
         $message = implode("<br>\n", $message_arr);
 
@@ -1026,6 +1047,19 @@ class Module extends UmsObject
         } else return 0;
     }
 
+    public function repareMe($lang="ar")
+    {
+        $atList = $this->getAllMyTables();
+        $cnt = 0;
+        /**
+         * @var Atable $atItem
+         */
+        foreach ($atList as $atItem) {
+            $cnt += $atItem->repareMe($lang);            
+        }
+
+        return $cnt;
+    }
 
 
     public function getAllMyTables($only_entities=false)

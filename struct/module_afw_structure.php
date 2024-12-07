@@ -3,18 +3,22 @@
         {
 			public static function initInstance($obj)
 			{
-				$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
-				// $obj->IS_LOOKUP = true;
-                $obj->editByStep = true;
-                $obj->editNbSteps = 13;
-                $obj->hzm_vtab_body_height = "100%";
-                $obj->hirerachyField = "id_module_parent";
-                $obj->showRetrieveErrors = true;
-                $obj->styleStep[7] = array("width"=>"80%");
-                $obj->styleStep[11] = array("width"=>"88%");
-                $obj->styleStep[12] = array("width"=>"88%");
-                $obj->UNIQUE_KEY = array('module_code');
-				$obj->DISPLAY_FIELD = "titre_short";
+				if($obj instanceof Module)
+				{
+					$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
+					// $obj->IS_LOOKUP = true;
+					$obj->editByStep = true;
+					$obj->editNbSteps = 13;
+					$obj->hzm_vtab_body_height = "100%";
+					$obj->hirerachyField = "id_module_parent";
+					$obj->showRetrieveErrors = true;
+					$obj->styleStep[7] = array("width"=>"80%");
+					$obj->styleStep[11] = array("width"=>"88%");
+					$obj->styleStep[12] = array("width"=>"88%");
+					$obj->UNIQUE_KEY = array('module_code');
+					$obj->DISPLAY_FIELD = "titre_short";
+				}
+				
 			}
             
 			public static $DB_STRUCTURE = array(
