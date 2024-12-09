@@ -842,16 +842,15 @@ class Module extends UmsObject
             if (true) {
                 if (true) // يوجد على الأقل جدول حقيقي
                 {
-                    if (true)  // intval($this->getVal("tablecount")) >0 => obsolete car  il y a aussi les BF les sous modules relations etc ..
-                    {
+                    if (($mode == "mode_id_module_type") and $this->isApplication()) {
+
                         $link = array();
                         $link["URL"] = "main.php?Main_Page=genere_datadic.php&mod_id=" . $this->getId();
                         $link["TITLE"] = "توليد قاموس البيانات لنظام " . $this->getDisplay();
                         $link["UGROUPS"] = array();
                         $otherLinksArray[] = $link;
-                    }
 
-                    if ($this->isApplication()) {
+
                         $link = array();
                         $link["URL"] = "dbgen.php?sql=1&show_sql=1&mod=" . $this->getId();
                         $link["TITLE"] = "توليد هيكل قاعدة بيانات " . $this->getDisplay();
@@ -914,19 +913,21 @@ class Module extends UmsObject
                         $link["TITLE"] = $title;
                         $link["UGROUPS"] = array();
                         $otherLinksArray[] = $link;
+
+                        unset($link);
+                        $mod_id = $this->getId();
+                        $link = array();
+                        $title = "إدارة وظائف النظام";
+                        $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Bfunction&currmod=ums&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=100&ids=all&fixmtit=$title&fixmdisable=1&fixm=curr_class_module_id=$mod_id&sel_curr_class_module_id=$mod_id";
+                        $link["TITLE"] = $title;
+                        $link["UGROUPS"] = array();
+                        $otherLinksArray[] = $link;
+
                     }
 
 
 
-                    unset($link);
-                    $mod_id = $this->getId();
-                    $link = array();
-                    $title = "إدارة وظائف النظام";
-                    $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Bfunction&currmod=ums&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=100&ids=all&fixmtit=$title&fixmdisable=1&fixm=curr_class_module_id=$mod_id&sel_curr_class_module_id=$mod_id";
-                    $link["TITLE"] = $title;
-                    $link["UGROUPS"] = array();
-                    $otherLinksArray[] = $link;
-
+                    
                     /*
                     unset($link);
                     $mod_id = $this->getId();

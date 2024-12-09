@@ -60,14 +60,14 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'id_module_type' => array('SHOW' => true,  'SEARCH' => true,  'QSEARCH' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+		'id_module_type' => array('SHOW' => true,  'SEARCH' => true,  'QSEARCH' => true,  'RETRIEVE' => true,  'EDIT' => true,  
 				'TYPE' => 'FK',  'ANSWER' => 'module_type',  'ANSMODULE' => 'ums',  'SHORTNAME' => 'type',  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50',
 				),
 
-			'id_module_status' => array('SHOW' => true,  'SEARCH' => true,  'QSEARCH' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+		'id_module_status' => array('SHOW' => true,  'SEARCH' => true,  'QSEARCH' => true,  'RETRIEVE' => true,  'EDIT' => true,  
 				'TYPE' => 'FK',  'ANSWER' => 'module_status',  'ANSMODULE' => 'ums',  'DEFAUT' => 1,  'SHORTNAME' => 'status',  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50', 
 				),
 
 		'assrole' => array(
@@ -97,7 +97,7 @@
 				),
 
 			'id_pm' => array('SHOW' => true,  'SHORTNAME' => 'domain',  'RETRIEVE' => false,  'EDIT' => true,  
-				'TYPE' => 'INT', 
+				'TYPE' => 'ENUM', 'ANSWER' => 'FUNCTION', 'FUNCTION_COL_NAME' => 'domain_enum',
 				'WHERE' => "", 
 				 'QEDIT' => true,  
 				'RELATION' => 'OneToMany',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
