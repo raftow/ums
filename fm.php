@@ -14,6 +14,7 @@
       if($module_id)
       {
         $module = UmsManager::decodeModuleCodeOrIdToModuleCode($module_id);
+        if(!$module) throw new AfwRuntimeException("UmsManager::decodeModuleCodeOrIdToModuleCode failed from id=($module_id)");
       }
     }
     

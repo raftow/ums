@@ -5,7 +5,7 @@
 // ALTER TABLE `arole` CHANGE `titre_short_en` `titre_short_en` VARCHAR(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL; 
 // 21/3/2024 :
 // ALTER TABLE ".$server_db_prefix."ums.arole CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
-$file_dir_name = dirname(__FILE__);
+
 
 // old include of afw.php
 
@@ -632,7 +632,7 @@ class Arole extends AFWObject
 
     public function removeBF($bf_id)
     {
-        global $file_dir_name;
+        
 
 
 
@@ -717,9 +717,8 @@ class Arole extends AFWObject
 
 	public function getTableRightsMatrice($framework, $subModId = 0)
     {
-        global $file_dir_name;
-
-        include_once("$file_dir_name/../pag/atable.php");
+        $file_dir_name = dirname(__FILE__);
+        include_once("$file_dir_name/../../p"."ag/models/atable.php");
         $this_id = $this->getId();
         $matriceArr = array();
         $moduleObj = $this->hetModule();
@@ -763,9 +762,9 @@ class Arole extends AFWObject
 
     public function saveTableRightsMatrice($framework, $data_posted, $subModId)
     {
-        global $file_dir_name;
+        $file_dir_name = dirname(__FILE__);
 
-        require_once("$file_dir_name/../pag/atable.php");
+        require_once("$file_dir_name/../../p"."ag/models/atable.php");
         include("$file_dir_name/../pag/framework_${framework}_specification.php");
         $removed_count = 0;
         $added_count = 0;
@@ -964,7 +963,9 @@ class Arole extends AFWObject
                 if(!$curr_class_atable_id) $curr_class_atable_id = 0;
                 if($curr_class_atable_id>0)
                 {
-                    $curr_class_atableObj = $bfItem->het("curr_class_atable_id");
+                    $file_dir_name = dirname(__FILE__);
+                    include_once("$file_dir_name/../../p"."ag/models/atable.php");
+                    $curr_class_atableObj = Atable::loadById($curr_class_atable_id);
                     if($curr_class_atableObj)
                     {
                         $id_module = $curr_class_atableObj->getVal("id_module");

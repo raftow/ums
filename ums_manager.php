@@ -50,7 +50,10 @@ class UmsManager extends AFWRoot
     {
         if(!is_numeric($module)) return $module;
         
-        return AfwPrevilege::moduleCodeOfModuleId($module);
+        $return = AfwPrevilege::moduleCodeOfModuleId($module);
+        if(!$return) throw new AfwRuntimeException("moduleCodeOfModuleId failed : from (id=$module) may be you need to regenrate .../external/chsys/modules_all.php");
+
+        return $return;
     }
 
     public static function decodeModuleCodeOrIdToModuleId($module)

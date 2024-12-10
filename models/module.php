@@ -2578,6 +2578,13 @@ class Module extends UmsObject
         return $this->getLookupJobResp($create_obj_if_not_found = true, $always_update_name = false, $lang);
     }
 
+    public static function moduleCodeToDomainId($module_code)    
+    {
+        $moduleObj = self::loadByMainIndex($module_code);
+        if(!$moduleObj) return 0;
+        return $moduleObj->getVal("id_pm");
+    }
+
     public function getLookupJobResp($create_obj_if_not_found = true, $always_update_name = false, $lang = "ar")
     {
 

@@ -37,7 +37,15 @@ class Jobrole extends AFWObject
           } else return null;
      }
 
-
+     public static function loadAll($id_domain=0)
+     {
+        $obj = new CustomerType();
+        $obj->select("active",'Y');
+        $obj->select("id_domain", $id_domain);
+        if($id_domain) $objList = $obj->loadMany();
+        
+        return $objList;
+     }
 
      public static function loadByMainIndex($id_domain, $jobrole_code, $create_obj_if_not_found = false)
      {
