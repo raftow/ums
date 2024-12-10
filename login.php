@@ -1,11 +1,11 @@
 <?php
 if((!isset($MODULE)) or (!$MODULE))
-{
-        $file_dir_name = dirname(__FILE__); 
+{         
         include_once ("$file_dir_name/ini.php");
         include_once ("$file_dir_name/module_config.php"); 
         
 }
+$file_dir_name = dirname(__FILE__);
 $direct_page = "login_ums.php";
 $direct_page_path = dirname(__FILE__); 
 require("$file_dir_name/../lib/afw/afw_main_page.php"); 
