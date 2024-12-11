@@ -12,6 +12,7 @@ class DocType extends AFWObject{
 	public function __construct($tablename="doc_type"){
 		parent::__construct($tablename,"id","ums");
                 $this->public_display = true;
+                $this->DISPLAY_FIELD = 'titre_short';
 	}
          
         public static function loadAll($ids="", $order_by="")
