@@ -1145,9 +1145,9 @@ class Bfunction extends UmsObject{
         
         public function attributeIsApplicable($attribute)
         {
-              if($attribute=="tobinus_reason")
+              if($attribute=="curr_class_atable_id")
               {
-                  //return $this->is("tobinus"); 
+                  return AfwSession::config('MODE_DEVELOPMENT', false); 
               }
               
               return true;

@@ -95,7 +95,7 @@
                 $menu_item_icon = $menu_folder_item["icon"];
                 if((!$menu_item_icon) and $menu_icons_arr[$menu_item_id]) $menu_item_icon = $menu_icons_arr[$menu_item_id];
                 if(!$menu_item_icon) $menu_item_icon = "globe icon-$menu_item_id";
-                $menu_item_title = $menu_folder_item["menu_name"];
+                $menu_item_title = $menu_folder_item["menu_name_$lang"];
                 $menu_item_title = AfwReplacement::trans_replace($menu_item_title, $module, $lang);
                 
                 $menu_item_page = $menu_folder_item["page"]."&r=$r";
