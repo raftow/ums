@@ -217,20 +217,19 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 /*
-		@todo rafik, this below if used please move to p a g mdoule not in ums because should be independant of p a g module
+		@todo rafik, this below if used please move to p a g mdoule not in ums because should be independant of p a g module*/
 		'tbs' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
+				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p'.'ag',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => '',  'SHORTNAME' => 'tables',  
 				'WHERE' => "(id_sub_module = '§id§' or id_module = '§id§' ) and is_lookup='N'", 
 				 'SHOW' => true,  'ROLES' => '',  'FORMAT' => 'retrieve',  'EDIT' => false,  'FGROUP' => 'tbs',  
-				'DO-NOT-RETRIEVE-COLS' => array (
-  0 => 'id_module',
+				'DO-NOT-RETRIEVE-COLS' => array (0 => 'id_module',
 ),  'NO-LABEL' => true,  'BUTTONS' => true,  'PILLAR' => false,  'STEP' => 8,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'lkps' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
+				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p'.'ag',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => '',  'SHORTNAME' => 'lookups',  
 				'WHERE' => "(id_sub_module = '§id§' or id_module = '§id§' ) and is_lookup='Y' ", 
 				 'SHOW' => true,  'ROLES' => '',  'FORMAT' => 'retrieve',  'EDIT' => false,  
@@ -240,7 +239,7 @@
 				),
 
 		'tome' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p'.'ag',  
 				'CATEGORY' => 'FORMULA',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -248,7 +247,7 @@
 				),
 
 		'anst' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p'.'ag',  
 				'CATEGORY' => 'FORMULA',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -256,7 +255,7 @@
 				),
 
 		'ext_tome' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p'.'ag',  
 				'CATEGORY' => 'FORMULA',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -264,7 +263,7 @@
 				),
 
 		'ext_anst' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p ag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'atable',  'ANSMODULE' => 'p'.'ag',  
 				'CATEGORY' => 'FORMULA',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'ROLES' => '',  'EDIT' => false,  'RETRIEVE' => false,  'STEP' => 10,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -272,14 +271,14 @@
 				),
 
 			'main_goal_id' => array('SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,  
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  'NO-ERROR-CHECK' => true,  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b'.'au',  'NO-ERROR-CHECK' => true,  
 				'WHERE' => "jobrole_id = §id_br§ and module_id in (§id_module_parent§,§id§)", 
 				 'DEFAUT' => 0,  'FGROUP' => 'goals_def',  'STEP' => 11,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'applicationGoalList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b'.'au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'module_id',  
 				'WHERE' => "", 
 				 'FGROUP' => 'goals_def',  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 11,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -287,7 +286,7 @@
 				),
 
 		'goalConcernList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'b au',  
+				'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'b'.'au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'application_id',  
 				'WHERE' => "", 
 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 11,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -295,18 +294,18 @@
 				),
 
 		'otherGoalList' => array(
-				'TYPE' => 'MFK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
+				'TYPE' => 'MFK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b'.'au',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => false,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  'READONLY' => true,  'PHP_FORMULA' => 'list_extract.goalConcernList.goal_id.',  'STEP' => 11,  'SEARCH-BY-ONE' => '',  'DISPLAY' => false,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'userStoryList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b au',  
+				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b'.'au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'module_id',  'PILLAR' => false,  
 				'WHERE' => "", 
 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'NO-LABEL' => true,  'FGROUP' => 'userStoryList',  'STEP' => 12,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),*/
+				),
 
 			'id_analyst' => array('SHOW' => true,  'EDIT' => true,  'QEDIT' => false,  'RETRIEVE' => true,  
 				'TYPE' => 'FK',  'SHORTNAME' => 'bmjob',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'ums',  'DEFAUT' => 53,  'SIZE' => 40,  

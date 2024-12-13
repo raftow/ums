@@ -508,9 +508,8 @@ zoomWindowOffety:-200
         
         public function select_visibilite_horizontale($dropdown = false)
         {
-            $me = AfwSession::getUserIdActing();
-        
-                $this->where("avail='Y' or (avail ='W' and owner_id = '$me')");
+                $me = AfwSession::getUserIdActing();        
+                $this->where("me.avail='Y' or (me.avail ='W' and me.owner_id = '$me')");
         }
         
         

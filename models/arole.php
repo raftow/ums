@@ -485,10 +485,15 @@ class Arole extends AFWObject
         //if($this->getId()==84) die("($lkp_module_role_code == $role_code) ? => ".$menu_folder["need_admin"]);
         $my_id = $this->getId();
         $menu_folder["id"] = $my_id;
-        $menu_folder["menu_name"] = $this->getShortDisplay($lang);
+        $default_menu_desc = "menu.arole" . $this->getId();
+        $menu_folder["menu_name_$lang"] = $this->getShortDisplay($lang);
+        if(!$menu_folder["menu_name_ar"]) $menu_folder["menu_name_ar"] = $this->getShortDisplay("ar");
+        if(!$menu_folder["menu_name_ar"]) $menu_folder["menu_name_ar"] = $default_menu_desc;
+        if(!$menu_folder["menu_name_en"]) $menu_folder["menu_name_en"] = $this->getShortDisplay("en");
+        if(!$menu_folder["menu_name_en"]) $menu_folder["menu_name_en"] = $default_menu_desc;
         if ($lang == "ar") $lang_other = "en";
         else $lang_other = "ar";
-        if (!trim($menu_folder["menu_name"])) $menu_folder["menu_name"] = "menu.arole" . $this->getId();
+        
         $menu_folder["page"] = "main.php?Main_Page=fm.php&a=$module_id&r=" . $this->getId();
         $menu_folder["css"] = $menu_css_arr[$my_id];
         if (!$menu_folder["css"]) $menu_folder["css"] = "info";
@@ -523,11 +528,16 @@ class Arole extends AFWObject
             foreach ($this_bfs as $bf_item) {
                 if ($bf_item and (is_object($bf_item)) and $bf_item->isActive()) {
                     $menu_folder["items"][$bf_item->getId()] = array();
-                    $title_lang =  $bf_item->getShortDisplay($lang);
                     $bf_item_id =  $bf_item->getId();
-                    if (!$title_lang) $title_lang = "bf-$bf_item_id-$lang";
+                    $title_ar =  $bf_item->getShortDisplay("ar");
+                    if (!$title_ar) $title_ar = "bf-$bf_item_id-ar";
+                    $title_en =  $bf_item->getShortDisplay("en");
+                    if (!$title_en) $title_ar = "bf-$bf_item_id-en";
+                    
+                    
                     $menu_folder["items"][$bf_item->getId()]["id"] = $bf_item->getId();
-                    $menu_folder["items"][$bf_item->getId()]["menu_name"] = $title_lang;
+                    $menu_folder["items"][$bf_item->getId()]["menu_name_ar"] = $title_ar;
+                    $menu_folder["items"][$bf_item->getId()]["menu_name_en"] = $title_en;
                     $menu_folder["items"][$bf_item->getId()]["page"] = $bf_item->getUrl();
                     $menu_folder["items"][$bf_item->getId()]["css"] = "bf";
                     $menu_folder["items"][$bf_item->getId()]["icon"] = $bf_item->getIcon();

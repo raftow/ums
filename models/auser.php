@@ -914,6 +914,9 @@ class Auser extends UmsObject{
                 foreach($mau_found_roles as $role_id => $role_item)
                 {
                         //if(!is_object($role_item)) die("auser::getMenuFor -> mau_found_roles : ".var_export($mau_found_roles,true));
+                        /**
+                         * @var Arole $role_item
+                         */
                         if($role_item)
                         {
                                 if($role_item->isActive())   $menu_arr[$role_item->getId()] = $role_item->getRoleMenu($sub_folders, $items);
@@ -927,7 +930,7 @@ class Auser extends UmsObject{
                 $menu_arr["-1"] = array (
                         'need_admin' => false,
                         'id' => 'control',
-                        'menu_name' => 'التحكم',
+                        'menu_name_ar' => 'التحكم',
                         'page' => 'main.php?Main_Page=fm.php&r=control',
                         'css' => 'info',
                         'icon' => NULL,
