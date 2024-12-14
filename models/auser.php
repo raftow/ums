@@ -930,7 +930,8 @@ class Auser extends UmsObject{
                 $menu_arr["-1"] = array (
                         'need_admin' => false,
                         'id' => 'control',
-                        'menu_name_ar' => 'التحكم',
+                        'menu_name_ar' => 'لوحة التحكم',
+                        'menu_name_en' => 'control panel',
                         'page' => 'main.php?Main_Page=fm.php&r=control',
                         'css' => 'info',
                         'icon' => NULL,
