@@ -1,4 +1,6 @@
+obsolete old menu constructor
 <?php
+/*
       if(!$menu_class_ul) $menu_class_ul = "prog-ul";
       
       $html = "<div class='innercontainer'>\n";
@@ -24,7 +26,7 @@
         <div class='subcontainer'>\n
         <div class='col-12'>\n
         <ul class='$menu_class_ul settingsul'>\n";
-                       foreach($menu[$theme_id][$subtheme_id] as $menu_id => $menu_item)
+                       foreach($men u[$theme_id][$subtheme_id] as $menu_id => $menu_item)
                        {
                                $menu_afw  = $menu_item["afw"];
                                $menu_mod  = $menu_item["mod"];
@@ -71,12 +73,6 @@
       }
       $html .= "</div>";
       
-     /* $html .= "<script>
-  $(function() {
-           $acc_list_html
 
-        });
-</script>";*/
-
-      echo $html;
+      echo $html;*/
 ?>

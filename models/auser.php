@@ -869,7 +869,7 @@ class Auser extends UmsObject{
                 // 
                 
                 // store it in temp php file associated to current session 
-                //if($this->cache_menu[$module_id][$langue]) return $this->cache_menu[$module_id][$langue];
+                //if($this->cache_m enu[$module_id][$langue]) return $this->cache_me nu[$module_id][$langue];
                 
                 
 
@@ -939,7 +939,7 @@ class Auser extends UmsObject{
                         );
                 
                 
-                //if(!$this->cache_menu[$module_id][$langue]) $this->cache_menu[$module_id][$langue] = $menu_arr;
+                //if(!$this->cache_me nu[$module_id][$langue]) $this->cache_me nu[$module_id][$langue] = $menu_arr;
 
                 //die($this->getDisplay("ar")."->getMenuFor($module_id, $langue, $sub_folders, $items) will return ".var_export($menu_arr,true));
                 return  $menu_arr;
@@ -1988,8 +1988,8 @@ class Auser extends UmsObject{
                         $mau_info['m'.$moduleId] = array('code'=>$moduleCode,'roles'=>$roles_arr);
 
                         $menu[$moduleCode] = array();
-                        $menu[$moduleCode]["ar"] = $this->getMenuFor($moduleId,"ar");
-                        $menu[$moduleCode]["en"] = $this->getMenuFor($moduleId,"en");
+                        $menu[$moduleCode]["all"] = $this->getMenuFor($moduleId,"ar");
+                        //$menu[$moduleCode]["en"] = $this->getMenuFor($moduleId,"en");
                 }
 
                 

@@ -20,8 +20,13 @@
     
     if($r=="control")
     {
+          $control_panel_title = AfwLanguageHelper::tarjemText("control panel", $lang);
+          $options_title = AfwLanguageHelper::tarjemText("options", $lang);
+          $upload_files_title = AfwLanguageHelper::tarjemText("upload files", $lang);   
+          $my_account_title = AfwLanguageHelper::tarjemText("my account", $lang);   
+          $command_line = AfwLanguageHelper::tarjemText("command-line", $lang);   
           $s12 = "s12";
-          $out_scr .= "<h3> لوحة التحكم </h3>"; 
+          $out_scr .= "<h3> $control_panel_title </h3>"; 
           $out_scr .= "<div id='menu-item-control-options' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
                                 <a class='hzm3-button hzm3-light-grey hzm3-block' href='main.php?Main_Page=toggle_option.php&My_Module=ums' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
                                     <div class=\"hzm-width-100 hzm-text-center hzm_margin_bottom \">
@@ -29,7 +34,7 @@
                                         <i class=\"hzm-container-center hzm-vertical-align-middle hzm-icon-settings\"></i>
                                       </div>
                                     </div>
-                                    <div class='hzm4-title'>الخيارات</div>
+                                    <div class='hzm4-title'>$options_title</div>
                                 </a>
                              </div>";
           if($iamAdmin or AfwSession::config("allow_upload_for_all", false))
@@ -41,7 +46,7 @@
                                               <i class=\"hzm-container-center hzm-vertical-align-middle hzm-icon-std fa-cloud-upload\"></i>
                                             </div>
                                           </div>
-                                          <div class='hzm4-title'>تحميل الملفات</div>
+                                          <div class='hzm4-title'>$upload_files_title</div>
                                       </a>
                                   </div>";
           }                   
@@ -52,25 +57,27 @@
                                         <i class=\"hzm-container-center hzm-vertical-align-middle hzm-icon-std fa-user\"></i>
                                       </div>
                                     </div>
-                                    <div class='hzm4-title'>حسابي</div>
+                                    <div class='hzm4-title'>$my_account_title</div>
                                 </a>
                              </div>        
                              
                              ";
 
-          $out_scr .= "<div id='menu-item-cline' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
+          if($module=="pag")                             
+          {
+              $out_scr .= "<div id='menu-item-cline' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
                              <a class='action_lourde hzm3-button hzm3-light-grey hzm3-block' href='cline_go.php' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
                                  <div class=\"hzm-width-100 hzm-text-center hzm_margin_bottom \">
                                    <div class=\"hzm-vertical-align hzm-container-center hzm-custom hzm-custom-icon-container only-border border-primary\">
                                      <i class=\"hzm-container-center hzm-vertical-align-middle hzm-icon-std fa-solid fa-bolt\"></i>
                                    </div>
                                  </div>
-                                 <div class='hzm4-title'>سطر الأوامر</div>
+                                 <div class='hzm4-title'>$command_line</div>
                              </a>
                           </div>        
                           
                           ";
-                             
+          }                   
                              
     }
     elseif($r)
@@ -96,6 +103,7 @@
                 if((!$menu_item_icon) and $menu_icons_arr[$menu_item_id]) $menu_item_icon = $menu_icons_arr[$menu_item_id];
                 if(!$menu_item_icon) $menu_item_icon = "globe icon-$menu_item_id";
                 $menu_item_title = $menu_folder_item["menu_name_$lang"];
+                if(!$menu_item_title) $menu_item_title = $menu_folder_item["menu_name"];
                 $menu_item_title = AfwReplacement::trans_replace($menu_item_title, $module, $lang);
                 
                 $menu_item_page = $menu_folder_item["page"]."&r=$r";
