@@ -162,11 +162,14 @@ class Module extends UmsObject
 
         if($objModule and $doReverse)
         {
-            // 2. reverse the ini file
+            // 2. reverse the names ar and en from ini file
             include("$file_dir_name/../../$module_code/ini.php");
+            $title_en = $NOM_SITE["en"];
+            $title_ar = $NOM_SITE["ar"];
 
-            $objModule->set("titre_short_en", $NOM_SITE["en"]);
-            $objModule->set("titre_short", $NOM_SITE["ar"]);
+
+            $objModule->set("titre_short_en", $title_en);
+            $objModule->set("titre_short", $title_ar);
             $objModule->set("id_module_type", 5);
             $objModule->commit();
             $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
@@ -191,7 +194,7 @@ class Module extends UmsObject
                     $tbl = Atable::loadByMainIndex($module_id, $atable_name);
                     if(!$tbl)
                     {
-                        // my be the atable_name has changed so we try with ID
+                        // may be the atable_name has changed so we try with ID
                         $tbl = Atable::loadById($tab_id);
                         // check if this $tbl found by ID is inside the module otherwise ignore it
                         if($tbl and ($tbl->getVal("id_module") != $module_id))
@@ -200,6 +203,16 @@ class Module extends UmsObject
                             $or_another_case = "or not in the same module $module_code";
                         }
                     }
+
+                    if(!$tbl)
+                    {
+                        // may be it is the first reverse engineering of this atable
+                        $object_code_arr = [];
+                        $object_code_arr[0] = $atable_name;
+                        $object_code_arr[1] = $module_code;
+                        list($tbl, $msg000) = Atable::reverseByCodes($object_code_arr);
+                    }
+
                     if($tbl)
                     {
                         $atable_name = $tbl->getVal("atable_name");
