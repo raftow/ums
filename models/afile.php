@@ -187,7 +187,7 @@ class Afile extends AFWObject{
                         $file_path = $this->getFileHttpPath();
                         $afile_ext = $this->getVal("afile_ext");
                         
-                        $url = self::getLightDownloadUrl("$file_path/$new_name", $afile_ext);
+                        $url = AfwHtmlHelper::getLightDownloadUrl("$file_path/$new_name", $afile_ext);
 			return $url;
 		    break;
                     
