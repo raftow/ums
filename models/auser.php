@@ -36,7 +36,7 @@ $file_dir_name = dirname(__FILE__);
 // AfwAutoLoader::init();
 
 
-class Auser extends UmsObject{
+class Auser extends UmsObject implements AfwFrontEndUser {
         
         private $myEmployeeObj = null;
         private $myEmployeeId = null;
