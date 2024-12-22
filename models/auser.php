@@ -1521,17 +1521,24 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         }
 
 
-        public function generateCacheFile($lang="ar", $me_id=0)
-        {
+        public function generateCacheFile($lang="ar", $onlyIfNotDone=false)
+        {                
                 try
                 {
-                        require_once (dirname(__FILE__)."/../../external/config.php");
-                        if(!$me_id) $me_id = $this->id;
-                        $file_path = $ROOT_WWW_PATH."external/chusers";
+                        $parent_project_path = AfwSession::config("parent_project_path", "");
+                        if(!$parent_project_path) return ["please define parent_project_path system config parameter", ""];
+                        $me_id = $this->id;
+                        $file_path = $parent_project_path."/external/chusers";
                         $fileName = "user_$me_id"."_data.php";
+                        $fileFullName = $file_path."/".$fileName;
+                        if($onlyIfNotDone and file_exists($fileFullName))
+                        {
+                                return ["", "already generated file $fileFullName"];
+                        }
+
                         $php = $this->calcPhp(false);
-                        AfwFileSystem::write($file_path."/".$fileName, $php);
-                        return array("", "$fileName created successfully");
+                        AfwFileSystem::write($fileFullName, $php);
+                        return array("", "$fileFullName created successfully");
                 }
                 catch(Exception $e)
                 {

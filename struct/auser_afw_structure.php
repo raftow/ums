@@ -154,7 +154,7 @@
 
 		'php' => array('STEP' => 4,  
 				'TYPE' => 'TEXT',  
-				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true, 'MINIBOX' => true,  'READONLY' => true,  'CAN-BE-SETTED' => false,  'SIZE' => 255,  'INPUT_WIDE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true, 'MINIBOX' => false,  'READONLY' => true,  'CAN-BE-SETTED' => false,  'SIZE' => 255,  'INPUT_WIDE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),				
 

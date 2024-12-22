@@ -30,10 +30,10 @@
 				),
 
 
-			'govern_code' => array(
+			/*'govern_code' => array(
 					'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SIZE' => 32,  'QEDIT' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 					'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-					),
+					),*/
 					
 
 			'nationalty_name_ar' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 48,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => true,  
