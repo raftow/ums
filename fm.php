@@ -20,6 +20,7 @@
     
     if($r=="control")
     {
+          $uri_module = AfwUrlManager::currentURIModule();
           $control_panel_title = AfwLanguageHelper::tarjemText("control panel", $lang);
           $options_title = AfwLanguageHelper::tarjemText("options", $lang);
           $upload_files_title = AfwLanguageHelper::tarjemText("upload files", $lang);   
@@ -63,7 +64,7 @@
                              
                              ";
 
-          if($module=="pag")                             
+          if($uri_module=="pag")                             
           {
               $out_scr .= "<div id='menu-item-cline' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
                              <a class='action_lourde hzm3-button hzm3-light-grey hzm3-block' href='cline_go.php' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
