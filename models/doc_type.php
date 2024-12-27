@@ -41,6 +41,8 @@ class DocType extends AFWObject{
         
         public static function getExentionsAllowed($ids, $upper=true)
         {
+              if(is_array($ids)) $ids = implode(",",$ids);  
+              if(!$ids) $ids = "0";
               $dt = new DocType();
               $cond = "avail='Y' and id in ($ids)";
               $dt->where($cond);
