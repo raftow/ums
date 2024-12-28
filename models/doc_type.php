@@ -1,6 +1,6 @@
 <?php
 
-
+// ALTER TABLE xxx_ums.doc_type add   titre_short_en varchar(48)  DEFAULT NULL  AFTER titre_short;
 class DocType extends AFWObject{
         
 	public static $DATABASE		= ""; 
@@ -12,7 +12,7 @@ class DocType extends AFWObject{
 	public function __construct($tablename="doc_type"){
 		parent::__construct($tablename,"id","ums");
                 $this->public_display = true;
-                $this->DISPLAY_FIELD = 'titre_short';
+                $this->DISPLAY_FIELD_BY_LANG = ['ar'=>'titre_short', 'en'=>'titre_short_en',];
 	}
          
         public static function loadAll($ids="", $order_by="")
@@ -32,11 +32,6 @@ class DocType extends AFWObject{
                 return $obj;
            }
            else return null;
-        }
-        
-        public function getDisplay($lang="ar")
-        {
-               return $this->getVal("titre_short");
         }
         
         public static function getExentionsAllowed($ids, $upper=true)
