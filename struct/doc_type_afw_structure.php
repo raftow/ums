@@ -4,7 +4,7 @@
                 public static $DB_STRUCTURE = array(
 
                         
-			'id' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+			'id' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true, 'QEDIT' => true, 'READONLY' => true,    
 				'TYPE' => 'PK',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
@@ -16,6 +16,11 @@
 
 			'titre_short' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
 				'TYPE' => 'TEXT',  'UTF8' => true,  'SIZE' => 64,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),
+
+            'titre_short_en' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+				'TYPE' => 'TEXT',  'UTF8' => false,  'SIZE' => 64,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
