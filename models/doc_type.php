@@ -2,6 +2,94 @@
 
 // ALTER TABLE xxx_ums.doc_type add   titre_short_en varchar(48)  DEFAULT NULL  AFTER titre_short;
 class DocType extends AFWObject{
+
+        // lookup Value List codes 
+        // ATTACHEMENT - مرفق آخر  
+        public static $DOC_TYPE_ATTACHEMENT = 7; 
+
+        // ATTESTATION - شهادة حضور دورة تدريبية  
+        public static $DOC_TYPE_ATTESTATION = 2; 
+
+        // AWARD - جائزة  
+        public static $DOC_TYPE_AWARD = 23; 
+
+        // BANNER - بنر   
+        public static $DOC_TYPE_BANNER = 9; 
+
+        // BIG_PHOTO - صورة تعريفية  
+        public static $DOC_TYPE_BIG_PHOTO = 13; 
+
+        // BOOK - كتاب دراسي  
+        public static $DOC_TYPE_BOOK = 8; 
+
+        // CERTIFICATE - شهادة إحترافية (مهارة)  
+        public static $DOC_TYPE_CERTIFICATE = 4; 
+
+        // CV - سيرة ذاتية  
+        public static $DOC_TYPE_CV = 20; 
+
+        // DIPLOMA - مؤهل علمي  
+        public static $DOC_TYPE_DIPLOMA = 6; 
+
+        // EMPLOYMENT - شهادة توظيف  
+        public static $DOC_TYPE_EMPLOYMENT = 19; 
+
+        // EVENT - حضور فعالية  
+        public static $DOC_TYPE_EVENT = 25; 
+
+        // EXAM - شهادة اجتياز اختبار  
+        public static $DOC_TYPE_EXAM = 28; 
+
+        // EXCEL - ملف بيانات اكسل للاستيراد  
+        public static $DOC_TYPE_EXCEL = 14; 
+
+        // EXPERIENCE - شهادة خبرة  
+        public static $DOC_TYPE_EXPERIENCE = 3; 
+
+        // EXTERNAL_PHOTO - صورة خارجية  
+        public static $DOC_TYPE_EXTERNAL_PHOTO = 15; 
+
+        // IDN_PHOTO - صورة الهوية  
+        public static $DOC_TYPE_IDN_PHOTO = 18; 
+
+        // INTERNAL_PHOTO - صورة داخلية  
+        public static $DOC_TYPE_INTERNAL_PHOTO = 16; 
+
+        // LOCATION - صورة الخريطة  
+        public static $DOC_TYPE_LOCATION = 17; 
+
+        // MEMBERSHIP - شهادة عضوية  
+        public static $DOC_TYPE_MEMBERSHIP = 26; 
+
+        // OTHER_CERTIFICATE - شهادات أخرى  
+        public static $DOC_TYPE_OTHER_CERTIFICATE = 5; 
+
+        // PATENT - براءة اختراع  
+        public static $DOC_TYPE_PATENT = 24; 
+
+        // PHOTO - صورة فوتو  
+        public static $DOC_TYPE_PHOTO = 27; 
+
+        // PRACTICE_PLAN - المقترح البحثي  
+        public static $DOC_TYPE_PRACTICE_PLAN = 22; 
+
+        // PRO - Doc type » 11  
+        public static $DOC_TYPE_PRO = 11; 
+
+        // SMALL_PHOTO - شعار / ايقونة  
+        public static $DOC_TYPE_SMALL_PHOTO = 12; 
+
+        // SPRODUCT - الانتاج العلمي  
+        public static $DOC_TYPE_SPRODUCT = 21; 
+
+        // TAZKIA - تزكية  
+        public static $DOC_TYPE_TAZKIA = 29; 
+
+        // UNKNOWN - غير معروف  
+        public static $DOC_TYPE_UNKNOWN = 1; 
+
+        // VIDEO - فيديو توضيحي  
+        public static $DOC_TYPE_VIDEO = 10;
         
 	public static $DATABASE		= ""; 
         public static $MODULE		    = "ums"; 
@@ -12,6 +100,8 @@ class DocType extends AFWObject{
 	public function __construct($tablename="doc_type"){
 		parent::__construct($tablename,"id","ums");
                 $this->public_display = true;
+                $this->IS_LOOKUP = true;
+                $this->IS_SMALL_LOOKUP = true;
                 $this->DISPLAY_FIELD_BY_LANG = ['ar'=>'titre_short', 'en'=>'titre_short_en',];
 	}
          
