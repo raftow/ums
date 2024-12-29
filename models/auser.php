@@ -28,7 +28,7 @@ ALTER TABLE `auser` CHANGE `address` `address` VARCHAR(128) CHARACTER SET utf8 C
 */
 // rafik 27/9/2024
 // ALTER TABLE `auser` ADD `hierarchy_level_enum` SMALLINT NOT NULL DEFAULT '999' AFTER `lang_id`;
-        
+// INSERT INTO `auser` (`id`, `id_aut`, `date_aut`, `id_mod`, `date_mod`, `id_valid`, `date_valid`, `avail`, `version`, `update_groups_mfk`, `delete_groups_mfk`, `display_groups_mfk`, `sci_id`, `city_id`, `country_id`, `mobile_type_id`, `idn_type_id`, `lang_id`, `hierarchy_level_enum`, `address`, `cp`, `email`, `genre_id`, `firstname`, `f_firstname`, `idn`, `lastname`, `mobile`, `mobile_sn`, `mobile_code`, `pwd`, `quarter`, `sim_card_sn`, `ggn_code`, `username`, `ldap`, `password`, `remember_token`, `fb_id`, `google_id`, `twitter_id`, `valide_email`, `valide_mobile`, `email_token`, `mobile_activation_id`, `email_token_expiry_date`, `remember_token_expiry_date`, `last_selected_school`) VALUES ('2', '1', '2024-12-26 07:45:10.000000', '1', '2024-12-26 07:45:10.000000', NULL, NULL, 'Y', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '999', NULL, NULL, 'robot@company.com', '1', 'المهمة', NULL, NULL, 'الآلية', NULL, NULL, NULL, '123456', NULL, NULL, NULL, NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);        
 
 $file_dir_name = dirname(__FILE__); 
                
