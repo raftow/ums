@@ -1,6 +1,6 @@
 <?php
 
-class UmsObject extends AFWObject{
+class UmsObject extends AfwMomkenObject{
 
         public function getTimeStampFromRow($row,$context="update", $timestamp_field="")
         {

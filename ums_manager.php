@@ -237,6 +237,7 @@ class UmsManager extends AFWRoot
             return AfwSession::getVar($table_cache_code);
         }
         $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
+        if(!$module_code) AfwSession::pushWarning("System cache failed to decode m$module_id to module code");
         list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
         if($found)
         {

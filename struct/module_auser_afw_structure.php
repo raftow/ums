@@ -23,7 +23,10 @@
 						'id_auser' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
 							'TYPE' => 'FK',  'ANSWER' => 'auser',  'ANSMODULE' => 'ums',  
 							'SHORTNAME' => 'user',  'SIZE' => 40,  'DEFAUT' => 0,  
-							'CSS' => 'width_pct_25',  'SEARCH-BY-ONE' => true,  'READONLY' => true,  
+							'CSS' => 'width_pct_25',  'SEARCH-BY-ONE' => true, 
+							'READONLY' => true,  
+							'AUTOCOMPLETE' => true,
+							'AUTOCOMPLETE-SEARCH' => true,
 							'DISPLAY' => true,  'STEP' => 1, 'RELATION' => 'OneToMany', 
 							'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 0, ),
 
