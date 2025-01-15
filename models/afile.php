@@ -20,6 +20,8 @@ class Afile extends AFWObject{
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 0;
 		$this->DISPLAY_FIELD = "afile_name";
                 $this->ORDER_BY_FIELDS = "date_aut desc";
+                $this->UNIQUE_KEY = array('stakeholder_id', 'owner_id', 'original_name', 'afile_size');
+
                 $this->showQeditErrors = true;
                 //$this->qedit_minibox = true;
                 $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;

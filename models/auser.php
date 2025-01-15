@@ -334,16 +334,26 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         }
         
         
-        public function isSuperAdmin()
+        public final function isSuperAdmin()
         {
-                $arr_admin = array(1);  // ,467,448
+                if(class_exists("AfwSession"))
+                {
+                        $arr_admin = AfwSession::config("super-admin-users-arr", [1]);
+                }
+                else $arr_admin = [1];  // ,467,448
                 return (in_array($this->getId(),$arr_admin)); // في الوقت الحالي
         }
         
 
-        public function isAdmin()
+        public final function isAdmin()
         {
-                return $this->isSuperAdmin(); // في الوقت الحالي  ((($this->getVal("id_sh_org")==3) and ($this->getVal("id_sh_dep")==5)) or ($this->getVal("id_sh_org")==32));
+                if($this->isSuperAdmin()) return true;
+                $arr_admin = [];
+                if(class_exists("AfwSession"))
+                {
+                        $arr_admin = AfwSession::config("admin-users-arr", []);
+                }                
+                return (in_array($this->getId(),$arr_admin));
         }
 
         public function giveMeTheseModulesAnRoles($moduleToGiveArr) // ,$my_org_id = 3
