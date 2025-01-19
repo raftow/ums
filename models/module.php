@@ -50,7 +50,7 @@ class Module extends UmsObject
     public static $TABLE            = "";
     public static $DB_STRUCTURE = null;
 
-    
+
 
     public static function loadByMainIndex($module_code, $create_obj_if_not_found = false)
     {
@@ -71,25 +71,23 @@ class Module extends UmsObject
         } else return null;
     }
 
-    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists=false)
+    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false)
     {
         $bf_added = 0;
         $message_arr = [];
-        
-        if (count($object_code_arr) != 1) throw new AfwRuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
-        $module_code = $object_code_arr[0];
-        $objModule = self::loadByMainIndex($module_code,true);
 
-        if(!$objModule) $message = "Strange Error happened because Module::loadByMainIndex($module_code) failed !!";
-        else
-        {
-            if((!$objModule->is_new) and (!$update_if_exists))
-            {
+        if (count($object_code_arr) != 1) throw new AfwRuntimeException("addByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
+        $module_code = $object_code_arr[0];
+        $objModule = self::loadByMainIndex($module_code, true);
+
+        if (!$objModule) $message = "Strange Error happened because Module::loadByMainIndex($module_code) failed !!";
+        else {
+            if ((!$objModule->is_new) and (!$update_if_exists)) {
                 throw new AfwRuntimeException("This module already exists");
             }
-            if(!$object_title_en) $object_title_en = $object_name_en;
-            if(!$object_title_ar) $object_title_ar = $object_name_ar;
-            
+            if (!$object_title_en) $object_title_en = $object_name_en;
+            if (!$object_title_ar) $object_title_ar = $object_name_ar;
+
             $objModule->set("titre_short_en", $object_name_en);
             $objModule->set("titre_short", $object_name_ar);
             $objModule->set("titre_en", $object_title_en);
@@ -99,7 +97,7 @@ class Module extends UmsObject
             $message = "successfully done";
         }
 
-        return [$objModule  , $message];
+        return [$objModule, $message];
     }
 
 
@@ -107,23 +105,22 @@ class Module extends UmsObject
     public static function repareByCodes($object_code_arr, $restriction)
     {
         global $mode_pag_me;
-        list($objModule, $message) = self::reverseByCodes($object_code_arr, ($restriction=="reverse"));
-        
-        if($objModule) 
-        {
+        list($objModule, $message) = self::reverseByCodes($object_code_arr, ($restriction == "reverse"));
+
+        if ($objModule) {
             $mode_pag_me = false;
-            $cnt = $objModule->repareMe('en');            
+            $cnt = $objModule->repareMe('en');
             $message .= "\n and $cnt attributes have been repared";
         }
 
-        return [$objModule  , $message];
+        return [$objModule, $message];
     }
 
-    public static function reverseByCodes($object_code_arr, $doReverse=true)
+    public static function reverseByCodes($object_code_arr, $doReverse = true)
     {
         $bf_added = 0;
         $message_arr = [];
-        
+
         if (count($object_code_arr) != 1) throw new AfwRuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
         $module_code = $object_code_arr[0];
         // 1. reverse the config file
@@ -154,14 +151,11 @@ class Module extends UmsObject
             $objModule->set("module_code", $module_code);
             $objModule->insert();
             $message_arr[] = self::prepareLog("The module $module_code has been created");
-        }
-        else
-        {
+        } else {
             $message_arr[] = self::prepareLog("The module $module_code has been updated");
         }
 
-        if($objModule and $doReverse)
-        {
+        if ($objModule and $doReverse) {
             // 2. reverse the names ar and en from ini file
             include("$file_dir_name/../../$module_code/ini.php");
             $title_en = $NOM_SITE["en"];
@@ -175,37 +169,30 @@ class Module extends UmsObject
             $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
             $id_system = $objModule->getVal("id_system");
             // 3. reverse the previleges file
-            AfwAutoLoader::addModule("p"."ag");
+            AfwAutoLoader::addModule("p" . "ag");
 
             $file_previleges = "$file_dir_name/../../$module_code/previleges.php";
-            if(!file_exists($file_previleges))
-            {
+            if (!file_exists($file_previleges)) {
                 $message_arr[] = self::prepareLog("Warning : The file $file_previleges not found");
-            }
-            else
-            {
+            } else {
                 include($file_previleges);
-                
-                foreach($tab_info as $tab_id => $tab_info_row)
-                {
-                    if(AfwSession::hasOption('CHECK_ERRORS')) break;
+
+                foreach ($tab_info as $tab_id => $tab_info_row) {
+                    if (AfwSession::hasOption('CHECK_ERRORS')) break;
                     $or_another_case = "";
                     $atable_name = $tab_info_row["name"];
                     $tbl = Atable::loadByMainIndex($module_id, $atable_name);
-                    if(!$tbl)
-                    {
+                    if (!$tbl) {
                         // may be the atable_name has changed so we try with ID
                         $tbl = Atable::loadById($tab_id);
                         // check if this $tbl found by ID is inside the module otherwise ignore it
-                        if($tbl and ($tbl->getVal("id_module") != $module_id))
-                        {
+                        if ($tbl and ($tbl->getVal("id_module") != $module_id)) {
                             $tbl = null;
                             $or_another_case = "or not in the same module $module_code";
                         }
                     }
 
-                    if(!$tbl)
-                    {
+                    if (!$tbl) {
                         // may be it is the first reverse engineering of this atable
                         $object_code_arr = [];
                         $object_code_arr[0] = $atable_name;
@@ -213,97 +200,192 @@ class Module extends UmsObject
                         list($tbl, $msg000) = Atable::reverseByCodes($object_code_arr);
                     }
 
-                    if($tbl)
-                    {
+                    if ($tbl) {
                         $atable_name = $tbl->getVal("atable_name");
                         $table_file_name = "$file_dir_name/../../$module_code/models/$atable_name.php";
-                        if(!file_exists($table_file_name))
-                        {
-                            $message_arr[] = self::prepareLog("Error : The table file $table_file_name not found");
+                        if (!file_exists($table_file_name)) {
+                            $message_arr[] = self::prepareLog("Error : Module::reverseByCodes : The table file $table_file_name not found");
                             $tblFieldsCount = 0;
-                        }
-                        else
-                        {
+                        } else {
                             $tblFieldsCount = $tbl->getNbFieldsInMode("all");
                         }
 
-                        if(!$tblFieldsCount)
-                        {
-                            
-                            if($tbl->forceDelete())
-                            {
+                        if (!$tblFieldsCount) {
+
+                            if ($tbl->forceDelete()) {
                                 $message_arr[] = self::prepareLog("The table $atable_name is obsolete and deleted");
-                            }
-                            else
-                            {
+                            } else {
                                 $tbl_id = $tbl->id;
-                                $message_arr[] = self::prepareLog("Warning : The table $atable_name / $tbl_id is obsolete and can't be deleted : ".$tbl->deleteNotAllowedReason);
+                                $message_arr[] = self::prepareLog("Warning : The table $atable_name / $tbl_id is obsolete and can't be deleted : " . $tbl->deleteNotAllowedReason);
                             }
-                            
+                        } else {
+                            // $tbl->reverseMe($module_code);
+                            $message_arr[] = self::prepareLog("The table $atable_name is to be reversed");
                         }
-                        else
-                        {
-                                // $tbl->reverseMe($module_code);
-                                $message_arr[] = self::prepareLog("The table $atable_name is to be reversed");
-                        }
-                    }
-                    else
-                    {
+                    } else {
                         $message_arr[] = self::prepareLog("Error : The table $tab_id / $atable_name not found $or_another_case");
                     }
                     unset($tbl);
                 }
                 // $tbf_info structure
                 /*
-                'arole' => [
-                    'id' => '1409',
+                'academic_level' => [
+                    'id' => '13865',
                     'display' => [
-                        'id' => '102858',
+                        'id' => '104817',
                     ],
                     'search' => [
-                        'id' => '102859',
+                        'id' => '104607',
                     ],
                         
                 */
 
-                foreach($tbf_info as $table_name => $tbf_info_row)
-                {
+                foreach ($tbf_info as $table_name => $tbf_info_row) {
                     $tbl = Atable::loadByMainIndex($module_id, $table_name);
                     $old_tab_id = $tbf_info_row['id'];
                     $tab_id = $tbl->id;
                     unset($tbf_info_row['id']);
-                    foreach($tbf_info_row as $mode => $tbf_mode_row)
-                    {
-                        if($tbf_mode_row['id']>0)
-                        {
+                    foreach ($tbf_info_row as $mode => $tbf_mode_row) {
+                        if ($tbf_mode_row['id'] > 0) {
                             //$message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name will have mode $mode");
                             $bf_specification = "";
                             $file_specification = $mode;
-                            
+
                             //$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
                             $bf_row = $tbl->createModeScreen($mode);
                             $bf_id = $bf_row["id"];
                             $bfObj = $bf_row["bf"];
-                            if($bfObj->is_new) 
-                            {
+                            if ($bfObj->is_new) {
                                 $bf_added++;
                                 $message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name has added the mode $mode");
-                            }
-                            else
-                            {
+                            } else {
                                 $message_arr[] = self::prepareLog("Success : The table $tab_id / $table_name already have mode $mode");
                             }
-                        }
-                        else
-                        {
+                        } else {
                             // @todo
                             // we dont disable a BF already created except if it is previleges file of developer owner of this BF
                             // this s to avoid loose BFs when developer do reverse engineering before do git pull of previleges file
                         }
                     }
+                }
 
+                // $role_info strcuture example
+                /*
+                $role_info = array(
+                    382 =>
+                    array(
+                        'name' =>
+                        array(
+                            'ar' => 'إعدادات القبول',
+                            'en' => 'Admission settings',
+                        ),
+                        'menu' =>
+                        array(
+                            'need_admin' => false,
+                            'id' => '382',
+                            'menu_name_ar' => 'إعدادات القبول',
+                            'menu_name_en' => 'Admission settings',
+                            'page' => 'main.php?Main_Page=fm.php&a=1282&r=382',
+                            'css' => 'info',
+                            'icon' => ' icon-382',
+                            'showme' => true,
+                            'items' =>
+                            array(
+                                104643 =>
+                                array(
+                                    'id' => '104643',
+                                    'menu_name_ar' => 'القرارات و اللوائح',
+                                    'menu_name_en' => 'Regulations',
+                                    'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=AconditionOrigin&currmod=adm',
+                                    'css' => 'bf',
+                                    'icon' => ' bficon-104643 bfc-',
+                                ),
+                                104636 =>
+                                array(
+                                    'id' => '104636',
+                                    'menu_name_ar' => 'الشروط',
+                                    'menu_name_en' => 'Conditions',
+                                    'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Acondition&currmod=adm',
+                                    'css' => 'bf',
+                                    'icon' => ' bficon-104636 bfc-',
+                                ),
+                            ),
+                        ),
+                    ),
+                );*/
+
+                foreach ($role_info as $role_id => $role_row) 
+                {
+                    $role_code = $role_row['code'];
+                    $role_name_ar = $role_row['name']['ar'];
+                    $role_name_en = $role_row['name']['en'];
+                    $role_items   = $role_row['menu']['items'];
+                    $roleObj = null;
+                    if($role_code) $roleObj = Arole::loadByMainIndex($module_id, $role_code, true);
+                    elseif($role_id) $roleObj = Arole::loadById($role_id);
+                    
+                    if($roleObj)
+                    {
+                        if(!AfwStringHelper::titleNotGood($role_name_en))
+                        {
+                            $roleObj->set("titre_short_en", $role_name_en);
+                            $roleObj->set("titre_en", $role_name_en);
+                            $message_arr[] = self::prepareLog("Success : role $role_id en title setted to $role_name_en");
+                        }
+
+                        if(!AfwStringHelper::titleNotGood($role_name_ar))
+                        {
+                            $roleObj->set("titre_short", $role_name_ar);
+                            $roleObj->set("titre", $role_name_ar);
+                            $message_arr[] = self::prepareLog("Success : role $role_id ar title setted to $role_name_ar");
+                        }
+                        $roleObj->commit();
+
+                        
+                        
+                    }
+                    else {
+                        $message_arr[] = self::prepareLog("Warning : role [$role_code/$role_id] not found");                        
+                    }
+
+                    foreach($role_items as $bf_id => $bf_row)
+                    {
+                        $bfObj = null;
+                        $bf_code = $bf_row['code'];
+                        if($bf_code) $bfObj = Bfunction::loadByMainIndex($module_id, $bf_code, true);
+                        elseif($bf_id) $bfObj = Bfunction::loadById($bf_id);
+
+                        if($bfObj)
+                        {
+                            
+                            $bf_name_ar = $bf_row['menu_name_ar'];
+                            $bf_name_en = $bf_row['menu_name_en'];
+                            if(!AfwStringHelper::titleNotGood($bf_name_en))
+                            {
+                                $bfObj->set("titre_short_en", $bf_name_en);
+                                $bfObj->set("titre_en", $bf_name_en);
+                                $message_arr[] = self::prepareLog("Success : BF $bf_id en title setted to $bf_name_en");
+                            }
+                            if(!AfwStringHelper::titleNotGood($bf_name_ar))
+                            {
+                                $bfObj->set("titre", $bf_name_ar);
+                                $bfObj->set("titre_short", $bf_name_ar);
+                                $message_arr[] = self::prepareLog("Success : BF $bf_id ar title setted to $bf_name_ar");
+                            }
+                            
+                            $bfObj->commit();
+                            
+                            
+                        }
+                        else {
+                            $message_arr[] = self::prepareLog("Warning : BF [$bf_code/$bf_id] not found");                        
+                        }
+                    }
+                    
                 }
             }
+            
+            
             $message_arr[] = self::prepareLog("Info : $bf_added BF(s) added");
         }
 
@@ -451,14 +533,14 @@ class Module extends UmsObject
         return null;
     }
 
-    public function getFormuleResult($attribute, $what='value')
+    public function getFormuleResult($attribute, $what = 'value')
     {
         $objme = AfwSession::getUserConnected();
         switch ($attribute) {
 
             case "assrole":
                 $file_dir_name = dirname(__FILE__);
-                
+
                 $id_module_parent = $this->getVal("id_module_parent");
                 $role = Arole::getAssociatedRoleForSubModule($id_module_parent, $this);
                 $this_id = $this->getId();
@@ -583,14 +665,14 @@ class Module extends UmsObject
 		    break;*/
         }
 
-        return AfwFormulaHelper::calculateFormulaResult($this,$attribute);
+        return AfwFormulaHelper::calculateFormulaResult($this, $attribute);
     }
 
     public function getAllRolesAndSubRoles()
     {
         $obj = new Arole();
-        $obj->select("module_id",$this->id);
-        $obj->select("avail","Y");
+        $obj->select("module_id", $this->id);
+        $obj->select("avail", "Y");
 
         return $obj->loadMany();
     }
@@ -627,14 +709,14 @@ class Module extends UmsObject
     }
 
 
-    public function calcPhp_module($textArea=true)
+    public function calcPhp_module($textArea = true)
     {
         global $MODE_BATCH_LOURD, $MODE_SQL_PROCESS_LOURD;
 
         $MODE_BATCH_LOURD = true;
         $MODE_SQL_PROCESS_LOURD = true;
         $source_php = "";
-        if($textArea) $source_php .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
+        if ($textArea) $source_php .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
         $source_php .= "<?php\n"; // ";
         $tab_info = array();
         $tbf_info = array();
@@ -653,7 +735,7 @@ class Module extends UmsObject
             $tbf_info_item = array();
             $tbf_info_item["id"] = $tableId;
             foreach ($afw_modes_arr as $afw_mode) {
-                $bf_id = UmsManager::getBunctionIdForOperationOnTable($moduleCode, $tableName, $afw_mode,null,true);
+                $bf_id = UmsManager::getBunctionIdForOperationOnTable($moduleCode, $tableName, $afw_mode, null, true);
                 $tbf_info_item[$afw_mode] = array('id' => $bf_id);
             }
 
@@ -661,26 +743,28 @@ class Module extends UmsObject
         }
 
         $roleList = $this->getAllRolesAndSubRoles();
-        foreach ($roleList as $roleItem) 
-        {
+        foreach ($roleList as $roleItem) {
             $roleId = $roleItem->id;
-            
+            $roleCode = $roleItem->getVal("role_code");
             $roleMenu = $roleItem->getRoleMenu();
 
             $role_info[$roleId] = [
-                                    'name' => ["ar"=>$roleItem->getShortDisplay("ar"), 
-                                              "en"=>$roleItem->getShortDisplay("en"),],
-                                    'menu' => $roleMenu
+                'code' => $roleCode,
+                'name' => [
+                    "ar" => $roleItem->getShortDisplay("ar"),
+                    "en" => $roleItem->getShortDisplay("en"),
+                ],
+                'menu' => $roleMenu
 
-                                ];
+            ];
         }
-        
+
         $source_php .= "\n\t\$tab_info = " . var_export($tab_info, true) . ";";
         $source_php .= "\n\t\$tbf_info = " . var_export($tbf_info, true) . ";";
         $source_php .= "\n\t\$role_info = " . var_export($role_info, true) . ";";
 
         $source_php .= "\n ?>";
-        if($textArea) $source_php .= "</textarea>"; // 
+        if ($textArea) $source_php .= "</textarea>"; // 
 
         return $source_php;
     }
@@ -703,7 +787,7 @@ class Module extends UmsObject
         return $all_rel_tables[$tbl_id];
     }
 
-    protected function getOtherLinksArray($mode, $genereLog = false, $step="all")
+    protected function getOtherLinksArray($mode, $genereLog = false, $step = "all")
     {
         global $lang;
         // $displ = $this->getDisplay($lang);
@@ -753,14 +837,13 @@ class Module extends UmsObject
             }
         }
 
-        if(self::pagIsThere())
-        {
+        if (self::pagIsThere()) {
             if (($mode == "mode_tbs") and ($this->isApplication())) {
                 $mod_id = $this->getId();
-                
+
                 $link = array();
                 $title = "إدارة جداول التطبيق : " . $this->valTitre_short();
-                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p"."ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=N&sel_is_entity=Y";
+                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p" . "ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=N&sel_is_entity=Y";
                 $link["TITLE"] = $title;
                 $link["UGROUPS"] = array();
                 $otherLinksArray[] = $link;
@@ -768,7 +851,7 @@ class Module extends UmsObject
                 unset($link);
                 $link = array();
                 $title = "إنشاء جدول جديد في : " . $this->valTitre_short();
-                $link["URL"] = "main.php?Main_Page=afw_mode_edit.php&cl=Atable&currmod=p"."ag&sel_id_module=$mod_id&sel_is_lookup=N&sel_is_entity=Y";
+                $link["URL"] = "main.php?Main_Page=afw_mode_edit.php&cl=Atable&currmod=p" . "ag&sel_id_module=$mod_id&sel_is_lookup=N&sel_is_entity=Y";
                 $link["TITLE"] = $title;
                 $link["UGROUPS"] = array();
                 $otherLinksArray[] = $link;
@@ -777,19 +860,19 @@ class Module extends UmsObject
                 $link = array();
                 $mod_id = $this->getId();
                 $title = "إدارة الصلاحيات على جداول التطبيق : " . $this->valTitre_short();
-                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p"."ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&submode=FGROUP&fgroup=roles_def&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=N";
+                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p" . "ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&submode=FGROUP&fgroup=roles_def&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=N";
                 $link["TITLE"] = $title;
                 $link["UGROUPS"] = array();
                 $otherLinksArray[] = $link;
             }
-            
+
             if (($mode == "mode_tbs") and ($this->isModule())) {
-                
+
                 $link = array();
                 $mod_id = $this->getVal("id_module_parent");
                 $smod_id = $this->getId();
                 $title = "إدارة جداول الوحدة : " . $this->valTitre_short();
-                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p"."ag&module_origin=ums&class_origin=Module&id_origin=$smod_id&newo=3&limit=50&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,id_sub_module=$smod_id&sel_id_module=$mod_id&sel_id_sub_module=$smod_id";
+                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p" . "ag&module_origin=ums&class_origin=Module&id_origin=$smod_id&newo=3&limit=50&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,id_sub_module=$smod_id&sel_id_module=$mod_id&sel_id_sub_module=$smod_id";
                 $link["TITLE"] = $title;
                 $link["UGROUPS"] = array();
                 $otherLinksArray[] = $link;
@@ -798,7 +881,7 @@ class Module extends UmsObject
                 $mod_id = $this->getVal("id_module_parent");
                 $smod_id = $this->getId();
                 $title = "إدارة الصلاحيات على جداول الوحدة : " . $this->valTitre_short();
-                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p"."ag&module_origin=ums&class_origin=Module&id_origin=$smod_id&newo=3&limit=50&ids=all&submode=FGROUP&fgroup=roles_def&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,id_sub_module=$smod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_id_sub_module=$smod_id&sel_is_lookup=N&sel_is_entity=Y";
+                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p" . "ag&module_origin=ums&class_origin=Module&id_origin=$smod_id&newo=3&limit=50&ids=all&submode=FGROUP&fgroup=roles_def&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,id_sub_module=$smod_id,is_lookup=N,is_entity=Y&sel_id_module=$mod_id&sel_id_sub_module=$smod_id&sel_is_lookup=N&sel_is_entity=Y";
                 $link["TITLE"] = $title;
                 $link["UGROUPS"] = array();
                 $otherLinksArray[] = $link;
@@ -809,7 +892,7 @@ class Module extends UmsObject
                 $link = array();
                 $mod_id = $this->getId();
                 $title = "إدارة القوائم الثابتة لتطبيق : " . $this->valTitre_short();
-                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p"."ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=Y,is_entity=N&sel_id_module=$mod_id&sel_is_lookup=Y&sel_is_entity=N";
+                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p" . "ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=Y,is_entity=N&sel_id_module=$mod_id&sel_is_lookup=Y&sel_is_entity=N";
                 $link["TITLE"] = $title;
                 $link["UGROUPS"] = array();
                 $otherLinksArray[] = $link;
@@ -817,7 +900,7 @@ class Module extends UmsObject
                 $link = array();
                 $mod_id = $this->getId();
                 $title = "إدارة قوائم الاختيارات لتطبيق : " . $this->valTitre_short();
-                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p"."ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=Y,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=Y&sel_is_entity=Y";
+                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Atable&currmod=p" . "ag&module_origin=ums&class_origin=Module&id_origin=$mod_id&newo=3&limit=200&ids=all&fixmtit=$title&fixmdisable=1&fixm=id_module=$mod_id,is_lookup=Y,is_entity=Y&sel_id_module=$mod_id&sel_is_lookup=Y&sel_is_entity=Y";
                 $link["TITLE"] = $title;
                 $link["UGROUPS"] = array();
                 $otherLinksArray[] = $link;
@@ -935,12 +1018,11 @@ class Module extends UmsObject
                         $link["TITLE"] = $title;
                         $link["UGROUPS"] = array();
                         $otherLinksArray[] = $link;
-
                     }
 
 
 
-                    
+
                     /*
                     unset($link);
                     $mod_id = $this->getId();
@@ -1032,7 +1114,7 @@ class Module extends UmsObject
     public function getBFCount()
     {
         $file_dir_name = dirname(__FILE__);
-        
+
 
         $bf = new Bfunction();
 
@@ -1048,7 +1130,7 @@ class Module extends UmsObject
     public function getPtaskCount()
     {
         $file_dir_name = dirname(__FILE__);
-        
+
 
         $ptsk = new Ptask();
 
@@ -1061,7 +1143,7 @@ class Module extends UmsObject
         } else return 0;
     }
 
-    public function repareMe($lang="ar")
+    public function repareMe($lang = "ar")
     {
         $atList = $this->getAllMyTables();
         $cnt = 0;
@@ -1069,31 +1151,29 @@ class Module extends UmsObject
          * @var Atable $atItem
          */
         foreach ($atList as $atItem) {
-            $cnt += $atItem->repareMe($lang);            
+            $cnt += $atItem->repareMe($lang);
         }
 
         return $cnt;
     }
 
 
-    public function getAllMyTables($only_entities=false)
+    public function getAllMyTables($only_entities = false)
     {
         $file_dir_name = dirname(__FILE__);
-        if(self::pagIsThere())
-        {
+        if (self::pagIsThere()) {
             $at = new Atable();
 
             $mod_id = $this->getId();
 
-            if (($mod_id) and (intval($mod_id) > 0)) 
-            {
+            if (($mod_id) and (intval($mod_id) > 0)) {
                 $at->where("(id_sub_module = '$mod_id' or id_module = '$mod_id')");
                 $at->select("avail", 'Y');
-                if($only_entities) $at->select("is_lookup", 'N');
+                if ($only_entities) $at->select("is_lookup", 'N');
                 return $at->loadMany();
-            } 
+            }
         }
-        
+
         return array();
     }
 
@@ -1103,10 +1183,9 @@ class Module extends UmsObject
     public function getATableCount($only_reel = true)
     {
         $file_dir_name = dirname(__FILE__);
-        if(self::pagIsThere())
-        {
-            AfwAutoLoader::addModule("p"."ag");
-        
+        if (self::pagIsThere()) {
+            AfwAutoLoader::addModule("p" . "ag");
+
 
             $at = new Atable();
 
@@ -1199,7 +1278,7 @@ class Module extends UmsObject
             if (!$system->load()) {
                 $system = null;
             } else {
-                if($cacheSys) $cacheSys->putIntoCache("ums", "module", $system, $code_mod, $context = "module::getModuleByCode($id_sh, $code_mod)");
+                if ($cacheSys) $cacheSys->putIntoCache("ums", "module", $system, $code_mod, $context = "module::getModuleByCode($id_sh, $code_mod)");
             }
         }
 
@@ -1213,9 +1292,8 @@ class Module extends UmsObject
         $mod_id = $this->getId();
         if (($mod_id) and (intval($mod_id) > 0)) {
             $file_dir_name = dirname(__FILE__);
-            if(self::pagIsThere())
-            {
-                AfwAutoLoader::addModule("p"."ag");
+            if (self::pagIsThere()) {
+                AfwAutoLoader::addModule("p" . "ag");
                 $at = new Atable();
 
                 $at->where("(id_module=$mod_id or id_sub_module=$mod_id)");
@@ -1225,14 +1303,13 @@ class Module extends UmsObject
                 foreach ($at_list as $at_id => $at_item) {
                     $at_item->createDefaultFields($lang);
                 }
-            }
-            else return array("this is production mode no p-a-g module found", "");
+            } else return array("this is production mode no p-a-g module found", "");
 
             return array("", "");
         } else return array("this is empty module (no ID found)", "");
     }
 
-    
+
     public function genereWebServicesBFs($lang = "ar")
     {
 
@@ -1249,7 +1326,7 @@ class Module extends UmsObject
 
         $file_dir_name = dirname(__FILE__);
 
-        
+
 
 
         $dblnk  = new DbLink();
@@ -1287,7 +1364,7 @@ class Module extends UmsObject
 
         $file_dir_name = dirname(__FILE__);
 
-        
+
 
         $ptsk_list = array();
 
@@ -1406,7 +1483,7 @@ class Module extends UmsObject
                 $ptsk->set($ptsk_fld_ACTIVE,'N');
                 $ptsk->update(false);*/
 
-        
+
         $bf = new Bfunction();
         $bf_fld_ACTIVE = $bf->fld_ACTIVE();
         $bf->select($bf_fld_ACTIVE, 'Y');
@@ -1524,8 +1601,7 @@ class Module extends UmsObject
         $brotherModuleId = $paramsArr["module_id"];
         if (!$brotherModuleId) return array("please specify the brother module id", "");
 
-        if(self::pagIsThere())
-        {
+        if (self::pagIsThere()) {
             $at = new Atable();
 
             $mod_id = $this->getId();
@@ -1544,7 +1620,6 @@ class Module extends UmsObject
             }
         }
         return array("", "$ret tables migrated to new module (ID=$brotherModuleId)");
-            
     }
 
 
@@ -1594,7 +1669,9 @@ class Module extends UmsObject
                     $title_ar = "دمج الجداول مع " . $brotherAppItem->getDisplay("ar");
                     $title_en = "merge tables with " . $brotherAppItem->getDisplay("en");
                     $pbms[$brotherAppItem->myHzmCode("brotherOf" . $this_id)] = array(
-                        "METHOD" => "mergeTablesToApplication", "COLOR" => $color, "LABEL_AR" => $title_ar,
+                        "METHOD" => "mergeTablesToApplication",
+                        "COLOR" => $color,
+                        "LABEL_AR" => $title_ar,
                         'SEND_PARAMS' => array("module_id" => $brotherAppItem->getId()),
                         'CONFIRMATION_NEEDED' => true,
                         'CONFIRMATION_QUESTION' => array(
@@ -1612,7 +1689,9 @@ class Module extends UmsObject
             $color = "red";
             $title_ar = "إنشاء/تحديث وظائف التطبيق";
             $pbms["1ac55M"] = array(
-                "METHOD" => "createUpdateMyBFs", "COLOR" => $color, "LABEL_AR" => $title_ar,
+                "METHOD" => "createUpdateMyBFs",
+                "COLOR" => $color,
+                "LABEL_AR" => $title_ar,
                 'CONFIRMATION_NEEDED' => true,
                 'CONFIRMATION_QUESTION' => array(
                     'ar' => "هل أنت متأكد أنك ترغب في تحديث وظائف التطبيق؟",
@@ -1645,7 +1724,9 @@ class Module extends UmsObject
                 $title_ar = "تحديث ملفات التطبيق";
                 $title_en = "update App files";
                 $pbms["xas15B"] = array(
-                    "METHOD" => "refreshMe", "COLOR" => $color, "LABEL_AR" => $title_ar,
+                    "METHOD" => "refreshMe",
+                    "COLOR" => $color,
+                    "LABEL_AR" => $title_ar,
                     'CONFIRMATION_NEEDED' => true,
                     'CONFIRMATION_QUESTION' => array(
                         'ar' => "هل أنت متأكد أنك ترغب في " . $title_ar,
@@ -1711,9 +1792,9 @@ class Module extends UmsObject
         $source_path = $START_GEN_TREE;
         // $dest_path = $START_GEN_TREE."php/";
         $dest_path = $ROOT_WWW_PATH;
-        
+
         $currmod = $this->getVal("module_code");
-        
+
         // require_once("$file_dir_name/../lib/afw/afw_copy_motor.php");
 
         if ($create_project) {
@@ -1770,7 +1851,7 @@ class Module extends UmsObject
     public function createUpdateMyBFs($lang = "ar", $errors_level = 1)
     {
         $file_dir_name = dirname(__FILE__);
-        
+
 
         $currApplicationId = $this->getId();
         $currmod = $this->getVal("module_code");
@@ -1779,7 +1860,7 @@ class Module extends UmsObject
 
         /*if (!$framework) $framework = $MODULE_FRAMEWORK[$currApplicationId];
         if (!$framework)*/
-        $framework = AfwSession::config("framework_id",1);
+        $framework = AfwSession::config("framework_id", 1);
         if (!$this->isApplication()) return array("this module $this ($currmod) is not an application !!", "");
         if (!$id_system) return array("no system defined for module $this ($currmod) id=$currApplicationId !!", "");
 
@@ -2103,7 +2184,7 @@ class Module extends UmsObject
     public function disableMyBFs($system_id, $framework_id = 0)
     {
         $file_dir_name = dirname(__FILE__);
-        if(!$framework_id) $framework_id=AfwSession::config("framework_id", 1);
+        if (!$framework_id) $framework_id = AfwSession::config("framework_id", 1);
         require("$file_dir_name/../lib/framework_${framework_id}_specification.php");
 
         Bfunction::disableAutoGeneratedBFs($system_id, $this->getId(), $framework_screens_bfcode_starts_with . "-");
@@ -2167,15 +2248,14 @@ class Module extends UmsObject
 
     public function beforeDelete($id, $id_replace)
     {
-        AfwAutoLoader::addModule("b"."au");
-        AfwAutoLoader::addModule("p"."ag");
+        AfwAutoLoader::addModule("b" . "au");
+        AfwAutoLoader::addModule("p" . "ag");
         if ($id) {
-            if ($id_replace == 0) 
-            {
+            if ($id_replace == 0) {
                 $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - not deletable 
                 // p"."ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("delete from $server_db_prefix"."p"."ag.atable where id_module = '$id' and avail='N'");
-                
+
                 $obj = new Atable();
                 $obj->where("id_module = '$id'");
                 $nbRecords = $obj->count();
@@ -2185,7 +2265,7 @@ class Module extends UmsObject
                 }
                 // p"."ag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("delete from $server_db_prefix"."p"."ag.atable where id_sub_module = '$id' and avail='N'");
-                
+
                 $obj = new Atable();
                 $obj->where("id_sub_module = '$id'");
                 $nbRecords = $obj->count();
@@ -2194,8 +2274,8 @@ class Module extends UmsObject
                     return false;
                 }
                 // ums.module-الوحدة الأم	id_module_parent  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."ums.module where id_module_parent = '$id' and avail='N'");
-                
+                $this->execQuery("delete from $server_db_prefix" . "ums.module where id_module_parent = '$id' and avail='N'");
+
                 $obj = new Module();
                 $obj->where("id_module_parent = '$id'");
                 $nbRecords = $obj->count();
@@ -2204,8 +2284,8 @@ class Module extends UmsObject
                     return false;
                 }
                 // ums.bfunction-النظام	id_system  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."ums.bfunction where id_system = '$id' and avail='N'");
-                
+                $this->execQuery("delete from $server_db_prefix" . "ums.bfunction where id_system = '$id' and avail='N'");
+
                 $obj = new Bfunction();
                 $obj->where("id_system = '$id'");
                 $nbRecords = $obj->count();
@@ -2214,8 +2294,8 @@ class Module extends UmsObject
                     return false;
                 }
                 // ums.bfunction-التطبيق	curr_class_module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."ums.bfunction where curr_class_module_id = '$id' and avail='N'");
-                
+                $this->execQuery("delete from $server_db_prefix" . "ums.bfunction where curr_class_module_id = '$id' and avail='N'");
+
                 $obj = new Bfunction();
                 $obj->where("curr_class_module_id = '$id'");
                 $nbRecords = $obj->count();
@@ -2224,8 +2304,8 @@ class Module extends UmsObject
                     return false;
                 }
                 // ums.arole-التطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."ums.arole where module_id = '$id' and avail='N'");
-                
+                $this->execQuery("delete from $server_db_prefix" . "ums.arole where module_id = '$id' and avail='N'");
+
                 $obj = new Arole();
                 $obj->where("module_id = '$id'");
                 $nbRecords = $obj->count();
@@ -2256,85 +2336,85 @@ class Module extends UmsObject
 
                 $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - deletable 
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."ums.module_auser where id_module = '$id' ");
+                $this->execQuery("delete from $server_db_prefix" . "ums.module_auser where id_module = '$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."ums.module_orgunit where id_module = '$id' ");
+                $this->execQuery("delete from $server_db_prefix" . "ums.module_orgunit where id_module = '$id' ");
                 // sdd.ptask-المشروع	project_module_id  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("delete from $server_db_prefix"."sdd.ptask where project_module_id = '$id' ");
                 // sdd.ptask-النظام / الـتطبيق	module_id  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("delete from $server_db_prefix"."sdd.ptask where module_id = '$id' ");
                 // b au.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."b"."au.user_story where system_id = '$id' ");
+                $this->execQuery("delete from $server_db_prefix" . "b" . "au.user_story where system_id = '$id' ");
                 // b au.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("delete from $server_db_prefix"."b"."au.user_story where module_id = '$id' ");
+                $this->execQuery("delete from $server_db_prefix" . "b" . "au.user_story where module_id = '$id' ");
 
 
                 // FK not part of me - replaceable 
                 // ums.module-النظام	id_system  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."ums.module set id_system='$id_replace' where id_system='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.module set id_system='$id_replace' where id_system='$id' ");
                 // b au.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."b"."au.gfield set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "b" . "au.gfield set module_id='$id_replace' where module_id='$id' ");
                 // p"."ag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."p"."ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "p" . "ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
                 // b au.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."b"."au.ptext set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "b" . "au.ptext set module_id='$id_replace' where module_id='$id' ");
                 // p"."ag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."p"."ag.pmessage set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "p" . "ag.pmessage set module_id='$id_replace' where module_id='$id' ");
                 // ums.job_arole-التطبيق	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."ums.job_arole set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.job_arole set module_id='$id_replace' where module_id='$id' ");
 
 
 
                 // MFK
                 // ums.bfunction-الوحدات المعنية	module_mfk  
-                $this->execQuery("update $server_db_prefix"."ums.bfunction set module_mfk=REPLACE(module_mfk, ',$id,', ',') where module_mfk like '%,$id,%' ");
+                $this->execQuery("update $server_db_prefix" . "ums.bfunction set module_mfk=REPLACE(module_mfk, ',$id,', ',') where module_mfk like '%,$id,%' ");
             } else {
                 $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK on me 
                 // p"."ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."p"."ag.atable set id_module='$id_replace' where id_module='$id' ");
+                $this->execQuery("update $server_db_prefix" . "p" . "ag.atable set id_module='$id_replace' where id_module='$id' ");
                 // p"."ag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."p"."ag.atable set id_sub_module='$id_replace' where id_sub_module='$id' ");
+                $this->execQuery("update $server_db_prefix" . "p" . "ag.atable set id_sub_module='$id_replace' where id_sub_module='$id' ");
                 // ums.module-الوحدة الأم	id_module_parent  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."ums.module set id_module_parent='$id_replace' where id_module_parent='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.module set id_module_parent='$id_replace' where id_module_parent='$id' ");
                 // ums.bfunction-النظام	id_system  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."ums.bfunction set id_system='$id_replace' where id_system='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.bfunction set id_system='$id_replace' where id_system='$id' ");
                 // ums.bfunction-التطبيق	curr_class_module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."ums.bfunction set curr_class_module_id='$id_replace' where curr_class_module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.bfunction set curr_class_module_id='$id_replace' where curr_class_module_id='$id' ");
                 // ums.arole-التطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."ums.arole set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.arole set module_id='$id_replace' where module_id='$id' ");
                 // b au.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."b"."au.goal set system_id='$id_replace' where system_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "b" . "au.goal set system_id='$id_replace' where system_id='$id' ");
                 // b au.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."b"."au.goal set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "b" . "au.goal set module_id='$id_replace' where module_id='$id' ");
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."ums.module_auser set id_module='$id_replace' where id_module='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.module_auser set id_module='$id_replace' where id_module='$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."ums.module_orgunit set id_module='$id_replace' where id_module='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.module_orgunit set id_module='$id_replace' where id_module='$id' ");
                 // sdd.ptask-المشروع	project_module_id  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("update $server_db_prefix"."sdd.ptask set project_module_id='$id_replace' where project_module_id='$id' ");
                 // sdd.ptask-النظام / الـتطبيق	module_id  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("update $server_db_prefix"."sdd.ptask set module_id='$id_replace' where module_id='$id' ");
                 // b au.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."b"."au.user_story set system_id='$id_replace' where system_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "b" . "au.user_story set system_id='$id_replace' where system_id='$id' ");
                 // b au.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix"."b"."au.user_story set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "b" . "au.user_story set module_id='$id_replace' where module_id='$id' ");
                 // ums.module-النظام	id_system  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."ums.module set id_system='$id_replace' where id_system='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.module set id_system='$id_replace' where id_system='$id' ");
                 // b au.gfield-النظام المصدر	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."b"."au.gfield set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "b" . "au.gfield set module_id='$id_replace' where module_id='$id' ");
                 // p"."ag.afield-تطبيق قائمة الإختيارات	answer_module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."p"."ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "p" . "ag.afield set answer_module_id='$id_replace' where answer_module_id='$id' ");
                 // b au.ptext-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."b"."au.ptext set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "b" . "au.ptext set module_id='$id_replace' where module_id='$id' ");
                 // p"."ag.pmessage-الوحدة أو المشروع	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."p"."ag.pmessage set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "p" . "ag.pmessage set module_id='$id_replace' where module_id='$id' ");
                 // ums.job_arole-التطبيق	module_id  حقل يفلتر به-ManyToOne
-                $this->execQuery("update $server_db_prefix"."ums.job_arole set module_id='$id_replace' where module_id='$id' ");
+                $this->execQuery("update $server_db_prefix" . "ums.job_arole set module_id='$id_replace' where module_id='$id' ");
 
 
                 // MFK
                 // ums.bfunction-الوحدات المعنية	module_mfk  
-                $this->execQuery("update $server_db_prefix"."ums.bfunction set module_mfk=REPLACE(module_mfk, ',$id,', ',$id_replace,') where module_mfk like '%,$id,%' ");
+                $this->execQuery("update $server_db_prefix" . "ums.bfunction set module_mfk=REPLACE(module_mfk, ',$id,', ',$id_replace,') where module_mfk like '%,$id,%' ");
             }
             return true;
         }
@@ -2369,7 +2449,7 @@ class Module extends UmsObject
         $ustr0->where("(system_id = $system_id or module_id = $module_id)");
         $ustr0->select("source", "auto-generated");
         $ustr0->logicDelete(true, false);
-        
+
         /*
         $ustr0->resetUpdates();
         $ustr0->set("user_story_goal_id", 0, true);
@@ -2384,7 +2464,7 @@ class Module extends UmsObject
         $ustr0->set("arole_id", 0, true);
         $ustr0->select("source", "auto-generated");
         $ustr0->where("(system_id = $system_id or module_id = $module_id)");
-        $ustr0->where("arole_id not in (select id from $server_db_prefix"."ums.arole where system_id=$my_system_id and role_code like 'manual%')");
+        $ustr0->where("arole_id not in (select id from $server_db_prefix" . "ums.arole where system_id=$my_system_id and role_code like 'manual%')");
         $ustr0->update(false);
 
 
@@ -2394,7 +2474,7 @@ class Module extends UmsObject
     public function resetAllGeneratedLookupAroles()
     {
         $file_dir_name = dirname(__FILE__);
-        
+
 
         if (!$this->isApplication()) return array("this module $this is not an application !!", "");
 
@@ -2486,7 +2566,7 @@ class Module extends UmsObject
         $category_id = 4;
 
         $file_dir_name = dirname(__FILE__);
-        
+
         $moduleTypeObj = $this->getType();
         $lookup_code = $moduleTypeObj->getVal("lookup_code");
         $typeObj = RAMObjectType::loadByMainIndex($lookup_code);
@@ -2527,7 +2607,7 @@ class Module extends UmsObject
 
         if (($mod_id) and (intval($mod_id) > 0)) {
             $file_dir_name = dirname(__FILE__);
-            
+
             $at = new Atable();
 
             $at->select("id_module", $mod_id);
@@ -2591,10 +2671,10 @@ class Module extends UmsObject
         return $this->getLookupJobResp($create_obj_if_not_found = true, $always_update_name = false, $lang);
     }
 
-    public static function moduleCodeToDomainId($module_code)    
+    public static function moduleCodeToDomainId($module_code)
     {
         $moduleObj = self::loadByMainIndex($module_code);
-        if(!$moduleObj) return 0;
+        if (!$moduleObj) return 0;
         return $moduleObj->getVal("id_pm");
     }
 
@@ -2605,19 +2685,18 @@ class Module extends UmsObject
 
         $code_jr = $appCode . "-lookup";
         $domain = null;
-        if(AfwSession::config("MODE_DEVELOPMENT",false))
-        {                            
+        if (AfwSession::config("MODE_DEVELOPMENT", false)) {
             $id_pm = $this->getVal("id_pm");
-            AfwAutoLoader::addModule("p"."ag");
+            AfwAutoLoader::addModule("p" . "ag");
             $domain = Domain::loadById($id_pm);
         }
-        
+
         if ((!$domain) or (!$domain->getId())) {
             return null;
         }
 
         $file_dir_name = dirname(__FILE__);
-        
+
         $jrObj = Jobrole::loadByMainIndex($domain->getId(), $code_jr, $create_obj_if_not_found);
 
         if ($jrObj->is_new or $always_update_name) {
@@ -2633,20 +2712,19 @@ class Module extends UmsObject
 
     public function updateLookupGoal($jrObj = null, $create_obj_if_not_found = true, $always_update_name = false)
     {
-        
+
         $domain = null;
-        if(AfwSession::config("MODE_DEVELOPMENT",false))
-        {                            
+        if (AfwSession::config("MODE_DEVELOPMENT", false)) {
             $id_pm = $this->getVal("id_pm");
-            AfwAutoLoader::addModule("p"."ag");
+            AfwAutoLoader::addModule("p" . "ag");
             $domain = Domain::loadById($id_pm);
         }
-        
+
         if ((!$domain) or (!$domain->getId())) {
             return null;
         }
         $file_dir_name = dirname(__FILE__);
-        
+
 
         if (!$jrObj) {
             $appCode = $this->getVal("module_code");
@@ -2663,7 +2741,7 @@ class Module extends UmsObject
         $goalObj = null;
 
         if ($this->getId() and $this->getVal("id_system")) {
-            
+
             $goal_code = strtoupper($code_jr);
 
             $goalObj = Goal::loadByMainIndex($this->getVal("id_system"), $this->getId(), $goal_code, $create_obj_if_not_found);
@@ -2682,7 +2760,7 @@ class Module extends UmsObject
 
 
 
-        
+
         $at = new Atable();
 
         $at->select("id_module", $this->getId());
@@ -2716,7 +2794,7 @@ class Module extends UmsObject
 
 
         $file_dir_name = dirname(__FILE__);
-        
+
         $jrObj = Jobrole::loadByMainIndex($domain->getId(), $code_jr, $create_obj_if_not_found);
         if ($jrObj->is_new or $always_update_name) {
             $jrObj->set("titre_short_en", "product admin");
@@ -2727,7 +2805,7 @@ class Module extends UmsObject
         $goalObj = null;
 
         if ($this->getId() and $this->getVal("id_system")) {
-            
+
             $goal_code = strtoupper($code_jr);
             $goalObj = Goal::loadByMainIndex($this->getVal("id_system"), $this->getId(), $goal_code, $create_obj_if_not_found);
             if ($goalObj->is_new or $always_update_name) {
@@ -2825,32 +2903,30 @@ class Module extends UmsObject
     }
 
 
-    public function myShortNameToAttributeName($attribute){
-        if($attribute=="mainsh") return "id_main_sh";
-        if($attribute=="title") return "titre_short";
-        if($attribute=="type") return "id_module_type";
-        if($attribute=="status") return "id_module_status";
-        if($attribute=="sys") return "id_system";
-        if($attribute=="parent") return "id_module_parent";
-        if($attribute=="domain") return "id_pm";
-        if($attribute=="engine") return "dbengine_id";
-        if($attribute=="system") return "dbsystem_id";
-        if($attribute=="php") return "php_ini";
-        if($attribute=="shs") return "orgs";
-        if($attribute=="app") return "applications";
-        if($attribute=="tables") return "tbs";
-        if($attribute=="lookups") return "lkps";
-        if($attribute=="bmjob") return "id_analyst";
-        if($attribute=="mmjob") return "id_hd";
-        if($attribute=="smjob") return "id_br";
-        if($attribute=="dispjobs") return "jobrole_mfk";
+    public function myShortNameToAttributeName($attribute)
+    {
+        if ($attribute == "mainsh") return "id_main_sh";
+        if ($attribute == "title") return "titre_short";
+        if ($attribute == "type") return "id_module_type";
+        if ($attribute == "status") return "id_module_status";
+        if ($attribute == "sys") return "id_system";
+        if ($attribute == "parent") return "id_module_parent";
+        if ($attribute == "domain") return "id_pm";
+        if ($attribute == "engine") return "dbengine_id";
+        if ($attribute == "system") return "dbsystem_id";
+        if ($attribute == "php") return "php_ini";
+        if ($attribute == "shs") return "orgs";
+        if ($attribute == "app") return "applications";
+        if ($attribute == "tables") return "tbs";
+        if ($attribute == "lookups") return "lkps";
+        if ($attribute == "bmjob") return "id_analyst";
+        if ($attribute == "mmjob") return "id_hd";
+        if ($attribute == "smjob") return "id_br";
+        if ($attribute == "dispjobs") return "jobrole_mfk";
         return $attribute;
     }
 
-    public function getSystem()
-    {
-
-    }
+    public function getSystem() {}
 
 
     /*

@@ -54,7 +54,14 @@ class Bfunction extends UmsObject{
         public static $TABLE			= "bfunction"; 
         public static $DB_STRUCTURE = null; 
         
-        
+        public static function loadById($id)
+        {
+            $obj = new Bfunction();
+            // $obj->select_visibilite_horizontale();
+            if ($obj->load($id)) {
+                return $obj;
+            } else return null;
+        } 
         
         
         public static function loadByUK($uk_vals)

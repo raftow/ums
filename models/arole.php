@@ -536,6 +536,7 @@ class Arole extends AFWObject
                     
                     
                     $menu_folder["items"][$bf_item->getId()]["id"] = $bf_item->getId();
+                    $menu_folder["items"][$bf_item->getId()]["code"] = $bf_item->getVal("bfunction_code");
                     $menu_folder["items"][$bf_item->getId()]["menu_name_ar"] = $title_ar;
                     $menu_folder["items"][$bf_item->getId()]["menu_name_en"] = $title_en;
                     $menu_folder["items"][$bf_item->getId()]["page"] = $bf_item->getUrl();
@@ -578,7 +579,7 @@ class Arole extends AFWObject
         return $menu_folder;
     }
 
-    public function addBF($bf_id)
+    public function addBF($bf_id, $forceInMenu=false)
     {
         global $lang;
 
@@ -609,7 +610,7 @@ class Arole extends AFWObject
         $bf = $rbf->hetBF();
 
         if ($bf) {
-            if ($bf->isMenu()) {
+            if ($forceInMenu or $bf->isMenu()) {
                 /*
                        $mfk_before = $this->getVal("bfunction_mfk");
                        $this->addRemoveInMfk("bfunction_mfk",array($bf->getId()), array());
@@ -628,7 +629,7 @@ class Arole extends AFWObject
                 $menu_added_info .= "<br>[$bf] ليس قائمة";
             }
         } else {
-            $menu_added_error = "الوظيفة [id=$bf_id] تحتوي على مشكل وتعذر إضافتها للقائمة";
+            $menu_added_error = "الوظيفة [id=$bf_id] مفقودة أو تحتوي على مشكل وتعذر إضافتها للقائمة";
         }
 
         $rol = $rbf->hetRole();
