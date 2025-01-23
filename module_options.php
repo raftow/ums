@@ -8,6 +8,7 @@
    $options_arr["UMS_LOG"] = ["ar"=>"تتبع الآثار", "en"=>"Authorisation management log", "admin"=>true];
    $options_arr["FULL_SCREEN"] = ["ar"=>"ملء الشاشة", "en"=>"Full screen"];
    $options_arr["HIJRI_TO_GREG"] = ["ar"=>"تواريخ ميلادية", "en"=>"Gregorian dates"];
+   $options_arr["COPY_PAST_M"] = ["ar"=>"نسخ لصق متعدد السطور", "en"=>"Multiple lines copy paste"];
 
    
 ?>
