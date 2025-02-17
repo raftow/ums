@@ -393,4 +393,44 @@ class UmsObject extends AfwMomkenObject{
             return AfwDateHelper::currentHijriDate();
         } 
 
+        public function fld_CREATION_USER_ID()
+        {
+            return 'id_aut';
+        }
+
+        public function fld_CREATION_DATE()
+        {
+            return 'date_aut';
+        }
+
+        public function fld_UPDATE_USER_ID()
+        {
+            return 'id_mod';
+        }
+
+        public function fld_UPDATE_DATE()
+        {
+            return 'date_mod';
+        }
+
+        public function fld_VALIDATION_USER_ID()
+        {
+            return 'id_valid';
+        }
+
+        public function fld_VALIDATION_DATE()
+        {
+            return 'date_valid';
+        }
+
+        public function fld_VERSION()
+        {
+            return 'version';
+        }
+
+        public function fld_ACTIVE()
+        {
+            return 'avail';
+        }
+
 }

@@ -653,7 +653,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         
         public function iCanDoOperationOnObjClass($myObj,$operation_sql)
         {
-             // return true;   
+             if($this->isSuperAdmin()) return true;   
              global $lang;
              
              if($operation_sql=="update") $operation_sql = "edit";
@@ -700,6 +700,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         
         public function iCanDoOperation($module_code,$table,$operation_sql, $ignore_cache=false)
         {
+                $this->fld_ACTIVE();
                 if(isset($this->iCanDoOperationArray["$module_code-$table-$operation_sql"]))
                 {
                         return $this->iCanDoOperationArray["$module_code-$table-$operation_sql"];

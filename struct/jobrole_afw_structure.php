@@ -18,7 +18,7 @@
 				),
 
 			'jobrole_code' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
-				'TYPE' => 'TEXT',  'MANDATORY' => true,  
+				'TYPE' => 'TEXT',  'MANDATORY' => true, 'QEDIT' => true,  
 				'SIZE' => '24',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
 				),
