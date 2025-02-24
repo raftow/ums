@@ -2,6 +2,13 @@
 
 class UmsObject extends AfwMomkenObject{
 
+        public function settings($field_name, $col_struct)
+        {
+            $col_struct = strtolower($col_struct);
+            $table_name = $this->getTableName();
+            return AfwSession::config("setting-$table_name-$field_name-$col_struct", AfwSession::config("setting-$table_name-$field_name-*", null));
+        }
+
         public function getTimeStampFromRow($row,$context="update", $timestamp_field="")
         {
                 if(!$timestamp_field) return $row["synch_timestamp"];
@@ -364,6 +371,8 @@ class UmsObject extends AfwMomkenObject{
                 $main_company = AfwSession::config("main_company","all");
                 $file_dir_name = dirname(__FILE__);        
                 include($file_dir_name."/../extra/hierarchy_level-$main_company.php");
+
+                if(count($hierarchy_level)==0) throw new AfwBusinessException("please define hierarchy level file of company $main_company","en","","","index.php", "php file is $file_dir_name/../extra/hierarchy_level-$main_company.php");
 
                 foreach($hierarchy_level as $id => $lookup_row)
                 {

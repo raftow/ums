@@ -4455,3 +4455,11 @@ div.hzm_data.hzm_data_php_rbf.form-control.inputreadonly {
     direction: ltr;
     overflow: scroll;
 }
+
+div#fg-myRoles {
+    min-height: 450px;
+}
+
+div#div_data_myRoles {
+    height: 100% !important;
+}

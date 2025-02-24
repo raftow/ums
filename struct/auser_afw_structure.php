@@ -10,7 +10,8 @@
 					$obj->ORDER_BY_FIELDS = "firstname,lastname";
 					$obj->FORMULA_DISPLAY_FIELD = "concat(IF(ISNULL(firstname), '', firstname) , ' ' , IF(ISNULL(f_firstname), '', f_firstname) , ' ' , IF(ISNULL(lastname), '', lastname))";
 					$obj->popup = false;
-					$obj->UNIQUE_KEY = array('email');
+					// $obj->UNIQUE_KEY = array('email');
+					$obj->UNIQUE_KEY = array('username');
 					$obj->editByStep = true;
 					$obj->editNbSteps = 5;
 					$obj->showQeditErrors = true;

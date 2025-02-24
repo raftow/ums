@@ -10,8 +10,9 @@
 				),
 
 			'id_domain' => array(
-				'TYPE' => 'INT', 'SHOW' => true,  'RETRIEVE' => true,  'SEARCH' => true,  'QSEARCH' => true,  'EDIT' => true,  'MANDATORY' => true,  
-				'WHERE' => "", 
+				'TYPE' => 'FK', 'ANSWER'=>'domain', 'ANSMODULE'=>'pag', 'SHOW' => '::settings',  'RETRIEVE' => '::settings',  'SEARCH' => true,  'QSEARCH' => '::settings',  
+				'EDIT' => true,  'MANDATORY' => true,  
+				// 'WHERE' => "", 
 				 'SHORTNAME' => 'domain', 
 				'RELATION' => 'OneToMany',  'STEP' => 1,  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
@@ -49,24 +50,29 @@
 				'TYPE' => 'FK',  'ANSWER' => 'job_arole',  'ANSMODULE' => 'ums',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'jobrole_id',  'SHORTNAME' => 'roles',  'MANDATORY' => true,  'ERROR-CHECK' => true,  
 				'WHERE' => "", 
-				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+				 'NO-LABEL' => false,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'myRoles' => array(
 				'TYPE' => 'FK',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  
-				'CATEGORY' => 'FORMULA',  'SUPER_CATEGORY' => 'ITEMS',  'SHOW' => true,  'FORMAT' => 'tree',  'LINK_COL' => 'parent_arole_id',  'ITEMS_COL' => 'childList',  'FEUILLE_COL' => 'rbfList',  'FEUILLE_COND_METHOD' => '_isMenu',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'CATEGORY' => 'FORMULA',  'SUPER_CATEGORY' => 'ITEMS',  'SHOW' => true,  'FORMAT' => 'tree',  
+				'LINK_COL' => 'parent_arole_id',  'ITEMS_COL' => 'childList',  'FEUILLE_COL' => 'rbfList',  
+				'FEUILLE_COND_METHOD' => '_isMenu',  'EDIT' => true,  'ICONS' => true,  'DELETE-ICON' => false,  
+				'BUTTONS' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true, 'READONLY' => true,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_100',
 				),
-		/*		
+				
 		'jobGoalList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
-				'CATEGORY' => 'ITEMS',  'ITEM' => 'jobrole_id',  'SHORTNAME' => 'goals',  'MANDATORY' => true,  'ERROR-CHECK' => true,  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b'.'au',  
+				'CATEGORY' => 'ITEMS',  'ITEM' => 'jobrole_id',  'SHORTNAME' => 'goals',  'MANDATORY' => false,  'ERROR-CHECK' => true,  
 				'WHERE' => "", 
-				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+				 'NO-LABEL' => false,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
-
+		/*	
 		'goalConcernList' => array(
 				'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'b au',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'jobrole_id',  

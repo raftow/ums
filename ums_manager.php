@@ -247,7 +247,8 @@ class UmsManager extends AFWRoot
                 AfwSession::pushWarning("Missed tbf_info[$table]['id'] data in previleges file of $module_code");                    
             }
         }
-        else 
+        
+        if(!$table_id)
         {
             AfwSession::pushWarning("System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");    
             $tableObj = Atable::getAtableByName($module_id, $table);
@@ -286,6 +287,11 @@ class UmsManager extends AFWRoot
             $create_with_names_if_not_exists,
             $ignore_cache
         );
+        /*
+        if(($bf_id==-1) and ($table=="adm_employee")) die("getBunctionIdForOperationOnTable : list(module_id=$module_id, system_id=$system_id) = decodeModule(module_code=$module_code)<br>\n
+                                                           getBunctionIdForOperationOnTable : atable_id = $atable_id = decodeTable(module_id=$module_id, table=$table)<br>\n
+                                                           getBunctionIdForOperationOnTable : bf_id = $bf_id = UmsManager::decodeBfunction(system_id=$system_id,operation=$operation,module_id=$module_id,atable_id=$atable_id,bf_spec='',
+                                                                                  create_with_names_if_not_exists=$create_with_names_if_not_exists,ignore_cache=$ignore_cache)");*/
         return $bf_id;
     }
 

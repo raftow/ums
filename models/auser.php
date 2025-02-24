@@ -873,6 +873,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         
         public function getMenuFor($module_id, $langue="", $sub_folders=false, $items = false)
         {
+                
                 global $lang;
                 if(!$langue) $langue = $lang;
                 
@@ -906,6 +907,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 {
                         if(!$authorized) 
                         {
+                                throw new AfwRuntimeException("WHy get here rafik B 20250223<br>\n user_id = $this->id<br>\nmodule_id=$module_id");
                                 $message = $this->tm("Denied M.A.U Access to this module for user %s <br>\nuser_id : %d<br>\nmodule_id : %d");
                                 $message = sprintf($message, $this->getDisplay($langue), $this->id, $module_id);
                                 AfwSession::pushError($message);
@@ -1521,7 +1523,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 if((!$from_active_directory) and $reset_password)
                 {                 
                         if(!$this->pwd) list($err[],$info[], $war[], $pwd,$sent_by, $sent_to) = $this->resetPassword($lang);
-                        if(count($err)==0) $info[] = $this->tm("password resetted, new password sent by",$lang)." : ".$this->tm($sent_by,$lang)." ". $this->tm("to",$lang) . $sent_to;
+                        if(count($err)==0) $info[] = $this->tm("Password has been resetted. The new password has been sent by",$lang)." : ".$this->tm($sent_by,$lang)." ". $this->tm("to",$lang) . " " . $sent_to;
                 }
                 else
                 {
@@ -1532,7 +1534,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         }
 
 
-        public function generateCacheFile($lang="ar", $onlyIfNotDone=false)
+        public function generateCacheFile($lang="ar", $onlyIfNotDone=false, $throwError=false)
         {                
                 try
                 {
@@ -1553,6 +1555,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 }
                 catch(Exception $e)
                 {
+                        if($throwError) throw $e;
                         return array($e->getMessage(),'');
                 }
         }
@@ -1972,43 +1975,47 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 {
                         $moduleItem = $mauItem->getModule();
                         $moduleId = $moduleItem->id;
-                        $moduleCode = $moduleItem->getVal("module_code");
-                        $roles_mfk = trim(trim($mauItem->getVal("arole_mfk")),",");
-                        $roles_arr = explode(",",$roles_mfk);
-
-                        $mau_info_item = array();
-                        $mau_info_item['id'] = $moduleId;
-                        foreach($roles_arr as $rid)
+                        if($moduleId)
                         {
-                                $mau_info_item['r'.$rid] = true;
-                        }
+                                $moduleCode = $moduleItem->getVal("module_code");
+                                $roles_mfk = trim(trim($mauItem->getVal("arole_mfk")),",");
+                                $roles_arr = explode(",",$roles_mfk);
 
-                        $rolesList = $mauItem->get("arole_mfk");
-
-                        foreach($rolesList as $roleItem)
-                        {
-                                if($roleItem)
+                                $mau_info_item = array();
+                                $mau_info_item['id'] = $moduleId;
+                                foreach($roles_arr as $rid)
                                 {
-                                        $roleId = $roleItem->id;
-                                        $bfList = $roleItem->get("bfList"); 
-                                        foreach($bfList as $bfItem)
+                                        $mau_info_item['r'.$rid] = true;
+                                }
+
+                                $rolesList = $mauItem->get("arole_mfk");
+
+                                foreach($rolesList as $roleItem)
+                                {
+                                        if($roleItem)
                                         {
-                                                $bfId = $bfItem->id;
-                                                if(!isset($mau_info_item['bf'.$bfId]))
+                                                $roleId = $roleItem->id;
+                                                $bfList = $roleItem->get("bfList"); 
+                                                foreach($bfList as $bfItem)
                                                 {
-                                                        $mau_info_item['bf'.$bfId] = array();
+                                                        $bfId = $bfItem->id;
+                                                        if(!isset($mau_info_item['bf'.$bfId]))
+                                                        {
+                                                                $mau_info_item['bf'.$bfId] = array();
+                                                        }
+                                                        $mau_info_item['bf'.$bfId][$roleId] = true;
                                                 }
-                                                $mau_info_item['bf'.$bfId][$roleId] = true;
                                         }
                                 }
+
+                                $mau_info[$moduleCode] = $mau_info_item;
+                                $mau_info['m'.$moduleId] = array('code'=>$moduleCode,'roles'=>$roles_arr);
+
+                                $menu[$moduleCode] = array();
+                                $menu[$moduleCode]["all"] = $this->getMenuFor($moduleId,"ar");
+                                //$menu[$moduleCode]["en"] = $this->getMenuFor($moduleId,"en");
                         }
-
-                        $mau_info[$moduleCode] = $mau_info_item;
-                        $mau_info['m'.$moduleId] = array('code'=>$moduleCode,'roles'=>$roles_arr);
-
-                        $menu[$moduleCode] = array();
-                        $menu[$moduleCode]["all"] = $this->getMenuFor($moduleId,"ar");
-                        //$menu[$moduleCode]["en"] = $this->getMenuFor($moduleId,"en");
+                        
                 }
 
                 
@@ -2041,10 +2048,16 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 {
                         $moduleItem = $mauItem->getModule();
                         $moduleId = $moduleItem->id;
-                        $html .= "<div class='module-ums module-$moduleId'>".$moduleItem->getDisplay($lang). "<div class='ums-aroles'>" . $mauItem->showAttribute("arole_mfk") . "</div></div>\n";
-                        $html .= "<div class='module-rights rights-$moduleId-$myId'>\n";
-                        $html .= $mauItem->calcRightsDiv();
-                        $html .= "</div>";
+                        $rdiv = $mauItem->calcRightsDiv();
+                        $aroles = $mauItem->showAttribute("arole_mfk");
+                        if($rdiv and $aroles)
+                        {
+                                $html .= "<div class='module-ums module-$moduleId'>".$moduleItem->getDisplay($lang). "<div class='ums-aroles'>" . $aroles . "</div></div>\n";
+                                $html .= "<div class='module-rights rights-$moduleId-$myId'>\n";
+                                $html .= $rdiv;
+                                $html .= "</div>";
+                        }
+                        
                         
                 }
                 $html .= "</div>";

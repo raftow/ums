@@ -55,6 +55,9 @@ class ModuleAuser extends AFWObject{
           
           public static function loadByMainIndex($id_module, $id_auser,$create_obj_if_not_found=false)
           {
+               if (!$id_module) throw new AfwRuntimeException("loadByMainIndex : id_module is mandatory field");
+               if (!$id_auser)  throw new AfwRuntimeException("loadByMainIndex : id_auser is mandatory field");
+
                $obj = new ModuleAuser();
                $obj->select("id_module",$id_module);
                $obj->select("id_auser",$id_auser);
@@ -126,7 +129,10 @@ class ModuleAuser extends AFWObject{
                
 
                $userItem = $this->getUser();
+               if(!$userItem) return "";
                $moduleItem = $this->getModule();
+               if(!$moduleItem or !$moduleItem->id) return "";
+
                $moduleCode = $moduleItem->getVal("module_code");
                $tableList = $moduleItem->getAllMyTables(true);
                $myId = $this->id;
@@ -148,7 +154,7 @@ class ModuleAuser extends AFWObject{
 
                $html .= $head;
 
-               $checked_picture = "<img src='../lib/images/green-check.png'>";
+               $checked_picture = "<img src='../lib/images/on-blue.png'>";
                $cl = "item";
                $rows = 0;
                foreach($tableList as $tableItem)
@@ -164,18 +170,22 @@ class ModuleAuser extends AFWObject{
                     $tableQEdit = $userItem->iCanDoOperation($moduleCode, $tableCode, "qedit", true) ? $checked_picture : "";
                     $tableQSearch = $userItem->iCanDoOperation($moduleCode, $tableCode, "qsearch", true) ? $checked_picture : "";
 
-                    $html .= "<tr class='$cl tb-$tableId'>\n";
-                    $html .= "  <td class='rtd tb'>$tableName</td>\n";
-                    $html .= "  <td class='rtd ed'>$tableEdit</td>\n";
-                    $html .= "  <td class='rtd vw'>$tableView</td>\n";
-                    $html .= "  <td class='rtd dl'>$tableDelete</td>\n";
-                    $html .= "  <td class='rtd qe'>$tableQEdit</td>\n";
-                    $html .= "  <td class='rtd qs'>$tableQSearch</td>\n";
-                    $html .= "</tr>\n";
-                    if($cl == "item") $cl = "altitem";
-                    else $cl = "item";
-
-                    $rows++;
+                    if($tableEdit or $tableView or $tableDelete or $tableQEdit or $tableQSearch)
+                    {
+                         $html .= "<tr class='$cl tb-$tableId'>\n";
+                         $html .= "  <td class='rtd tb'>$tableName</td>\n";
+                         $html .= "  <td class='rtd ed'>$tableEdit</td>\n";
+                         $html .= "  <td class='rtd vw'>$tableView</td>\n";
+                         $html .= "  <td class='rtd dl'>$tableDelete</td>\n";
+                         $html .= "  <td class='rtd qe'>$tableQEdit</td>\n";
+                         $html .= "  <td class='rtd qs'>$tableQSearch</td>\n";
+                         $html .= "</tr>\n";
+                         if($cl == "item") $cl = "altitem";
+                         else $cl = "item";
+     
+                         $rows++;
+                    }
+                    
                     if($rows==10)
                     {
                          $html .= $head;

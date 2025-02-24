@@ -1,7 +1,7 @@
 <?php
 
 
-class Jobrole extends AFWObject
+class Jobrole extends UmsObject
 {
 
      private $mainGoal = null;
@@ -26,6 +26,7 @@ class Jobrole extends AFWObject
           $this->showQeditErrors = true;
           $this->showRetrieveErrors = true;
           $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
+          $this->after_save_edit = array("class"=>'Domain',"attribute"=>'id_domain', "currmod"=>'p'.'ag',"currstep"=>2);
      }
 
      public static function loadById($id)
@@ -264,11 +265,7 @@ class Jobrole extends AFWObject
 
      public function getFormuleResult($attribute, $what='value')
      {
-          global $me, $server_db_prefix;
-
-          $file_dir_name = dirname(__FILE__);
-
-
+          $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
 
           switch ($attribute) {
                case "mainApplication":
