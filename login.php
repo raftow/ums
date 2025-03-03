@@ -41,7 +41,7 @@ include_once ("$file_dir_name/../$uri_module/application_config.php");
 AfwSession::initConfig($config_arr);
 AfwSession::startSession();
 
-require_once ("$file_dir_name/../external/db.php");*/
+require_once ("$file_dir_name/../config/global_config.php");*/
 // 
 
 

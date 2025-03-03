@@ -1541,7 +1541,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                         $parent_project_path = AfwSession::config("parent_project_path", "");
                         if(!$parent_project_path) return ["please define parent_project_path system config parameter", ""];
                         $me_id = $this->id;
-                        $file_path = $parent_project_path."/external/chusers";
+                        $file_path = $parent_project_path."/cache/chusers";
                         $fileName = "user_$me_id"."_data.php";
                         $fileFullName = $file_path."/".$fileName;
                         if($onlyIfNotDone and file_exists($fileFullName))
@@ -1916,7 +1916,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 else
                 {
                         $me_id = $this->id;
-                        $file_full_path = dirname(__FILE__)."/../external/chusers/user_$me_id"."_data.php";
+                        $file_full_path = dirname(__FILE__)."/../cache/chusers/user_$me_id"."_data.php";
                         if(file_exists($file_full_path))
                         {
                                 include($file_full_path);
@@ -2091,7 +2091,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         public function getMyQuickLinks($lang="ar", $except_module="")
         {
                 $quick_links_arr = array();
-                //include(dirname(__FILE__)."/../external/quick_links.php");
+                
                 if(!$this->isCustomer())
                 {
                         $mauList = $this->loadMyModules();

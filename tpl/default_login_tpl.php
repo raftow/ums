@@ -4,10 +4,10 @@
             <div class="modal-header">
                 <div>
                     <div class="login title_company">
-                        <img src="../external/pic/title-company-[company].png" alt="" style="margin-top: 0px;width: 412px !important;height: 86px;border-radius: 0;">
+                        <img src="../client-[company]/pic/title-company-[company].png" alt="" style="margin-top: 0px;width: 412px !important;height: 86px;border-radius: 0;">
                     </div>
                     <div class="login logo_company">
-                        <img src="../external/pic/logo-company-[company].png" alt="" style="margin-right: 0;margin-left: 0;margin-top: 0px;width: 86px !important;height: 86px;border-radius: 0;">
+                        <img src="../client-[company]/pic/logo-company-[company].png" alt="" style="margin-right: 0;margin-left: 0;margin-top: 0px;width: 86px !important;height: 86px;border-radius: 0;">
                     </div>
                 </div>
                 <!--<div>

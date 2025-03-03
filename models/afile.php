@@ -458,7 +458,7 @@ zoomWindowOffety:-200
                 {
                         $new_name = $this->getNewName();
                         $img = "<img class='rafik-img' style='$style' src='$upld_path/$new_name'>"; 
-                        // die("after include_once of $file_dir_name/../external/config.php , upld_path = ".$upld_path." img = $img");
+                        // die("after include_once of $file_dir_name/../ext-ernal/config.php , upld_path = ".$upld_path." img = $img");
                         return $img;
                 }
                 else

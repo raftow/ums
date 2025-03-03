@@ -923,7 +923,7 @@ span.object_id {
     
     .calendar_bloc_g {
         height: 96px;
-        background-image: url(../../external/pic/calendar_school.png) !important;
+        background-image: url(../../lib/images/calendar_school.png) !important;
         background-repeat: no-repeat;
         background-size: 75%;
         background-position: 10px 10px;

@@ -20,7 +20,7 @@ AfwSession::initConfig($config_arr);
 $NOM_SITE = AfwSession::config("application_name","This Application");
 
 
-require_once("$file_dir_name/../external/db.php");
+require_once("$file_dir_name/../config/global_config.php");
 // 
 
 include("$file_dir_name/../lib/hzm/web/hzm_header.php");

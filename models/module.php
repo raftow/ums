@@ -1792,7 +1792,7 @@ class Module extends UmsObject
         $source_path = $START_GEN_TREE;
         // $dest_path = $START_GEN_TREE."php/";
         $dest_path = $ROOT_WWW_PATH;
-
+        $company = AfwSession::currentCompany();
         $currmod = $this->getVal("module_code");
 
         // require_once("$file_dir_name/../lib/afw/afw_copy_motor.php");
@@ -1802,7 +1802,7 @@ class Module extends UmsObject
             AFWCopyMotor::recurseCopy($source_path . "php/empty", $dest_path . $currmod);
 
             // copy company logo and title
-            AFWCopyMotor::copyFile($dest_path . "external/pic/title-company.png", $dest_path . "external/pic/title-company-$currmod.png");
+            AFWCopyMotor::copyFile($dest_path . "client-$company/pic/title-company.png", $dest_path . "client-$company/pic/title-company-$currmod.png");
         }
 
         if ($update_files) {
@@ -1813,8 +1813,8 @@ class Module extends UmsObject
 
             // no need we should use same logo except if define const CUSTOM_COMPANY_DATA
             // copy company logo and title
-            // AFWCopyMotor::copyFile($source_path."php/external/pic/title-company.png", $dest_path."external/pic/title-company-$currmod.png");
-            // AFWCopyMotor::copyFile($source_path."php/external/pic/logo-company.png", $dest_path."external/pic/logo-company-$currmod.png");
+            // AFWCopyMotor::copyFile($source_path."php/client-$company/pic/title-company.png", $dest_path."client-$company/pic/title-company-$currmod.png");
+            // AFWCopyMotor::copyFile($source_path."php/client-$company/pic/logo-company.png", $dest_path."client-$company/pic/logo-company-$currmod.png");
         }
 
 

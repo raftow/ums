@@ -58,8 +58,8 @@
                 
                 $front_header = true;
                 $front_application = true;
-                $config["img-path"] = "../external/pic/";
-                $config["img-company-path"] = "../external/pic/";
+                // $config["img-path"] = "../exte-rnal/pic/";
+                // $config["img-company-path"] = "../exte-rnal/pic/";
                 
                 $display_in_edit_mode["*"] = true;
                 $jstree_activate = true;
