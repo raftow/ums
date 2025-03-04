@@ -1538,11 +1538,12 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         {                
                 try
                 {
+                        $company = AfwSession::currentCompany();
                         $parent_project_path = AfwSession::config("parent_project_path", "");
                         if(!$parent_project_path) return ["please define parent_project_path system config parameter", ""];
                         $me_id = $this->id;
                         $file_path = $parent_project_path."/cache/chusers";
-                        $fileName = "user_$me_id"."_data.php";
+                        $fileName = $company."_user_$me_id"."_data.php";
                         $fileFullName = $file_path."/".$fileName;
                         if($onlyIfNotDone and file_exists($fileFullName))
                         {
@@ -1915,8 +1916,9 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 }
                 else
                 {
+                        $company = AfwSession::currentCompany();
                         $me_id = $this->id;
-                        $file_full_path = dirname(__FILE__)."/../cache/chusers/user_$me_id"."_data.php";
+                        $file_full_path = dirname(__FILE__)."/../cache/chusers/$company"."_user_$me_id"."_data.php";
                         if(file_exists($file_full_path))
                         {
                                 include($file_full_path);
@@ -1927,7 +1929,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                                 else
                                 {
                                         $mau_info_export = var_export($mau_info,true);
-                                        $message_after_init = "roles-authorization not found in-cache for module ".$MODULE." in user_$me_id"."_data";
+                                        $message_after_init = "roles-authorization not found in-cache for module ".$MODULE." in $company _user_$me_id"."_data";
                                         $message_after_init .= " <!-- after inc $file_full_path \n cached mau_info = $mau_info_export -->";
                                         return array(false, $message_after_init);
                                 }

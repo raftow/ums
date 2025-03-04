@@ -537,6 +537,7 @@ class Arole extends AFWObject
                     
                     $menu_folder["items"][$bf_item->getId()]["id"] = $bf_item->getId();
                     $menu_folder["items"][$bf_item->getId()]["code"] = $bf_item->getVal("bfunction_code");
+                    $menu_folder["items"][$bf_item->getId()]["level"] = $bf_item->getVal("hierarchy_level_enum");
                     $menu_folder["items"][$bf_item->getId()]["menu_name_ar"] = $title_ar;
                     $menu_folder["items"][$bf_item->getId()]["menu_name_en"] = $title_en;
                     $menu_folder["items"][$bf_item->getId()]["page"] = $bf_item->getUrl();

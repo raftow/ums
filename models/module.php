@@ -668,6 +668,7 @@ class Module extends UmsObject
         return AfwFormulaHelper::calculateFormulaResult($this, $attribute);
     }
 
+
     public function getAllRolesAndSubRoles()
     {
         $obj = new Arole();
@@ -1715,6 +1716,13 @@ class Module extends UmsObject
             $title_ar = "هندسة معاكسة";
             $pbms["yan38B"] = array("METHOD" => "pagAllTables", "COLOR" => $color, "LABEL_AR" => $title_ar);
 
+
+            $color = "green";
+            $title_ar = "هندسة معاكسة لمستوياتي الوظيفية";
+            $pbms["yghtrB"] = array("METHOD" => "reverseHierarchyLevels", "COLOR" => $color, "LABEL_AR" => $title_ar);
+
+            
+
             if (!$this->IamInstalled()) {
                 $color = "green";
                 $title_ar = "تثبيت ملفات التطبيق";
@@ -2061,6 +2069,65 @@ class Module extends UmsObject
 
                return array("",""); 
          }*/
+
+        public function reverseHierarchyLevels($lang = "ar", $update_if_exists = true)
+        { 
+            $info = array();
+            $err = array();
+            $war = array();
+            $tech = array();
+
+            $arr_list_of_hierarchy_level = self::hierarchy_level($this->id);
+            $hierarchy_data = [];
+            foreach($arr_list_of_hierarchy_level as $langue => $hierarchy_level_data)
+            {
+                foreach($hierarchy_level_data as $hierarchy_level_id => $hierarchy_level_label)
+                {
+                    $hierarchy_data[$hierarchy_level_id][$langue] = $hierarchy_level_label;
+                }
+                
+            }
+
+            foreach($hierarchy_data as $id => $row)
+            {
+                $ugObj = Ugroup::loadByMainIndex($this->id,1,1,'level-'.$id,true);
+                if($ugObj)
+                {
+                    if($ugObj->is_new or $update_if_exists)
+                    {
+                        if($ugObj->is_new)
+                        {
+                            $action = "جديد";
+                        }
+                        else
+                        {
+                            $action = "تعديل";
+                        }
+                        
+
+                        $ugObj->set("titre_short_ar", $row["ar"]);
+                        $ugObj->set("titre_short_en", $row["en"]);
+                        $ugObj->commit();
+                        
+                    }
+                    else
+                    {
+                        $action = "موجود";
+                        $row["ar"] = $ugObj->getVal("titre_short_ar");
+                        $row["en"] = $ugObj->getVal("titre_short_en");                        
+                    }
+
+                    $info[] = $action." : ".$row["ar"]."-".$row["en"];
+                }
+                else
+                {
+                    $err[] = "Ugroup creation failed for level-$id : ".$row["ar"]."-".$row["en"];
+                }
+            }
+            
+            return AfwFormatHelper::pbm_result($err, $info, $war, $sep = "<br>\n", $tech);
+        }
+
 
     public function pagAllTables($lang = "ar", $update_if_exists = true)
     {

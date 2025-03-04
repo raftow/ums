@@ -116,7 +116,7 @@ class Bfunction extends UmsObject{
            $obj->select("curr_class_atable_id",$curr_class_atable_id);
            $obj->select("file_specification",$file_specification);
            $obj->select("bf_specification",$bf_specification);
-
+           
            if($obj->load())
            {
                 if($create_obj_if_not_found) $obj->activate();
@@ -168,7 +168,10 @@ class Bfunction extends UmsObject{
                 
         }
         
-        
+        public function getNodeDisplay($lang="ar")
+        {
+             return $this->getShortDisplay($lang)." (L-". $this->getVal("hierarchy_level_enum").") " .$this->getVal("bfunction_code")." " .$this->getVal("bf_specification")." " .$this->getVal("file_specification");
+        }
         
         public function getDisplay($lang="ar")
         {
@@ -1302,7 +1305,7 @@ class Bfunction extends UmsObject{
                 if(AfwStringHelper::stringContain($this->bfunction_code,"edit")) return $icon_table ? $icon_table : "edit";
                 if(AfwStringHelper::stringContain($this->bfunction_code,"delete")) return "delete";
 
-                return $MENU_ICONS["BF-".$this->id]." bficon-".$this->id." bfc-".$this->bfunction_code;
+                return trim($MENU_ICONS["BF-".$this->id]." bficon-".$this->id." bfc-".$this->bfunction_code);
         }
 
         public function findMeInRoles($aroles_ids, $context="log")

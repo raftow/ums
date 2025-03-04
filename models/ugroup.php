@@ -6,33 +6,49 @@ $file_dir_name = dirname(__FILE__);
 
 class Ugroup extends AFWObject{
 
-	public static $DATABASE		= ""; public static $MODULE		    = "ums"; public static $TABLE			= ""; public static $DB_STRUCTURE = null; /* = array(
-		"id" => array("SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "PK"),
-		"titre_short" => array("SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "UTF8" => true, "SIZE" => 40, "TYPE" => "TEXT"),
-		"titre" => array("SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "UTF8" => true, "SIZE" => 255, "TYPE" => "TEXT"),
-		"ugroup_type_id" => array("SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "FK", "ANSWER" => "ugroup_type", "ANSMODULE" => "ums", "SIZE" => 40, "DEFAULT" => 0, "SHORTNAME"=>"type"),
-		"ugroup_scope_id" => array("SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "FK", "ANSWER" => "ugroup_scope", "ANSMODULE" => "ums", "SIZE" => 40, "DEFAULT" => 0, "SHORTNAME"=>"scope"),
-		"definition" => array("SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "TEXT"),
-
-		"id_aut" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_aut" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"id_mod" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_mod" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"id_valid" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_valid" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"avail" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "DEFAULT" => "Y", "TYPE" => "YN"),
-		"version" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "INT"),
-		"update_groups_mfk" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"delete_groups_mfk" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"display_groups_mfk" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"sci_id" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "scenario_item", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0)
-	);
+	public static $DATABASE		= ""; 
+	public static $MODULE		    = "ums"; 
+	public static $TABLE			= "ugroup"; 
+	public static $DB_STRUCTURE = null; 
 	
-	*/ public function __construct(){
+	public function __construct(){
 		parent::__construct("ugroup","id","ums");
-                $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
-                $this->DISPLAY_FIELD = "titre_short";
-                $this->ORDER_BY_FIELDS = "titre_short";
+        UmsUgroupAfwStructure::initInstance($this);    
+	}
+	
+	public static function loadByMainIndex($module_id, $ugroup_type_id, $ugroup_scope_id, $definition,$create_obj_if_not_found=false)
+	{
+	   if(!$module_id) throw new AfwRuntimeException("loadByMainIndex : module_id is mandatory field");
+	   if(!$ugroup_type_id) throw new AfwRuntimeException("loadByMainIndex : ugroup_type_id is mandatory field");
+	   if(!$ugroup_scope_id) throw new AfwRuntimeException("loadByMainIndex : ugroup_scope_id is mandatory field");
+	   if(!$definition) throw new AfwRuntimeException("loadByMainIndex : definition is mandatory field");
+
+
+	   $obj = new Ugroup();
+	   $obj->select("module_id",$module_id);
+	   $obj->select("ugroup_type_id",$ugroup_type_id);
+	   $obj->select("ugroup_scope_id",$ugroup_scope_id);
+	   $obj->select("definition",$definition);
+
+	   if($obj->load())
+	   {
+			if($create_obj_if_not_found) $obj->activate();
+			return $obj;
+	   }
+	   elseif($create_obj_if_not_found)
+	   {
+			$obj->set("module_id",$module_id);
+			$obj->set("ugroup_type_id",$ugroup_type_id);
+			$obj->set("ugroup_scope_id",$ugroup_scope_id);
+			$obj->set("definition",$definition);
+
+			$obj->insertNew();
+			if(!$obj->id) return null; // means beforeInsert rejected insert operation
+			$obj->is_new = true;
+			return $obj;
+	   }
+	   else return null;
+	   
 	}
         
         public function isMember($auser,$dataObj)
@@ -47,10 +63,16 @@ class Ugroup extends AFWObject{
                $sgrp = new UGroup();
                if($ugroup=="owner")
                {
-                   $sgrp->set("ugroup_type_id",1);
+                   $sgrp->set("ugroup_type_id",3);
                }
                
                return $sgrp;
+        }
+
+
+		public function getNodeDisplay($lang="ar")
+        {
+             return $this->getShortDisplay($lang)." (". $this->getVal("definition").")";
         }
 }
 ?>

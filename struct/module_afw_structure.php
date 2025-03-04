@@ -216,6 +216,27 @@
 				 'FGROUP' => 'aroles',  'STEP' => 7,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
+
+				'allRolesAndSubRoles' => array(
+					'TYPE' => 'FK',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  
+					'CATEGORY' => 'ITEMS',  'ITEM' => 'module_id',  
+					'SHOW' => true,  'FORMAT' => 'retrieve',  // was before tree but tree use IFrames not secure
+					//'LINK_COL' => 'parent_arole_id',  'ITEMS_COL' => 'childList',  'FEUILLE_COL' => 'rbfList',  'FEUILLE_COND_METHOD' => '_isMenu',   'IFRAME_BELOW' => true,  
+					'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true, 
+					'FGROUP' => 'aroles',  'STEP' => 777,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+					'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+					),
+
+		'allLevels' => array(
+				'TYPE' => 'FK',  'ANSWER' => 'ugroup',  'ANSMODULE' => 'ums',  
+				'CATEGORY' => 'ITEMS',  'ITEM' => 'module_id',  
+				'WHERE' => "ugroup_type_id = 1 and ugroup_scope_id = 1", 
+				 'SHOW' => true,  'FORMAT' => 'retrieve',  // was before tree but tree use IFrames not secure
+				 //'LINK_COL' => 'parent_arole_id',  'ITEMS_COL' => 'childList',  'FEUILLE_COL' => 'rbfList',  'FEUILLE_COND_METHOD' => '_isMenu',   'IFRAME_BELOW' => true,  
+				 'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'BUTTONS' => true, 
+				 'FGROUP' => 'aroles',  'STEP' => 7,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),
 /*
 		@todo rafik, this below if used please move to p a g mdoule not in ums because should be independant of p a g module*/
 		'tbs' => array(

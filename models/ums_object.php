@@ -364,13 +364,14 @@ class UmsObject extends AfwMomkenObject{
             return self::hierarchy_level()[$lang];
         }
         
-        public static function hierarchy_level()
+        public static function hierarchy_level($module_id=0)
         {
                 $arr_list_of_hierarchy_level = array();
 
                 $main_company = AfwSession::config("main_company","all");
                 $file_dir_name = dirname(__FILE__);        
-                include($file_dir_name."/../extra/hierarchy_level-$main_company.php");
+                $current_module = $module_id;
+                include($file_dir_name."/../../client-$main_company/extra/hierarchy_level-$main_company.php");
 
                 if(count($hierarchy_level)==0) throw new AfwBusinessException("please define hierarchy level file of company $main_company","en","","","index.php", "php file is $file_dir_name/../extra/hierarchy_level-$main_company.php");
 

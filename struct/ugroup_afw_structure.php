@@ -1,6 +1,31 @@
 <?php 
         class UmsUgroupAfwStructure
         {
+                // token separator = §
+                public static function initInstance(&$obj)
+                {
+                        if ($obj instanceof Ugroup) 
+                        {
+                                $obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
+                                $obj->DISPLAY_FIELD = "titre_short_ar";
+                                
+                                // $obj->ENABLE_DISPLAY_MODE_IN_QEDIT=true;
+                                $obj->ORDER_BY_FIELDS = "titre_short_ar";
+                                
+                                $obj->UNIQUE_KEY = array('module_id', 'ugroup_type_id', 'ugroup_scope_id', 'definition');
+                                
+                                $obj->showQeditErrors = true;
+                                $obj->showRetrieveErrors = true;
+                                $obj->general_check_errors = true;
+                                // $obj->after_save_edit = array("class"=>'Road',"attribute"=>'road_id', "currmod"=>'btb',"currstep"=>9);
+                                $obj->after_save_edit = array("mode"=>"qsearch", "currmod"=>'adm', "class"=>'Ugroup',"submit"=>true);
+                        }
+                        else 
+                        {
+                                UgroupArTranslator::initData();
+                                UgroupEnTranslator::initData();
+                        }
+                }
                 public static $DB_STRUCTURE = array(
 
                         
@@ -9,29 +34,83 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'titre_short' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'UTF8' => true,  'SIZE' => 40,  
-				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+			'titre_short_ar' => array(
+                                'SEARCH' => true,
+                                'QSEARCH' => true,
+                                'SHOW' => true,
+                                'AUDIT' => false,
+                                'RETRIEVE' => true,
+                                'EDIT' => true,
+                                'QEDIT' => true,
+                                'SIZE' => 40,
+                                'MAXLENGTH' => 32,
+                                'CHAR_TEMPLATE' => "ALPHABETIC,SPACE",
+                                'UTF8' => true,
+                                'TYPE' => 'TEXT',
+                                'READONLY' => false,
+                                'DNA' => true,
+                                'CSS' => 'width_pct_50',
+                        ),
 
-			'titre' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'UTF8' => true,  'SIZE' => 255,  
-				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+                        'titre_short_en' => array(
+                                'SEARCH' => true,
+                                'QSEARCH' => true,
+                                'SHOW' => true,
+                                'AUDIT' => false,
+                                'RETRIEVE' => true,
+                                'EDIT' => true,
+                                'QEDIT' => true,
+                                'SIZE' => 40,
+                                'MAXLENGTH' => 48,
+                                'MIN-SIZE' => 5,
+                                'CHAR_TEMPLATE' => "ALPHABETIC,SPACE",
+                                'UTF8' => false,
+                                'TYPE' => 'TEXT',
+                                'READONLY' => false,
+                                'DNA' => true,
+                                'CSS' => 'width_pct_50',
+                        ),
+
+
+                        'module_id' => array(
+                                'IMPORTANT' => 'IN',
+                                'SHOW' => true,
+                                'RETRIEVE' => false,
+                                'EDIT' => true,
+                                'TYPE' => 'FK',
+                                'ANSWER' => 'module',
+                                'ANSMODULE' => 'ums',
+                                'SIZE' => 64,
+                                'DEFAUT' => 0,
+                                'WHERE' => "id_module_type=5",
+                                'QEDIT' => true,
+                                'SEARCH-BY-ONE' => true,
+                                'MANDATORY' => true,                                
+                                'RELATION' => 'OneToMany',
+                                'DISPLAY' => true,
+                                'STEP' => 1,
+                                'DISPLAY-UGROUPS' => '',
+                                'EDIT-UGROUPS' => '',
+                                'ERROR-CHECK' => true,
+                        ),                                
 
 			'ugroup_type_id' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  
-				'TYPE' => 'FK',  'ANSWER' => 'ugroup_type',  'ANSMODULE' => 'ums',  'SIZE' => 40,  'DEFAUT' => 0,  'SHORTNAME' => 'type',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'TYPE' => 'FK',  'ANSWER' => 'ugroup_type',  'ANSMODULE' => 'ums',  
+                                'SIZE' => 40,  'DEFAUT' => 0,  'SHORTNAME' => 'type',  'SEARCH-BY-ONE' => '',  
+                                'DISPLAY' => true,  'STEP' => 1, 'MANDATORY' => true,    
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 			'ugroup_scope_id' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  
-				'TYPE' => 'FK',  'ANSWER' => 'ugroup_scope',  'ANSMODULE' => 'ums',  'SIZE' => 40,  'DEFAUT' => 0,  'SHORTNAME' => 'scope',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'TYPE' => 'FK',  'ANSWER' => 'ugroup_scope',  'ANSMODULE' => 'ums',  
+                                'SIZE' => 40,  'DEFAUT' => 0,  'SHORTNAME' => 'scope',  'SEARCH-BY-ONE' => '',  
+                                'DISPLAY' => true,  'STEP' => 1, 'MANDATORY' => true,    
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 			'definition' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  
 				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'MANDATORY' => true,   
 				),
 
 			'avail' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false,  'DEFAUT' => 'Y',  
