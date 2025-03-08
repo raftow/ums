@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label class="label login">[login_by]
                         </label>
-                        <input class="form-auth login username" spellcheck="false" type="text" name="mail" value="<?php echo $user_name_c ?>" required>
+                        <input class="form-auth login username" spellcheck="false" type="text" name="mail" id="mail" value="<?php echo $user_name_c ?>" required>
                     </div>
                     <div class="form-group">
                         <label class="label login">[password_label]
