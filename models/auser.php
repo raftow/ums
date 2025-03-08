@@ -658,8 +658,11 @@ class Auser extends UmsObject implements AfwFrontEndUser {
              
              if($operation_sql=="update") $operation_sql = "edit";
              elseif($operation_sql=="view") $operation_sql = "display";
-             elseif($operation_sql=="search") $operation_sql = "display";
-             elseif($operation_sql=="qsearch") $operation_sql = "display";
+             
+             // below is strange and seems bug
+             // because qsearch BFs for example are generated with mode qsearch not display 
+             // elseif($operation_sql=="search") $operation_sql = "display";
+             // elseif($operation_sql=="qsearch") $operation_sql = "display";
              
              if($operation_sql=="edit") 
              {
@@ -751,9 +754,22 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         }
         
         public function getICanDoLog()
+        {             
+             $return = strip_tags(AfwSession::getLog("iCanDo")); 
+             $return = str_replace('"', "", $return);
+             $return = str_replace("'", "", $return);
+
+             return $return;
+        }
+
+
+        public function getICantDoReason()
         {
-             // very bad it erase all log find better solution (named log) 
-             // return AfwSession::getLog(); 
+                $return0 = $this->getICanDoLog();
+                list($log, $return) = explode("cant because", $return0);
+                list($return, $log) = explode("!", $return);
+                if($return) return $return;
+                return $return0;
         }
         
         public function iCanDoBFCode($curr_class_module_id, $bfCode)
@@ -794,7 +810,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 $cache_user_can_bf_code = "user_${this_id}_can_do_bf_$bfId";
                 $can = AfwSession::getVar($cache_user_can_bf_code);
                 if(!empty($can)) AfwSession::contextLog("iCanDoBF : $cache_user_can_bf_code found in cache = $can, stop !", "iCanDo");
-                if($can=="Y") return true;
+                if($can=="Y") return "selon the cache I can do";
                 if($can=="N") return false;
                 AfwSession::contextLog("iCanDoBF : $cache_user_can_bf_code not found in cache, continue..", "iCanDo");
                 
@@ -810,6 +826,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 AfwSession::contextLog("iCanDoBF : bf found : $bfObj", "iCanDo");
                 if($bfObj->_isPublic())
                 {
+                        AfwSession::contextLog("iCanDoBF : bf is public", "iCanDo");
                         AfwSession::setVar($cache_user_can_bf_code, "Y");
                         return "bf is public";
                 } 
@@ -818,17 +835,34 @@ class Auser extends UmsObject implements AfwFrontEndUser {
 
                 $module_id = $bfObj->getVal("curr_class_module_id");
 
-                list($auth, $mau_found_roles_ids) = $this->getMyRoles($module_id, $only_ids=true);
-                AfwSession::contextLog("iCanDoBF : for user : $this ($this_id) roles in module $module_id => $mau_found_roles_ids", "iCanDo");
                 
+                list($auth, $mau_found_roles_ids) = $this->getMyRoles($module_id, $only_ids=true);
+                if(!$mau_found_roles_ids) $mau_found_roles_ids_display = "no-roles";
+                else $mau_found_roles_ids_display = $mau_found_roles_ids;
+                AfwSession::contextLog("iCanDoBF : for user : $this ($this_id) roles in module $module_id => [$mau_found_roles_ids_display]", "iCanDo");
+                
+                $user_hierarchy_level_enum = $this->getVal("hierarchy_level_enum");
+                if(!$user_hierarchy_level_enum) $user_hierarchy_level_enum = 0;
+                $bf_hierarchy_level_enum = $bfObj->getVal("hierarchy_level_enum");
+                if(!$bf_hierarchy_level_enum) $bf_hierarchy_level_enum = 0;
+                
+                if($bf_hierarchy_level_enum<$user_hierarchy_level_enum)
+                {
+                        AfwSession::contextLog("iCanDoBF : NO I can't because BFL=$bf_hierarchy_level_enum < UHL=$user_hierarchy_level_enum !", "iCanDo");
+                        AfwSession::setVar($cache_user_can_bf_code, "N");
+                        return false;  
+                }
+
                 $foundInRoles = $bfObj->findMeInRoles($mau_found_roles_ids, "iCanDo");
                 if($foundInRoles)
                 {
+                        AfwSession::contextLog("iCanDoBF : YES I can because foundInRoles=$foundInRoles. & BFL=$bf_hierarchy_level_enum >= UHL=$user_hierarchy_level_enum !", "iCanDo");
                         AfwSession::setVar($cache_user_can_bf_code, "Y");
-                        return $foundInRoles;
+                        return $foundInRoles." & BFL=$bf_hierarchy_level_enum >= UHL=$user_hierarchy_level_enum !";
                 }
                 else
                 {
+                        AfwSession::contextLog("iCanDoBF : NO I can't because not found In Roles", "iCanDo");
                         AfwSession::setVar($cache_user_can_bf_code, "N");
                         return false;
                 }
@@ -1325,8 +1359,10 @@ class Auser extends UmsObject implements AfwFrontEndUser {
 
                 if($empl and (!$empl->isEmpty()))
                 {
-                      $divObj = $empl->het("id_sh_div");
-                      if($divObj) return $divObj->getDisplay($lang);
+                        $depObj = $empl->het("id_sh_dep");
+                        if($depObj) return $depObj->getDisplay($lang);  
+                        $divObj = $empl->het("id_sh_div");
+                        if($divObj) return $divObj->getDisplay($lang);
                 }
                 else
                 {
@@ -1339,16 +1375,16 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                                         $school = $stdnt->hetSchool();
                                         if($school)
                                         {
-                                        $dep = $school->hetOrgunit();
-                                        if($dep) return $dep->getDisplay($lang);
-                                        else return "no department";
+                                                $dep = $school->hetOrgunit();
+                                                if($dep) return $dep->getDisplay($lang);
+                                                else return "no department";
                                         }
                                         else return "no school"; 
                                 }
                         }
                 }
                 
-                return "Unknown department";
+                return $this->tm("Head department", $lang);
         }
         
         public function getMyJob($lang="ar")

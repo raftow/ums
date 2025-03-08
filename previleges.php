@@ -168,7 +168,7 @@
     ),
     'delete' => 
     array (
-      'id' => -1,
+      'id' => '104942',
     ),
   ),
   'arole_bf' => 
@@ -300,7 +300,7 @@
     ),
     'delete' => 
     array (
-      'id' => -1,
+      'id' => '104943',
     ),
   ),
   'bfunction' => 
@@ -344,7 +344,7 @@
     ),
     'delete' => 
     array (
-      'id' => -1,
+      'id' => '104944',
     ),
   ),
   'bfunction_type' => 
@@ -608,7 +608,7 @@
     ),
     'delete' => 
     array (
-      'id' => -1,
+      'id' => '104945',
     ),
   ),
   'module' => 
@@ -652,7 +652,7 @@
     ),
     'delete' => 
     array (
-      'id' => -1,
+      'id' => '104946',
     ),
   ),
   'module_auser' => 
@@ -740,7 +740,7 @@
     ),
     'delete' => 
     array (
-      'id' => -1,
+      'id' => '104947',
     ),
   ),
   'module_status' => 
@@ -985,6 +985,72 @@
       'showme' => true,
       'items' => 
       array (
+        104901 => 
+        array (
+          'id' => '104901',
+          'code' => 'f2-a-module/qsearch',
+          'level' => '1',
+          'menu_name_ar' => 'التطبيقات',
+          'menu_name_en' => 'Modules',
+          'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Module&currmod=ums',
+          'css' => 'bf',
+          'icon' => 'bficon-104901 bfc-',
+        ),
+        104887 => 
+        array (
+          'id' => '104887',
+          'code' => 'f2-a-bfunction/qsearch',
+          'level' => '1',
+          'menu_name_ar' => 'الوظائف العملية',
+          'menu_name_en' => 'business functions',
+          'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Bfunction&currmod=ums',
+          'css' => 'bf',
+          'icon' => 'bficon-104887 bfc-',
+        ),
+        104881 => 
+        array (
+          'id' => '104881',
+          'code' => 'f2-a-auser/qsearch',
+          'level' => '1',
+          'menu_name_ar' => 'حسابات المستخدمين',
+          'menu_name_en' => 'Ausers',
+          'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Auser&currmod=ums',
+          'css' => 'bf',
+          'icon' => 'bficon-104881 bfc-',
+        ),
+        104867 => 
+        array (
+          'id' => '104867',
+          'code' => 'f2-a-arole/qsearch',
+          'level' => '1',
+          'menu_name_ar' => 'الصلاحيات',
+          'menu_name_en' => 'Aroles',
+          'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Arole&currmod=ums',
+          'css' => 'bf',
+          'icon' => 'bficon-104867 bfc-',
+        ),
+        104913 => 
+        array (
+          'id' => '104913',
+          'code' => 'f2-a-module_orgunit/qsearch',
+          'level' => '1',
+          'menu_name_ar' => 'علاقات الأنظمة بالإدارات',
+          'menu_name_en' => 'Module concerned organization units',
+          'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=ModuleOrgunit&currmod=ums',
+          'css' => 'bf',
+          'icon' => 'bficon-104913 bfc-',
+        ),
+        104895 => 
+        array (
+          'id' => '104895',
+          'code' => 'f2-a-job_arole/qsearch',
+          'level' => '1',
+          'menu_name_ar' => 'صلاحيات الوظائف',
+          'menu_name_en' => 'ØµÙ„Ø§Ø­ÙŠØ§Øª Ø§Ù„ÙˆØ¸Ø§Ø¦Ù',
+          'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=JobArole&currmod=ums',
+          'css' => 'bf',
+          'icon' => 'bficon-104895 bfc-',
+        ),
       ),
       'sub-folders' => 
       array (
@@ -1041,11 +1107,12 @@
         array (
           'id' => '104940',
           'code' => 'f2-a-afile/qsearch',
+          'level' => '1',
           'menu_name_ar' => 'الملفات',
           'menu_name_en' => 'Afiles',
           'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Afile&currmod=ums',
           'css' => 'bf',
-          'icon' => ' bficon-104940 bfc-',
+          'icon' => 'bficon-104940 bfc-',
         ),
       ),
       'sub-folders' => 
@@ -1280,6 +1347,28 @@
       'showme' => true,
       'items' => 
       array (
+        104901 => 
+        array (
+          'id' => '104901',
+          'code' => 'f2-a-module/qsearch',
+          'level' => '1',
+          'menu_name_ar' => 'التطبيقات',
+          'menu_name_en' => 'Modules',
+          'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Module&currmod=ums',
+          'css' => 'bf',
+          'icon' => 'bficon-104901 bfc-',
+        ),
+        104913 => 
+        array (
+          'id' => '104913',
+          'code' => 'f2-a-module_orgunit/qsearch',
+          'level' => '1',
+          'menu_name_ar' => 'علاقات الأنظمة بالإدارات',
+          'menu_name_en' => 'Module concerned organization units',
+          'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=ModuleOrgunit&currmod=ums',
+          'css' => 'bf',
+          'icon' => 'bficon-104913 bfc-',
+        ),
       ),
       'sub-folders' => 
       array (

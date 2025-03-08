@@ -2969,6 +2969,10 @@ class Module extends UmsObject
         return false;
     }
 
+    public function getLevelUgroup($level)
+    {
+        return Ugroup::loadByMainIndex($this->id,1,1,'level-'.$level);   
+    }
 
     public function myShortNameToAttributeName($attribute)
     {

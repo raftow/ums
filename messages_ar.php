@@ -10,7 +10,7 @@
     $messages["Your new password is"] = "كلمة المرور الجديدة الخاصة بك";
     $messages["Your user name is"] = "اسم المستخدم الخاص بك";
 
-
+    $messages["Head department"] = "الادارة العليا";
     $messages["You need also approval from your direct manager for this"] = "تحتاج أيضا في طلبك ارفاق موافقة مديرك المباشر مع ذكر اسم الجهة التي تعمل فيها";
 
 ?>

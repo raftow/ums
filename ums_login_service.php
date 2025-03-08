@@ -13,7 +13,7 @@ class UmsLoginService extends AFWRoot
 
 
             if ($user_domain_c) {
-                    if (!AfwLoginUtilities::isLDAPDomain($user_domain_c)) {
+                    if (!AfwLoginUtilities::isInternalDomain($user_domain_c)) {
                             $user_name_c  = $email_initial;
                             $this_user_is_internal = false;
                     } else {

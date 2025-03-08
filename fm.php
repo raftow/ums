@@ -1,8 +1,20 @@
 <?php
     $out_scr .= "<div class='hzm3-row-padding hzm3-center hzm3-small hzm_home_bloc' style='margin:0 -16px'>";
     $objme = AfwSession::getUserConnected();
-    if($objme) $iamAdmin = $objme->isAdmin();
-    else $iamAdmin = false;
+    if($objme) 
+    {
+      $iamAdmin = $objme->isAdmin();
+      $myLevel = $iamAdmin ? 0 : $objme->getVal("hierarchy_level_enum");
+      $myName = $objme->getDisplay($lang);
+      $myId = $objme->id;
+    }
+    else 
+    {
+      $iamAdmin = false;
+      $myLevel = 999999;
+      $myName = "None-authenticated";
+      $myId = "0";
+    }
 
     if(!$a)
     {
@@ -52,7 +64,7 @@
                                   </div>";
           }                   
           $out_scr .= "<div id='menu-item-myaccount' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
-                                <a class='action_lourde hzm3-button hzm3-light-grey hzm3-block' href='afw_my_account.php' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
+                                <a class='action_lourde hzm3-button hzm3-light-grey hzm3-block' href='user_account.php' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
                                     <div class=\"hzm-width-100 hzm-text-center hzm_margin_bottom \">
                                       <div class=\"hzm-vertical-align hzm-container-center hzm-custom hzm-custom-icon-container only-border border-primary\">
                                         <i class=\"hzm-container-center hzm-vertical-align-middle hzm-icon-std fa-user\"></i>
@@ -85,6 +97,7 @@
     {
             
           list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($a, $r, $lang);
+          // die("rafik see menu_folder = ".var_export($menu_folder,true));
           $role_item_display = AfwReplacement::trans_replace($role_item_display, $module, $lang);
           /**
            * @var array $menu_folder
@@ -98,14 +111,20 @@
             else $s12 = "s12";
             foreach($menu_folder["items"] as $menu_folder_item_id => $menu_folder_item)
             {
-                
-                $menu_item_id = $menu_folder_item["id"];
+              $menu_item_id = $menu_folder_item["id"];
+              $menu_item_level = $menu_folder_item["level"];
+              $menu_item_title = $menu_folder_item["menu_name_$lang"];
+              if(!$menu_item_title) $menu_item_title = $menu_folder_item["menu_name"];
+              $menu_item_title = AfwReplacement::trans_replace($menu_item_title, $module, $lang);
+
+              if($menu_item_level >= $myLevel)
+              {
+                $out_scr .= "<!-- OK => $menu_item_title BFID=$menu_item_id BFL=$menu_item_level >= UHL=$myLevel (User=$myName ID=$myId)-->";
+
                 $menu_item_icon = $menu_folder_item["icon"];
+                
                 if((!$menu_item_icon) and $menu_icons_arr[$menu_item_id]) $menu_item_icon = $menu_icons_arr[$menu_item_id];
                 if(!$menu_item_icon) $menu_item_icon = "globe icon-$menu_item_id";
-                $menu_item_title = $menu_folder_item["menu_name_$lang"];
-                if(!$menu_item_title) $menu_item_title = $menu_folder_item["menu_name"];
-                $menu_item_title = AfwReplacement::trans_replace($menu_item_title, $module, $lang);
                 
                 $menu_item_page = $menu_folder_item["page"]."&r=$r";
                 $menu_item_css = $menu_folder_item["css"];
@@ -120,6 +139,11 @@
                                     <div class='hzm4-title'>$menu_item_title</div>
                                 </a>
                              </div>";
+              }
+              else
+              {
+                $out_scr .= "<!-- NOT-OK => $menu_item_title BFID=$menu_item_id BFL=$menu_item_level < UHL=$myLevel (User=$myName ID=$myId)-->";
+              }
 
             }
             foreach($menu_folder["sub-folders"] as $menu_sub_folder_id => $menu_sub_folder)
