@@ -51,7 +51,7 @@ class UmsManager extends AFWRoot
         if(!is_numeric($module)) return $module;
         
         $return = AfwPrevilege::moduleCodeOfModuleId($module);
-        if(!$return) throw new AfwRuntimeException("moduleCodeOfModuleId failed : from (id=$module) may be you need to regenrate .../cache/chsys/modules_all.php");
+        if(!$return) throw new AfwRuntimeException("moduleCodeOfModuleId failed : from (id=$module) may be you need to regenrate .../client-xxxx/modules_all.php");
 
         return $return;
     }
