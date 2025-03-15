@@ -1904,7 +1904,7 @@ class Module extends UmsObject
                     $table_errors = array();
                     $table_ok = $atb_obj->isOk(true);
                     if (!$table_ok) {
-                        $err_text = implode("<br>\n", $atb_obj->getDataErrors());
+                        $err_text = implode("<br>\n", AfwDataQualityHelper::getDataErrors($atb_obj, ));
                         if ($errors_level >= 2) $errors[] = $err_text;
                         $table_errors[] = $err_text;
                     }

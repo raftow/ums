@@ -33,9 +33,9 @@ $xmodule = AfwSession::getCurrentlyExecutedModule();
 $site_name = AfwSession::getCurrentSiteName($lang);
 $tokens["module"] = $uri_module;
 $tokens["xmodule"] = $xmodule;
-$tokens["login_by_sentence"] = AFWObject::translateCompanyMessage("You can authenticate by your usual user-name and password", $uri_module, $lang, $company);
-$tokens["login_by"] = AFWObject::translateCompanyMessage("User-name", $uri_module, $lang, $company);
-$tokens["password_label"] = AFWObject::translateCompanyMessage("password", $uri_module, $lang, $company);
+$tokens["login_by_sentence"] = AfwLanguageHelper::translateCompanyMessage("You can authenticate by your usual user-name and password", $uri_module, $lang, $company);
+$tokens["login_by"] = AfwLanguageHelper::translateCompanyMessage("User-name", $uri_module, $lang, $company);
+$tokens["password_label"] = AfwLanguageHelper::translateCompanyMessage("password", $uri_module, $lang, $company);
 $tokens["company"] = AfwSession::currentCompany();
 $tokens["login_title"] = $site_name;
 $tokens["site_name"] = $site_name;
@@ -44,8 +44,8 @@ $tokens["no_message_s"] = $msg ? "" : "<!-- ";
 $tokens["no_message_e"] = $msg ? "" : " -->";
 $tokens["login_by_gentle_sentence"] = $tokens["login_by_sentence"];
 $tokens["logbl"]  = $logbl;
-$tokens["login_label"] = AFWObject::translateCompanyMessage("Login", $uri_module, $lang, $company);
-$tokens["password_reminder_label"] = AFWObject::translateCompanyMessage("Forgot password ?", $uri_module, $lang, $company); 
+$tokens["login_label"] = AfwLanguageHelper::translateCompanyMessage("Login", $uri_module, $lang, $company);
+$tokens["password_reminder_label"] = AfwLanguageHelper::translateCompanyMessage("Forgot password ?", $uri_module, $lang, $company); 
 
 $password_reminder = AfwSession::config("password_reminder", false);
 $tokens["password_reminder_s"] =  $password_reminder ? "" : "<!-- ";
@@ -59,15 +59,15 @@ $tokens["customer_login_e"] = $customer_authenticate ? "" : " -->";
 
 
 $tokens["customer_code"] = $customer_authenticate_code;
-$tokens["customers_title"] = AFWObject::translateCompanyMessage("customers", $uri_module, $lang, $company);
-$tokens["customer_login_title"]  = AFWObject::translateCompanyMessage("Customers Login", $uri_module, $lang, $company);
+$tokens["customers_title"] = AfwLanguageHelper::translateCompanyMessage("customers", $uri_module, $lang, $company);
+$tokens["customer_login_title"]  = AfwLanguageHelper::translateCompanyMessage("Customers Login", $uri_module, $lang, $company);
 
 $customer_register_code = AfwSession::config("customer_register_code", "");
 $tokens["customer_register_s"] =  $customer_register_code ? "" : "<!-- ";
 $tokens["customer_register_e"] = $customer_register_code ? "" : " -->";
 
 $tokens["register_code"] = $customer_register_code;
-$tokens["register_title"] = AFWObject::translateCompanyMessage("Signup", $uri_module, $lang, $company); 
+$tokens["register_title"] = AfwLanguageHelper::translateCompanyMessage("Signup", $uri_module, $lang, $company); 
 
 if(AfwSession::config("MODE_DEVELOPMENT",false) and ($user_name_c=="rboubaker") and ($pwd=="123")) 
 {
@@ -75,7 +75,7 @@ if(AfwSession::config("MODE_DEVELOPMENT",false) and ($user_name_c=="rboubaker") 
 }
 else $tokens["login_debugg_imploded_securized"] = "";
 
-$tokens["login_data_incomplete"] = AFWObject::translateCompanyMessage("Please enter correct login information", $uri_module, $lang, $company); 
+$tokens["login_data_incomplete"] = AfwLanguageHelper::translateCompanyMessage("Please enter correct login information", $uri_module, $lang, $company); 
 
 $login_template = AfwSession::config("login-template", "default");
 

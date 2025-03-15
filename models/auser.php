@@ -1706,7 +1706,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 
                 // this code
                 /*
-                if($fields_updated["mobile"] and $this->getId() and $this->getVal("mobile") and (!$this->getAttributeError("mobile"))) 
+                if($fields_updated["mobile"] and $this->getId() and $this->getVal("mobile") and (!AfwDataQualityHelper::getAttributeError($this, "mobile"))) 
                 {
                            $file_dir_name = dirname(__FILE__);
                            
@@ -1781,7 +1781,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                                 
                                 if(count($errors)==0)
                                 {
-                                $errors = $user->getDataErrors($lang);
+                                $errors = AfwDataQualityHelper::getDataErrors($user, $lang);
                                 
                                 }                             
                                 if(count($errors)==0)
