@@ -230,7 +230,7 @@ class UmsManager extends AFWRoot
         );
     }
 
-    public static function decodeTable($module_id, $table)
+    public static function decodeTable($module_id, $table, $ignore_cache=false)
     {
         $table_cache_code = "table-$module_id-$table";
         if (AfwSession::getVar($table_cache_code)) {
@@ -238,7 +238,12 @@ class UmsManager extends AFWRoot
         }
         $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
         if(!$module_code) AfwSession::pushWarning("System cache failed to decode m$module_id to module code");
-        list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
+        if(!$ignore_cache)
+        {
+            list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
+        }
+        else $found = false;
+
         if($found)
         {
             $table_id = $tbf_info[$table]['id'];
@@ -274,7 +279,7 @@ class UmsManager extends AFWRoot
         AfwSession::log(
             "getBunctionIdForOperationOnTable : list($module_id, $system_id) = decodeModule($module_code)"
         );
-        $atable_id = UmsManager::decodeTable($module_id, $table);
+        $atable_id = UmsManager::decodeTable($module_id, $table, $ignore_cache);
         AfwSession::log(
             "getBunctionIdForOperationOnTable : $atable_id = decodeTable($module_id, $table)"
         );
@@ -287,8 +292,8 @@ class UmsManager extends AFWRoot
             $create_with_names_if_not_exists,
             $ignore_cache
         );
-        /*
-        if(($bf_id==-1) and ($table=="adm_employee")) die("getBunctionIdForOperationOnTable : list(module_id=$module_id, system_id=$system_id) = decodeModule(module_code=$module_code)<br>\n
+        
+        /*if(($table=="sorting_path") and ($operation=="qsearch")) die("Seems Failed ? (bf_id=$bf_id) decodeBfunction for $table / $operation => getBunctionIdForOperationOnTable : list(module_id=$module_id, system_id=$system_id) = decodeModule(module_code=$module_code)<br>\n
                                                            getBunctionIdForOperationOnTable : atable_id = $atable_id = decodeTable(module_id=$module_id, table=$table)<br>\n
                                                            getBunctionIdForOperationOnTable : bf_id = $bf_id = UmsManager::decodeBfunction(system_id=$system_id,operation=$operation,module_id=$module_id,atable_id=$atable_id,bf_spec='',
                                                                                   create_with_names_if_not_exists=$create_with_names_if_not_exists,ignore_cache=$ignore_cache)");*/

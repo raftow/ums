@@ -1204,7 +1204,10 @@ class Auser extends UmsObject implements AfwFrontEndUser {
               
               return array(implode("\n<br>",$err_arr), implode("\n<br>",$info_arr));
         }
-        
+
+        /*
+        Class Student is not a permanent class in permanenet module should not be treated here in 
+        permanent class Auser in permanent Module UMS
         public function getStudent()
         {
                 $file_dir_name = dirname(__FILE__);
@@ -1236,7 +1239,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         }
         
         
-        /*
+        
         public function getSempl()
         {
             global $file_dir_name;
@@ -1587,7 +1590,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                         }
 
                         $php = $this->calcPhp(false);
-                        AfwFileSystem::write($fileFullName, $php);
+                        AfwFileSystem::write($fileFullName, $php, 'erase', true);
                         return array("", "$fileFullName created successfully");
                 }
                 catch(Exception $e)

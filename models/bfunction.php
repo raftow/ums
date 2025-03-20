@@ -720,13 +720,17 @@ class Bfunction extends UmsObject{
                 // et que ce champ contiendra une valeur par defaut et le fait de la changer ne change rien au fait que c'est la telle business function
                 // si $bf_specification est specifie cela veut dire que ce param s'il change ce n'est plus la meme BF 
                 if($bf_specification) $bf->select("bf_specification",$bf_specification);
-                
+                // if($curr_class_atable_id==13951 and $file_specification=="qsearch") die("sql for curr_class_atable_id=$curr_class_atable_id => ".$bf->getSQL());
                 if($bf->load()) 
                 {
                       $gloablBFS["BF-$id_system-$file_specification-$curr_class_module_id-$curr_class_atable_id-$bf_specification"] =& $bf;
                       return $bf;
                 }
-                else return null;
+                else 
+                {
+                        // if($curr_class_atable_id==13951) die("")
+                        return null;
+                }
         }
         
         
