@@ -1029,7 +1029,7 @@ class Bfunction extends UmsObject{
         {
                 if(!$this->id) return false;
                 
-                if(AfwSession::config("MODE_DEVELOPMENT",false))
+                if(AfwSession::config("MODE_DEVELOPMENT",false) and (!AfwSession::config("MODE_TEST",true)))
                 {                            
                     AfwAutoLoader::addModule("b"."au");   
                     return count(UserStory::loadAll($this->id));
