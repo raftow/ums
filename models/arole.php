@@ -78,11 +78,13 @@ class Arole extends AFWObject
         // list($typ,) = $this->displayAttribute("arole_type_id");
         // $fn .= " ($typ)";
 
+        $moduleId = $this->getVal("module_id");
         $moduleObj = $this->het("module_id");
 
         if ($moduleObj) {
             $module_code = $moduleObj->getVal("module_code");
-            $fn = AfwReplacement::trans_replace($fn, $module_code, $lang);
+            if($module_code) $fn = AfwReplacement::trans_replace($fn, $module_code, $lang);
+            // else die("check module code for module id = $moduleId name ".$moduleObj->getDisplay($lang));
         }
 
         return $fn;

@@ -242,29 +242,32 @@ class Module extends UmsObject
 
                 foreach ($tbf_info as $table_name => $tbf_info_row) {
                     $tbl = Atable::loadByMainIndex($module_id, $table_name);
-                    $old_tab_id = $tbf_info_row['id'];
-                    $tab_id = $tbl->id;
-                    unset($tbf_info_row['id']);
-                    foreach ($tbf_info_row as $mode => $tbf_mode_row) {
-                        if ($tbf_mode_row['id'] > 0) {
-                            //$message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name will have mode $mode");
-                            $bf_specification = "";
-                            $file_specification = $mode;
+                    if($tbl)
+                    {
+                        $old_tab_id = $tbf_info_row['id'];
+                        $tab_id = $tbl->id;
+                        unset($tbf_info_row['id']);
+                        foreach ($tbf_info_row as $mode => $tbf_mode_row) {
+                            if ($tbf_mode_row['id'] > 0) {
+                                //$message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name will have mode $mode");
+                                $bf_specification = "";
+                                $file_specification = $mode;
 
-                            //$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
-                            $bf_row = $tbl->createModeScreen($mode);
-                            $bf_id = $bf_row["id"];
-                            $bfObj = $bf_row["bf"];
-                            if ($bfObj->is_new) {
-                                $bf_added++;
-                                $message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name has added the mode $mode");
+                                //$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
+                                $bf_row = $tbl->createModeScreen($mode);
+                                $bf_id = $bf_row["id"];
+                                $bfObj = $bf_row["bf"];
+                                if ($bfObj->is_new) {
+                                    $bf_added++;
+                                    $message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name has added the mode $mode");
+                                } else {
+                                    $message_arr[] = self::prepareLog("Success : The table $tab_id / $table_name already have mode $mode");
+                                }
                             } else {
-                                $message_arr[] = self::prepareLog("Success : The table $tab_id / $table_name already have mode $mode");
+                                // @todo
+                                // we dont disable a BF already created except if it is previleges file of developer owner of this BF
+                                // this s to avoid loose BFs when developer do reverse engineering before do git pull of previleges file
                             }
-                        } else {
-                            // @todo
-                            // we dont disable a BF already created except if it is previleges file of developer owner of this BF
-                            // this s to avoid loose BFs when developer do reverse engineering before do git pull of previleges file
                         }
                     }
                 }
@@ -2745,19 +2748,27 @@ class Module extends UmsObject
         return $moduleObj->getVal("id_pm");
     }
 
+
+    public function getMyDomain()
+    {
+        $domain = null;
+        if (AfwSession::config("MODE_DEVELOPMENT", false)) {
+            $id_pm = $this->getVal("id_pm");
+            AfwAutoLoader::addModule("p" . "ag");
+            if($id_pm) $domain = Domain::loadById($id_pm);
+        }
+
+        return $domain;
+    }
+
     public function getLookupJobResp($create_obj_if_not_found = true, $always_update_name = false, $lang = "ar")
     {
 
         $appCode = $this->getVal("module_code");
 
         $code_jr = $appCode . "-lookup";
-        $domain = null;
-        if (AfwSession::config("MODE_DEVELOPMENT", false)) {
-            $id_pm = $this->getVal("id_pm");
-            AfwAutoLoader::addModule("p" . "ag");
-            $domain = Domain::loadById($id_pm);
-        }
-
+        
+        $domain = $this->getMyDomain();
         if ((!$domain) or (!$domain->getId())) {
             return null;
         }
@@ -2780,12 +2791,7 @@ class Module extends UmsObject
     public function updateLookupGoal($jrObj = null, $create_obj_if_not_found = true, $always_update_name = false)
     {
 
-        $domain = null;
-        if (AfwSession::config("MODE_DEVELOPMENT", false)) {
-            $id_pm = $this->getVal("id_pm");
-            AfwAutoLoader::addModule("p" . "ag");
-            $domain = Domain::loadById($id_pm);
-        }
+        $domain = $this->getMyDomain();
 
         if ((!$domain) or (!$domain->getId())) {
             return null;
@@ -2854,7 +2860,7 @@ class Module extends UmsObject
         $appCode = $this->getVal("module_code");
         $code_jr = $appCode . "-data";
 
-        $domain = $this->het("domain");
+        $domain = $this->getMyDomain();
         if ((!$domain) or (!$domain->getId())) {
             return null;
         }

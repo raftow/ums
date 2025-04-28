@@ -91,7 +91,7 @@ class UmsManager extends AFWRoot
                 {
                         return array($role_data["name"][$lang], $role_data["menu"], $role_data);
                 }
-                else AfwSession::pushWarning("Missed role_info[$role_id] data in module_$module_code file");    
+                else AfwSession::pushWarning("Missed role_info[$role_id] data in $module_code/previleges.php file");    
             }
             else AfwSession::pushWarning("System need cache optimisation by creating module_$module_code file <!-- file not found $module_sys_file -->");    
                 
@@ -255,7 +255,7 @@ class UmsManager extends AFWRoot
         
         if(!$table_id)
         {
-            AfwSession::pushWarning("System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");    
+            AfwSession::pushWarning("Can not find AtableID for table $table System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");    
             $tableObj = Atable::getAtableByName($module_id, $table);
             $table_id = $tableObj->id;
         }
