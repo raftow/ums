@@ -1703,8 +1703,8 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 if(($objme) and ($this->getId()==$objme->getId()))
                 {
                     AfwSession::unsetUserConnected();
-                    $langObj = $this->hetLang();
-                    if($langObj) AfwSession::setVar("lang", $langObj->valCode());
+                    $languageOfUser = self::code_of_language_enum($this->getVal("lang_id"));
+                    if($languageOfUser) AfwSession::setVar("lang", $languageOfUser);
                 }
                 
                 // this code
