@@ -793,7 +793,7 @@ class Module extends UmsObject
 
     protected function getOtherLinksArray($mode, $genereLog = false, $step = "all")
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
         // $displ = $this->getDisplay($lang);
         $file_dir_name = dirname(__FILE__);
 
@@ -2846,7 +2846,7 @@ class Module extends UmsObject
             $at_mfk .= $atItem->getId() . ",";
         }
         if ($goalObj) {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             $goalObj->set("atable_mfk", $at_mfk);
             $goalObj->update();
             $goalObj->genereConcernedGoals($lang, $regen = true, $operation_men = ",1,2,3,5,");

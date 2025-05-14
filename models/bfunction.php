@@ -202,7 +202,7 @@ class Bfunction extends UmsObject{
         
         public function beforeMAJ($id, $fields_updated) 
         {
-              global $lang;  
+              $lang = AfwLanguageHelper::getGlobalLanguage();  
                 
                 if(!$this->getVal("titre")) {
                            $this->set("titre",$this->getVal("titre_short"));
@@ -222,7 +222,7 @@ class Bfunction extends UmsObject{
         
         public function afterInsert($id, $fields_updated) 
         {
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 if(($this->isToBeInUserStory()) and (!$this->isEmpty()) and (!$this->isInUserStory()))
                 {
                     $this->generateUserStory($lang, 0, false);  
@@ -736,7 +736,7 @@ class Bfunction extends UmsObject{
         
         public function getFormuleResult($attribute, $what='value') 
         {
-            global $lang;   
+            $lang = AfwLanguageHelper::getGlobalLanguage();   
             $server_db_prefix = AfwSession::config("db_prefix","default_db_"); 
                
 	       switch($attribute) 
@@ -1323,7 +1323,7 @@ class Bfunction extends UmsObject{
                         if($in_cache != "not-found") return $in_cache;
                         else return false;
                 }
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 AfwSession::contextLog("look to find $this in roles : $aroles_ids", $context);
                 list($role_item, $role_item_sql) = $this->relRbfList()->resetWhere("avail='Y' and arole_id in ($aroles_ids)")->getFirst();
                 

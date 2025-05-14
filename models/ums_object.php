@@ -18,7 +18,7 @@ class UmsObject extends AfwMomkenObject{
 
         public static function code_of_domain_enum($lkp_id=null)
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             if($lkp_id) return self::domain()['code'][$lkp_id];
             else return self::domain()['code'];
         }
@@ -45,7 +45,7 @@ class UmsObject extends AfwMomkenObject{
         
         public static function list_of_domain_enum()
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             return self::domain()[$lang];
         }
         
@@ -184,7 +184,7 @@ class UmsObject extends AfwMomkenObject{
 
         public static function list_of_religion_enum()
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             return self::religion_enum()[$lang];
         }
         
@@ -214,7 +214,7 @@ class UmsObject extends AfwMomkenObject{
 
         public static function list_of_address_type_enum()
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             return self::address_type_enum()[$lang];
         }
         
@@ -249,7 +249,7 @@ class UmsObject extends AfwMomkenObject{
 
         public static function list_of_employer_enum()
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             return self::employer_enum()[$lang];
         }
         
@@ -270,7 +270,7 @@ class UmsObject extends AfwMomkenObject{
 
         public static function list_of_relationship_enum()
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             return self::relationship_enum()[$lang];
         }
         
@@ -319,7 +319,7 @@ class UmsObject extends AfwMomkenObject{
 
         public static function code_of_language_enum($lkp_id=null)
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             if($lkp_id) return self::language()['code'][$lkp_id];
             else return self::language()['code'];
         }
@@ -331,7 +331,7 @@ class UmsObject extends AfwMomkenObject{
         
         public static function list_of_language_enum()
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             return self::language()[$lang];
         }
         
@@ -360,7 +360,7 @@ class UmsObject extends AfwMomkenObject{
         
         public static function list_of_hierarchy_level_enum()
         {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             return self::hierarchy_level()[$lang];
         }
         

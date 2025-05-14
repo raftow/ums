@@ -187,7 +187,7 @@ class Arole extends AFWObject
 
     public static function getOrCreateLookupRoleForApplication($applicationObj)
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
         if (!$applicationObj->isApplication()) throw new AfwRuntimeException("$applicationObj is not an application");
         if ($applicationObj) $applicationObjId = $applicationObj->getId();
         else $applicationObjId = 0;
@@ -212,7 +212,7 @@ class Arole extends AFWObject
 
     public static function getOrCreateLookupSubRoleForSubModule($lookupRole, $application_code, $module_id, $subModuleObj)
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
         if (!$lookupRole) throw new AfwRuntimeException("lookupRole is required for Arole::getOrCreateLookupSubRoleForSubModule method");
 
         if ($subModuleObj) $subModuleObjId = $subModuleObj->getId();
@@ -584,7 +584,7 @@ class Arole extends AFWObject
 
     public function addBF($bf_id, $forceInMenu=false)
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
 
         $file_dir_name = dirname(__FILE__);
 
@@ -672,7 +672,7 @@ class Arole extends AFWObject
 
     protected function getOtherLinksArray($mode, $genereLog = false, $step = "all")
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
 
         $otherLinksArray = $this->getOtherLinksArrayStandard($mode, false, $step);
         $arole_id = $this->getId();

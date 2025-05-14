@@ -540,7 +540,7 @@ class Jobrole extends UmsObject
 
      public function beforeMAJ($id, $fields_updated)
      {
-          global $lang;  
+          $lang = AfwLanguageHelper::getGlobalLanguage();  
 
           if (!$this->getVal("titre")) {
                $this->set("titre", $this->getVal("titre_short"));

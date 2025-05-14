@@ -118,7 +118,7 @@ class ModuleAuser extends AFWObject{
 
           public function calcRightsDiv()
           {
-               global $lang;
+               $lang = AfwLanguageHelper::getGlobalLanguage();
                global $MODE_SQL_PROCESS_LOURD, $nb_queries_executed;
                $old_nb_queries_executed = $nb_queries_executed;
                $old_MODE_SQL_PROCESS_LOURD = $MODE_SQL_PROCESS_LOURD;

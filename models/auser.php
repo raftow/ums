@@ -654,7 +654,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         public function iCanDoOperationOnObjClass($myObj,$operation_sql)
         {
              if($this->isSuperAdmin()) return true;   
-             global $lang;
+             $lang = AfwLanguageHelper::getGlobalLanguage();
              
              if($operation_sql=="update") $operation_sql = "edit";
              elseif($operation_sql=="view") $operation_sql = "display";
@@ -908,7 +908,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         public function getMenuFor($module_id, $langue="", $sub_folders=false, $items = false)
         {
                 
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 if(!$langue) $langue = $lang;
                 
                 // $file_dir_name = dirname(__FILE__); 
@@ -1555,7 +1555,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         
         public function initUser($from_active_directory=false, $reset_password=false) 
         {
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 $info = array();
                 $err = array();
                 $war = array();
@@ -1676,7 +1676,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         public function beforeMAJ($id, $fields_updated) 
         {
                 
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
                 
                 if($this->getVal("mobile")=="05") {
                      $this->set("mobile","");
@@ -2079,7 +2079,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
 
         public function calcRights()
         {
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 $html = "<div class='ums-rights'>";
 
                 $mauList = $this->get("mau");

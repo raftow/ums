@@ -63,7 +63,7 @@ class UserParam extends UmsObject
 
         public static function list_of_aparam_use_scope_id()
         {
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 return self::aparam_use_scope()[$lang];
         }
 
@@ -141,7 +141,7 @@ class UserParam extends UmsObject
 
         protected function getOtherLinksArray($mode, $genereLog = false, $step = "all")
         {
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 // $objme = AfwSession::getUserConnected();
                 // $me = ($objme) ? $objme->id : 0;
 
