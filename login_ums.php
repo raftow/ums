@@ -3,7 +3,7 @@ if(!$action_page) $action_page = "login.php";
 $login_dbg = array();
 $msg = "";
 if(!$login_page_options) $login_page_options = AfwSession::config("login_page_options", array());
-if(AfwSession::userIsConnected()) 
+if(AfwSession::userIsAuthenticated()) 
 {
         header("Location: index.php");
 } 
@@ -17,7 +17,10 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
 
         $user_or_email = $_POST["mail"];
         $password = $_POST["pwd"];
-
+        
+        // UmsLoginService::umsAuthentication below if succeeded will 
+        // complete the authentication and redorect to home page
+        // if failed the error message will be returned inside the array $tokens
         $tokens = UmsLoginService::umsAuthentication($user_or_email, $password);
 }
 else
