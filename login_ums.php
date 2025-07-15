@@ -42,6 +42,7 @@ $tokens["password_label"] = AfwLanguageHelper::translateCompanyMessage("password
 $tokens["company"] = AfwSession::currentCompany();
 $tokens["login_title"] = $site_name;
 $tokens["site_name"] = $site_name;
+if($tokens["message"]) $msg = $tokens["message"];
 $tokens["message"] = $msg;
 $tokens["no_message_s"] = $msg ? "" : "<!-- ";
 $tokens["no_message_e"] = $msg ? "" : " -->";
