@@ -22,6 +22,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         // complete the authentication and redorect to home page
         // if failed the error message will be returned inside the array $tokens
         $tokens = UmsLoginService::umsAuthentication($user_or_email, $password);
+        die("tokens=".var_export($tokens,true));
 }
 else
 {
