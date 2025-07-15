@@ -21,9 +21,9 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         // UmsLoginService::umsAuthentication below if succeeded will 
         // complete the authentication and redorect to home page
         // if failed the error message will be returned inside the array $tokens
-        die("before login _POST=".var_export($_POST,true));
+        // die("before login _POST=".var_export($_POST,true));
         $tokens = UmsLoginService::umsAuthentication($user_or_email, $password);
-        die("after login tokens=".var_export($tokens,true));
+        // die("after login tokens=".var_export($tokens,true));
 }
 else
 {
@@ -31,7 +31,7 @@ else
         $user_name = "";
         $msg = "";
         $tokens = [];
-        $tokens["message"] = "Please login";
+        // $tokens["message"] = "Please login";
 }
 $logbl = substr(md5($_SERVER["HTTP_USER_AGENT"] . "-" . date("Y-m-d")),0,10);
 $uri_module = AfwUrlManager::currentURIModule();
