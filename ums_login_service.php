@@ -35,7 +35,7 @@ class UmsLoginService extends AFWRoot
                         $login_dbg[] = "try to db_or_golden_login";
                         list($user_connected, $user_not_connected_reason, $user_infos, $login_dbg[]) = AfwLoginUtilities::db_or_golden_login($user_name_c, $password);
                         $user_found = $user_connected;
-                        //die("rafik 3 user_connected=$user_connected reason=$user_not_connected_reason, info=$user_infos login_dbg=".var_export($login_dbg,true));
+                        die("rafik 3 user_connected=$user_connected reason=$user_not_connected_reason, info=$user_infos login_dbg=".var_export($login_dbg,true));
 
                 } else {
                         $user_name_ldap =  $info["samaccountname"][0];
