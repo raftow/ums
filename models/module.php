@@ -716,9 +716,9 @@ class Module extends UmsObject
     public function calcPhp_module($textArea = true)
     {
         global $MODE_BATCH_LOURD, $MODE_SQL_PROCESS_LOURD;
-
         $MODE_BATCH_LOURD = true;
         $MODE_SQL_PROCESS_LOURD = true;
+
         $source_php = "";
         if ($textArea) $source_php .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
         $source_php .= "<?php\n"; // ";
