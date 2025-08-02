@@ -7,7 +7,7 @@
                 <div class="signin-content">
                     <div class="signin-image">
                         <a href="#" class="signup-image-link">[site_name]</a>
-                        <figure><img src="../client-uoh/pic/login-picture.png" alt="sing up image"></figure>                        
+                        <figure><img src="../client-[company]/pic/login-picture.png" alt="sing up image"></figure>                        
                     </div>
 
                     <div class="signin-form">
