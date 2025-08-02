@@ -79,7 +79,7 @@ class Bfunction extends UmsObject{
              }
         }
         
-        public static function loadByMainIndex($curr_class_module_id, $bfunction_code,$create_obj_if_not_found=false)
+        public static function loadByMainIndex($curr_class_module_id, $bfunction_code)
         {
            $obj = new Bfunction();
            $obj->select("curr_class_module_id",$curr_class_module_id);
@@ -87,15 +87,43 @@ class Bfunction extends UmsObject{
 
            if($obj->load())
            {
+                return $obj;
+           }
+           else return null;
+           
+        }
+
+        public static function loadNonTabledBfunction($id_system, $file_specification, 
+                                $bf_specification="", $direct_access="N", $create_obj_if_not_found=false)
+        {
+           if(!$id_system) throw new AfwRuntimeException("loadByMainIndex : id_system is mandatory field");
+           if(!$file_specification) throw new AfwRuntimeException("loadByMainIndex : file_specification is mandatory field");
+           
+
+           $obj = new Bfunction();
+           $obj->select("id_system",$id_system);
+           $obj->select("curr_class_module_id",0);
+           $obj->select("curr_class_atable_id",0);
+           $obj->select("file_specification",$file_specification);
+           $obj->select("bf_specification",$bf_specification);
+           
+           if($obj->load())
+           {
                 if($create_obj_if_not_found) $obj->activate();
+                $obj->set("direct_access",$direct_access);
                 return $obj;
            }
            elseif($create_obj_if_not_found)
            {
-                $obj->set("curr_class_module_id",$curr_class_module_id);
-                $obj->set("bfunction_code",$bfunction_code);
+                $obj->set("id_system",$id_system);
+                $obj->set("curr_class_module_id",0);
+                $obj->set("curr_class_atable_id",0);
+                $obj->set("file_specification",$file_specification);
+                $obj->set("bf_specification",$bf_specification);
+                $obj->set("direct_access",$direct_access);
+                $obj->insertNew();
+                if(!$obj->id) return null; // means beforeInsert rejected insert operation
                 $obj->is_new = true;
-                $obj->insert();
                 return $obj;
            }
            else return null;
@@ -108,7 +136,7 @@ class Bfunction extends UmsObject{
            if(!$curr_class_module_id) throw new AfwRuntimeException("loadByMainIndex : curr_class_module_id is mandatory field");
            if(!$curr_class_atable_id) throw new AfwRuntimeException("loadByMainIndex : curr_class_atable_id is mandatory field");
            if(!$file_specification) throw new AfwRuntimeException("loadByMainIndex : file_specification is mandatory field");
-
+           
 
            $obj = new Bfunction();
            $obj->select("id_system",$id_system);
@@ -586,10 +614,10 @@ class Bfunction extends UmsObject{
 
        public static function createNewBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc="", $bf_desc_en="", $direct_access="obsolete-param", $public="N", $bf_type=1, $bf_code="", $bf_complexity=0,$bf_priority=0,$resetUS=false)
        {
+                $bf = null;
 
-        
-                if($curr_class_module_id and $bf_code) $bf = Bfunction::loadByMainIndex($curr_class_module_id, $bf_code,$create_obj_if_not_found=true);
-                else $bf = new Bfunction();
+                if($curr_class_module_id and $bf_code) $bf = Bfunction::loadByMainIndex($curr_class_module_id, $bf_code);
+                if(!$bf) $bf = new Bfunction();
                                 
                 $bf->set("id_system",$id_system);    // system
                 $bf->set("file_specification",$file);  // source code of BF
@@ -820,7 +848,62 @@ class Bfunction extends UmsObject{
                  
         }
         
-        
+        public static function reverseUrl($module_id, $url)
+        {
+                $url = str_replace("main.php?", "", $url);
+                $url_items = explode("&",$url);
+                $file_specification = "";
+                $bf_specification = "";
+                $tableObj = null;
+                $currmod_obj = null;
+                $curr_module_id = null;
+                $bfObj = null;
+                $direct_page = "Y";
+                foreach($url_items as $url_item)
+                {
+                        list($url_item_code,$url_item_value) = explode("=",$url_item);
+                        if("Main_Page"==$url_item_code)
+                        {
+                                $file_specification = str_replace("afw_mode_", "", $url_item_value);
+                                $file_specification = str_replace(".php", "", $file_specification);
+                                $direct_page = "N";
+                        }
+                        elseif("cl"==$url_item_code)
+                        {
+                                $atable_name = AfwStringHelper::classToTable($url_item_value);
+                        }
+                        elseif("currmod"==$url_item_code)
+                        {
+                                $currmod_obj = Module::loadByMainIndex($url_item_value);
+                                if($currmod_obj) $curr_module_id = $currmod_obj->id;
+                        }
+                        elseif($currmod_obj and $url_item)
+                        {
+                                if($bf_specification) $bf_specification .= "&";
+                                $bf_specification .= $url_item;
+                        }
+                }
+
+                if(!$curr_module_id) $curr_module_id = $module_id;
+                if($atable_name and $curr_module_id)
+                {
+                        $tableObj = Atable::loadByMainIndex($curr_module_id, $atable_name);
+                }
+
+                if($tableObj and $curr_module_id)
+                {
+                        $system_id = $tableObj->calc("system_id");
+                        $bfObj = Bfunction::loadByBusinessIndex($system_id, $curr_module_id, $tableObj->id, $file_specification, $bf_specification, true);
+                }
+                else
+                {
+                        $bfObj = Bfunction::loadNonTabledBfunction($module_id, $file_specification, $bf_specification, $direct_page, true);
+                }
+
+                return $bfObj;
+        }
+
+
         public function getUrl()
         {
               if($this->getVal("curr_class_atable_id"))

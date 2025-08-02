@@ -23,7 +23,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         // if failed the error message will be returned inside the array $tokens
         // die("before login _POST=".var_export($_POST,true));
         $tokens = UmsLoginService::umsAuthentication($user_or_email, $password);
-        // die("after login tokens=".var_export($tokens,true));
+        die("after login tokens=".var_export($tokens,true));
 }
 else
 {
@@ -84,7 +84,7 @@ else $tokens["login_debugg_imploded_securized"] = "";
 
 $tokens["login_data_incomplete"] = AfwLanguageHelper::translateCompanyMessage("Please enter correct login information", $uri_module, $lang, $company); 
 
-$login_template = AfwSession::config("login-template", "default");
+$login_template = AfwSession::config("login-template", "simple");
 
 $file_dir_name = dirname(__FILE__);
 $html_template_file = $file_dir_name."/tpl/$login_template"."_login_tpl.php";

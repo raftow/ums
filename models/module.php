@@ -178,7 +178,8 @@ class Module extends UmsObject
                 include($file_previleges);
 
                 foreach ($tab_info as $tab_id => $tab_info_row) {
-                    if (AfwSession::hasOption('CHECK_ERRORS')) break;
+                    // find another idea to be able to break the loop
+                    // if (AfwSession::hasOption('CHECK_ERRORS')) break;
                     $or_another_case = "";
                     $atable_name = $tab_info_row["name"];
                     $tbl = Atable::loadByMainIndex($module_id, $atable_name);
@@ -191,6 +192,10 @@ class Module extends UmsObject
                             $or_another_case = "or not in the same module $module_code";
                         }
                     }
+                    else
+                    {
+                        $message_arr[] = self::prepareLog("Done : Atable::loadByMainIndex($module_id,$atable_name) succeeded");
+                    }
 
                     if (!$tbl) {
                         // may be it is the first reverse engineering of this atable
@@ -198,6 +203,14 @@ class Module extends UmsObject
                         $object_code_arr[0] = $atable_name;
                         $object_code_arr[1] = $module_code;
                         list($tbl, $msg000) = Atable::reverseByCodes($object_code_arr);
+                        if(!$tbl)
+                        {
+                            $message_arr[] = self::prepareLog("Error : Atable::reverseByCodes($atable_name,$module_code) failed : $msg000");
+                        }
+                        else{
+                            $message_arr[] = self::prepareLog("Done : Atable::reverseByCodes($atable_name,$module_code) succeeded");
+                        }
+                        
                     }
 
                     if ($tbl) {
@@ -213,17 +226,17 @@ class Module extends UmsObject
                         if (!$tblFieldsCount) {
 
                             if ($tbl->forceDelete()) {
-                                $message_arr[] = self::prepareLog("The table $atable_name is obsolete and deleted");
+                                $message_arr[] = self::prepareLog("The table $atable_name is obsolete (contain no field) so deleted");
                             } else {
                                 $tbl_id = $tbl->id;
                                 $message_arr[] = self::prepareLog("Warning : The table $atable_name / $tbl_id is obsolete and can't be deleted : " . $tbl->deleteNotAllowedReason);
                             }
                         } else {
                             // $tbl->reverseMe($module_code);
-                            $message_arr[] = self::prepareLog("The table $atable_name is to be reversed");
+                            $message_arr[] = self::prepareLog("The table $atable_name may need to be reversed");
                         }
                     } else {
-                        $message_arr[] = self::prepareLog("Error : The table $tab_id / $atable_name not found $or_another_case");
+                        $message_arr[] = self::prepareLog("Error : The table $tab_id / $module_code.$atable_name not found $or_another_case : $msg000");
                     }
                     unset($tbl);
                 }
@@ -250,10 +263,10 @@ class Module extends UmsObject
                         foreach ($tbf_info_row as $mode => $tbf_mode_row) {
                             if ($tbf_mode_row['id'] > 0) {
                                 //$message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name will have mode $mode");
-                                $bf_specification = "";
-                                $file_specification = $mode;
-
-                                //$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
+                                
+                                //*$bf_specification = "";
+                                //*$file_specification = $mode;
+                                //*$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
                                 $bf_row = $tbl->createModeScreen($mode);
                                 $bf_id = $bf_row["id"];
                                 $bfObj = $bf_row["bf"];
@@ -269,6 +282,21 @@ class Module extends UmsObject
                                 // this s to avoid loose BFs when developer do reverse engineering before do git pull of previleges file
                             }
                         }
+                    }
+                    else
+                    {
+                        $object_code_arr = [];
+                        $object_code_arr[0] = $atable_name;
+                        $object_code_arr[1] = $module_code;
+                        list($tbl, $msg000) = Atable::reverseByCodes($object_code_arr);
+                        if(!$tbl)
+                        {
+                            $message_arr[] = self::prepareLog("Error : Atable::reverseByCodes($atable_name,$module_code) failed : $msg000");
+                        }
+                        else{
+                            $message_arr[] = self::prepareLog("Done : Atable::reverseByCodes($atable_name,$module_code) succeeded");
+                        }
+                        
                     }
                 }
 
@@ -355,8 +383,19 @@ class Module extends UmsObject
                     {
                         $bfObj = null;
                         $bf_code = $bf_row['code'];
-                        if($bf_code) $bfObj = Bfunction::loadByMainIndex($module_id, $bf_code, true);
-                        elseif($bf_id) $bfObj = Bfunction::loadById($bf_id);
+                        $bf_page_url = $bf_row['page'];
+                        if($bf_code) $bfObj = Bfunction::loadByMainIndex($module_id, $bf_code);
+                        elseif($bf_id) 
+                        {
+                            $bfObj = Bfunction::loadById($bf_id);
+                            if($bfObj->getUrl() != $bf_page_url)
+                            {
+                                unset($bfObj);
+                                $bfObj = null;
+                            }
+                        }
+
+                        if(!$bfObj) $bfObj = Bfunction::reverseUrl($module_id, $bf_page_url);
 
                         if($bfObj)
                         {
@@ -380,7 +419,8 @@ class Module extends UmsObject
                             
                             
                         }
-                        else {
+                        else 
+                        {
                             $message_arr[] = self::prepareLog("Warning : BF [$bf_code/$bf_id] not found");                        
                         }
                     }
