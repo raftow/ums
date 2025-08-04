@@ -13,6 +13,14 @@
                     <div class="signin-form">
                         <h2 class="form-title">تسجيل دخول المشرف</h2>
                         <form method="POST" class="register-form" id="login-form" action="<? echo $action_page ?>" onSubmit="return checkForm();" dir="ltr" enctype="multipart/form-data" autocomplete="off">
+                            [companies_s]
+                            <div class="form-group">
+                                <label for="company"><i class="zmdi zmdi-layers"></i></label>
+                                <select name="company" id="company">
+                                    [companies_options]
+                                </select>
+                            </div>
+                            [companies_e]
                             <div class="form-group">
                                 <label for="mail"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="mail" id="mail" placeholder="[login_by]"/>

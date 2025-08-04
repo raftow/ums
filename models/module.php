@@ -2362,7 +2362,7 @@ class Module extends UmsObject
         AfwAutoLoader::addModule("p" . "ag");
         if ($id) {
             if ($id_replace == 0) {
-                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - not deletable 
+                $server_db_prefix = AfwSession::currentDBPrefix(); // FK part of me - not deletable 
                 // p"."ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("delete from $server_db_prefix"."p"."ag.atable where id_module = '$id' and avail='N'");
 
@@ -2444,7 +2444,7 @@ class Module extends UmsObject
                 }
 
 
-                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - deletable 
+                $server_db_prefix = AfwSession::currentDBPrefix(); // FK part of me - deletable 
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("delete from $server_db_prefix" . "ums.module_auser where id_module = '$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
@@ -2479,7 +2479,7 @@ class Module extends UmsObject
                 // ums.bfunction-الوحدات المعنية	module_mfk  
                 $this->execQuery("update $server_db_prefix" . "ums.bfunction set module_mfk=REPLACE(module_mfk, ',$id,', ',') where module_mfk like '%,$id,%' ");
             } else {
-                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK on me 
+                $server_db_prefix = AfwSession::currentDBPrefix(); // FK on me 
                 // p"."ag.atable-النظام	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix" . "p" . "ag.atable set id_module='$id_replace' where id_module='$id' ");
                 // p"."ag.atable-الوحدة	id_sub_module  أنا تفاصيل لها-OneToMany
@@ -2542,7 +2542,7 @@ class Module extends UmsObject
 
     public function resetAllGeneratedUserStories()
     {
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
         $file_dir_name = dirname(__FILE__);
         /*
                 $application = $this->getParentApplication();

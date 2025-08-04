@@ -73,7 +73,7 @@ figure {
     }
 }
 
-input {
+input, select {
     width: 100%;
     display: block;
     border: none;
@@ -142,6 +142,7 @@ label {
     left: 4px;
     top: 50%;
     padding-top: inherit !important;
+    width : auto !important;
     @include transform(translateY(-50%));
     color: $black-color;
 }

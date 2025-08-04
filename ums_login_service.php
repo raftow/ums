@@ -170,7 +170,7 @@ class UmsLoginService extends AFWRoot
                                 }
 
                                 if ($user_connected) {
-                                        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+                                        $server_db_prefix = AfwSession::currentDBPrefix();
                                         //die("rafik 5 : user is connected");
                                         $user_infos = AfwDatabase::db_recup_row("select id, avail, firstname, email 
                                                             from $server_db_prefix" . "ums.auser 

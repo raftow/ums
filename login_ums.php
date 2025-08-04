@@ -17,13 +17,13 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
 
         $user_or_email = $_POST["mail"];
         $password = $_POST["pwd"];
-        
+        if($_POST["company"]) AfwSession::setCurrentCompany($_POST["company"]);
         // UmsLoginService::umsAuthentication below if succeeded will 
         // complete the authentication and redorect to home page
         // if failed the error message will be returned inside the array $tokens
         // die("before login _POST=".var_export($_POST,true));
         $tokens = UmsLoginService::umsAuthentication($user_or_email, $password);
-        die("after login tokens=".var_export($tokens,true));
+        //die("after login tokens=".var_export($tokens,true));
 }
 else
 {
@@ -43,12 +43,17 @@ $tokens["login_by_sentence"] = AfwLanguageHelper::translateCompanyMessage("You c
 $tokens["login_by"] = AfwLanguageHelper::translateCompanyMessage("User-name", $uri_module, $lang, $company);
 $tokens["password_label"] = AfwLanguageHelper::translateCompanyMessage("password", $uri_module, $lang, $company);
 $tokens["company"] = AfwSession::currentCompany();
+$tokens["companies_options"] = AfwHtmlHelper::arrayToSelectOptions(AfwSession::companiesList(), $tokens["company"]);
 $tokens["login_title"] = $site_name;
 $tokens["site_name"] = $site_name;
 if($tokens["message"]) $msg = $tokens["message"];
 $tokens["message"] = $msg;
 $tokens["no_message_s"] = $msg ? "" : "<!-- ";
 $tokens["no_message_e"] = $msg ? "" : " -->";
+$company_selection_enabled = AfwSession::config("company_selection_enabled", true);
+$tokens["companies_s"] = $company_selection_enabled ? "" : "<!-- ";
+$tokens["companies_e"] = $company_selection_enabled ? "" : " -->";
+
 $tokens["login_by_gentle_sentence"] = $tokens["login_by_sentence"];
 $tokens["logbl"]  = $logbl;
 $tokens["login_label"] = AfwLanguageHelper::translateCompanyMessage("Login", $uri_module, $lang, $company);

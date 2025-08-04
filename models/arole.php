@@ -834,7 +834,7 @@ class Arole extends AFWObject
 
         if ($id) {
             if ($id_replace == 0) {
-                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - not deletable 
+                $server_db_prefix = AfwSession::currentDBPrefix(); // FK part of me - not deletable 
                 $this->execQuery("delete from ${server_db_prefix}ums.arole where parent_arole_id = '$id' and avail='N'");
 
                 $obj = new Arole();
@@ -846,7 +846,7 @@ class Arole extends AFWObject
                 }
 
 
-                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - deletable 
+                $server_db_prefix = AfwSession::currentDBPrefix(); // FK part of me - deletable 
                 // ums.job_arole-الصلاحية المسندة	arole_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("delete from ${server_db_prefix}ums.job_arole where arole_id = '$id' ");
                 // ums.arole_bf-الصلاحية	arole_id  أنا تفاصيل لها-OneToMany
@@ -867,7 +867,7 @@ class Arole extends AFWObject
                 // ums.module_auser-الصلاحيات التي يمكنه أن يسندها لغيره	open_arole_mfk  
                 $this->execQuery("update ${server_db_prefix}ums.module_auser set open_arole_mfk=REPLACE(open_arole_mfk, ',$id,', ',') where open_arole_mfk like '%,$id,%' ");
             } else {
-                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK on me 
+                $server_db_prefix = AfwSession::currentDBPrefix(); // FK on me 
                 // ums.arole-الصلاحية الأم	parent_arole_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update ${server_db_prefix}ums.arole set parent_arole_id='$id_replace' where parent_arole_id='$id' ");
                 // ums.job_arole-الصلاحية المسندة	arole_id  أنا تفاصيل لها-OneToMany
