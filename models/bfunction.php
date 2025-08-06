@@ -661,8 +661,6 @@ class Bfunction extends UmsObject{
                         $bf = self::createNewBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc, $bf_desc_en, $direct_access, $public, $bf_type, $bf_code, $bf_complexity,$bf_priority,$resetUS);
                         // $id_bf = $bf->getId();
                         // obsolete
-                        // $_SESSION["BFS"]["BF-$id_system-$file-$curr_class_module_id-$curr_class_atable_id-$bf_spec"] =& $bf;
-                        // $_SESSION["BFS"]["BF-BYID-$id_bf"] =& $bf;
                         $bf_new = true;
                 }
                 
@@ -709,15 +707,10 @@ class Bfunction extends UmsObject{
         
         public static function getBfunctionById($id_bf)
         {
-                
-                // if($_SESSION["BFS"]["BF-BYID-$id_bf"]) 
-                //   return $_SESSION["BFS"]["BF-BYID-$id_bf"]; 
-                
                 $bf = new Bfunction();
 
                 if($bf->load($id_bf)) 
                 {
-                      // $_SESSION["BFS"]["BF-BYID-$id_bf"] =& $bf;
                       return $bf;
                 }
                 else return null;

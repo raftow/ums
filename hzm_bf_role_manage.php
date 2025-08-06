@@ -1,6 +1,6 @@
 <?php
       
-      
+     /* to be reviewed or obsolete   
       
       
       
@@ -60,7 +60,7 @@
       if($bfrm_submit)
       {
            list($added_count, $removed_count, $menu_added_count, $menu_removed_count) = saveTableRightsMatrice($aroleObj, $framework, $_POST, $subm);
-           $_SESSION["success"] = "added records:$added_count, removed records:$removed_count, menu_added:$menu_added_count, menu_removed:$menu_removed_count";
+           $_S ESSION["success"] = "added records:$added_count, removed records:$removed_count, menu_added:$menu_added_count, menu_removed:$menu_removed_count";
       }
 
       
@@ -185,11 +185,7 @@ foreach($framework_mode_list as $framework_mode => $framework_mode_item)
        $bf_id = $bf_data["bf"]->getId();
        $bf_data_arole_id = $bf_data["arole_id"];
        $bf_data_menu = $bf_data["menu"];
-       /*
-       if($bf_id==101663)
-       {
        
-       }*/
        
        if($aroleAllBFList[$bf_id])
        {
@@ -251,5 +247,5 @@ foreach($framework_mode_list as $framework_mode => $framework_mode_item)
 </form>
 
 <?
-        $out_scr = ob_get_clean();
+        $out_scr = ob_get_clean();*/
 ?>

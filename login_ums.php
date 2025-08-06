@@ -18,7 +18,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         $user_or_email = $_POST["mail"];
         $password = $_POST["pwd"];
         if($_POST["company"]) AfwSession::setCurrentCompany($_POST["company"]);
-        die("debugg rafik _POST=[".var_export($_POST,true)."] and _SESSION = ".var_export($_SESSION,true));
+        // die("debugg rafik _POST=[".var_export($_POST,true)."] and _SESSION = ".var_export($_SES SION,true));
         // UmsLoginService::umsAuthentication below if succeeded will 
         // complete the authentication and redorect to home page
         // if failed the error message will be returned inside the array $tokens
