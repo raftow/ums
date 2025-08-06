@@ -204,7 +204,7 @@ class UmsLoginService extends AFWRoot
                                 }
 
                                 //effacer les var d'une eventuelle session précédente
-                                AfwSession::resetSession();
+                                AfwSession::resetSession("main_company");
 
                                 foreach ($user_infos as $col => $val) {
                                         AfwSession::setSessionVar("user_$col", $val);
