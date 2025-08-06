@@ -13,7 +13,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         {
                 AFWDebugg::startDebuggPage();
         }
-        AfwSession::resetSession();
+        AfwSession::resetSession("main_company");
 
         $user_or_email = $_POST["mail"];
         $password = $_POST["pwd"];
