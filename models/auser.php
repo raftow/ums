@@ -348,6 +348,8 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         public final function isAdmin()
         {
                 if($this->isSuperAdmin()) return true;
+                $admin_max_level = AfwSession::config("admin-max-level", 1);
+                if($this->getVal("hierarchy_level_enum") <= $admin_max_level) return true;
                 $arr_admin = [];
                 if(class_exists("AfwSession"))
                 {
