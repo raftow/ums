@@ -705,7 +705,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         
         public function iCanDoOperation($module_code,$table,$operation_sql, $ignore_cache=false)
         {
-                $this->fld_ACTIVE();
+                // $this->fld_ACTIVE();
                 if(isset($this->iCanDoOperationArray["$module_code-$table-$operation_sql"]))
                 {
                         return $this->iCanDoOperationArray["$module_code-$table-$operation_sql"];
@@ -714,7 +714,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 if($operation_sql=="update") $operation = "edit";
                 elseif($operation_sql=="view") $operation = "display";
                 else $operation = $operation_sql;
-                
+                if(($operation == "display") and $this->isAdmin()) return true;
                 if($this->isSuperAdmin()) return true;
                 list($module_id, $system_id) = UmsManager::decodeModule($module_code);
                 AfwSession::contextLog("list($module_id, $system_id) = decodeModule($module_code)", "iCanDo");
