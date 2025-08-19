@@ -672,11 +672,18 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 list($editWithoutRole, $editWithoutRoleReason) = $myObj->userCanEditMeWithoutRole($this);
                 if($editWithoutRole) 
                 {
+                        
                         AfwSession::contextLog("[".$this->getDisplay($lang)."] can edit '$myObj_displ' without role. $editWithoutRoleReason", "iCanDo");
                         return true;
                 }
                 else
-                {                        
+                {         
+                        
+                        if(($operation_sql=="edit") and ($this->id==1368)) // amjad
+                        {
+                                die("cantEditWithoutRoleReason=$editWithoutRoleReason ".AfwSession::getLog("iCanDo"));
+                        }
+
                         AfwSession::contextLog("[".$this->getDisplay($lang)."] can not edit '$myObj_displ' without role : $editWithoutRoleReason", "iCanDo");
                 }   
              } 
@@ -740,9 +747,9 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                         AfwSession::contextLog("BF ID invalid or BF not found for operation $operation", "iCanDo");
                 }
 
-                if(($operation_sql=="edit") and ($table=="school_class"))
+                if(($operation_sql=="edit") and ($table=="major_department"))
                 {
-                        //die(AfwSession::getLog("iCanDo"));
+                        // die(AfwSession::getLog("iCanDo"));
                 }
                 
                 /*if((!$return or true) and ($this->id==758))
