@@ -358,6 +358,22 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 return (in_array($this->getId(),$arr_admin));
         }
 
+        // a supervisor is a the highest business role and in technical
+        // he has some roles lightly smaller than admin (can see some needed logs for example)        
+        public final function isSupervisor()
+        {
+                if($this->isAdmin()) return true;
+                $supervisor_max_level = AfwSession::config("supervisor-max-level", 2);
+                if($this->getVal("hierarchy_level_enum") <= $supervisor_max_level) return true;
+                $arr_supervisor = [];
+                if(class_exists("AfwSession"))
+                {
+                        $arr_supervisor = AfwSession::config("supervisor-users-arr", []);
+                }                
+                return (in_array($this->getId(),$arr_supervisor));
+
+        }
+
         public function giveMeTheseModulesAnRoles($moduleToGiveArr) // ,$my_org_id = 3
         {
                 $countGived = 0;

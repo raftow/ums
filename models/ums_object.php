@@ -381,8 +381,11 @@ class UmsObject extends AfwMomkenObject{
                     $arr_list_of_hierarchy_level["en"][$id] = $lookup_row["en"];
                 }
 
-                $arr_list_of_hierarchy_level["ar"][1] = "مشرف";
+                $arr_list_of_hierarchy_level["ar"][1] = "مشرف فني";
                 $arr_list_of_hierarchy_level["en"][1] = "admin";
+
+                $arr_list_of_hierarchy_level["ar"][2] = "مشرف";
+                $arr_list_of_hierarchy_level["en"][2] = "supervisor";
 
                 
                 return $arr_list_of_hierarchy_level;
