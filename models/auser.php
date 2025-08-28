@@ -697,7 +697,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                         
                         if(($operation_sql=="edit") and ($this->id==1368)) // amjad
                         {
-                                die("cantEditWithoutRoleReason=$editWithoutRoleReason ".AfwSession::getLog("iCanDo"));
+                                // die("cantEditWithoutRoleReason=$editWithoutRoleReason ".AfwSession::getLog("iCanDo"));
                         }
 
                         AfwSession::contextLog("[".$this->getDisplay($lang)."] can not edit '$myObj_displ' without role : $editWithoutRoleReason", "iCanDo");
