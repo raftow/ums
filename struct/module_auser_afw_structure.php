@@ -24,7 +24,7 @@
 							'TYPE' => 'FK',  'ANSWER' => 'auser',  'ANSMODULE' => 'ums',  
 							'SHORTNAME' => 'user',  'SIZE' => 40,  'DEFAUT' => 0,  
 							'CSS' => 'width_pct_25',  'SEARCH-BY-ONE' => true, 
-							'READONLY' => true,  
+							'READONLY' => true, 'QEDIT' => true, 
 							'AUTOCOMPLETE' => true,
 							'AUTOCOMPLETE-SEARCH' => true,
 							'DISPLAY' => true,  'STEP' => 1, 'RELATION' => 'OneToMany', 
@@ -34,7 +34,7 @@
 							'TYPE' => 'FK',  'ANSWER' => 'module',  'ANSMODULE' => 'ums',  'SIZE' => 40,  
 							'CSS' => 'width_pct_25',  'SHORTNAME' => 'module',  'DEFAUT' => '0',  'SEARCH-BY-ONE' => true,  
 							'DEPENDENT_OFME' => array (0 => 'arole_mfk',),  
-							'WHERE' => "id_module_type=5", 
+							'WHERE' => "id_module_type=5", 'QEDIT' => true,
 							'READONLY' => true, 'DISABLE-READONLY-ADMIN'=>true, 'EDIT_IF_EMPTY'=>true, 'DISPLAY' => true,  'STEP' => 1,  
 							'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => '0', ),
 
