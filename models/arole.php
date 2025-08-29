@@ -300,6 +300,29 @@ class Arole extends AFWObject
         return $all_bf_arr;
     }
 
+    public function getOtherBFs()
+    {
+        $rbfList = $this->get("rbfList");
+
+        $all_bf_arr = array();
+        /**
+         * @var AroleBf $rbfObj
+         * */
+
+        foreach ($rbfList as $rbfId => $rbfObj) {
+            if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) and $rbfObj->isNot("menu")) {
+                $bfObj = $rbfObj->het("bfunction_id");
+                $bf_id = $rbfObj->getVal("bfunction_id");
+                // die("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
+                $all_bf_arr[$bf_id] = $bfObj;
+            }
+        }
+
+        return $all_bf_arr;
+    }
+
+    
+
     public function getAllBFs()
     {
         $rbfList = $this->get("rbfList");
@@ -502,9 +525,11 @@ class Arole extends AFWObject
         $menu_folder["icon"] = $MENU_ICONS[$my_id] . " icon-$my_id";
         $menu_folder["showme"] = true;
         $menu_folder["items"] = array();
+        $menu_folder["otherbfs"] = array();
         if ($items) {
             $this_bfs_list = array(); //$this->get("bfunction_mfk");
             $this_bfs_menu = $this->getMenuBFs();
+            $other_bfs = $this->getOtherBFs();
 
             $this_bfs = array_merge($this_bfs_list, $this_bfs_menu);
 
@@ -545,6 +570,37 @@ class Arole extends AFWObject
                     $menu_folder["items"][$bf_item->getId()]["page"] = $bf_item->getUrl();
                     $menu_folder["items"][$bf_item->getId()]["css"] = "bf";
                     $menu_folder["items"][$bf_item->getId()]["icon"] = $bf_item->getIcon();
+                    //$menu_folder["items"][$bf_item->getId()]["png"] = $bf_item->getPng();
+                } else {
+                    /*
+                            if($this->getId()==80)
+                            {
+                                throw new AfwRuntimeException("bf_item = ".var_export($bf_item,true));
+                            }*/
+                }
+
+                
+
+            }
+
+            foreach ($other_bfs as $bf_item) {
+                if ($bf_item and (is_object($bf_item)) and $bf_item->isActive()) {
+                    $menu_folder["otherbfs"][$bf_item->getId()] = array();
+                    $bf_item_id =  $bf_item->getId();
+                    $title_ar =  $bf_item->getShortDisplay("ar");
+                    if (!$title_ar) $title_ar = "bf-$bf_item_id-ar";
+                    $title_en =  $bf_item->getShortDisplay("en");
+                    if (!$title_en) $title_ar = "bf-$bf_item_id-en";
+                    
+                    
+                    $menu_folder["otherbfs"][$bf_item->getId()]["id"] = $bf_item->getId();
+                    $menu_folder["otherbfs"][$bf_item->getId()]["code"] = $bf_item->getVal("bfunction_code");
+                    $menu_folder["otherbfs"][$bf_item->getId()]["level"] = $bf_item->getVal("hierarchy_level_enum");
+                    $menu_folder["otherbfs"][$bf_item->getId()]["menu_name_ar"] = $title_ar;
+                    $menu_folder["otherbfs"][$bf_item->getId()]["menu_name_en"] = $title_en;
+                    $menu_folder["otherbfs"][$bf_item->getId()]["page"] = $bf_item->getUrl();
+                    $menu_folder["otherbfs"][$bf_item->getId()]["css"] = "bf";
+                    $menu_folder["otherbfs"][$bf_item->getId()]["icon"] = $bf_item->getIcon();
                     //$menu_folder["items"][$bf_item->getId()]["png"] = $bf_item->getPng();
                 } else {
                     /*
