@@ -1388,9 +1388,13 @@ class Bfunction extends UmsObject{
                 return trim($MENU_ICONS["BF-".$this->id]." bficon-".$this->id." bfc-".$this->bfunction_code);
         }
 
-        public function findMeInRoles($aroles_ids, $context="log")
+        public function findMeInRoles($aroles_ids, $context="log", $module_id=null)
         {
+                if(!$module_id) $module_id = $this->getVal("curr_class_module_id");
+                if(!$module_id) return false;
                 if(!$aroles_ids) return false;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
+                
                 $bf_in_roles_code = "find-roles($aroles_ids)-in-bf-".$this->id;
 
                 $in_cache = AfwSession::getVar($bf_in_roles_code);
@@ -1399,6 +1403,15 @@ class Bfunction extends UmsObject{
                         if($in_cache != "not-found") return $in_cache;
                         else return false;
                 }
+
+                // in system cache files
+                $aroles_ids_arr = explode(",", trim($aroles_ids,","));
+                foreach($aroles_ids_arr as $arole_id)
+                {
+                        list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($module_id, $arole_id, $lang);
+                        if($menu_folder['otherbfs'][$this->id]) return "bf found in system cache files in role ".$role_item_display;
+                }
+                
                 $lang = AfwLanguageHelper::getGlobalLanguage();
                 AfwSession::contextLog("look to find $this in roles : $aroles_ids", $context);
                 list($role_item, $role_item_sql) = $this->relRbfList()->resetWhere("avail='Y' and arole_id in ($aroles_ids)")->getFirst();
