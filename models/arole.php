@@ -310,7 +310,7 @@ class Arole extends AFWObject
          * */
 
         foreach ($rbfList as $rbfId => $rbfObj) {
-            if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) and $rbfObj->isNot("menu")) {
+            if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) /* and $rbfObj->isNot("menu")*/) {
                 $bfObj = $rbfObj->het("bfunction_id");
                 $bf_id = $rbfObj->getVal("bfunction_id");
                 // die("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
