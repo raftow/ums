@@ -302,7 +302,7 @@ class Arole extends AFWObject
 
     public function getOtherBFs()
     {
-        $rbfList = $this->get("rbfList");
+        $rbfList = $this->get("all_rbfList");
 
         $all_bf_arr = array();
         /**
