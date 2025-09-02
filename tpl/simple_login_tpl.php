@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="signin-form">
-                        <h2 class="form-title">تسجيل دخول المشرف</h2>
+                        <h2 class="form-title">تسجيل دخول [admin_account_jobs]</h2>
                         <form method="POST" class="register-form" id="login-form" action="<? echo $action_page ?>" onSubmit="return checkForm();" dir="ltr" enctype="multipart/form-data" autocomplete="off">
                             [companies_s]
                             <div class="form-group">

@@ -54,7 +54,7 @@ $tokens["no_message_e"] = $msg ? "" : " -->";
 $company_selection_enabled = AfwSession::config("company_selection_enabled", true);
 $tokens["companies_s"] = $company_selection_enabled ? "" : "<!-- ";
 $tokens["companies_e"] = $company_selection_enabled ? "" : " -->";
-
+$tokens["admin_account_jobs"] = AfwSession::config("admin_account_jobs", "المشرف");
 $tokens["login_by_gentle_sentence"] = $tokens["login_by_sentence"];
 $tokens["logbl"]  = $logbl;
 $tokens["login_label"] = AfwLanguageHelper::translateCompanyMessage("Login", $uri_module, $lang, $company);
