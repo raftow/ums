@@ -1187,6 +1187,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         // should become obsolete student is student (ria), employee is employee (hrm)
         public function getStudentId()
         {
+            /*    
             if($this->getId()>5000000) return ($this->getId() - 5000000);
             
             if($this->myStudentId) return $this->myStudentId;
@@ -1203,13 +1204,14 @@ class Auser extends UmsObject implements AfwFrontEndUser {
               return $return;
             }
             else return 0;
+            */
         }
         
         public function createMyStudentAccount($lang="ar",$student_num="")
         {
               $err_arr = array();
               $info_arr = array();
-              
+              /*
                 $file_dir_name = dirname(__FILE__);
                 require_once "$file_dir_name/../ria/student.php";
                 
@@ -1227,14 +1229,12 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 $this->myStudentObj =& $stdnt;
               
               
-              return array(implode("\n<br>",$err_arr), implode("\n<br>",$info_arr));
+              return array(implode("\n<br>",$err_arr), implode("\n<br>",$info_arr));*/
         }
 
-        /*
-        Class Student is not a permanent class in permanenet module should not be treated here in 
-        permanent class Auser in permanent Module UMS
         public function getStudent()
         {
+                /*
                 $file_dir_name = dirname(__FILE__);
                 
                 require_once "$file_dir_name/../ria/student.php";
@@ -1261,10 +1261,11 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 
                 // return $this->myStudentObj;
                 return $stdnt;
+                */
         }
         
         
-        
+        /*
         public function getSempl()
         {
             global $file_dir_name;
