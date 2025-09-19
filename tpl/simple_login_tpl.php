@@ -4,12 +4,23 @@
         <section class="sign-in">
             <div class="container">
                 <!-- <div class="signin-header">جامعة نايف العربية للعلوم الأمنية</div> -->
+                [login_banner_s]
+                    <style>
+                        .signin-content {
+                            background-image: url(../client-[company]/pic/login-banner.png) !important;
+                        }
+                    </style>
+                [login_banner_e] 
                 <div class="signin-content">
                     <div class="signin-image">
+                        [site_name_s]
                         <a href="#" class="signup-image-link">[site_name]</a>
+                        [site_name_e]
+                        [figure_s]
                         <figure><img src="../client-[company]/pic/login-picture.png" alt="sing up image"></figure>                        
+                        [figure_e]                        
                     </div>
-
+                      
                     <div class="signin-form">
                         <h2 class="form-title">تسجيل دخول [admin_account_jobs]</h2>
                         <form method="POST" class="register-form" id="login-form" action="<? echo $action_page ?>" onSubmit="return checkForm();" dir="ltr" enctype="multipart/form-data" autocomplete="off">

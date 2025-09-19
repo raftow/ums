@@ -54,6 +54,20 @@ $tokens["no_message_e"] = $msg ? "" : " -->";
 $company_selection_enabled = AfwSession::config("company_selection_enabled", true);
 $tokens["companies_s"] = $company_selection_enabled ? "" : "<!-- ";
 $tokens["companies_e"] = $company_selection_enabled ? "" : " -->";
+
+$site_name_show = AfwSession::config("site_name_show", true);
+$tokens["site_name_s"] = $site_name_show ? "" : "<!-- ";
+$tokens["site_name_e"] = $site_name_show ? "" : " -->";
+
+$figure_show = AfwSession::config("figure_show", true);
+$tokens["figure_s"] = $figure_show ? "" : "<!-- ";
+$tokens["figure_e"] = $figure_show ? "" : " -->";
+
+$login_banner = AfwSession::config("login_banner", false);
+$tokens["login_banner_s"] = $login_banner ? "" : "<!-- ";
+$tokens["login_banner_e"] = $login_banner ? "" : " -->";
+
+
 $tokens["admin_account_jobs"] = AfwSession::config("admin_account_jobs", "المشرف");
 $tokens["login_by_gentle_sentence"] = $tokens["login_by_sentence"];
 $tokens["logbl"]  = $logbl;
