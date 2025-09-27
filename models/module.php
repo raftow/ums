@@ -161,10 +161,32 @@ class Module extends UmsObject
             $title_en = $NOM_SITE["en"];
             $title_ar = $NOM_SITE["ar"];
 
+            include("$file_dir_name/../../$module_code/application_config.php");
+            if($config_arr["application_id"] != $objModule->id)
+            {
+                throw new AfwRuntimeException("reverseByCodes : application_id is not correct [=$objModule->id] in application_config file for module $module_code (vs id = $objByCodeId)");
+            }
+            
+            if(!$title_ar or !$title_en)
+            {
+                $title_en = $config_arr['application_name']["en"];
+                $title_ar = $config_arr['application_name']["ar"];
+            }
+
+            $domain_code = $config_arr['domain_code'];
+            $system_code = $config_arr['system_code'];
+            $systemObj = null;
+            $domainObj = null;
+            if($system_code) $systemObj = Module::loadByMainIndex($system_code);
+            if($domain_code) $domainObj = Domain::loadByMainIndex($domain_code);
 
             $objModule->set("titre_short_en", $title_en);
             $objModule->set("titre_short", $title_ar);
+            if($systemObj) $objModule->set("id_system", $systemObj->id);
+            if($domainObj) $objModule->set("id_pm", $domainObj->id);
+            
             $objModule->set("id_module_type", 5);
+             
             $objModule->commit();
             $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
             $id_system = $objModule->getVal("id_system");

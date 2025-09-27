@@ -92,24 +92,24 @@
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
-/*
+
 		'mainGoal' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
-				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 99,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'lookupGoal' => array(
 				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
-				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 99,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'statsGoal' => array(
 				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  
-				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'STEP' => 99,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),*/
+				),
 
 		'is_finished' => array(
 				'TYPE' => 'YN',  
