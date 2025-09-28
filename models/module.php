@@ -2174,6 +2174,9 @@ class Module extends UmsObject
 
     public function pagAllTables($lang = "ar", $update_if_exists = true)
     {
+        global $MODE_SQL_PROCESS_LOURD;
+        $old_MODE_SQL_PROCESS_LOURD = $MODE_SQL_PROCESS_LOURD;
+        $MODE_SQL_PROCESS_LOURD = true;
         if ($this->getVal("id_module_type") != self::$MODULE_TYPE_APPLICATION) {
             return array("pagAllTables method is Only for application module", "");
         }
@@ -2204,8 +2207,8 @@ class Module extends UmsObject
             }
         }
 
-
-        require_once("$file_dir_name/../$cc/all_to_pag.php");
+        $modtopag = $currmod;
+        require_once("$file_dir_name/../../$cc/all_to_pag.php");
         foreach ($arr_all_files as $topag_table) {
             $cl = AfwStringHelper::tableToClass($topag_table);
             if ($cl and (!$pagged_arr[$cl])) {
@@ -2223,8 +2226,8 @@ class Module extends UmsObject
         if ($m_fld_i + $m_fld_u > 0) $information  = "تم إضافة  $m_fld_i حقول  وتم $m_fld_u حقل ";
         else $information  = "لا يوجد تعديلات";
 
-
-
+        $MODE_SQL_PROCESS_LOURD = $old_MODE_SQL_PROCESS_LOURD;
+        AfwQueryAnalyzer::$nb_queries_executed = 0;
         return array("", $information);
     }
 

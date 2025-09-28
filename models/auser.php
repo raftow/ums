@@ -962,7 +962,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 global $ACCEPT_WITHOUT_ROLE_MODULE;                
                 
                 if((!$ACCEPT_WITHOUT_ROLE_MODULE[$module_id]) and 
-                   (!AfwSession::config("mdoule_$module_id"."_is_public", false)))
+                   (!AfwSession::config("module_$module_id"."_is_public", false)))
                 {
                         if(!$authorized) 
                         {

@@ -2,6 +2,38 @@
 if(!class_exists("AfwSession")) die("Denied access");
 $server_db_prefix = AfwSession::currentDBPrefix();
 
+/*
+mysql> alter table tvtc_ums.module change id_analyst id_analyst int null;
+Query OK, 98 rows affected (0.04 sec)
+Records: 98  Duplicates: 0  Warnings: 0
+
+mysql> alter table tvtc_ums.module change id_pm id_pm int null;
+Query OK, 98 rows affected (0.03 sec)
+Records: 98  Duplicates: 0  Warnings: 0
+
+mysql> alter table tvtc_ums.module change id_hd id_hd int null;
+Query OK, 98 rows affected (0.03 sec)
+Records: 98  Duplicates: 0  Warnings: 0
+
+mysql> alter table tvtc_ums.module change id_br id_br int null;
+Query OK, 98 rows affected (0.04 sec)
+Records: 98  Duplicates: 0  Warnings: 0
+
+mysql> alter table tvtc_ums.module change id_main_sh id_main_sh int null;
+Query OK, 98 rows affected (0.04 sec)
+Records: 98  Duplicates: 0  Warnings: 0
+
+mysql> alter table tvtc_ums.module change id_module_type id_module_type smallint null;
+Query OK, 98 rows affected (0.05 sec)
+Records: 98  Duplicates: 0  Warnings: 0
+
+mysql> alter table tvtc_ums.module change id_module_parent id_module_parent int null;
+Query OK, 98 rows affected (0.03 sec)
+Records: 98  Duplicates: 0  Warnings: 0
+
+mysql> alter table tvtc_ums.module change id_module_status id_module_status int null;
+*/
+
 
 AfwDatabase::db_query("DROP TABLE IF EXISTS ".$server_db_prefix."ums.user_param");
 
