@@ -1868,7 +1868,7 @@ class Module extends UmsObject
         $company = AfwSession::currentCompany();
         $currmod = $this->getVal("module_code");
 
-        // require_once("$file_dir_name/../lib/afw/afw_copy_motor.php");
+        
 
         if ($create_project) {
             // copy empty project folder files

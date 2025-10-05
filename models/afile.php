@@ -26,6 +26,50 @@ class Afile extends AFWObject{
                 //$this->qedit_minibox = true;
                 $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
 	}
+
+
+        public static function loadByMainIndex($original_name, $afile_size, $owner_id, $stakeholder_id,$create_obj_if_not_found=false)
+        {
+
+
+           $obj = new Afile();
+           $obj->select("original_name",$original_name);
+           $obj->select("afile_size",$afile_size);
+           $obj->select("owner_id",$owner_id);
+           $obj->select("stakeholder_id",$stakeholder_id);
+
+           if($obj->load())
+           {
+                if($create_obj_if_not_found) $obj->activate();
+                return $obj;
+           }
+           elseif($create_obj_if_not_found)
+           {
+                $obj->set("original_name",$original_name);
+                $obj->set("afile_size",$afile_size);
+                $obj->set("owner_id",$owner_id);
+                $obj->set("stakeholder_id",$stakeholder_id);
+
+                $obj->insertNew();
+                if(!$obj->id) return null; // means beforeInsert rejected insert operation
+                $obj->is_new = true;
+                return $obj;
+           }
+           else return null;
+           
+        }
+
+        public static function loadById($id)
+        {
+           $obj = new Afile();
+           $obj->select_visibilite_horizontale();
+           if($obj->load($id))
+           {
+                return $obj;
+           }
+           else return null;
+        }
+
         
         public function getWideDisplay($lang="ar") 
         {
