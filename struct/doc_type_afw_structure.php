@@ -14,7 +14,7 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'titre_short' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+			'titre_short' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true, 'QEDIT' => true, 
 				'TYPE' => 'TEXT',  'UTF8' => true,  'SIZE' => 64,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
