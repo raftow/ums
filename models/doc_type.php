@@ -103,6 +103,7 @@ class DocType extends AFWObject{
                 $this->IS_LOOKUP = true;
                 $this->IS_SMALL_LOOKUP = true;
                 $this->DISPLAY_FIELD_BY_LANG = ['ar'=>'titre_short', 'en'=>'titre_short_en',];
+                $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
 	}
          
         public static function loadAll($ids="", $order_by="")
