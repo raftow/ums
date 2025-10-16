@@ -1291,7 +1291,7 @@ class Module extends UmsObject
         return true;
     }
 
-    public function afterInsert($id, $fields_updated)
+    public function afterInsert($id, $fields_updated, $disableAfterCommitDBEvent=false)
     {
         // create goals for this application and for the standard IT Jobs
         $this->genereITJobsAndGoals();

@@ -1721,7 +1721,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
 		return true;
 	}
         
-        public function afterUpdate($id, $fields_updated) 
+        public function afterUpdate($id, $fields_updated, $disableAfterCommitDBEvent=false) 
         {
                 
                 $objme = AfwSession::getUserConnected();

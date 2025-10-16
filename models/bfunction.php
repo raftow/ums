@@ -248,7 +248,7 @@ class Bfunction extends UmsObject{
 		return true;
 	}
         
-        public function afterInsert($id, $fields_updated) 
+        public function afterInsert($id, $fields_updated, $disableAfterCommitDBEvent=false) 
         {
                 $lang = AfwLanguageHelper::getGlobalLanguage();
                 if(($this->isToBeInUserStory()) and (!$this->isEmpty()) and (!$this->isInUserStory()))
