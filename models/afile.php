@@ -440,6 +440,8 @@ zoomWindowOffety:-200
             else             
                  return $uploads_root_path;
 	}
+
+        
         
         public function getExcelData($row_num_start=-1, $row_num_end=-1, $caller="not-defined")
         {
@@ -460,11 +462,7 @@ zoomWindowOffety:-200
                             throw new AfwRuntimeException("File not found : $file_path");
                      }
                      
-                     $excel = new HzmExcel($file_path);
-                     $my_data = $excel->getData($row_num_start, $row_num_end, $caller);
-                     $my_head = $excel->getHeaderTrad();
-                     
-                     return [$excel, $my_head, $my_data];
+                     return HzmExcel::getExcelFileData($file_path, $row_num_start, $row_num_end, $caller);
               }
               else
               {
