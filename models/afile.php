@@ -454,7 +454,7 @@ zoomWindowOffety:-200
               
               if(($doc_type_id==14) and (in_array($afile_ext,$xls_ext_arr)))
               {
-                     require_once("$file_dir_name/../lib/hzm/excel/hzm_excel.php");
+                     // require_once("$file_dir_name/../lib/hzm/excel/hzm_excel.php");
                      $new_name = $this->getNewName();
                      $file_path = $this->getFilePath().$new_name;
                      if(!file_exists($file_path))
@@ -462,7 +462,7 @@ zoomWindowOffety:-200
                             throw new AfwRuntimeException("File not found : $file_path");
                      }
                      
-                     return HzmExcel::getExcelFileData($file_path, $row_num_start, $row_num_end, $caller);
+                     return AfwExcel::getExcelFileData($file_path, $row_num_start, $row_num_end, $caller);
               }
               else
               {
