@@ -155,7 +155,7 @@ class Country extends AFWObject{
         }
         
         
-        protected function hideDisactiveRowsFor($auser)
+        protected function hideNonActiveRowsFor($auser)
         {
               return false;  
         }

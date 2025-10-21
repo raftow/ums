@@ -296,7 +296,7 @@ zoomWindowOffety:-200
         }
         
         
-        protected function hideDisactiveRowsFor($auser)
+        protected function hideNonActiveRowsFor($auser)
         {
               return true;  
         }
