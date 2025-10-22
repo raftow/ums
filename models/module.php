@@ -71,7 +71,7 @@ class Module extends UmsObject
         } else return null;
     }
 
-    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false)
+    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false, $command_code_option="")
     {
         $bf_added = 0;
         $message_arr = [];
