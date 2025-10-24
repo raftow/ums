@@ -96,7 +96,7 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'id_pm' => array('SHOW' => true,  'SHORTNAME' => 'domain',  'RETRIEVE' => false,  'EDIT' => true,  
+			'id_pm' => array('SHOW' => true,  'SHORTNAME' => 'domain',  'RETRIEVE' => true,  'EDIT' => true,  
 				'TYPE' => 'ENUM', 'ANSWER' => 'FUNCTION', 'FUNCTION_COL_NAME' => 'domain_enum',
 				'WHERE' => "", 
 				 'QEDIT' => true,  
@@ -109,7 +109,7 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'goal' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+			'goal' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  
 				'TYPE' => 'TEXT',  'UTF8' => true,  
 				'SIZE' => 'AREA',  'QEDIT' => false,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
