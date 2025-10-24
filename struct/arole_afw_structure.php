@@ -1,6 +1,32 @@
 <?php
 class UmsAroleAfwStructure
 {
+
+	// token separator = §
+	public static function initInstance(&$obj)
+	{
+		if ($obj instanceof Arole) {
+			$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
+			$obj->DISPLAY_FIELD_BY_LANG = ['ar' => "titre_short", 'en' => "titre_short_en"];
+
+			$obj->ENABLE_DISPLAY_MODE_IN_QEDIT=true;
+			$obj->ORDER_BY_FIELDS = "module_id, role_code";
+			$obj->copypast = false;
+
+			$obj->UNIQUE_KEY = array('module_id', 'role_code');
+			$obj->editByStep = true;
+			$obj->editNbSteps = 6;
+			$obj->showQeditErrors = true;
+			$obj->showRetrieveErrors = true;
+			$obj->general_check_errors = true;
+			// $obj->after_save_edit = array("class"=>'Road',"attribute"=>'road_id', "currmod"=>'btb',"currstep"=>9);
+			$obj->after_save_edit = array("mode" => "qsearch", "currmod" => 'adm', "class" => 'Arole', "submit" => true);
+		} else {
+			AroleArTranslator::initData();
+			AroleEnTranslator::initData();
+		}
+	}
+
 	public static $DB_STRUCTURE = array(
 
 
@@ -47,6 +73,7 @@ class UmsAroleAfwStructure
 			'ANSMODULE' => 'ums',
 			'SEARCH-BY-ONE' => true,
 			'RELATION' => 'OneToMany',
+			'MANDATORY' => true,
 			'SIZE' => 40,
 			'DEFAUT' => 0,
 			'WHERE' => "id_module_type=5",
@@ -61,6 +88,7 @@ class UmsAroleAfwStructure
 			'SEARCH' => true,
 			'SHOW' => true,
 			'RETRIEVE' => true,
+			'MANDATORY' => true,
 			'EDIT' => true,
 			'QEDIT' => true,
 			'MIN-SIZE' => 4,
