@@ -9,8 +9,8 @@
 	$trad["jobrole"]["id_sh_div"] = "الإدارة/القسم";
 	$trad["jobrole"]["titre_short"] = "مسمى المسؤولية";
 	$trad["jobrole"]["titre_short_en"] = "مسمى المسؤولية بالانجليزي";
-	$trad["jobrole"]["titre"] = "تعريف المسؤولية الوظيفية";
-	$trad["jobrole"]["titre_en"] = "تعريف المسؤولية الوظيفية بالانجليزي";
+	$trad["jobrole"]["titre"] = "تعريف المهمة الوظيفية";
+	$trad["jobrole"]["titre_en"] = "تعريف المهمة الوظيفية بالانجليزي";
 	$trad["jobrole"]["step1"] = "بيانات التعريف";
 	$trad["jobrole"]["step2"] = "الأهداف والصلاحيات";
 	$trad["jobrole"]["step3"] = "إعتماد صحة البيانات";
@@ -31,8 +31,8 @@
         */
         
         $trad["jobrole"]["conds"] = "شروط الأهلية للوظيفة";
-        $trad["jobrole"]["jobAroleList"] = "صلاحيات المسؤولية الوظيفية";
-        $trad["jobrole"]["jobGoalList"] = "الأهداف الرئيسية للمسؤولية الوظيفية";
+        $trad["jobrole"]["jobAroleList"] = "صلاحيات المهمة الوظيفية";
+        $trad["jobrole"]["jobGoalList"] = "الأهداف الرئيسية للمهمة الوظيفية";
         
         $trad["jobrole"]["mainApplication"] = "التطبيق الرئيسي";
         $trad["jobrole"]["mainGoal"] = "هدفي الأول من التطبيق الرئيسي";

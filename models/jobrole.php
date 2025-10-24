@@ -155,7 +155,7 @@ class Jobrole extends UmsObject
                unset($link);
                $my_id = $this->getId();
                $link = array();
-               $title = "إدارة صلاحيات المسؤولية الوظيفية ";
+               $title = "إدارة صلاحيات المهمة الوظيفية ";
                $title_detailed = $title . " : " . $displ;
                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=JobArole&currmod=ums&id_origin=$my_id&class_origin=Jobrole&module_origin=ums&newo=10&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=jobrole_id=$my_id&sel_jobrole_id=$my_id";
                $link["TITLE"] = $title;
@@ -167,7 +167,7 @@ class Jobrole extends UmsObject
                unset($link);
                $my_id = $this->getId();
                $link = array();
-               $title = "إدارة  أهداف المسؤولية الوظيفية";
+               $title = "إدارة  أهداف المهمة الوظيفية";
                $title_detailed = $title . " : " . $displ;
                $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Goal&currmod=b au&id_origin=$my_id&class_origin=Jobrole&module_origin=ums&newo=4&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=jobrole_id=$my_id&sel_jobrole_id=$my_id";
                $link["TITLE"] = $title;
@@ -572,7 +572,7 @@ class Jobrole extends UmsObject
           if ($id) {
                if ($id_replace == 0) {
                     $server_db_prefix = AfwSession::currentDBPrefix(); // FK part of me - not deletable 
-                    // b au.goal-المسؤولية الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
+                    // b au.goal-المهمة الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
                     // $this->execQuery("delete from ".$server_db_prefix."b au.goal where jobrole_id = '$id' and avail='N'");
                     $obj = new Goal();
                     $obj->where("jobrole_id = '$id'");
@@ -618,7 +618,7 @@ class Jobrole extends UmsObject
 
                } else {
                     $server_db_prefix = AfwSession::currentDBPrefix(); // FK on me 
-                    // b au.goal-المسؤولية الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
+                    // b au.goal-المهمة الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
                     $this->execQuery("update ".$server_db_prefix."b au.goal set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // ums.job_arole-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
                     $this->execQuery("update ".$server_db_prefix."ums.job_arole set jobrole_id='$id_replace' where jobrole_id='$id' ");
