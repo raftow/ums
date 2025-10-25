@@ -116,7 +116,7 @@ class Module extends UmsObject
         return [$objModule, $message];
     }
 
-    public static function reverseByCodes($object_code_arr, $doReverse = true)
+    public static function reverseByCodes($object_code_arr, $doReverse = true, $restriction="")
     {
         $bf_added = 0;
         $message_arr = [];
@@ -219,7 +219,7 @@ class Module extends UmsObject
                         $message_arr[] = self::prepareLog("Done : Atable::loadByMainIndex($module_id,$atable_name) succeeded");
                     }
 
-                    if (!$tbl) {
+                    if ((!$tbl) or ($restriction=="erase")) {
                         // may be it is the first reverse engineering of this atable
                         $object_code_arr = [];
                         $object_code_arr[0] = $atable_name;
