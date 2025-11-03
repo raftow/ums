@@ -188,6 +188,11 @@ class Module extends UmsObject
             $objModule->set("id_module_type", 5);
              
             $objModule->commit();
+
+            list($err111, $inf111, $war111, $pagged) = $objModule->pagAllTables($lang = "ar");
+            if($err111) $message_arr[] = "Error : $err111";
+            if($inf111) $message_arr[] = "Info : $inf111";
+
             $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
             $id_system = $objModule->getVal("id_system");
             // 3. reverse the previleges file
@@ -198,6 +203,8 @@ class Module extends UmsObject
                 $message_arr[] = self::prepareLog("Warning : The file $file_previleges not found");
             } else {
                 include($file_previleges);
+
+                
 
                 foreach ($tab_info as $tab_id => $tab_info_row) {
                     // find another idea to be able to break the loop
@@ -227,7 +234,7 @@ class Module extends UmsObject
                         list($tbl, $msg000) = Atable::reverseByCodes($object_code_arr);
                         if(!$tbl)
                         {
-                            $message_arr[] = self::prepareLog("Error : Atable::reverseByCodes($atable_name,$module_code) failed : $msg000");
+                            $message_arr[] = self::prepareLog("Error : Atable::reverseByCodes($atable_name(from previleges.php),$module_code) failed : $msg000");
                         }
                         else{
                             $message_arr[] = self::prepareLog("Done : Atable::reverseByCodes($atable_name,$module_code) succeeded");
@@ -239,7 +246,7 @@ class Module extends UmsObject
                         $atable_name = $tbl->getVal("atable_name");
                         $table_file_name = "$file_dir_name/../../$module_code/models/$atable_name.php";
                         if (!file_exists($table_file_name)) {
-                            $message_arr[] = self::prepareLog("Error : Module::reverseByCodes : The table file $table_file_name not found");
+                            $message_arr[] = self::prepareLog("Error : Module::reverseByCodes : The table file $table_file_name not found => table=$atable_name (from previleges.php)");
                             $tblFieldsCount = 0;
                         } else {
                             $tblFieldsCount = $tbl->getNbFieldsInMode("all");
