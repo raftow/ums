@@ -163,7 +163,7 @@ class DocType extends AFWObject{
                   }
               }
               //$ext_arr[] = $cond;
-              return array($ext_arr, $ft_arr);
+              return array($ext_arr, $ft_arr, $ft_used);
         }
         
         public function fld_CREATION_USER_ID()
