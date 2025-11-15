@@ -9,17 +9,17 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'lookup_code' => array(
+			'lookup_code' => array('IMPORTANT' => 'HIGH',
 				'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SIZE' => 64,  'QEDIT' => true,  'SHORTNAME' => 'code',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'titre_short' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true, 'QEDIT' => true, 
+			'titre_short' => array('IMPORTANT' => 'HIGH','SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true, 'QEDIT' => true, 
 				'TYPE' => 'TEXT',  'UTF8' => true,  'SIZE' => 64,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-            'titre_short_en' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+            'titre_short_en' => array('IMPORTANT' => 'HIGH', 'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
 				'TYPE' => 'TEXT',  'UTF8' => false,  'SIZE' => 64,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
@@ -29,12 +29,12 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'valid_ext' => array('SEARCH' => true,  'QSEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'SHORT_SIZE' => 120,  'SIZE' => 255,  'MIN-SIZE' => 2,  'CHAR_TEMPLATE' => '',  'MANDATORY' => true,  'UTF8' => true,  
+			'valid_ext' => array('IMPORTANT' => 'HIGH', 'SEARCH' => true,  'QSEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'SHORT_SIZE' => 120,  'SIZE' => 255,  'MIN-SIZE' => 2,  'CHAR_TEMPLATE' => '',  'MANDATORY' => true,  'UTF8' => true,  
 				'TYPE' => 'TEXT',  'READONLY' => false,  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
 				),
 
-		        'extentions' => array('STEP' => 5,  'SIZE' => 255,  'SHOW' => true,  'RETRIEVE' => true,  
+		    'extentions' => array('IMPORTANT' => 'HIGH', 'STEP' => 5,  'SIZE' => 255,  'SHOW' => true,  'RETRIEVE' => true,  
 				'CATEGORY' => 'FORMULA',  
 				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
