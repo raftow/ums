@@ -34,7 +34,7 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
 				),
 
-		    'extentions' => array('IMPORTANT' => 'HIGH', 'STEP' => 5,  'SIZE' => 255,  'SHOW' => true,  'RETRIEVE' => true,  
+		    'extentions' => array('STEP' => 5,  'SIZE' => 255,  'SHOW' => true,  'RETRIEVE' => true,  
 				'CATEGORY' => 'FORMULA',  
 				'TYPE' => 'TEXT',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
