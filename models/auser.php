@@ -959,16 +959,15 @@ class Auser extends UmsObject implements AfwFrontEndUser {
 
 
                 list($authorized, $mau_found_roles) = $this->getMyRoles($module_id);
-                global $ACCEPT_WITHOUT_ROLE_MODULE;                
-                
-                if((!$ACCEPT_WITHOUT_ROLE_MODULE[$module_id]) and 
-                   (!AfwSession::config("module_$module_id"."_is_public", false)))
+                $module_is_public = AfwSession::config("module_$module_id"."_is_public", false);
+                if(!$module_is_public)
                 {
                         if(!$authorized) 
                         {
-                                throw new AfwRuntimeException("WHy get here rafik B 20250223<br>\n user_id = $this->id<br>\nmodule_id=$module_id");
-                                $message = $this->tm("Denied M.A.U Access to this module for user %s <br>\nuser_id : %d<br>\nmodule_id : %d");
+                                $message = $this->tm("The user %s (uid:%d) is not authorized to access this module [mid:%d]");
                                 $message = sprintf($message, $this->getDisplay($langue), $this->id, $module_id);
+
+                                throw new AfwBusinessException($message);                                
                                 AfwSession::pushError($message);
                                 return $menu_arr;
                         }

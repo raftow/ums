@@ -1,5 +1,5 @@
 <?php
-    $messages["Denied M.A.U Access to this module for user %s <br>\nuser_id : %d<br>\nmodule_id : %d"] = 
+    $messages["The user %s (uid:%d) is not authorized to access this module [mid:%d]"] = 
          "عذرا، لا يوجد صلاحية للدخول على هذا التطبيق للمستخدم %s <br>\nمعرف المستخدم : %d<br>\معرف التطبيق : %d";
 
 
