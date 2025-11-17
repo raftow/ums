@@ -227,6 +227,13 @@
 					'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 					),
 
+		'rolesIcons' =>	array(
+				'TYPE' => 'TEXT',  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true,  'UTF8' => false,  
+				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 7,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),		
+
 		'allLevels' => array(
 				'TYPE' => 'FK',  'ANSWER' => 'ugroup',  'ANSMODULE' => 'ums',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'module_id',  

@@ -34,6 +34,19 @@ class Arole extends AFWObject
     }
 
 
+    public function proposeIcon()
+    {
+        $strings = [];
+        $strings[] = $this->getVal("role_code");
+        $strings[] = $this->getVal("titre_short");
+        $strings[] = $this->getVal("titre_short_en");
+        $strings[] = $this->getVal("titre");
+        $strings[] = $this->getVal("titre_en");
+             
+        return AfwIconHelper::proposeIcon($strings);
+    }
+    
+
     public static function loadByMainIndex($module_id, $role_code, $create_obj_if_not_found = false)
     {
         if (!$module_id) throw new AfwRuntimeException("loadByMainIndex : module_id is mandatory field");

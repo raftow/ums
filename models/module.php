@@ -741,6 +741,23 @@ class Module extends UmsObject
     }
 
 
+    public function calcRolesIcons($what="value")
+    {
+        $roles_icons = array();
+        $all_roles = $this->get("allRoles");
+        foreach ($all_roles as $role_id => $role_item) {
+            $role_icon = $role_item->proposeIcon();
+            if ($role_icon) {
+                $roles_icons[$role_id] = ".icon-$role_id:before {
+    content: \"\\$role_icon\";
+}\n";
+            }
+        }
+
+        return "<pre class='css ltr'>".implode("\n", $roles_icons)."</pre>";
+    }
+
+
     public function getAllRolesAndSubRoles()
     {
         $obj = new Arole();
