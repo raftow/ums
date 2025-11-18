@@ -230,8 +230,8 @@
 		'rolesIcons' =>	array(
 				'TYPE' => 'TEXT',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true,  'UTF8' => false,  
-				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 7,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 7,  'READONLY' => true, 'FORMAT' => 'html',
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50', 
 				),		
 
 		'allLevels' => array(
@@ -363,13 +363,23 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-		'mybfs' => array(
+		'mybfs' => array('STEP' => 13, 
 				'TYPE' => 'FK',  'ANSWER' => 'bfunction',  'ANSMODULE' => 'ums',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => '',  
 				'WHERE' => "curr_class_module_id = §id§", 
-				 'NO-LABEL' => true,  'FGROUP' => 'mybfs',  'PILLAR' => false,  'NO-ERROR-CHECK' => true,  'BUTTONS' => true,  'SHOW' => true,  'ROLES' => '',  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => false,  'STEP' => 13,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				 'NO-LABEL' => true,  'FGROUP' => 'mybfs',  'PILLAR' => false,  'NO-ERROR-CHECK' => true,  
+				 'BUTTONS' => true,  'SHOW' => true,  'ROLES' => '',  'FORMAT' => 'retrieve',  'EDIT' => false,  
+				 'ICONS' => true,  'DELETE'.'-ICON' => false,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
+
+				
+		'bfIcons' =>	array('STEP' => 13, 
+				'TYPE' => 'TEXT',  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true,  'UTF8' => false,  
+				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'READONLY' => true, 'FORMAT' => 'html',
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50', 
+				),		
 
 			'avail' => array('STEP' => 99,  'HIDE_IF_NEW' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => false,  'QEDIT' => false,  'DEFAUT' => 'Y',  
 				'TYPE' => 'YN',  'FGROUP' => 'tech_fields',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  

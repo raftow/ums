@@ -362,6 +362,8 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 		),
 
+		
+
 		'call_specification' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -538,6 +540,23 @@ class UmsBfunctionAfwStructure
 			'STEP' => 4,
 			'SEARCH-BY-ONE' => '',
 			'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',
+			'EDIT-UGROUPS' => '',
+		),
+
+		'key_words_found' => array(
+			'IMPORTANT' => 'IN',
+			'SHOW' => true,
+			'CATEGORY' => 'FORMULA',
+			'EDIT' => true,
+			'QEDIT' => false,
+			'SIZE' => 32,
+			'UTF8' => false,
+			'TYPE' => 'TEXT',
+			'STEP' => 4,
+			'SEARCH-BY-ONE' => '',
+			'DISPLAY' => true,
+			'READONLY' => true,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),

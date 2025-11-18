@@ -4463,3 +4463,11 @@ div#fg-myRoles {
 div#div_data_myRoles {
     height: 100% !important;
 }
+
+div#div_data_rolesIcons {
+    min-height: 850px;
+}
+
+div#div_data_bfIcons {
+    min-height: 850px;
+}

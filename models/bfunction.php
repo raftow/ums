@@ -793,6 +793,8 @@ class Bfunction extends UmsObject{
                     
                     
                }
+
+               return AfwFormulaHelper::calculateFormulaResult($this, $attribute, $what);
         }
         
         
@@ -1388,6 +1390,20 @@ class Bfunction extends UmsObject{
                 return trim($MENU_ICONS["BF-".$this->id]." bficon-".$this->id." bfc-".$this->bfunction_code);
         }
 
+        public function proposeIcons($returnKeys=false, $debugg=false)
+        {
+                $strings = [];
+                $strings[] = $this->getVal("bfunction_code");
+                $strings[] = $this->getVal("titre_short");
+                $strings[] = $this->getVal("titre_short_en");
+                $strings[] = $this->getVal("titre");
+                $strings[] = $this->getVal("titre_en");
+                $strings[] = $this->getVal("file_specification");
+                $strings[] = $this->getVal("bf_specification");
+                
+                return AfwIconHelper::proposeIcons($strings, $returnKeys, $debugg);
+        }
+
         public function findMeInRoles($aroles_ids, $context="log", $module_id=null)
         {
                 if(!$module_id) $module_id = $this->getVal("curr_class_module_id");
@@ -1451,6 +1467,12 @@ class Bfunction extends UmsObject{
                 if($currstep == 4) return 118;
 
                 return 0;
+        }
+
+
+        public function calcKey_words_found($what="value")
+        {
+                return "found=".$this->calcProposedKeys($debugg=true);
         }
                                 
                                                                                   

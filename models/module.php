@@ -741,17 +741,49 @@ class Module extends UmsObject
     }
 
 
+
+
+    public function calcBfIcons($what="value")
+    {
+        $roles_icons = array();
+        $all_bfs = $this->get("mybfs");
+        foreach ($all_bfs as $bf_id => $bf_item) {
+            $bf_item_label = $bf_item->getShortDisplay("en")." - ".$bf_item->getShortDisplay("ar")." - ".$bf_item->calcProposedKeys();
+            $bf_icon_arr = $bf_item->proposeIcons();
+            foreach ($bf_icon_arr as $bf_icon) {
+                if ($bf_icon) 
+                {
+
+                $roles_icons[$bf_id] = "/* $bf_item_label*/
+.hzm-icon-bficon-$bf_id:before {
+    content: \"\\$bf_icon\";
+}\n";
+                }
+            }
+            
+        }
+
+        return "<pre class='css ltr'>".implode("\n", $roles_icons)."</pre>";
+    }
+
+
     public function calcRolesIcons($what="value")
     {
         $roles_icons = array();
         $all_roles = $this->get("allRoles");
         foreach ($all_roles as $role_id => $role_item) {
-            $role_icon = $role_item->proposeIcon();
-            if ($role_icon) {
-                $roles_icons[$role_id] = ".icon-$role_id:before {
+            $role_item_label = $role_item->getShortDisplay("en")." - ".$role_item->getShortDisplay("ar")." - ".$role_item->calcProposedKeys();
+            $role_icon_arr = $role_item->proposeIcons();
+            foreach ($role_icon_arr as $role_icon) {
+                if ($role_icon) 
+                {
+                $roles_icons[$role_id] = "/* $role_item_label*/
+.icon-$role_id:before {
     content: \"\\$role_icon\";
 }\n";
+                }
             }
+            
         }
 
         return "<pre class='css ltr'>".implode("\n", $roles_icons)."</pre>";

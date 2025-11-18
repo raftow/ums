@@ -34,7 +34,7 @@ class Arole extends AFWObject
     }
 
 
-    public function proposeIcon()
+    public function proposeIcons($returnKeys=false)
     {
         $strings = [];
         $strings[] = $this->getVal("role_code");
@@ -43,7 +43,7 @@ class Arole extends AFWObject
         $strings[] = $this->getVal("titre");
         $strings[] = $this->getVal("titre_en");
              
-        return AfwIconHelper::proposeIcon($strings);
+        return AfwIconHelper::proposeIcons($strings,$returnKeys);
     }
     
 

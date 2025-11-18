@@ -323,4 +323,21 @@ class UmsObject extends AfwMomkenObject{
             return 'avail';
         }
 
+        public function proposeIcons($returnKeys=false, $debugg=false)
+        {
+            return [];
+        }
+
+        public function calcProposedIcons()
+        {
+            $arrIcons = $this->proposeIcons();
+            return implode(" / ", $arrIcons);
+        }
+
+        public function calcProposedKeys($debugg=false)
+        {
+            $arrKeys = $this->proposeIcons(true, $debugg);
+            return implode(" / ", $arrKeys);
+        }
+
 }
