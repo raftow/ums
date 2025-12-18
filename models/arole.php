@@ -9,7 +9,7 @@
 
 // old include of afw.php
 
-class Arole extends AFWObject
+class Arole extends UmsObject
 {
 
     public static $DATABASE        = "";
@@ -34,16 +34,16 @@ class Arole extends AFWObject
     }
 
 
-    public function proposeIcons($returnKeys=false)
+    public function proposeIcons($returnKeys=false, $debugg=false)
     {
         $strings = [];
         $strings[] = $this->getVal("role_code");
-        $strings[] = $this->getVal("titre_short");
         $strings[] = $this->getVal("titre_short_en");
-        $strings[] = $this->getVal("titre");
         $strings[] = $this->getVal("titre_en");
+        $strings[] = $this->getVal("titre_short");
+        $strings[] = $this->getVal("titre");
              
-        return AfwIconHelper::proposeIcons($strings,$returnKeys);
+        return AfwIconHelper::proposeIcons($strings,$returnKeys, $debugg);
     }
     
 

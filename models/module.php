@@ -747,19 +747,12 @@ class Module extends UmsObject
     {
         $roles_icons = array();
         $all_bfs = $this->get("mybfs");
-        foreach ($all_bfs as $bf_id => $bf_item) {
-            $bf_item_label = $bf_item->getShortDisplay("en")." - ".$bf_item->getShortDisplay("ar")." - ".$bf_item->calcProposedKeys();
-            $bf_icon_arr = $bf_item->proposeIcons();
-            foreach ($bf_icon_arr as $bf_icon) {
-                if ($bf_icon) 
-                {
-
-                $roles_icons[$bf_id] = "/* $bf_item_label*/
-.hzm-icon-bficon-$bf_id:before {
-    content: \"\\$bf_icon\";
-}\n";
-                }
-            }
+        foreach ($all_bfs as $bf_id => $bf_item) 
+        {
+            /**
+             * @var Bfunction $bf_item
+             */
+            $roles_icons[$bf_id] = $bf_item->calcBfIcon($what="value");
             
         }
 
@@ -2334,6 +2327,26 @@ class Module extends UmsObject
     {
         return (($this->getVal("id_module_type") == self::$MODULE_TYPE_SYSTEM) or ($this->getVal("id_module_type") == self::$MODULE_TYPE_FRAMEWORK));
     }
+
+    public function readSettingValue($setting_name)
+    {
+        $settings = $this->getVal("web");
+
+        $settings_rows = explode("\n", $settings);
+        foreach($settings_rows as $settings_row)
+        {
+            list($param,$value) = explode("=", $settings_row);
+            $value = trim($value);
+            $param = trim($param);
+            if($param == $setting_name)
+            {
+                return $value;
+            }
+        }
+
+        return null;
+    }
+
 
     public function attributeIsApplicable($attribute)
     {

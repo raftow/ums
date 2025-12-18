@@ -544,6 +544,15 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 		),
 
+
+		'bfIcon' =>	array('STEP' => 4, 
+				'TYPE' => 'TEXT',  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true,  'UTF8' => false,  
+				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'READONLY' => true, 'FORMAT' => 'html',
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_100', 
+				),
+
+
 		'key_words_found' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -559,7 +568,9 @@ class UmsBfunctionAfwStructure
 			'READONLY' => true,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
+			'CSS' => 'width_pct_100',
 		),
+
 		/*
 		'mainGoal' => array('SHOW' => true,  'SIZE' => 40,  
 				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  'NO-ERROR-CHECK' => true,  

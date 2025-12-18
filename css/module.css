@@ -4471,3 +4471,13 @@ div#div_data_rolesIcons {
 div#div_data_bfIcons {
     min-height: 850px;
 }
+
+div#div_data_key_words_found {
+    min-height: min-content;
+    white-space: pre;
+}
+
+div#div_data_bfIcon {
+    min-height: min-content;
+    white-space: pre;
+}

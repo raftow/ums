@@ -337,7 +337,7 @@ class UmsObject extends AfwMomkenObject{
         public function calcProposedKeys($debugg=false)
         {
             $arrKeys = $this->proposeIcons(true, $debugg);
-            return implode(" / ", $arrKeys);
+            return implode(" --> \n ", $arrKeys);
         }
 
 }

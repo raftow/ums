@@ -1,4 +1,9 @@
 <?php
+	$trad["bfunction"]["step1"] = "Main";
+	$trad["bfunction"]["step2"] = "Advanced Properties";
+	$trad["bfunction"]["step3"] = "Usage Domain";
+	$trad["bfunction"]["step4"] = "Technical Properties";
+
 	$trad["bfunction"]["titre"] = "Description of B.F (Arabic)";
 	$trad["bfunction"]["titre_short"] = "Name of B.F (Arabic)";
 	$trad["bfunction"]["titre_en"] = "Description of B.F";

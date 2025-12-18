@@ -1472,7 +1472,27 @@ class Bfunction extends UmsObject{
 
         public function calcKey_words_found($what="value")
         {
-                return "found=".$this->calcProposedKeys($debugg=true);
+                return "Proposed Keys : \n".$this->calcProposedKeys($debugg=true);
+        }
+
+        public function calcBfIcon($what="value")
+        {
+            $bf_id = $this->id;
+            $this_label = $this->getShortDisplay("en")." - ".$this->getShortDisplay("ar");
+            $this_explanation = $this->calcProposedKeys(false);
+            $bf_icon_arr = $this->proposeIcons();
+            if(!$bf_icon_arr) return "/* NO-ICON-PROPOSED-FOR : $this_label */ ";
+            foreach ($bf_icon_arr as $bf_icon) {
+                if ($bf_icon) 
+                {
+
+                 return "/* $this_label*/
+                /* $this_explanation */
+.hzm-icon-bficon-$bf_id:before {
+    content: \"\\$bf_icon\";
+}\n";
+                }
+            }
         }
                                 
                                                                                   
