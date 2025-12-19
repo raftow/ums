@@ -333,6 +333,10 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 
         }
         
+        public final function isRootUser()
+        {
+                return $this->isSuperAdmin() and AfwSession::hasOption("SWITCH_ROOT");
+        }
         
         public final function isSuperAdmin()
         {

@@ -9,6 +9,10 @@
    $options_arr["FULL_SCREEN"] = ["ar"=>"ملء الشاشة", "en"=>"Full screen"];
    $options_arr["HIJRI_TO_GREG"] = ["ar"=>"تواريخ ميلادية", "en"=>"Gregorian dates"];
    $options_arr["COPY_PAST_M"] = ["ar"=>"نسخ لصق متعدد السطور", "en"=>"Multiple lines copy paste"];
-
+   if($objme and $objme->isSuperAdmin())
+   {
+      $options_arr["SWITCH_ROOT"] = ["ar"=>"صلاحية الروت", "en"=>"Root previleges"];
+   }
+   
    
 ?>
