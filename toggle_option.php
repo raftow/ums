@@ -1,12 +1,11 @@
 <?php
 
-$file_dir_name = dirname(__FILE__);
-     
-include "$file_dir_name/../ums/module_options.php";
-include "$file_dir_name/../$MODULE/special_module_options.php";
+      $file_dir_name = dirname(__FILE__);
+      $objme = AfwSession::getUserConnected();     
+      include "$file_dir_name/../ums/module_options.php";
+      include "$file_dir_name/../$MODULE/special_module_options.php";
       
-      $r = "control";
-      $objme = AfwSession::getUserConnected();
+      $r = "control";      
       if(!is_object($objme)) 
       {
           $out_scr .= "You are not logged";
