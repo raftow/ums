@@ -1475,22 +1475,22 @@ class Bfunction extends UmsObject{
                 return "Proposed Keys : \n".$this->calcProposedKeys($debugg=true);
         }
 
-        public function calcBfIcon($what="value")
+        public function calcBfIcon($what="value", $debugg = false, $explain = false)
         {
             $bf_id = $this->id;
             $this_label = $this->getShortDisplay("en")." - ".$this->getShortDisplay("ar");
-            $this_explanation = $this->calcProposedKeys(false);
+            if($explain) $this_explanation = "\n/*" . $this->calcProposedKeys($debugg) . "*/\n";
+            else $this_explanation = "";
             $bf_icon_arr = $this->proposeIcons();
-            if(!$bf_icon_arr) return "/* NO-ICON-PROPOSED-FOR : $this_label */ ";
+            if(!$bf_icon_arr) return "/* NO-ICON-PROPOSED-FOR : $this_label */ \n\n";
             foreach ($bf_icon_arr as $bf_icon) {
                 if ($bf_icon) 
                 {
 
-                 return "/* $this_label*/
-                /* $this_explanation */
+                 return "/* $this_label*/ $this_explanation                
 .hzm-icon-bficon-$bf_id:before {
     content: \"\\$bf_icon\";
-}\n";
+}\n\n";
                 }
             }
         }

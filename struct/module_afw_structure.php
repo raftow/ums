@@ -378,7 +378,7 @@
 				'TYPE' => 'TEXT',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true,  'UTF8' => false,  
 				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'READONLY' => true, 'FORMAT' => 'html',
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50', 
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_100', 
 				),		
 
 			'avail' => array('STEP' => 99,  'HIDE_IF_NEW' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => false,  'QEDIT' => false,  'DEFAUT' => 'Y',  

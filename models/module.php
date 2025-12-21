@@ -745,14 +745,31 @@ class Module extends UmsObject
 
     public function calcBfIcons($what="value")
     {
+        $debugg  = $this->readSettingValue("propose-icons-debugg", false);
+        $explain  = $this->readSettingValue("propose-icons-explain", false);
+        $mode = $this->readSettingValue("propose-icons-mode", "all");
+        if(!$mode) $mode = "all";
+        $help_phrase = "/* Treated mode is : $mode */\n";
         $roles_icons = array();
+        $roles_icons[] = $help_phrase;
         $all_bfs = $this->get("mybfs");
         foreach ($all_bfs as $bf_id => $bf_item) 
         {
             /**
              * @var Bfunction $bf_item
              */
-            $roles_icons[$bf_id] = $bf_item->calcBfIcon($what="value");
+            $bf_description = $bf_item->getShortDisplay("en")." - ".$bf_item->getShortDisplay("ar"); // ." - ".$bf_item->calcProposedKeys()
+            $bf_mode = $bf_item->getVal("file_specification");
+            if(($bf_mode == $mode) or ($mode == "all"))
+            {
+                $roles_icons[$bf_id] = $bf_item->calcBfIcon($what, $debugg, $explain);
+            }
+            else
+            {
+                if($debugg) $roles_icons[$bf_id] = "/* BF ($bf_description) ID $bf_id with mode $bf_mode skipped */\n";
+            } 
+
+            
             
         }
 
@@ -2328,7 +2345,7 @@ class Module extends UmsObject
         return (($this->getVal("id_module_type") == self::$MODULE_TYPE_SYSTEM) or ($this->getVal("id_module_type") == self::$MODULE_TYPE_FRAMEWORK));
     }
 
-    public function readSettingValue($setting_name)
+    public function readSettingValue($setting_name, $default_value = null)
     {
         $settings = $this->getVal("web");
 
@@ -2344,7 +2361,7 @@ class Module extends UmsObject
             }
         }
 
-        return null;
+        return $default_value;
     }
 
 
