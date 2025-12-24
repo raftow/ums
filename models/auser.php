@@ -1637,8 +1637,9 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 $username = $this->getVal("username");
                 $firstname = $this->getVal("firstname");
                 $firstname_en = AfwStringHelper::firstCharUpper(strtolower(AfwStringHelper::arabic_to_latin_chars($this->getVal("firstname"))));
+                $firstname_en = str_replace(" ","", $firstname_en);
                 $part1fn = substr($firstname_en,0,3);
-                $part2fn = substr($firstname_en,3);
+                $part2fn = substr($firstname_en,3,3);
                 if(!$username) 
                 {
                         $username = $this->getVal("mobile");
@@ -1649,8 +1650,10 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 }
                 $sent_by = "nothing";
                 $sent_to = "nobody";
-                $len = AfwSession::config("password_generated_length", 8)-strlen($part1fn)-strlen($part2fn);
-                $pwd = $part1fn.AfwEncryptionHelper::password_generate($username,$len,true).$part2fn;
+                $len = AfwSession::config("password_generated_length", 10)-6;
+                if($len<3) $len = 3;
+                if($len>5) $len = 5;
+                $pwd = trim($part1fn.AfwEncryptionHelper::password_generate($username,$len,true).$part2fn);
                 $pwd_enc = AfwEncryptionHelper::password_encrypt($pwd);
                 $this->set("pwd",$pwd_enc);
                 if($commit) 
