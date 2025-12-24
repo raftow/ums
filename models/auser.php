@@ -1630,7 +1630,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         }
         
         
-        public function resetPassword($lang="ar",$commit=true, $password_sent_by=null, $message_prefix="")
+        public function resetPassword($lang="ar", $password_sent_by=null, $message_prefix="")
         {
                 if(!$password_sent_by) $password_sent_by = AfwSession::config("password_sent_by", []);
                 $objme = AfwSession::getUserConnected();
@@ -1656,52 +1656,48 @@ class Auser extends UmsObject implements AfwFrontEndUser {
                 $pwd = trim($part1fn.AfwEncryptionHelper::password_generate($username,$len,true).$part2fn);
                 $pwd_enc = AfwEncryptionHelper::password_encrypt($pwd);
                 $this->set("pwd",$pwd_enc);
-                if($commit) 
+                $this->commit();
+                $info_detail = "";
+                if($objme and $objme->isSuperAdmin()) $info_detail = "<!-- username=$username  enc($pwd)=$pwd_enc -->";
+                if(!$message_prefix) $message_prefix = $firstname;
+                $message = $message_prefix;
+                $message .= "<br>\n ".$this->tm("Your user name is",$lang) ." : ". $username;
+                $message .= "<br>\n ".$this->tm("Your new password is",$lang) ." : ". $pwd;
+                $info = $message." : $info_detail";
+                foreach($password_sent_by as $password_sent_by_try)
                 {
-                        $this->commit();
-                        $info_detail = "";
-                        if($objme and $objme->isSuperAdmin()) $info_detail = "<!-- username=$username  enc($pwd)=$pwd_enc -->";
-                        if(!$message_prefix) $message_prefix = $firstname;
-                        $message = $message_prefix;
-                        $message .= "<br>\n ".$this->tm("Your user name is",$lang) ." : ". $username;
-                        $message .= "<br>\n ".$this->tm("Your new password is",$lang) ." : ". $pwd;
-                        $info = $message." : $info_detail";
-                        foreach($password_sent_by as $password_sent_by_try)
+                        if($password_sent_by_try=="sms")
                         {
-                                if($password_sent_by_try=="sms")
+                                $send_succeeded = false;
+                                $simulate_sms_to_mobile = AfwSession::config("simulate_sms_to_mobile", null);
+                                if($simulate_sms_to_mobile) $sms_mobile = $simulate_sms_to_mobile;
+                                else $sms_mobile = $this->getVal("mobile");
+                                // @todo : send SMS / Email with the new password
+                                if($sms_mobile)
                                 {
-                                        $send_succeeded = false;
-                                        $simulate_sms_to_mobile = AfwSession::config("simulate_sms_to_mobile", null);
-                                        if($simulate_sms_to_mobile) $sms_mobile = $simulate_sms_to_mobile;
-                                        else $sms_mobile = $this->getVal("mobile");
-                                        // @todo : send SMS / Email with the new password
-                                        if($sms_mobile)
+                                        list($send_succeeded, $sms_info) = AfwSmsSender::sendSMS($sms_mobile, $message);
+                                        // if send succeeded
+                                        if($send_succeeded)
                                         {
-                                                list($send_succeeded, $sms_info) = AfwSmsSender::sendSMS($sms_mobile, $message);
-                                                // if send succeeded
-                                                if($send_succeeded)
-                                                {
-                                                        $sent_to = $sms_mobile;
-                                                        $sent_by = "sms";
-                                                } 
-                                        }
-                                        else
-                                        {
-                                                // die("auser without mobile : ".var_export($this,true));
-                                                $sms_info = "no mobile number provided to send sms";
-                                        }
-                                        $info .= "/".$sms_info;
-
+                                                $sent_to = $sms_mobile;
+                                                $sent_by = "sms";
+                                        } 
                                 }
-
-                                if($password_sent_by_try=="email")
+                                else
                                 {
-                                        
-                                }                                
-                        }
-                }
-                else $info = $this->tm("Password reset, but need commit",$lang);
+                                        // die("auser without mobile : ".var_export($this,true));
+                                        $sms_info = "no mobile number provided to send sms";
+                                }
+                                $info .= "/".$sms_info;
 
+                        }
+
+                        if($password_sent_by_try=="email")
+                        {
+                                
+                        }                                
+                }
+                
                 
                 
                 return array("", $info, "", $pwd, $sent_by, $sent_to);
