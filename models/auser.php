@@ -1632,7 +1632,7 @@ class Auser extends UmsObject implements AfwFrontEndUser {
         
         public function resetPassword($lang="ar",$commit=true, $password_sent_by=null, $message_prefix="")
         {
-                if(!$password_sent_by) $password_sent_by = AfwSession::config("password_sent_by", ["sms"]);
+                if(!$password_sent_by) $password_sent_by = AfwSession::config("password_sent_by", []);
                 $objme = AfwSession::getUserConnected();
                 $username = $this->getVal("username");
                 $firstname = $this->getVal("firstname");
