@@ -3,35 +3,35 @@ if(!class_exists("AfwSession")) die("Denied access");
 $server_db_prefix = AfwSession::currentDBPrefix();
 
 /*
-alter table tvtc_ums.module change id_analyst id_analyst int null;
+alter table ttc_ums.module change id_analyst id_analyst int null;
 Query OK, 98 rows affected (0.04 sec)
 Records: 98  Duplicates: 0  Warnings: 0
 
-alter table tvtc_ums.module change id_pm id_pm int null;
+alter table ttc_ums.module change id_pm id_pm int null;
 Query OK, 98 rows affected (0.03 sec)
 Records: 98  Duplicates: 0  Warnings: 0
 
-alter table tvtc_ums.module change id_hd id_hd int null;
+alter table ttc_ums.module change id_hd id_hd int null;
 Query OK, 98 rows affected (0.03 sec)
 Records: 98  Duplicates: 0  Warnings: 0
 
-alter table tvtc_ums.module change id_br id_br int null;
+alter table ttc_ums.module change id_br id_br int null;
 Query OK, 98 rows affected (0.04 sec)
 Records: 98  Duplicates: 0  Warnings: 0
 
-alter table tvtc_ums.module change id_main_sh id_main_sh int null;
+alter table ttc_ums.module change id_main_sh id_main_sh int null;
 Query OK, 98 rows affected (0.04 sec)
 Records: 98  Duplicates: 0  Warnings: 0
 
-alter table tvtc_ums.module change id_module_type id_module_type smallint null;
+alter table ttc_ums.module change id_module_type id_module_type smallint null;
 Query OK, 98 rows affected (0.05 sec)
 Records: 98  Duplicates: 0  Warnings: 0
 
-alter table tvtc_ums.module change id_module_parent id_module_parent int null;
+alter table ttc_ums.module change id_module_parent id_module_parent int null;
 Query OK, 98 rows affected (0.03 sec)
 Records: 98  Duplicates: 0  Warnings: 0
 
-alter table tvtc_ums.module change id_module_status id_module_status int null;
+alter table ttc_ums.module change id_module_status id_module_status int null;
 */
 
 
@@ -129,6 +129,6 @@ create table tmp_dup_afile as select original_name,afile_size,owner_id,stakehold
 
 delete from afile where original_name in (select original_name from tmp_dup_afile) and id not in (select keep_id from tmp_dup_afile);                                                   Query OK, 354 rows affected (0.37 sec)
 
-create unique index uk_afile on tvtc_ums.afile(original_name,afile_size,owner_id,stakeholder_id);
+create unique index uk_afile on ttc_ums.afile(original_name,afile_size,owner_id,stakeholder_id);
 */
 

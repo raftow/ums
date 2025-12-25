@@ -9,7 +9,7 @@ class UserParamValue extends AFWObject{
 
         public static $MY_ATABLE_ID=13959; 
   
-        public static $DATABASE		= "tvtc_ums";
+        public static $DATABASE		= "ttc_ums";
         public static $MODULE		        = "ums";        
         public static $TABLE			= "user_param_value";
 
@@ -172,7 +172,7 @@ class UserParamValue extends AFWObject{
         
         public function beforeDelete($id,$id_replace) 
         {
-            $server_db_prefix = AfwSession::config("db_prefix","tvtc_");
+            $server_db_prefix = AfwSession::config("db_prefix","ttc_");
             
             if(!$id)
             {
