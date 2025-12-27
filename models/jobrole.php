@@ -222,9 +222,10 @@ class Jobrole extends UmsObject
                 $ignored_arr = array();
 
                 foreach ($jobGoalList as $jobGoalId => $jobGoal) {
+                        /** @var Goal $jobGoal */
                         if ($jobGoal->getVal('module_id')) {
                                 if ($jobGoal->isOk(true)) {
-                                        $ar = $jobGoal->getOrCreateAssociatedArole();
+                                        $ar = $jobGoal->getOrCreateAssociatedArole(true);
                                         if ($ar->is_new)
                                                 $createdArolesCount++;
                                         else
