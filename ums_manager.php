@@ -233,29 +233,30 @@ class UmsManager extends AFWRoot
         $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
         if (!$module_code)
             AfwSession::pushWarning("System cache failed to decode m$module_id to module code");
+        $table_id = 0;
         if (!$ignore_cache) {
             list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
-            $table_id = 0;
             if ($found) {
                 $table_id = $tbf_info[$table]['id'];
                 if (!$table_id) {
                     AfwSession::pushWarning("Missed tbf_info[$table]['id'] data in previleges file of $module_code");
                 }
-            } elseif (!$table_id) {
-                if ($module_sys_file) {
-                    AfwSession::pushWarning("Can not find AtableID for table $table System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");
-                }
+            }
+        }
 
-                $tableObj = Atable::getAtableByName($module_id, $table);
-                $table_id = $tableObj->id;
+        if (!$table_id) {
+            if ($module_sys_file) {
+                AfwSession::pushWarning("Can not find AtableID for table $table System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");
             }
-            if ($table_id) {
-                AfwSession::setVar($table_cache_code, $table_id);
-            } else {
-                AfwSession::setVar($table_cache_code, -1);
-            }
+
+            $tableObj = Atable::getAtableByName($module_id, $table);
+            $table_id = $tableObj->id;
+        }
+
+        if ($table_id) {
+            AfwSession::setVar($table_cache_code, $table_id);
         } else {
-            $found = false;
+            AfwSession::setVar($table_cache_code, -1);
         }
 
         return AfwSession::getVar($table_cache_code);
@@ -273,8 +274,10 @@ class UmsManager extends AFWRoot
             "getBunctionIdForOperationOnTable : list($module_id, $system_id) = decodeModule($module_code)"
         );
         $atable_id = UmsManager::decodeTable($module_id, $table, $ignore_cache);
+        if (!$atable_id)
+            return '-99';
         AfwSession::log(
-            "getBunctionIdForOperationOnTable : $atable_id = decodeTable($module_id, $table)"
+            "getBunctionIdForOperationOnTable : $atable_id = decodeTable($module_id, $table, $ignore_cache)"
         );
         $bf_id = UmsManager::decodeBfunction(
             $system_id,
@@ -289,7 +292,7 @@ class UmsManager extends AFWRoot
         if (($table == 'workflow_request') and ($operation == 'qsearch'))
             die("Seems not correct ? (bf_id=$bf_id) decodeBfunction for $table / $operation => getBunctionIdForOperationOnTable : list(module_id=$module_id, system_id=$system_id) = decodeModule(module_code=$module_code)<br>
 
-                                                           getBunctionIdForOperationOnTable : atable_id = $atable_id = decodeTable(module_id=$module_id, table=$table)<br>
+                                                           getBunctionIdForOperationOnTable : atable_id = $atable_id = decodeTable(module_id=$module_id, table=$table, ignore_cache=$ignore_cache)<br>
 
                                                            getBunctionIdForOperationOnTable : bf_id = $bf_id = UmsManager::decodeBfunction(system_id=$system_id,operation=$operation,module_id=$module_id,atable_id=$atable_id,bf_spec='',
                                                                                   create_with_names_if_not_exists=$create_with_names_if_not_exists,ignore_cache=$ignore_cache)");
