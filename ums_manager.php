@@ -135,7 +135,7 @@ class UmsManager extends AFWRoot
     ) {
         $file_dir_name = dirname(__FILE__);
         if (!$ignore_cache) {
-            throw new AfwRuntimeException('rafik choof here is using cahce see why ...');
+            // throw new AfwRuntimeException('rafik choof here is using cahce see why ...');
             $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
             if (!$module_code)
                 throw new AfwRuntimeException("the file chsys modules_all doen't contain mod_info[m$module_id][code]");
@@ -286,10 +286,13 @@ class UmsManager extends AFWRoot
             $ignore_cache
         );
 
-        /*if(($table=="sorting_path") and ($operation=="qsearch")) die("Seems Failed ? (bf_id=$bf_id) decodeBfunction for $table / $operation => getBunctionIdForOperationOnTable : list(module_id=$module_id, system_id=$system_id) = decodeModule(module_code=$module_code)<br>\n
-                                                           getBunctionIdForOperationOnTable : atable_id = $atable_id = decodeTable(module_id=$module_id, table=$table)<br>\n
+        if (($table == 'workflow_request') and ($operation == 'qsearch'))
+            die("Seems not correct ? (bf_id=$bf_id) decodeBfunction for $table / $operation => getBunctionIdForOperationOnTable : list(module_id=$module_id, system_id=$system_id) = decodeModule(module_code=$module_code)<br>
+
+                                                           getBunctionIdForOperationOnTable : atable_id = $atable_id = decodeTable(module_id=$module_id, table=$table)<br>
+
                                                            getBunctionIdForOperationOnTable : bf_id = $bf_id = UmsManager::decodeBfunction(system_id=$system_id,operation=$operation,module_id=$module_id,atable_id=$atable_id,bf_spec='',
-                                                                                  create_with_names_if_not_exists=$create_with_names_if_not_exists,ignore_cache=$ignore_cache)");*/
+                                                                                  create_with_names_if_not_exists=$create_with_names_if_not_exists,ignore_cache=$ignore_cache)");
         return $bf_id;
     }
 
