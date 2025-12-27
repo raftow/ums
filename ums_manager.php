@@ -135,6 +135,7 @@ class UmsManager extends AFWRoot
     ) {
         $file_dir_name = dirname(__FILE__);
         if (!$ignore_cache) {
+            throw new AfwRuntimeException('rafik choof here is using cahce see why ...');
             $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
             if (!$module_code)
                 throw new AfwRuntimeException("the file chsys modules_all doen't contain mod_info[m$module_id][code]");
