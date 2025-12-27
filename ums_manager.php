@@ -5,26 +5,27 @@ $file_dir_name = dirname(__FILE__);
 class UmsManager extends AFWRoot
 {
     /*
-        public static function systemOfModuleCode($module_code)
-        {
-             
-                $system_cache_key = "system_id_of_module_".$module_code;
-                if(AfwSession::getVar($system_cache_key)) return AfwSession::getVar($system_cache_key);
-                $my_org_id = 3;
-                
-                $moduleObj = Module::getModuleByCode($my_org_id, $module_code);
-
-                if($moduleObj)
-                {
-                        AfwSession::setVar($system_cache_key, $moduleObj->id_system);             
-                }
-                else
-                {
-                        AfwSession::setVar($system_cache_key, 0);                  
-                }
-                
-                return AfwSession::getVar($system_cache_key);
-        }*/
+     * public static function systemOfModuleCode($module_code)
+     * {
+     *
+     *         $system_cache_key = "system_id_of_module_".$module_code;
+     *         if(AfwSession::getVar($system_cache_key)) return AfwSession::getVar($system_cache_key);
+     *         $my_org_id = 3;
+     *
+     *         $moduleObj = Module::getModuleByCode($my_org_id, $module_code);
+     *
+     *         if($moduleObj)
+     *         {
+     *                 AfwSession::setVar($system_cache_key, $moduleObj->id_system);
+     *         }
+     *         else
+     *         {
+     *                 AfwSession::setVar($system_cache_key, 0);
+     *         }
+     *
+     *         return AfwSession::getVar($system_cache_key);
+     * }
+     */
 
     public static function decodeRole($module_code, $role_code)
     {
@@ -48,53 +49,51 @@ class UmsManager extends AFWRoot
 
     public static function decodeModuleCodeOrIdToModuleCode($module)
     {
-        if(!is_numeric($module)) return $module;
-        
+        if (!is_numeric($module))
+            return $module;
+
         $return = AfwPrevilege::moduleCodeOfModuleId($module);
-        if(!$return) throw new AfwRuntimeException("moduleCodeOfModuleId failed : from (id=$module) may be you need to regenrate .../client-xxxx/modules_all.php");
+        if (!$return)
+            throw new AfwRuntimeException("moduleCodeOfModuleId failed : from (id=$module) may be you need to regenrate .../client-xxxx/modules_all.php");
 
         return $return;
     }
 
     public static function decodeModuleCodeOrIdToModuleId($module)
     {
-        if(is_numeric($module)) return $module;
-        
+        if (is_numeric($module))
+            return $module;
+
         return AfwPrevilege::moduleIdOfModuleCode($module);
     }
 
-
-    public static function getRoleDetails($module, $role_id, $lang)    
+    public static function getRoleDetails($module, $role_id, $lang)
     {
-        if(!$lang) $lang = "ar";
-        if(!$module)
-        {
-                AfwSession::pushError("No module specified to give role details");    
-                return;
+        if (!$lang)
+            $lang = 'ar';
+        if (!$module) {
+            AfwSession::pushError('No module specified to give role details');
+            return;
         }
-        
-        if(!$role_id)
-        {
-                AfwSession::pushError("No role_id specified to give role details");    
-                return;
+
+        if (!$role_id) {
+            AfwSession::pushError('No role_id specified to give role details');
+            return;
         }
 
         $module_code = self::decodeModuleCodeOrIdToModuleCode($module);
-        if(!$module_code) AfwSession::pushError("No module code for module $module check your php file chsys->modules->all");    
-        else
-        {
+        if (!$module_code)
+            AfwSession::pushError("No module code for module $module check your php file chsys->modules->all");
+        else {
             list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
-            if($found)
-            {
+            if ($found) {
                 $role_data = $role_info[$role_id];
-                if($role_data)
-                {
-                        return array($role_data["name"][$lang], $role_data["menu"], $role_data);
-                }
-                else AfwSession::pushWarning("Missed role_info[$role_id] data in $module_code/previleges.php file");    
-            }
-            else AfwSession::pushWarning("System need cache optimisation by creating module_$module_code file <!-- file not found $module_sys_file -->");    
-                
+                if ($role_data) {
+                    return array($role_data['name'][$lang], $role_data['menu'], $role_data);
+                } else
+                    AfwSession::pushWarning("Missed role_info[$role_id] data in $module_code/previleges.php file");
+            } else
+                AfwSession::pushWarning("System need cache optimisation by creating module_$module_code file <!-- file not found $module_sys_file -->");
         }
     }
 
@@ -110,7 +109,7 @@ class UmsManager extends AFWRoot
         }
         $my_org_id = 3;
 
-        //$module_id = self::decodeModuleCodeOrIdToModuleId($module_code)
+        // $module_id = self::decodeModuleCodeOrIdToModuleId($module_code)
 
         $moduleObj = Module::getModuleByCode($my_org_id, $module_code);
         if ($moduleObj) {
@@ -132,25 +131,21 @@ class UmsManager extends AFWRoot
         $curr_class_atable_id,
         $bf_spec,
         $create_with_names_if_not_exists = null,
-        $ignore_cache=false
-    ) 
-    {
-        $file_dir_name = dirname(__FILE__); 
-        if(!$ignore_cache)
-        {
-            $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id); 
-            if(!$module_code) throw new AfwRuntimeException("the file chsys modules_all doen't contain mod_info[m$module_id][code]");
-            
+        $ignore_cache = false
+    ) {
+        $file_dir_name = dirname(__FILE__);
+        if (!$ignore_cache) {
+            $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
+            if (!$module_code)
+                throw new AfwRuntimeException("the file chsys modules_all doen't contain mod_info[m$module_id][code]");
+
             list($found, $role_info, $tab_info, $tbf_info) = AfwPrevilege::loadModulePrevileges($module_code);
-            
-            if($found)
-            {
-                if(count($tab_info)>0)
-                {
-                    $object_table = $tab_info[$curr_class_atable_id]["name"];
-                    $bf_id = $tbf_info[$object_table][$operation]["id"];
-                    if(($bf_id>0) or ($bf_id === -1))
-                    {
+
+            if ($found) {
+                if (count($tab_info) > 0) {
+                    $object_table = $tab_info[$curr_class_atable_id]['name'];
+                    $bf_id = $tbf_info[$object_table][$operation]['id'];
+                    if (($bf_id > 0) or ($bf_id === -1)) {
                         return $bf_id;
                     }
                 }
@@ -158,16 +153,13 @@ class UmsManager extends AFWRoot
         }
 
         // global $decodeBfunction;
-        
+
         // die("the file $module_sys_file doen't contain \$tbf_info[$object_table][$operation][id]");
         $bf_cache_code = "bf-$id_system-$operation-$module_id-$curr_class_atable_id-$bf_spec";
         $bf_id_from_cache = AfwSession::getVar($bf_cache_code);
-        if (($bf_id_from_cache>0)  or ($bf_id_from_cache === -1)) 
-        {
+        if (($bf_id_from_cache > 0) or ($bf_id_from_cache === -1)) {
             return $bf_id_from_cache;
         }
-
-        
 
         $bf = Bfunction::getBfunction(
             $id_system,
@@ -196,20 +188,21 @@ class UmsManager extends AFWRoot
         }
 
         AfwSession::setVar($bf_cache_code, $bf_id);
+
         /*
-        $bf_cc_to_monitor = "bf-1230-edit-1044-13336-";
-        if(true or AfwStringHelper::stringStartsWith($bf_cache_code,$bf_cc_to_monitor))
-        {
-            if(!$decodeBfunction) $decodeBfunction = 1;
-            else $decodeBfunction++;
-            
-            if($decodeBfunction>20) 
-            {
-                die("decodeBfunction for [$bf_cache_code] entered too much time AfwSession::log_all_data = " .AfwSession::log_all_data());
-            }
-        }
-        // die("decodeBfunction setted into cache $bf_cache_code val =".$bf_id." all data = ".AfwSession::log_all_data());
-        */
+         * $bf_cc_to_monitor = "bf-1230-edit-1044-13336-";
+         * if(true or AfwStringHelper::stringStartsWith($bf_cache_code,$bf_cc_to_monitor))
+         * {
+         *     if(!$decodeBfunction) $decodeBfunction = 1;
+         *     else $decodeBfunction++;
+         *
+         *     if($decodeBfunction>20)
+         *     {
+         *         die("decodeBfunction for [$bf_cache_code] entered too much time AfwSession::log_all_data = " .AfwSession::log_all_data());
+         *     }
+         * }
+         * // die("decodeBfunction setted into cache $bf_cache_code val =".$bf_id." all data = ".AfwSession::log_all_data());
+         */
         return $bf_id;
     }
 
@@ -230,39 +223,38 @@ class UmsManager extends AFWRoot
         );
     }
 
-    public static function decodeTable($module_id, $table, $ignore_cache=false)
+    public static function decodeTable($module_id, $table, $ignore_cache = false)
     {
         $table_cache_code = "table-$module_id-$table";
         if (AfwSession::getVar($table_cache_code)) {
             return AfwSession::getVar($table_cache_code);
         }
         $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
-        if(!$module_code) AfwSession::pushWarning("System cache failed to decode m$module_id to module code");
-        if(!$ignore_cache)
-        {
+        if (!$module_code)
+            AfwSession::pushWarning("System cache failed to decode m$module_id to module code");
+        if (!$ignore_cache) {
             list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
-        }
-        else $found = false;
+            $table_id = 0;
+            if ($found) {
+                $table_id = $tbf_info[$table]['id'];
+                if (!$table_id) {
+                    AfwSession::pushWarning("Missed tbf_info[$table]['id'] data in previleges file of $module_code");
+                }
+            } elseif (!$table_id) {
+                if ($module_sys_file) {
+                    AfwSession::pushWarning("Can not find AtableID for table $table System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");
+                }
 
-        if($found)
-        {
-            $table_id = $tbf_info[$table]['id'];
-            if(!$table_id)
-            {
-                AfwSession::pushWarning("Missed tbf_info[$table]['id'] data in previleges file of $module_code");                    
+                $tableObj = Atable::getAtableByName($module_id, $table);
+                $table_id = $tableObj->id;
             }
-        }
-        
-        if(!$table_id)
-        {
-            AfwSession::pushWarning("Can not find AtableID for table $table System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");    
-            $tableObj = Atable::getAtableByName($module_id, $table);
-            $table_id = $tableObj->id;
-        }
-        if ($table_id) {
-            AfwSession::setVar($table_cache_code, $table_id);
+            if ($table_id) {
+                AfwSession::setVar($table_cache_code, $table_id);
+            } else {
+                AfwSession::setVar($table_cache_code, -1);
+            }
         } else {
-            AfwSession::setVar($table_cache_code, -1);
+            $found = false;
         }
 
         return AfwSession::getVar($table_cache_code);
@@ -273,7 +265,7 @@ class UmsManager extends AFWRoot
         $table,
         $operation,
         $create_with_names_if_not_exists = null,
-        $ignore_cache=false
+        $ignore_cache = false
     ) {
         list($module_id, $system_id) = UmsManager::decodeModule($module_code);
         AfwSession::log(
@@ -292,7 +284,7 @@ class UmsManager extends AFWRoot
             $create_with_names_if_not_exists,
             $ignore_cache
         );
-        
+
         /*if(($table=="sorting_path") and ($operation=="qsearch")) die("Seems Failed ? (bf_id=$bf_id) decodeBfunction for $table / $operation => getBunctionIdForOperationOnTable : list(module_id=$module_id, system_id=$system_id) = decodeModule(module_code=$module_code)<br>\n
                                                            getBunctionIdForOperationOnTable : atable_id = $atable_id = decodeTable(module_id=$module_id, table=$table)<br>\n
                                                            getBunctionIdForOperationOnTable : bf_id = $bf_id = UmsManager::decodeBfunction(system_id=$system_id,operation=$operation,module_id=$module_id,atable_id=$atable_id,bf_spec='',
@@ -308,7 +300,7 @@ class UmsManager extends AFWRoot
     ) {
         if (!$module_caller) {
             $module_caller = 'ums';
-        } // script commun reutilise par les autres modules
+        }  // script commun reutilise par les autres modules
         list($module_id, $system_id) = UmsManager::decodeModule($module_caller);
         AfwSession::log(
             "getBunctionForScript : list($module_id, $system_id) = decodeModule($module_caller)"
@@ -332,8 +324,8 @@ class UmsManager extends AFWRoot
         $pMethodName = $pMethodItem['METHOD'];
         if (!$pMethodName) {
             return [
-                'Error : executeExternalMethodOnEmployee missed method name for : ' .
-                var_export($pMethodItem, true),
+                'Error : executeExternalMethodOnEmployee missed method name for : '
+                    . var_export($pMethodItem, true),
                 '',
             ];
         }
@@ -381,20 +373,20 @@ class UmsManager extends AFWRoot
         $mode = 'display',
         $create_if_not_exists = false
     ) {
-        if(!$auser) throw new AfwRuntimeException("second param auser of UmsManager::getAllowedBFMethods is required");
-        //if($mode=="all") $code_pbm_to_check = "xc183A";
+        if (!$auser)
+            throw new AfwRuntimeException('second param auser of UmsManager::getAllowedBFMethods is required');
+        // if($mode=="all") $code_pbm_to_check = "xc183A";
         // else $code_pbm_to_check = "xxyxx";
         // if(!$pbm_arr[$code_pbm_to_check]) throw new AfwRuntimeException("pb code $code_pbm_to_check not found, pbm_arr = ".var_export($pbm_arr,true));
-        $code_pbm_to_check = "cL1o4s";
+        $code_pbm_to_check = 'cL1o4s';
 
         $final_pbm_arr = [];
-        foreach ($pbm_arr as $pbm_code => $pbm_item) 
-        {
+        foreach ($pbm_arr as $pbm_code => $pbm_item) {
             if (
-                    !isset($pbm_item['PUBLIC']) and !$pbm_item['BF-ID'] and 
-                    (!is_array($pbm_item['UGROUPS']) or !count($pbm_item['UGROUPS']))
-                ) 
-            {
+                !isset($pbm_item['PUBLIC']) and
+                !$pbm_item['BF-ID'] and
+                (!is_array($pbm_item['UGROUPS']) or !count($pbm_item['UGROUPS']))
+            ) {
                 $pbm_item['SUPER-ADMIN-ONLY'] = true;
             }
 
@@ -405,10 +397,10 @@ class UmsManager extends AFWRoot
                 $mode == 'all' or
                 (($mode == 'display') and (!isset($pbm_item['MODE'])) and !isset($pbm_item['DISPLAY']))
             ) {
-                if (!$pbm_item['ADMIN-ONLY'] and !$pbm_item['SUPER-ADMIN-ONLY']) 
-                {
+                if (!$pbm_item['ADMIN-ONLY'] and !$pbm_item['SUPER-ADMIN-ONLY']) {
                     if (
-                        $auser and $auser->isAdmin() or
+                        $auser and
+                        $auser->isAdmin() or
                         $pbm_item['BF-ID'] and
                             $auser and
                             $auser->iCanDoBF($pbm_item['BF-ID']) or
@@ -418,48 +410,38 @@ class UmsManager extends AFWRoot
                                 null
                             )
                     ) {
-                        //$other_link["URL"] = $this->decodeText($other_link["URL"],"", false);
+                        // $other_link["URL"] = $this->decodeText($other_link["URL"],"", false);
                         $final_pbm_arr[$pbm_code] = $pbm_item;
                     } else {
-                        $reason = "$auser denied access";                        
+                        $reason = "$auser denied access";
                     }
-                } 
-                else 
-                {
-                    if ($pbm_item['SUPER-ADMIN-ONLY']) 
-                    {
-                        if ($auser->isSuperAdmin() or $pbm_item['LOG-FOR-METHOD']) 
-                        {
+                } else {
+                    if ($pbm_item['SUPER-ADMIN-ONLY']) {
+                        if ($auser->isSuperAdmin() or $pbm_item['LOG-FOR-METHOD']) {
                             $final_pbm_arr[$pbm_code] = $pbm_item;
-                        } 
-                        else 
-                        {
+                        } else {
                             $reason = "$auser not super admin";
                         }
-                    } 
-                    else 
-                    {
-                        if ($auser->isAdmin() or $pbm_item['LOG-FOR-METHOD']) 
-                        {
+                    } else {
+                        if ($auser->isAdmin() or $pbm_item['LOG-FOR-METHOD']) {
                             $final_pbm_arr[$pbm_code] = $pbm_item;
-                        } 
-                        else 
-                        {
+                        } else {
                             $reason = "$auser not admin";
                         }
                     }
                 }
             } else {
                 $reason =
-                    "mode not convenient : pbm_code : $pbm_code, mode : $mode, mode_is_active : $mode_is_active, and pbm_item = " .
-                    var_export($pbm_item, true);
+                    "mode not convenient : pbm_code : $pbm_code, mode : $mode, mode_is_active : $mode_is_active, and pbm_item = "
+                    . var_export($pbm_item, true);
             }
 
             // if(($mode!="display") and ($pbm_code==$code_pbm_to_check) and ($reason)) die("reason : [$reason], final_pbm_arr = ".var_export($final_pbm_arr,true));
-            // if(($mode=="all") and ($pbm_code==$code_pbm_to_check) and (!$reason)) die("display mode accepted, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item".var_export($pbm_item,true));            
+            // if(($mode=="all") and ($pbm_code==$code_pbm_to_check) and (!$reason)) die("display mode accepted, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item".var_export($pbm_item,true));
         }
 
-        if($pbm_code==$code_pbm_to_check) echo("log reason = $reason, final_pbm_arr = ".var_export($final_pbm_arr,true)." pbm_item = ".var_export($pbm_item,true));
+        if ($pbm_code == $code_pbm_to_check)
+            echo ("log reason = $reason, final_pbm_arr = " . var_export($final_pbm_arr, true) . ' pbm_item = ' . var_export($pbm_item, true));
 
         return $final_pbm_arr;
     }
