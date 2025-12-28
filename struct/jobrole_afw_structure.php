@@ -165,7 +165,7 @@ class UmsJobroleAfwStructure
 		'jobGoalList' => array(
 			'TYPE' => 'FK',
 			'ANSWER' => 'goal',
-			'ANSMODULE' => 'b' . 'au',
+			'ANSMODULE' => 'bau',
 			'CATEGORY' => 'ITEMS',
 			'ITEM' => 'jobrole_id',
 			'SHORTNAME' => 'goals',
@@ -188,7 +188,7 @@ class UmsJobroleAfwStructure
 
 		/*
 		 * 'goalConcernList' => array(
-		 * 		'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'b au',
+		 * 		'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'bau',
 		 * 		'CATEGORY' => 'ITEMS',  'ITEM' => 'jobrole_id',
 		 * 		'WHERE' => "",
 		 * 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
@@ -196,7 +196,7 @@ class UmsJobroleAfwStructure
 		 * 		),
 		 *
 		 * 'otherGoalList' => array(
-		 * 		'TYPE' => 'MFK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',
+		 * 		'TYPE' => 'MFK',  'ANSWER' => 'goal',  'ANSMODULE' => 'bau',
 		 * 		'CATEGORY' => 'FORMULA',  'SHOW' => false,  'RETRIEVE' => false,  'EDIT' => false,  'QEDIT' => false,  'READONLY' => true,  'PHP_FORMULA' => 'list_extract.goalConcernList.goal_id.',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => false,
 		 * 		'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		 * 		),
@@ -228,7 +228,7 @@ class UmsJobroleAfwStructure
 		'lookupGoal' => array(
 			'TYPE' => 'FK',
 			'ANSWER' => 'goal',
-			'ANSMODULE' => 'b au',
+			'ANSMODULE' => 'bau',
 			'CATEGORY' => 'FORMULA',
 			'SHOW' => true,
 			'STEP' => 99,
@@ -240,7 +240,7 @@ class UmsJobroleAfwStructure
 		'statsGoal' => array(
 			'TYPE' => 'FK',
 			'ANSWER' => 'goal',
-			'ANSMODULE' => 'b au',
+			'ANSMODULE' => 'bau',
 			'CATEGORY' => 'FORMULA',
 			'SHOW' => true,
 			'STEP' => 99,

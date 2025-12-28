@@ -15,19 +15,6 @@ class UmsObject extends AfwMomkenObject{
                 else return $row[$timestamp_field];
         }
 
-
-        public static function code_of_domain_enum($lkp_id=null)
-        {
-            $lang = AfwLanguageHelper::getGlobalLanguage();
-            if($lkp_id) return self::domain()['code'][$lkp_id];
-            else return self::domain()['code'];
-        }
-
-        public static function name_of_domain_enum($domain_enum, $lang="ar")
-        {
-            return self::domain()[$lang][$domain_enum];            
-        }
-        
         public static function prepareLog($log)
         {
 
@@ -42,19 +29,21 @@ class UmsObject extends AfwMomkenObject{
             return $log;
         }
         
-        
-        public static function list_of_domain_enum()
+
+        public static function code_of_domain_enum($lkp_id=null)
         {
             $lang = AfwLanguageHelper::getGlobalLanguage();
-            return self::domain()[$lang];
+            if($lkp_id) return self::domain()['code'][$lkp_id];
+            else return self::domain()['code'];
+        }
+
+        public static function name_of_domain_enum($domain_enum, $lang="ar")
+        {
+            return self::domain()[$lang][$domain_enum];            
         }
         
-        public static function domain()
-        {
-                $main_company = AfwSession::currentCompany();
-                $file_dir_name = dirname(__FILE__);        
-                return include($file_dir_name."/../../client-$main_company/extra/domains-$main_company.php");
-        } 
+        
+
 
         public static function list_of_religion_enum()
         {
