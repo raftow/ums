@@ -4,12 +4,12 @@ class UmsBfunctionAfwStructure
 	public static function initInstance($obj)
 	{
 		if ($obj instanceof Bfunction) {
-			//$obj->CACHE_SCOPE = "server";
+			// $obj->CACHE_SCOPE = "server";
 			$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
 			// $obj->copypast = true;
-			$obj->DISPLAY_FIELD = "titre_short";
+			$obj->DISPLAY_FIELD = 'titre_short';
 			$obj->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(file_specification), '', file_specification) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre), '', titre))";
-			$obj->ORDER_BY_FIELDS = "titre_short";
+			$obj->ORDER_BY_FIELDS = 'titre_short';
 			// $obj->UNIQUE_KEY = array('curr_class_module_id','bfunction_code');
 			$obj->UNIQUE_KEY = array('id_system', 'curr_class_module_id', 'curr_class_atable_id', 'file_specification', 'bfunction_code', 'bf_specification');
 
@@ -24,7 +24,6 @@ class UmsBfunctionAfwStructure
 	}
 
 	public static $DB_STRUCTURE = array(
-
 		'id' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -37,7 +36,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'id_system' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -49,7 +47,7 @@ class UmsBfunctionAfwStructure
 			'SHORTNAME' => 'system',
 			'SIZE' => 40,
 			'DEFAUT' => 0,
-			'WHERE' => "id_module_type in (4,7)",
+			'WHERE' => 'id_module_type in (4,7)',
 			'QEDIT' => false,
 			'MANDATORY' => true,
 			'SEARCH-BY-ONE' => '',
@@ -59,7 +57,6 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
 		),
-
 		'bfunction_type_id' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -79,7 +76,6 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
 		),
-
 		'curr_class_module_id' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -90,7 +86,7 @@ class UmsBfunctionAfwStructure
 			'ANSMODULE' => 'ums',
 			'SIZE' => 64,
 			'DEFAUT' => 0,
-			'WHERE' => "id_module_type=5",
+			'WHERE' => 'id_module_type=5',
 			'QEDIT' => false,
 			'SEARCH-BY-ONE' => true,
 			'MANDATORY' => true,
@@ -104,7 +100,6 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
 		),
-
 		'curr_class_atable_id' => array(
 			'IMPORTANT' => 'IN',
 			'SEARCH' => true,
@@ -115,7 +110,7 @@ class UmsBfunctionAfwStructure
 			'SIZE' => 64,
 			'TYPE' => 'FK',
 			'ANSWER' => 'atable',
-			'ANSMODULE' => 'p'.'ag',
+			'ANSMODULE' => 'p' . 'ag',
 			'DEFAUT' => 0,
 			'AUTOCOMPLETE' => true,
 			'QSEARCH' => true,
@@ -131,7 +126,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'bfunction_code' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -150,7 +144,6 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
 		),
-
 		'parent_bfunction_id' => array(
 			'IMPORTANT' => 'IN',
 			'SEARCH' => true,
@@ -174,7 +167,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'rbfList' => array(
 			'TYPE' => 'FK',
 			'ANSWER' => 'arole_bf',
@@ -193,15 +185,14 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'childList' => array(
 			'TYPE' => 'FK',
 			'ANSWER' => 'bfunction',
 			'ANSMODULE' => 'ums',
 			'CATEGORY' => 'ITEMS',
 			'ITEM' => 'parent_bfunction_id',
-			'WHERE' => "",
-			'SHOW' => true,
+			'WHERE' => 'parent_bfunction_id > 0',
+			'SHOW' => false,
 			'FORMAT' => 'retrieve',
 			'EDIT' => false,
 			'ICONS' => true,
@@ -214,7 +205,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'titre_short' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -235,7 +225,6 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
 		),
-
 		'titre_short_en' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -254,7 +243,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'titre' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -272,7 +260,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'titre_en' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -290,7 +277,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'file_specification' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -307,7 +293,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'direct_access' => array(
 			'IMPORTANT' => 'IN',
 			'SEARCH' => true,
@@ -328,7 +313,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'bf_specification' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -345,7 +329,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'is_special' => array(
 			'TYPE' => 'YN',
 			'SHOW' => true,
@@ -361,9 +344,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
-		
-
 		'call_specification' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -380,7 +360,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'hierarchy_level_enum' => array(
 			'SEARCH' => true,
 			'SHOW' => true,
@@ -405,7 +384,6 @@ class UmsBfunctionAfwStructure
 			'DEFAUT' => 1,
 			'CSS' => 'width_pct_25',
 		),
-
 		'module_mfk' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -416,7 +394,7 @@ class UmsBfunctionAfwStructure
 			'ANSWER' => 'module',
 			'ANSMODULE' => 'ums',
 			'HZM-WIDTH' => 4,
-			'WHERE' => "id_module_type=6 and (id_module_parent=§id_system§ or §id_system§=0)",
+			'WHERE' => 'id_module_type=6 and (id_module_parent=§id_system§ or §id_system§=0)',
 			'STEP' => 3,
 			'SEARCH-BY-ONE' => '',
 			'DISPLAY' => true,
@@ -424,7 +402,6 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 			'CSS' => 'width_pct_75',
 		),
-
 		'arole_mfk' => array(
 			'TYPE' => 'MFK',
 			'RETRIEVE' => true,
@@ -445,15 +422,16 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-		/*		
-		'userStoryList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b au',  
-				'CATEGORY' => 'ITEMS',  'ITEM' => 'bfunction_id',  
-				'WHERE' => "", 
-				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => true,  'FGROUP' => 'userStoryList',  'STEP' => 3,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),*/
 
+		/*
+		 * 'userStoryList' => array(
+		 * 		'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b au',
+		 * 		'CATEGORY' => 'ITEMS',  'ITEM' => 'bfunction_id',
+		 * 		'WHERE' => "",
+		 * 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => true,  'FGROUP' => 'userStoryList',  'STEP' => 3,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+		 * 		'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
+		 * 		),
+		 */
 		'tobinus' => array(
 			'CATEGORY' => 'FORMULA',
 			'SHOW' => true,
@@ -468,7 +446,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'tobinus_reason' => array(
 			'CATEGORY' => 'FORMULA',
 			'SHOW' => true,
@@ -485,7 +462,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'public' => array(
 			'IMPORTANT' => 'IN',
 			'SEARCH' => true,
@@ -503,7 +479,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'bf_complexity' => array(
 			'IMPORTANT' => 'IN',
 			'SEARCH' => true,
@@ -523,7 +498,6 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
 		'bf_priority' => array(
 			'IMPORTANT' => 'IN',
 			'SEARCH' => true,
@@ -543,16 +517,21 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
-
-		'bfIcon' =>	array('STEP' => 4, 
-				'TYPE' => 'TEXT',  
-				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true,  'UTF8' => false,  
-				'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'READONLY' => true, 'FORMAT' => 'html',
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_100', 
-				),
-
-
+		'bfIcon' => array(
+			'STEP' => 4,
+			'TYPE' => 'TEXT',
+			'CATEGORY' => 'FORMULA',
+			'SHOW' => true,
+			'EDIT' => true,
+			'UTF8' => false,
+			'SEARCH-BY-ONE' => '',
+			'DISPLAY' => true,
+			'READONLY' => true,
+			'FORMAT' => 'html',
+			'DISPLAY-UGROUPS' => '',
+			'EDIT-UGROUPS' => '',
+			'CSS' => 'width_pct_100',
+		),
 		'key_words_found' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -572,12 +551,12 @@ class UmsBfunctionAfwStructure
 		),
 
 		/*
-		'mainGoal' => array('SHOW' => true,  'SIZE' => 40,  
-				'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  'NO-ERROR-CHECK' => true,  
-				'CATEGORY' => 'FORMULA',  'DEFAUT' => 0,  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),*/
-
+		 * 'mainGoal' => array('SHOW' => true,  'SIZE' => 40,
+		 * 		'TYPE' => 'FK',  'ANSWER' => 'goal',  'ANSMODULE' => 'b au',  'NO-ERROR-CHECK' => true,
+		 * 		'CATEGORY' => 'FORMULA',  'DEFAUT' => 0,  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+		 * 		'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
+		 * 		),
+		 */
 		'avail' => array(
 			'IMPORTANT' => 'IN',
 			'SHOW' => true,
@@ -592,8 +571,7 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 		),
-
-		'id_aut'         => array(
+		'id_aut' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -605,8 +583,7 @@ class UmsBfunctionAfwStructure
 			'ANSMODULE' => 'ums',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'date_aut'            => array(
+		'date_aut' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -616,8 +593,7 @@ class UmsBfunctionAfwStructure
 			'TYPE' => 'GDAT',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'id_mod'           => array(
+		'id_mod' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -629,8 +605,7 @@ class UmsBfunctionAfwStructure
 			'ANSMODULE' => 'ums',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'date_mod'              => array(
+		'date_mod' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -640,8 +615,7 @@ class UmsBfunctionAfwStructure
 			'TYPE' => 'GDAT',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'id_valid'       => array(
+		'id_valid' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -652,8 +626,7 @@ class UmsBfunctionAfwStructure
 			'ANSMODULE' => 'ums',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'date_valid'          => array(
+		'date_valid' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -662,11 +635,9 @@ class UmsBfunctionAfwStructure
 			'TYPE' => 'GDAT',
 			'FGROUP' => 'tech_fields'
 		),
-
-		/* 'avail'                   => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'EDIT' => false, 
+		/* 'avail'                   => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'EDIT' => false,
 //                                                                'QEDIT' => false, "DEFAULT" => 'Y', 'TYPE' => 'YN', 'FGROUP' => 'tech_fields'),*/
-
-		'version'                  => array(
+		'version' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -675,11 +646,9 @@ class UmsBfunctionAfwStructure
 			'TYPE' => 'INT',
 			'FGROUP' => 'tech_fields'
 		),
-
-		// 'draft'                         => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'EDIT' => false, 
+		// 'draft'                         => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'EDIT' => false,
 		//                                                                'QEDIT' => false, "DEFAULT" => 'Y', 'TYPE' => 'YN', 'FGROUP' => 'tech_fields'),
-
-		'update_groups_mfk'             => array(
+		'update_groups_mfk' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -690,8 +659,7 @@ class UmsBfunctionAfwStructure
 			'TYPE' => 'MFK',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'delete_groups_mfk'             => array(
+		'delete_groups_mfk' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -702,8 +670,7 @@ class UmsBfunctionAfwStructure
 			'TYPE' => 'MFK',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'display_groups_mfk'            => array(
+		'display_groups_mfk' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
@@ -714,28 +681,26 @@ class UmsBfunctionAfwStructure
 			'TYPE' => 'MFK',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'sci_id'                        => array(
+		'sci_id' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'SHOW' => true,
 			'RETRIEVE' => false,
 			'QEDIT' => false,
-			'TYPE' => 'INT', /*stepnum-not-the-object*/
+			'TYPE' => 'INT',  /* stepnum-not-the-object */
 			'ANSMODULE' => 'ums',
 			'FGROUP' => 'tech_fields'
 		),
-
-		'tech_notes' 	                => array(
+		'tech_notes' => array(
 			'STEP' => 99,
 			'HIDE_IF_NEW' => true,
 			'TYPE' => 'TEXT',
 			'CATEGORY' => 'FORMULA',
-			"SHOW-ADMIN" => true,
+			'SHOW-ADMIN' => true,
 			'QEDIT' => false,
-			'TOKEN_SEP' => "§",
+			'TOKEN_SEP' => '§',
 			'READONLY' => true,
-			"NO-ERROR-CHECK" => true,
+			'NO-ERROR-CHECK' => true,
 			'FGROUP' => 'tech_fields'
 		),
 	);
