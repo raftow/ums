@@ -544,7 +544,8 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $fileName = $company . "_user_$me_id" . '_data.php';
                 $fileFullName = $file_path . '/' . $fileName;
 
-                self::$codePhp[$me_id] = AfwCodeHelper::showCodeLines($fileFullName);
+                self::$codePhp[$me_id] = $this->showAttribute('mau');
+                self::$codePhp[$me_id] .= AfwCodeHelper::showCodeLines($fileFullName);
 
                 return ['', 'done'];
         }
