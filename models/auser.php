@@ -42,6 +42,8 @@ class Auser extends UmsObject implements AfwFrontEndUser
         private $myModules = null;
         private $iCanDoOperationArray = [];
 
+        private static $codePhp = [];
+
         public static $MAX_USERS_CRM_START = 1000000;
         public static $MY_ATABLE_ID = 1407;
         // إحصائيات حول حسابات المستخدمين
@@ -518,7 +520,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 $color = 'orange';
                 $title_ar = 'استخراج وتفقد ملف صلاحيات المستخدم';
-                $methodName = 'getPrevilegesPhpCodeForUser';
+                $methodName = 'getPrevilegesPhpCode';
                 $pbms[AfwStringHelper::hzmEncode($methodName)] = array(
                         'METHOD' => $methodName,
                         'COLOR' => $color,
@@ -542,9 +544,15 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $fileName = $company . "_user_$me_id" . '_data.php';
                 $fileFullName = $file_path . '/' . $fileName;
 
-                $codeHtml = AfwCodeHelper::showCodeLines($fileFullName);
+                self::$codePhp[$me_id] = AfwCodeHelper::showCodeLines($fileFullName);
 
-                return ['', $codeHtml];
+                return ['', 'done'];
+        }
+
+        public function calcShowPhpCode($what = 'value')
+        {
+                $me_id = $this->id;
+                return self::$codePhp[$me_id];
         }
 
         public function canRunApplication($module_code)
