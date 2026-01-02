@@ -364,7 +364,7 @@ class UmsBfunctionAfwStructure
 		'hierarchy_level_enum' => array(
 			'SEARCH' => true,
 			'SHOW' => true,
-			'RETRIEVE' => false,
+			'RETRIEVE' => true,
 			'EDIT' => true,
 			'QEDIT' => true,
 			'SIZE' => 40,
