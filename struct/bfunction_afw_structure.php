@@ -113,6 +113,7 @@ class UmsBfunctionAfwStructure
 			'ANSMODULE' => 'p' . 'ag',
 			'DEFAUT' => 0,
 			'AUTOCOMPLETE' => true,
+			'AUTOCOMPLETE-SEARCH' => true,
 			'QSEARCH' => true,
 			'SHORTNAME' => 'table',
 			'WHERE' => "(('§id§'='' or '§id§'='0') or 
