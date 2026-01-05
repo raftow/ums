@@ -412,13 +412,13 @@ class UmsManager extends AFWRoot
                         $auser and
                         $auser->isAdmin() or
                         $pbm_item['BF-ID'] and
-                            $auser and
-                            $auser->iCanDoBF($pbm_item['BF-ID']) or
                         $auser and
-                            $auser->i_belong_to_one_of_ugroups(
-                                $pbm_item['UGROUPS'],
-                                null
-                            )
+                        $auser->iCanDoBF($pbm_item['BF-ID']) or
+                        $auser and
+                        $auser->i_belong_to_one_of_ugroups(
+                            $pbm_item['UGROUPS'],
+                            null
+                        )
                     ) {
                         // $other_link["URL"] = $this->decodeText($other_link["URL"],"", false);
                         $final_pbm_arr[$pbm_code] = $pbm_item;
@@ -454,5 +454,62 @@ class UmsManager extends AFWRoot
             echo ("log reason = $reason, final_pbm_arr = " . var_export($final_pbm_arr, true) . ' pbm_item = ' . var_export($pbm_item, true));
 
         return $final_pbm_arr;
+    }
+
+
+    public static function genereTablePrevilegesFile($moduleCode, $objTable, $genereFile = false)
+    {
+        $afw_modes_arr = ['display', 'search', 'qsearch', 'edit', 'qedit', 'crossed', 'stats', 'ddb', 'minibox', 'delete'];
+        $tableId = $objTable->id;
+        $tableName = $objTable->getVal("atable_name");
+
+        $tab_info_item = array('name' => $tableName);
+
+        $tbf_info_item = array();
+        $tbf_info_item["id"] = $tableId;
+        $php_code = "<?php\n";
+        foreach ($afw_modes_arr as $afw_mode) {
+            $bf_id = UmsManager::getBunctionIdForOperationOnTable($moduleCode, $tableName, $afw_mode, null, true);
+            $tbf_info_item[$afw_mode] = array('id' => $bf_id);
+        }
+
+        $php_code .= "\n\t\$tbf_info[$tableName] = " . var_export($tbf_info_item, true) . ";\n\n";
+        $php_code .= "\n\t\$tab_info[$tableId] = " . var_export($tab_info_item, true) . ";\n\n";
+
+        if ($genereFile) {
+            $fileName = "previleges_$moduleCode" . "_$tableName"  . ".php";
+            list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges");
+        } else $fileName = "";
+
+        return [$tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd];
+    }
+
+
+    public static function genereRolePrevilegesFile($moduleCode, $roleItem, $genereFile = false)
+    {
+        $roleId = $roleItem->id;
+        $roleCode = $roleItem->getVal("role_code");
+        $roleMenu = $roleItem->getRoleMenu();
+
+        $role_infoItem = [
+            'code' => $roleCode,
+            'name' => [
+                "ar" => $roleItem->getShortDisplay("ar"),
+                "en" => $roleItem->getShortDisplay("en"),
+            ],
+            'menu' => $roleMenu
+
+        ];
+
+        $php_code = "\n\t\$role_info[$roleId] = " . var_export($role_infoItem, true) . ";";
+
+        if ($genereFile) {
+
+            $fileName = "previleges_$moduleCode" . "_role$roleId"  . ".php";
+            list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges");
+        } else $fileName = "";
+
+
+        return [$role_infoItem, $fileName, $php_code, $mv_cmd];
     }
 }

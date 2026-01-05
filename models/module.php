@@ -71,7 +71,7 @@ class Module extends UmsObject
         } else return null;
     }
 
-    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false, $command_code_option="")
+    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false, $command_code_option = "")
     {
         $bf_added = 0;
         $message_arr = [];
@@ -116,7 +116,7 @@ class Module extends UmsObject
         return [$objModule, $message];
     }
 
-    public static function reverseByCodes($object_code_arr, $doReverse = true, $restriction="")
+    public static function reverseByCodes($object_code_arr, $doReverse = true, $restriction = "")
     {
         $bf_added = 0;
         $message_arr = [];
@@ -162,13 +162,11 @@ class Module extends UmsObject
             $title_ar = $NOM_SITE["ar"];
 
             include("$file_dir_name/../../$module_code/application_config.php");
-            if($config_arr["application_id"] != $objModule->id)
-            {
+            if ($config_arr["application_id"] != $objModule->id) {
                 throw new AfwRuntimeException("reverseByCodes : application_id is not correct [=$objModule->id] in application_config file for module $module_code (vs id = $objByCodeId)");
             }
-            
-            if(!$title_ar or !$title_en)
-            {
+
+            if (!$title_ar or !$title_en) {
                 $title_en = $config_arr['application_name']["en"];
                 $title_ar = $config_arr['application_name']["ar"];
             }
@@ -177,21 +175,21 @@ class Module extends UmsObject
             $system_code = $config_arr['system_code'];
             $systemObj = null;
             $domainObj = null;
-            if($system_code) $systemObj = Module::loadByMainIndex($system_code);
-            if($domain_code) $domainObj = Domain::loadByMainIndex($domain_code);
+            if ($system_code) $systemObj = Module::loadByMainIndex($system_code);
+            if ($domain_code) $domainObj = Domain::loadByMainIndex($domain_code);
 
             $objModule->set("titre_short_en", $title_en);
             $objModule->set("titre_short", $title_ar);
-            if($systemObj) $objModule->set("id_system", $systemObj->id);
-            if($domainObj) $objModule->set("id_pm", $domainObj->id);
-            
+            if ($systemObj) $objModule->set("id_system", $systemObj->id);
+            if ($domainObj) $objModule->set("id_pm", $domainObj->id);
+
             $objModule->set("id_module_type", 5);
-             
+
             $objModule->commit();
 
             list($err111, $inf111, $war111, $pagged) = $objModule->pagAllTables($lang = "ar");
-            if($err111) $message_arr[] = "Error : $err111";
-            if($inf111) $message_arr[] = "Info : $inf111";
+            if ($err111) $message_arr[] = "Error : $err111";
+            if ($inf111) $message_arr[] = "Info : $inf111";
 
             $message_arr[] = self::prepareLog("The module $module_code has been named and typed");
             $id_system = $objModule->getVal("id_system");
@@ -204,7 +202,7 @@ class Module extends UmsObject
             } else {
                 include($file_previleges);
 
-                
+
 
                 foreach ($tab_info as $tab_id => $tab_info_row) {
                     // find another idea to be able to break the loop
@@ -220,26 +218,21 @@ class Module extends UmsObject
                             $tbl = null;
                             $or_another_case = "or not in the same module $module_code";
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $message_arr[] = self::prepareLog("Done : Atable::loadByMainIndex($module_id,$atable_name) succeeded");
                     }
 
-                    if ((!$tbl) or ($restriction=="erase")) {
+                    if ((!$tbl) or ($restriction == "erase")) {
                         // may be it is the first reverse engineering of this atable
                         $object_code_arr = [];
                         $object_code_arr[0] = $atable_name;
                         $object_code_arr[1] = $module_code;
                         list($tbl, $msg000) = Atable::reverseByCodes($object_code_arr);
-                        if(!$tbl)
-                        {
+                        if (!$tbl) {
                             $message_arr[] = self::prepareLog("Error : Atable::reverseByCodes($atable_name(from previleges.php),$module_code) failed : $msg000");
-                        }
-                        else{
+                        } else {
                             $message_arr[] = self::prepareLog("Done : Atable::reverseByCodes($atable_name,$module_code) succeeded");
                         }
-                        
                     }
 
                     if ($tbl) {
@@ -284,15 +277,14 @@ class Module extends UmsObject
 
                 foreach ($tbf_info as $table_name => $tbf_info_row) {
                     $tbl = Atable::loadByMainIndex($module_id, $table_name);
-                    if($tbl)
-                    {
+                    if ($tbl) {
                         $old_tab_id = $tbf_info_row['id'];
                         $tab_id = $tbl->id;
                         unset($tbf_info_row['id']);
                         foreach ($tbf_info_row as $mode => $tbf_mode_row) {
                             if ($tbf_mode_row['id'] > 0) {
                                 //$message_arr[] = self::prepareLog("Warning : The table $tab_id / $table_name will have mode $mode");
-                                
+
                                 //*$bf_specification = "";
                                 //*$file_specification = $mode;
                                 //*$bfObj = Bfunction::loadByBusinessIndex($id_system, $module_id, $tab_id, $file_specification, $bf_specification, $create_obj_if_not_found = true);
@@ -311,21 +303,16 @@ class Module extends UmsObject
                                 // this s to avoid loose BFs when developer do reverse engineering before do git pull of previleges file
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $object_code_arr = [];
                         $object_code_arr[0] = $atable_name;
                         $object_code_arr[1] = $module_code;
                         list($tbl, $msg000) = Atable::reverseByCodes($object_code_arr);
-                        if(!$tbl)
-                        {
+                        if (!$tbl) {
                             $message_arr[] = self::prepareLog("Error : Atable::reverseByCodes($atable_name,$module_code) failed : $msg000");
-                        }
-                        else{
+                        } else {
                             $message_arr[] = self::prepareLog("Done : Atable::reverseByCodes($atable_name,$module_code) succeeded");
                         }
-                        
                     }
                 }
 
@@ -374,90 +361,71 @@ class Module extends UmsObject
                     ),
                 );*/
 
-                foreach ($role_info as $role_id => $role_row) 
-                {
+                foreach ($role_info as $role_id => $role_row) {
                     $role_code = $role_row['code'];
                     $role_name_ar = $role_row['name']['ar'];
                     $role_name_en = $role_row['name']['en'];
                     $role_items   = $role_row['menu']['items'];
                     $roleObj = null;
-                    if($role_code) $roleObj = Arole::loadByMainIndex($module_id, $role_code, true);
-                    elseif($role_id) $roleObj = Arole::loadById($role_id);
-                    
-                    if($roleObj)
-                    {
-                        if(!AfwStringHelper::titleNotGood($role_name_en))
-                        {
+                    if ($role_code) $roleObj = Arole::loadByMainIndex($module_id, $role_code, true);
+                    elseif ($role_id) $roleObj = Arole::loadById($role_id);
+
+                    if ($roleObj) {
+                        if (!AfwStringHelper::titleNotGood($role_name_en)) {
                             $roleObj->set("titre_short_en", $role_name_en);
                             $roleObj->set("titre_en", $role_name_en);
                             $message_arr[] = self::prepareLog("Success : role $role_id en title setted to $role_name_en");
                         }
 
-                        if(!AfwStringHelper::titleNotGood($role_name_ar))
-                        {
+                        if (!AfwStringHelper::titleNotGood($role_name_ar)) {
                             $roleObj->set("titre_short", $role_name_ar);
                             $roleObj->set("titre", $role_name_ar);
                             $message_arr[] = self::prepareLog("Success : role $role_id ar title setted to $role_name_ar");
                         }
                         $roleObj->commit();
-
-                        
-                        
-                    }
-                    else {
-                        $message_arr[] = self::prepareLog("Warning : role [$role_code/$role_id] not found");                        
+                    } else {
+                        $message_arr[] = self::prepareLog("Warning : role [$role_code/$role_id] not found");
                     }
 
-                    foreach($role_items as $bf_id => $bf_row)
-                    {
+                    foreach ($role_items as $bf_id => $bf_row) {
                         $bfObj = null;
                         $bf_code = $bf_row['code'];
                         $bf_page_url = $bf_row['page'];
-                        if($bf_code) $bfObj = Bfunction::loadByMainIndex($module_id, $bf_code);
-                        elseif($bf_id) 
-                        {
+                        if ($bf_code) $bfObj = Bfunction::loadByMainIndex($module_id, $bf_code);
+                        elseif ($bf_id) {
                             $bfObj = Bfunction::loadById($bf_id);
-                            if($bfObj->getUrl() != $bf_page_url)
-                            {
+                            if ($bfObj->getUrl() != $bf_page_url) {
                                 unset($bfObj);
                                 $bfObj = null;
                             }
                         }
 
-                        if(!$bfObj) $bfObj = Bfunction::reverseUrl($module_id, $bf_page_url);
+                        if (!$bfObj) $bfObj = Bfunction::reverseUrl($module_id, $bf_page_url);
 
-                        if($bfObj)
-                        {
-                            
+                        if ($bfObj) {
+
                             $bf_name_ar = $bf_row['menu_name_ar'];
                             $bf_name_en = $bf_row['menu_name_en'];
-                            if(!AfwStringHelper::titleNotGood($bf_name_en))
-                            {
+                            if (!AfwStringHelper::titleNotGood($bf_name_en)) {
                                 $bfObj->set("titre_short_en", $bf_name_en);
                                 $bfObj->set("titre_en", $bf_name_en);
                                 $message_arr[] = self::prepareLog("Success : BF $bf_id en title setted to $bf_name_en");
                             }
-                            if(!AfwStringHelper::titleNotGood($bf_name_ar))
-                            {
+                            if (!AfwStringHelper::titleNotGood($bf_name_ar)) {
                                 $bfObj->set("titre", $bf_name_ar);
                                 $bfObj->set("titre_short", $bf_name_ar);
                                 $message_arr[] = self::prepareLog("Success : BF $bf_id ar title setted to $bf_name_ar");
                             }
-                            
+
                             $bfObj->commit();
-                            
-                            
-                        }
-                        else 
-                        {
-                            $message_arr[] = self::prepareLog("Warning : BF [$bf_code/$bf_id] not found");                        
+                        } else {
+                            $message_arr[] = self::prepareLog("Warning : BF [$bf_code/$bf_id] not found");
                         }
                     }
-                    
                 }
             }
-            
-            
+
+
             $message_arr[] = self::prepareLog("Info : $bf_added BF(s) added");
         }
 
@@ -743,60 +711,51 @@ class Module extends UmsObject
 
 
 
-    public function calcBfIcons($what="value")
+    public function calcBfIcons($what = "value")
     {
         $debugg  = $this->readSettingValue("propose-icons-debugg", false);
         $explain  = $this->readSettingValue("propose-icons-explain", false);
         $mode = $this->readSettingValue("propose-icons-mode", "all");
-        if(!$mode) $mode = "all";
+        if (!$mode) $mode = "all";
         $help_phrase = "/* Treated mode is : $mode */\n";
         $roles_icons = array();
         $roles_icons[] = $help_phrase;
         $all_bfs = $this->get("mybfs");
-        foreach ($all_bfs as $bf_id => $bf_item) 
-        {
+        foreach ($all_bfs as $bf_id => $bf_item) {
             /**
              * @var Bfunction $bf_item
              */
-            $bf_description = $bf_item->getShortDisplay("en")." - ".$bf_item->getShortDisplay("ar"); // ." - ".$bf_item->calcProposedKeys()
+            $bf_description = $bf_item->getShortDisplay("en") . " - " . $bf_item->getShortDisplay("ar"); // ." - ".$bf_item->calcProposedKeys()
             $bf_mode = $bf_item->getVal("file_specification");
-            if(($bf_mode == $mode) or ($mode == "all"))
-            {
+            if (($bf_mode == $mode) or ($mode == "all")) {
                 $roles_icons[$bf_id] = $bf_item->calcBfIcon($what, $debugg, $explain);
+            } else {
+                if ($debugg) $roles_icons[$bf_id] = "/* BF ($bf_description) ID $bf_id with mode $bf_mode skipped */\n";
             }
-            else
-            {
-                if($debugg) $roles_icons[$bf_id] = "/* BF ($bf_description) ID $bf_id with mode $bf_mode skipped */\n";
-            } 
-
-            
-            
         }
 
-        return "<pre class='css ltr'>".implode("\n", $roles_icons)."</pre>";
+        return "<pre class='css ltr'>" . implode("\n", $roles_icons) . "</pre>";
     }
 
 
-    public function calcRolesIcons($what="value")
+    public function calcRolesIcons($what = "value")
     {
         $roles_icons = array();
         $all_roles = $this->get("allRoles");
         foreach ($all_roles as $role_id => $role_item) {
-            $role_item_label = $role_item->getShortDisplay("en")." - ".$role_item->getShortDisplay("ar")." - ".$role_item->calcProposedKeys();
+            $role_item_label = $role_item->getShortDisplay("en") . " - " . $role_item->getShortDisplay("ar") . " - " . $role_item->calcProposedKeys();
             $role_icon_arr = $role_item->proposeIcons();
             foreach ($role_icon_arr as $role_icon) {
-                if ($role_icon) 
-                {
-                $roles_icons[$role_id] = "/* $role_item_label*/
+                if ($role_icon) {
+                    $roles_icons[$role_id] = "/* $role_item_label*/
 .icon-$role_id:before {
     content: \"\\$role_icon\";
 }\n";
                 }
             }
-            
         }
 
-        return "<pre class='css ltr'>".implode("\n", $roles_icons)."</pre>";
+        return "<pre class='css ltr'>" . implode("\n", $roles_icons) . "</pre>";
     }
 
 
@@ -848,57 +807,38 @@ class Module extends UmsObject
         $MODE_SQL_PROCESS_LOURD = true;
 
         $source_php = "";
-        if ($textArea) $source_php .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
         $source_php .= "<?php\n"; // ";
-        $tab_info = array();
-        $tbf_info = array();
-        $role_info = array();
+
         $moduleCode = $this->getVal("module_code");
 
-        $afw_modes_arr = ['display', 'search', 'qsearch', 'edit', 'qedit', 'crossed', 'stats', 'ddb', 'minibox', 'delete'];
+
 
         $tableList = $this->getAllMyTables();
         foreach ($tableList as $tableItem) {
-            $tableId = $tableItem->id;
-            $tableName = $tableItem->getVal("atable_name");
-
-            $tab_info[$tableId] = array('name' => $tableName);
-
-            $tbf_info_item = array();
-            $tbf_info_item["id"] = $tableId;
-            foreach ($afw_modes_arr as $afw_mode) {
-                $bf_id = UmsManager::getBunctionIdForOperationOnTable($moduleCode, $tableName, $afw_mode, null, true);
-                $tbf_info_item[$afw_mode] = array('id' => $bf_id);
-            }
-
-            $tbf_info[$tableName] = $tbf_info_item;
+            list($tbf_info_item, $tab_info_item, $fileName, $php_code) = UmsManager::genereTablePrevilegesFile($moduleCode, $tableItem, true);
+            $source_php .= "\tinclude('previleges/$fileName');\n";
         }
 
         $roleList = $this->getAllRolesAndSubRoles();
         foreach ($roleList as $roleItem) {
-            $roleId = $roleItem->id;
-            $roleCode = $roleItem->getVal("role_code");
-            $roleMenu = $roleItem->getRoleMenu();
-
-            $role_info[$roleId] = [
-                'code' => $roleCode,
-                'name' => [
-                    "ar" => $roleItem->getShortDisplay("ar"),
-                    "en" => $roleItem->getShortDisplay("en"),
-                ],
-                'menu' => $roleMenu
-
-            ];
+            list($role_infoItem, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($moduleCode, $roleItem, true);
+            $source_php .= "\tinclude('previleges/$fileName');\n";
         }
 
-        $source_php .= "\n\t\$tab_info = " . var_export($tab_info, true) . ";";
-        $source_php .= "\n\t\$tbf_info = " . var_export($tbf_info, true) . ";";
-        $source_php .= "\n\t\$role_info = " . var_export($role_info, true) . ";";
+
+
 
         $source_php .= "\n ?>";
-        if ($textArea) $source_php .= "</textarea>"; // 
+        $file_source_php = "";
+        if ($textArea) $file_source_php .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
+        $file_source_php .= $source_php;
+        if ($textArea) $file_source_php .= "</textarea>"; // 
 
-        return $source_php;
+        $fileName = "previleges.php";
+        list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $source_php, "");
+
+
+        return $file_source_php;
     }
 
     public function getMyRelationTables($to_ext = true, $from_ext = true, $to_int = true, $from_int = true)
@@ -1357,7 +1297,7 @@ class Module extends UmsObject
         return true;
     }
 
-    public function afterInsert($id, $fields_updated, $disableAfterCommitDBEvent=false)
+    public function afterInsert($id, $fields_updated, $disableAfterCommitDBEvent = false)
     {
         // create goals for this application and for the standard IT Jobs
         $this->genereITJobsAndGoals();
@@ -1852,7 +1792,7 @@ class Module extends UmsObject
             $title_ar = "هندسة معاكسة لمستوياتي الوظيفية";
             $pbms["yghtrB"] = array("METHOD" => "reverseHierarchyLevels", "COLOR" => $color, "LABEL_AR" => $title_ar);
 
-            
+
 
             if (!$this->IamInstalled()) {
                 $color = "green";
@@ -1934,7 +1874,7 @@ class Module extends UmsObject
         $company = AfwSession::currentCompany();
         $currmod = $this->getVal("module_code");
 
-        
+
 
         if ($create_project) {
             // copy empty project folder files
@@ -2035,7 +1975,7 @@ class Module extends UmsObject
                     $table_errors = array();
                     $table_ok = $atb_obj->isOk(true);
                     if (!$table_ok) {
-                        $err_text = implode("<br>\n", AfwDataQualityHelper::getDataErrors($atb_obj, ));
+                        $err_text = implode("<br>\n", AfwDataQualityHelper::getDataErrors($atb_obj,));
                         if ($errors_level >= 2) $errors[] = $err_text;
                         $table_errors[] = $err_text;
                     }
@@ -2201,63 +2141,49 @@ class Module extends UmsObject
                return array("",""); 
          }*/
 
-        public function reverseHierarchyLevels($lang = "ar", $update_if_exists = true)
-        { 
-            $info = array();
-            $err = array();
-            $war = array();
-            $tech = array();
+    public function reverseHierarchyLevels($lang = "ar", $update_if_exists = true)
+    {
+        $info = array();
+        $err = array();
+        $war = array();
+        $tech = array();
 
-            $arr_list_of_hierarchy_level = self::hierarchy_level($this->id);
-            $hierarchy_data = [];
-            foreach($arr_list_of_hierarchy_level as $langue => $hierarchy_level_data)
-            {
-                foreach($hierarchy_level_data as $hierarchy_level_id => $hierarchy_level_label)
-                {
-                    $hierarchy_data[$hierarchy_level_id][$langue] = $hierarchy_level_label;
-                }
-                
+        $arr_list_of_hierarchy_level = self::hierarchy_level($this->id);
+        $hierarchy_data = [];
+        foreach ($arr_list_of_hierarchy_level as $langue => $hierarchy_level_data) {
+            foreach ($hierarchy_level_data as $hierarchy_level_id => $hierarchy_level_label) {
+                $hierarchy_data[$hierarchy_level_id][$langue] = $hierarchy_level_label;
             }
-
-            foreach($hierarchy_data as $id => $row)
-            {
-                $ugObj = Ugroup::loadByMainIndex($this->id,1,1,'level-'.$id,true);
-                if($ugObj)
-                {
-                    if($ugObj->is_new or $update_if_exists)
-                    {
-                        if($ugObj->is_new)
-                        {
-                            $action = "جديد";
-                        }
-                        else
-                        {
-                            $action = "تعديل";
-                        }
-                        
-
-                        $ugObj->set("titre_short_ar", $row["ar"]);
-                        $ugObj->set("titre_short_en", $row["en"]);
-                        $ugObj->commit();
-                        
-                    }
-                    else
-                    {
-                        $action = "موجود";
-                        $row["ar"] = $ugObj->getVal("titre_short_ar");
-                        $row["en"] = $ugObj->getVal("titre_short_en");                        
-                    }
-
-                    $info[] = $action." : ".$row["ar"]."-".$row["en"];
-                }
-                else
-                {
-                    $err[] = "Ugroup creation failed for level-$id : ".$row["ar"]."-".$row["en"];
-                }
-            }
-            
-            return AfwFormatHelper::pbm_result($err, $info, $war, $sep = "<br>\n", $tech);
         }
+
+        foreach ($hierarchy_data as $id => $row) {
+            $ugObj = Ugroup::loadByMainIndex($this->id, 1, 1, 'level-' . $id, true);
+            if ($ugObj) {
+                if ($ugObj->is_new or $update_if_exists) {
+                    if ($ugObj->is_new) {
+                        $action = "جديد";
+                    } else {
+                        $action = "تعديل";
+                    }
+
+
+                    $ugObj->set("titre_short_ar", $row["ar"]);
+                    $ugObj->set("titre_short_en", $row["en"]);
+                    $ugObj->commit();
+                } else {
+                    $action = "موجود";
+                    $row["ar"] = $ugObj->getVal("titre_short_ar");
+                    $row["en"] = $ugObj->getVal("titre_short_en");
+                }
+
+                $info[] = $action . " : " . $row["ar"] . "-" . $row["en"];
+            } else {
+                $err[] = "Ugroup creation failed for level-$id : " . $row["ar"] . "-" . $row["en"];
+            }
+        }
+
+        return AfwFormatHelper::pbm_result($err, $info, $war, $sep = "<br>\n", $tech);
+    }
 
 
     public function pagAllTables($lang = "ar", $update_if_exists = true)
@@ -2350,13 +2276,11 @@ class Module extends UmsObject
         $settings = $this->getVal("web");
 
         $settings_rows = explode("\n", $settings);
-        foreach($settings_rows as $settings_row)
-        {
-            list($param,$value) = explode("=", $settings_row);
+        foreach ($settings_rows as $settings_row) {
+            list($param, $value) = explode("=", $settings_row);
             $value = trim($value);
             $param = trim($param);
-            if($param == $setting_name)
-            {
+            if ($param == $setting_name) {
                 return $value;
             }
         }
@@ -2906,7 +2830,7 @@ class Module extends UmsObject
         if (AfwSession::config("MODE_DEVELOPMENT", false)) {
             $id_pm = $this->getVal("id_pm");
             AfwAutoLoader::addModule("p" . "ag");
-            if($id_pm) $domain = Domain::loadById($id_pm);
+            if ($id_pm) $domain = Domain::loadById($id_pm);
         }
 
         return $domain;
@@ -2918,7 +2842,7 @@ class Module extends UmsObject
         $appCode = $this->getVal("module_code");
 
         $code_jr = $appCode . "-lookup";
-        
+
         $domain = $this->getMyDomain();
         if ((!$domain) or (!$domain->getId())) {
             return null;
@@ -3128,7 +3052,7 @@ class Module extends UmsObject
 
     public function getLevelUgroup($level)
     {
-        return Ugroup::loadByMainIndex($this->id,1,1,'level-'.$level);   
+        return Ugroup::loadByMainIndex($this->id, 1, 1, 'level-' . $level);
     }
 
     public function myShortNameToAttributeName($attribute)
