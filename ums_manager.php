@@ -503,7 +503,7 @@ class UmsManager extends AFWRoot
 
         $php_code = "";
         $php_code .= "<?php\n";
-        $php_code = "\n\t\$role_info[$roleId] = " . var_export($role_infoItem, true) . ";";
+        $php_code .= "\n\t\$role_info[$roleId] = " . var_export($role_infoItem, true) . ";";
 
         if ($genereFile) {
 
