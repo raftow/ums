@@ -473,7 +473,7 @@ class UmsManager extends AFWRoot
             $tbf_info_item[$afw_mode] = array('id' => $bf_id);
         }
 
-        $php_code .= "\n\t\$tbf_info[$tableName] = " . var_export($tbf_info_item, true) . ";\n\n";
+        $php_code .= "\n\t\$tbf_info['$tableName'] = " . var_export($tbf_info_item, true) . ";\n\n";
         $php_code .= "\n\t\$tab_info[$tableId] = " . var_export($tab_info_item, true) . ";\n\n";
 
         if ($genereFile) {
