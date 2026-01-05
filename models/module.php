@@ -820,13 +820,13 @@ class Module extends UmsObject
         $tableList = $this->getAllMyTables();
         foreach ($tableList as $tableItem) {
             list($tbf_info_item, $tab_info_item, $fileName, $php_code) = UmsManager::genereTablePrevilegesFile($moduleCode, $tableItem, true);
-            $source_php .= "\tinclude('previleges/$fileName');\n";
+            $source_php .= "\tinclude('previleges/table/$fileName');\n";
         }
 
         $roleList = $this->getAllRolesAndSubRoles();
         foreach ($roleList as $roleItem) {
             list($role_infoItem, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($moduleCode, $roleItem, true);
-            $source_php .= "\tinclude('previleges/$fileName');\n";
+            $source_php .= "\tinclude('previleges/role/$fileName');\n";
         }
 
 
