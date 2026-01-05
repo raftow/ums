@@ -477,7 +477,7 @@ class UmsManager extends AFWRoot
         $php_code .= "\n\t\$tab_info[$tableId] = " . var_export($tab_info_item, true) . ";\n\n";
 
         if ($genereFile) {
-            $fileName = "previleges_$moduleCode" . "_$tableName"  . ".php";
+            $fileName = "previleges_$moduleCode" . "_table_$tableName"  . ".php";
             list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges");
         } else $fileName = "";
 
