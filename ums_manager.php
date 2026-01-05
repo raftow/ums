@@ -478,7 +478,7 @@ class UmsManager extends AFWRoot
 
         if ($genereFile) {
             $fileName = "previleges_$moduleCode" . "_table_$tableName"  . ".php";
-            list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges");
+            list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges/table");
         } else $fileName = "";
 
         return [$tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd];
@@ -506,7 +506,7 @@ class UmsManager extends AFWRoot
         if ($genereFile) {
 
             $fileName = "previleges_$moduleCode" . "_role$roleId"  . ".php";
-            list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges");
+            list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges/role");
         } else $fileName = "";
 
 

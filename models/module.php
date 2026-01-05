@@ -809,6 +809,10 @@ class Module extends UmsObject
         $source_php = "";
         $source_php .= "<?php\n"; // ";
 
+        $source_php .= "\t\$tbf_info = array();\n";
+        $source_php .= "\t\$tab_info = array();\n";
+        $source_php .= "\t\$role_info = array();\n";
+
         $moduleCode = $this->getVal("module_code");
 
 
