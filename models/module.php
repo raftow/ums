@@ -815,17 +815,19 @@ class Module extends UmsObject
 
         $moduleCode = $this->getVal("module_code");
 
-
+        $mv_cmd_all = array();
 
         $tableList = $this->getAllMyTables();
         foreach ($tableList as $tableItem) {
-            list($tbf_info_item, $tab_info_item, $fileName, $php_code) = UmsManager::genereTablePrevilegesFile($moduleCode, $tableItem, true);
+            list($tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd) = UmsManager::genereTablePrevilegesFile($moduleCode, $tableItem, true);
+            $mv_cmd_all[] = $mv_cmd;
             $source_php .= "\tinclude('previleges/table/$fileName');\n";
         }
 
         $roleList = $this->getAllRolesAndSubRoles();
         foreach ($roleList as $roleItem) {
             list($role_infoItem, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($moduleCode, $roleItem, true);
+            $mv_cmd_all[] = $mv_cmd;
             $source_php .= "\tinclude('previleges/role/$fileName');\n";
         }
 
@@ -840,8 +842,14 @@ class Module extends UmsObject
 
         $fileName = "previleges.php";
         list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $source_php, "");
+        $mv_cmd_all[] = $mv_cmd;
 
+        $mv_cmd_text = implode("\n", $mv_cmd_all);
 
+        $cmd_lines = implode("\n", $arr_cmd_lines);
+
+        $file_source_php .= "<pre class='shell'>$mv_cmd_text</pre>";
+        $file_source_php .= "<pre class='cline'>$cmd_lines</pre>";
         return $file_source_php;
     }
 
