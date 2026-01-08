@@ -1,6 +1,10 @@
 <?php
-if(!class_exists("AfwSession")) die("Denied access");
+if (!class_exists("AfwSession")) die("Denied access");
 $server_db_prefix = AfwSession::currentDBPrefix();
+
+// 8/1/2026
+// update bfunction set hierarchy_level_enum = 999 where bfunction_code like '%/display%';
+// update bfunction set hierarchy_level_enum = 999 where bfunction_code like '%/qsearch%';
 
 /*
 alter table ttc_ums.module change id_analyst id_analyst int null;
@@ -35,9 +39,9 @@ alter table ttc_ums.module change id_module_status id_module_status int null;
 */
 
 
-AfwDatabase::db_query("DROP TABLE IF EXISTS ".$server_db_prefix."ums.user_param");
+AfwDatabase::db_query("DROP TABLE IF EXISTS " . $server_db_prefix . "ums.user_param");
 
-AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS ".$server_db_prefix."ums.`user_param` (
+AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS " . $server_db_prefix . "ums.`user_param` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_aut` int(11) NOT NULL,
   `date_aut`   datetime NOT NULL,
@@ -77,13 +81,13 @@ AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS ".$server_db_prefix."ums.`user
 
 
 // unique index : 
-AfwDatabase::db_query("CREATE unique index uk_user_param on ".$server_db_prefix."ums.user_param(aparameter_name_ar,aparameter_name_en,aparam_use_scope_id,customizable,afield_type_id,answer_table_id,measurement_unit_ar,measurement_unit_en,avail,id_aut,date_aut,id_mod,date_mod,id_valid,date_valid)");
+AfwDatabase::db_query("CREATE unique index uk_user_param on " . $server_db_prefix . "ums.user_param(aparameter_name_ar,aparameter_name_en,aparam_use_scope_id,customizable,afield_type_id,answer_table_id,measurement_unit_ar,measurement_unit_en,avail,id_aut,date_aut,id_mod,date_mod,id_valid,date_valid)");
 
 
 
-AfwDatabase::db_query("DROP TABLE IF EXISTS ".$server_db_prefix."ums.user_param_value");
+AfwDatabase::db_query("DROP TABLE IF EXISTS " . $server_db_prefix . "ums.user_param_value");
 
-AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS ".$server_db_prefix."ums.`user_param_value` (
+AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS " . $server_db_prefix . "ums.`user_param_value` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_aut` int(11) NOT NULL,
   `date_aut`   datetime NOT NULL,
@@ -119,9 +123,9 @@ AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS ".$server_db_prefix."ums.`user
 ) ENGINE=innodb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=1");
 
 
- 
+
 // unique index : 
-AfwDatabase::db_query("CREATE unique index uk_user_param_value on ".$server_db_prefix."ums.user_param_value(user_param_id,company_orgunit_id,department_orgunit_id,division_orgunit_id,employee_id)");
+AfwDatabase::db_query("CREATE unique index uk_user_param_value on " . $server_db_prefix . "ums.user_param_value(user_param_id,company_orgunit_id,department_orgunit_id,division_orgunit_id,employee_id)");
 
 
 /*
@@ -131,4 +135,3 @@ delete from afile where original_name in (select original_name from tmp_dup_afil
 
 create unique index uk_afile on ttc_ums.afile(original_name,afile_size,owner_id,stakeholder_id);
 */
-
