@@ -345,10 +345,10 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $countGived = 0;
                 $log_arr = array();
                 foreach ($moduleToGiveArr as $module_id => $module_roles) {
-                        $this->giveMeModule($module_id, $module_roles);
+                        $gived = $this->giveMeModule($module_id, $module_roles, 3, true);
                         if (is_array($module_roles))
-                                $module_roles = implode(',', $module_roles);
-                        $log_arr[] = "gived for module $module_id : $module_roles";
+                                $module_roles_txt = implode(',', $module_roles);
+                        $log_arr[] = "For module $module_id try to give ($module_roles_txt) gived ($gived)";
                         $countGived++;
                 }
                 $log_arr[] = $countGived . ' ' . $this->tm('module-role(s) has been affected to this user according to his job respobilities');  // .var_export($moduleToGiveArr,true)
@@ -401,7 +401,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return array($mau->id => $mau);
         }
 
-        public function giveMeModule($mod, $roles, $my_org_id = 3)
+        public function giveMeModule($mod, $roles, $my_org_id = 3, $returnDescription = false)
         {
                 global $file_dir_name;
                 if (is_array($roles)) {
@@ -441,7 +441,8 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 $mau->update();
 
-                return $mau;
+                if ($returnDescription) return "before : $arole_mfk_before after : $arole_mfk_after";
+                else return $mau;
         }
 
         public function removeMeRoles($my_module_id, $roles)
@@ -1888,7 +1889,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         $me_id = $this->id;
                         $file_full_path = dirname(__FILE__) . "/../cache/chusers/$company" . "_user_$me_id" . '_data.php';
                         if (file_exists($file_full_path)) {
-                                include ($file_full_path);
+                                include($file_full_path);
                                 if ($mau_info[$MODULE]) {
                                         return array(true, 'done-from-cache');
                                 } else {
@@ -2038,10 +2039,12 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         foreach ($mauList as $mauItem) {
                                 $moduleItem = $mauItem->hetModule();
                                 if ($moduleItem and $moduleItem->isRunnable() and ($except_module != $moduleItem->getVal('module_code'))) {
-                                        $quick_links_arr[] = array('target' => $moduleItem->getVal('module_code'),
+                                        $quick_links_arr[] = array(
+                                                'target' => $moduleItem->getVal('module_code'),
                                                 'name_ar' => $moduleItem->getShortDisplay('ar'),
                                                 'name_en' => $moduleItem->getShortDisplay('en'),
-                                                'url' => $moduleItem->getMyURL($lang));
+                                                'url' => $moduleItem->getMyURL($lang)
+                                        );
                                 }
                         }
                 }
