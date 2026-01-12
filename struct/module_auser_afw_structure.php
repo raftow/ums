@@ -9,6 +9,8 @@
                     $obj->ORDER_BY_FIELDS = "id_module, id_auser, description";
                     $obj->UNIQUE_KEY = array('id_module','id_auser');
                     $obj->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
+					$obj->editByStep = true;
+					$obj->editNbSteps = 2;
                     
                     $obj->after_save_edit = array("class"=>'Auser',"attribute"=>'id_auser', "currmod"=>'ums',"currstep"=>3);
 				}
@@ -48,19 +50,19 @@
 							'TYPE' => 'YN',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 							'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'DEFAUT' => 'Y', ),
 
-						'arole_mfk' => array('SHORTNAME' => 'roles',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
+						'arole_mfk' => array('STEP' => 2,'SHORTNAME' => 'roles',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  
 							'TYPE' => 'MFK',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  
 							'WHERE-SEARCH' => "arole_type_id = 10", 
 							'DEPENDENCY' => 'id_module',  
 							'WHERE' => "module_id = §id_module§ and arole_type_id = 10 and avail='Y'", 
-							'LINK_TO_MFK_ITEMS' => 'صلاحية',  'LIST_SEPARATOR' => '، ',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+							'LINK_TO_MFK_ITEMS' => 'صلاحية',  'LIST_SEPARATOR' => '، ',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 							'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 							),
 
-						'open_arole_mfk' => array('SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  
+						'open_arole_mfk' => array('STEP' => 2,'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  
 							'TYPE' => 'MFK',  'ANSWER' => 'arole',  'ANSMODULE' => 'ums',  
 							'WHERE' => "(§id_module§ = '0' or §id_module§ = '' or module_id = §id_module§) and id in ('0§arole_mfk§0')", 
-							'LIST_SEPARATOR' => '<br> ',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+							'LIST_SEPARATOR' => '<br> ',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 							'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 							),
 

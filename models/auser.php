@@ -887,17 +887,15 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return Arole::getAllRolesForModuleAndUser($module_id, $this->id, $only_ids);
         }
 
-        public function getMenuFor($module_id, $langue = '', $sub_folders = false, $items = false)
+        public function getMenuFor($module_id, $lang = '', $sub_folders = false, $items = false)
         {
-                $lang = AfwLanguageHelper::getGlobalLanguage();
-                if (!$langue)
-                        $langue = $lang;
+                if (!$lang) $lang = AfwLanguageHelper::getGlobalLanguage();
 
                 // $file_dir_name = dirname(__FILE__);
                 //
 
                 // store it in temp php file associated to current session
-                // if($this->cache_m enu[$module_id][$langue]) return $this->cache_me nu[$module_id][$langue];
+                // if($this->cache_m enu[$module_id][$lang]) return $this->cache_me nu[$module_id][$lang];
 
                 $menu_arr = array();
 
@@ -912,8 +910,8 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $module_is_public = AfwSession::config("module_$module_id" . '_is_public', false);
                 if (!$module_is_public) {
                         if (!$authorized) {
-                                $message = $this->tm('The user %s (uid:%d) is not authorized to access this module [mid:%d]');
-                                $message = sprintf($message, $this->getDisplay($langue), $this->id, $module_id);
+                                $message = $this->tm('The user %s (uid:%d) is not authorized to access this module [mid:%d]', $lang);
+                                $message = sprintf($message, $this->getDisplay($lang), $this->id, $module_id);
 
                                 throw new AfwBusinessException($message);
                                 AfwSession::pushError($message);
@@ -922,7 +920,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                         if (!count($mau_found_roles)) {
                                 $message = $this->tm("No roles assigned to this module for user %s <br>\nuser_id : %d<br>\nmodule_id : %d");
-                                $message = sprintf($message, $this->getDisplay($langue), $this->id, $module_id);
+                                $message = sprintf($message, $this->getDisplay($lang), $this->id, $module_id);
                                 AfwSession::pushWarning($message);
                         }
                 }
@@ -950,9 +948,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         'sub-folders' => array(),
                 );
 
-                // if(!$this->cache_me nu[$module_id][$langue]) $this->cache_me nu[$module_id][$langue] = $menu_arr;
+                // if(!$this->cache_me nu[$module_id][$lang]) $this->cache_me nu[$module_id][$lang] = $menu_arr;
 
-                // die($this->getDisplay("ar")."->getMenuFor($module_id, $langue, $sub_folders, $items) will return ".var_export($menu_arr,true));
+                // die($this->getDisplay("ar")."->getMenuFor($module_id, $lang, $sub_folders, $items) will return ".var_export($menu_arr,true));
                 return $menu_arr;
         }
 

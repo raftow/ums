@@ -186,7 +186,7 @@ class Module extends UmsObject
             $objModule->set("id_module_type", 5);
 
             $objModule->commit();
-
+            AfwSession::setConfig("create_table_if_not_exists", true);
             list($err111, $inf111, $war111, $pagged) = $objModule->pagAllTables($lang = "ar");
             if ($err111) $message_arr[] = "Error : $err111";
             if ($inf111) $message_arr[] = "Info : $inf111";
