@@ -467,7 +467,7 @@ zoomWindowOffety:-200
                         // die("after include_once of $file_dir_name/../ext-ernal/config.php , upld_path = ".$upld_path." img = $img");
                         return $img;
                 } else {
-                        return "<img style='$style' src='../lib/images/no-picture.png'>";
+                        return "<img style='width:30%;height:auto' src='../lib/images/no-picture.png'>";
                 }
         }
 
