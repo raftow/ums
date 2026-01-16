@@ -2055,6 +2055,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return false;
         }
 
+
         public function getUserPicture()
         {
                 $html = '';
