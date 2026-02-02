@@ -1063,4 +1063,18 @@ class Arole extends UmsObject
 
         return $php_code;
     }
+
+
+    public function calcPhp_code($what="value") {        
+        $moduleObj = $this->het("module_id");
+        if ($moduleObj) {
+            $module_code = $moduleObj->getVal("module_code");
+            if ($module_code) list($role_infoItem, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $this, $genereFile = true);
+            else $php_code = "No module code defined for the module of this role";
+        }
+        else $php_code = "No module defined for this role";
+
+        return "<textarea cols='80' rows='30'>".$php_code."</textarea>";
+        
+    }
 }

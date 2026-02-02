@@ -2,6 +2,10 @@
 if (!class_exists("AfwSession")) die("Denied access");
 $server_db_prefix = AfwSession::currentDBPrefix();
 
+
+// 2/2/2026
+// alter table ttc_ums.ugroup add module_id int(11) not null default 0;
+
 // 8/1/2026
 // update bfunction set hierarchy_level_enum = 999 where bfunction_code like '%/display%';
 // update bfunction set hierarchy_level_enum = 999 where bfunction_code like '%/qsearch%';

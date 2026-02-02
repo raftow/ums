@@ -333,6 +333,28 @@ class UmsAroleAfwStructure
 			'EDIT-UGROUPS' => '',
 		),
 
+
+		'php_code' => array(
+			'TYPE' => 'TEXT',
+			'CATEGORY' => 'FORMULA',
+			'SHOW' => true,
+			'EDIT' => true,
+			'QEDIT' => false,
+			'READONLY' => true,
+			'RETRIEVE' => false,
+			'PRE' => true,
+			'CSS' => 'width_pct_100',
+			'TEXT-ALIGN' => 'left',
+			'STEP' => 4,
+			'SEARCH-BY-ONE' => '',
+			'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',
+			'EDIT-UGROUPS' => '',
+		),
+
+
+		
+
 		'all_rbfList' => array(
 			'TYPE' => 'FK',
 			'ANSWER' => 'arole_bf',
