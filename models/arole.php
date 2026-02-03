@@ -1074,6 +1074,6 @@ class Arole extends UmsObject
             else $php_code = "No module code defined for the module of this role";
         } else $php_code = "No module defined for this role";
 
-        return "<textarea cols='150' rows='30' style='direction: ltr;'" . $php_code . "</textarea>";
+        return "<textarea cols='150' rows='30' style='direction: ltr;'>" . $php_code . "</textarea>";
     }
 }
