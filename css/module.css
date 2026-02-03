@@ -9,42 +9,42 @@
     border-bottom: 2px solid #91b1c947 !important;
 }
 
-.counter_desc{
+.counter_desc {
     font-weight: bold;
     color: red;
 }
 
-.course_desc{
+.course_desc {
     font-weight: bold;
     color: blue;
 }
 
-.devoir_desc{
+.devoir_desc {
     font-weight: bold;
     color: black;
 }
 
-.course_title{
+.course_title {
     color: #b55922;
     font-weight: bold;
 }
 
 
-.course_comment{
+.course_comment {
     color: #0023a0;
     font-weight: bold;
 }
 
 
-.devoir_comment{
+.devoir_comment {
     color: #6f6b68;
     font-weight: bold;
 }
 
-.present_on_session{
+.present_on_session {
     background-color: #e1fbe1;
     padding: 3px 3px 3px 3px;
-    max-width: 200px;    
+    max-width: 200px;
     border-radius: 6px;
     border-width: 1px;
     color: #2e7916;
@@ -57,7 +57,7 @@
     font-weight: bold;
 }
 
-.present_on_session_display{
+.present_on_session_display {
     border-radius: 6px;
     border-width: 1px;
     color: #2e7916;
@@ -70,14 +70,14 @@
     font-weight: bold;
 }
 
-.good_quitted{
+.good_quitted {
     background-color: #d7f1ff;
     padding: 3px 3px 3px 3px;
     max-width: 200px;
     border-radius: 6px;
     border-width: 1px;
     color: #18779d;
-    border-color: #18779d;    
+    border-color: #18779d;
     height: 40px;
     background-image: url(../pic/leave.png) !important;
     background-size: 20px 20px !important;
@@ -101,7 +101,7 @@
     background-color: #dfeefd;
 }
 
-.absent{
+.absent {
     background-color: #fbe1e1;
     padding: 3px 3px 3px 3px;
     max-width: 200px;
@@ -135,7 +135,7 @@
 }
 
 
-.early_quitted{
+.early_quitted {
     background-color: #fff9ddcf;
     padding: 3px 3px 3px 3px;
     max-width: 200px;
@@ -151,7 +151,7 @@
     font-weight: bold;
 }
 
-.early_quitted_display{
+.early_quitted_display {
     border-radius: 6px;
     border-width: 1px;
     color: #792e16;
@@ -198,7 +198,7 @@
     background-color: #fff0d6;
 }
 
-.not_called_yet{
+.not_called_yet {
     background-color: white;
     border-color: #b3a1a1;
     padding: 3px 3px 3px 3px;
@@ -206,12 +206,12 @@
     border-radius: 6px;
     border-width: 1px;
     color: #707966;
-    
+
     height: 40px;
     font-weight: bold;
 }
 
-.not_called_yet_display{
+.not_called_yet_display {
     border-radius: 6px;
     border-width: 1px;
     color: #707966;
@@ -279,39 +279,38 @@
     background-repeat: no-repeat !important;
     background-position: 3px 0px !important;
     font-weight: bold;
-    
+
 }
 
-button.toggle-hzm-btn.on_time, 
+button.toggle-hzm-btn.on_time,
 button.toggle-hzm-btn.absent,
 button.toggle-hzm-btn.good_quitted,
 button.toggle-hzm-btn.early_quitted,
-button.toggle-hzm-btn.on_late
- {
+button.toggle-hzm-btn.on_late {
     font-size: 95% !important;
     text-align: right;
     padding-right: 5px;
 }
 
 
-.exam_warning{
-    background-color: rgb(255,75,4);
+.exam_warning {
+    background-color: rgb(255, 75, 4);
     width: 370px;
     border-radius: 18px 18px 0px 0px;
     padding: 8px 15px 8px 15px;
     color: #fff;
 }
 
-.exam_desc{
-    background-color: rgb(0,135,225);
+.exam_desc {
+    background-color: rgb(0, 135, 225);
     width: 370px;
     border-radius: 0px 0px 18px 18px;
     padding: 8px 15px 8px 15px;
     color: #fff;
 }
 
-.exam_name{
-    background-color: rgb(93,201,250);
+.exam_name {
+    background-color: rgb(93, 201, 250);
     width: 370px;
     padding: 5px 12px 4px 12px;
     color: #000;
@@ -513,7 +512,7 @@ button.toggle-hzm-btn.on_late
     /* background-image: url(../../adm/pic/molecule.png);*/
     /* background-size: 1576px 874px; */
     /* background-clip: content-box; */
-    background-color: rgba(255,255,255, 0.76) !important;
+    background-color: rgba(255, 255, 255, 0.76) !important;
     background-repeat: no-repeat;
     background-position-x: 20px;
     background-position-y: 80px;
@@ -641,12 +640,12 @@ div>a.downloadbtn>div.pdf_download {
     margin-bottom: 10px;
 }
 
-.certiftp a{
+.certiftp a {
     float: right;
     width: 100%;
-    text-align:center;
-    padding-top:10px;
-    color: black;    
+    text-align: center;
+    padding-top: 10px;
+    color: black;
 }
 
 .certiftp.current {
@@ -793,8 +792,7 @@ li.hzm_login {
     background-color: #ffffff1a;
 }
 
-@media (max-width:640px)
-{
+@media (max-width:640px) {
     .modal_login.modal-content {
         width: 80%;
         margin-left: 4%;
@@ -833,7 +831,7 @@ div.modal-dialog {
     background-color: #fff;
     padding-bottom: 3px !important;
 }
-    
+
 
 .hzmSteps {
     min-height: 128px;
@@ -888,83 +886,83 @@ span.object_id {
 .collapsed {
     background: #fff url(../../lib/images/collapse16.png) no-repeat scroll 25px 15px !important;
 }
-  
+
 
 /***     login/home/header nice can be published for all   */
 
-    @media screen and (max-width: 718px) {
-        .title_company{
-            visibility:hidden;
-            display : none;
-            width: 0px !important;
-            height: 0px !important;
-        }
+@media screen and (max-width: 718px) {
+    .title_company {
+        visibility: hidden;
+        display: none;
+        width: 0px !important;
+        height: 0px !important;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .title_company_user {
+        visibility: hidden;
+        display: none;
+        width: 0px !important;
+        height: 0px !important;
     }
 
-    @media screen and (max-width: 730px) {
-        .title_company_user {
-            visibility:hidden;
-            display : none;
-            width: 0px !important;
-            height: 0px !important;
-        }
+}
 
-    } 
-
-    @media screen and (max-width: 535px) {
-            .calendar_bloc_g{
-               display : none;
-               visibility:hidden;
-               width: 0px !important;
-               height: 0px !important;
-            }
-    }
-    
-    
+@media screen and (max-width: 535px) {
     .calendar_bloc_g {
-        height: 96px;
-        background-image: url(../../lib/images/calendar_school.png) !important;
-        background-repeat: no-repeat;
-        background-size: 75%;
-        background-position: 10px 10px;
-        padding-top: 33px;
-        font-family: saharat;
-        font-size: 14px;
-        font-weight: bold;
-        width: 105px;
-        float: left;
-        margin-top: -4px;
+        display: none;
+        visibility: hidden;
+        width: 0px !important;
+        height: 0px !important;
     }
-    
-    .calendar_year {
-        text-align: center;
-        color: #0670bb;
-        font-family: digi !important;
-        font-weight: bold !important;
-        font-size: 15px !important;
-        margin-left: -7px !important;
-        margin-top: -2px !important;
-        line-height: 16px;
-    }
-    
-    .calendar_day {
-        height: 60px;
-        text-align: center;
-        color: #333;
-        margin-left: -7px !important;
-        font-family: title, courrier,arial,rgt;
-        font-weight: bold;
-        font-size: 11px;
-        padding-top: 0px;
-        line-height: 11px;
-    }   
-    
-    span.dday {
-        font-size: 14px !important;
-        font-family: DIGI !important;
-        color: #ce641b !important;
-        padding: 0px 1px !important;
-    }
+}
+
+
+.calendar_bloc_g {
+    height: 96px;
+    background-image: url(../../lib/images/calendar_school.png) !important;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    background-position: 10px 10px;
+    padding-top: 33px;
+    font-family: saharat;
+    font-size: 14px;
+    font-weight: bold;
+    width: 105px;
+    float: left;
+    margin-top: -4px;
+}
+
+.calendar_year {
+    text-align: center;
+    color: #0670bb;
+    font-family: digi !important;
+    font-weight: bold !important;
+    font-size: 15px !important;
+    margin-left: -7px !important;
+    margin-top: -2px !important;
+    line-height: 16px;
+}
+
+.calendar_day {
+    height: 60px;
+    text-align: center;
+    color: #333;
+    margin-left: -7px !important;
+    font-family: title, courrier, arial, rgt;
+    font-weight: bold;
+    font-size: 11px;
+    padding-top: 0px;
+    line-height: 11px;
+}
+
+span.dday {
+    font-size: 14px !important;
+    font-family: DIGI !important;
+    color: #ce641b !important;
+    padding: 0px 1px !important;
+}
 
 
 
@@ -997,7 +995,7 @@ div.modal-dialog {
 
 /***     login/home/header nice can be published for all   */
 
- #primary_nav_wrap {
+#primary_nav_wrap {
     background: #8ec1f5;
 }
 
@@ -1008,15 +1006,15 @@ div.modal-dialog {
 
 
 .in-group-answer_props {
-     min-height: auto;
+    min-height: auto;
 }
 
 .in-group-answer_props {
-     min-height: auto;
+    min-height: auto;
 }
 
 .min_height_auto {
-     min-height: auto !important;
+    min-height: auto !important;
 }
 
 /**** for all Momken Framework      *******/
@@ -1049,15 +1047,16 @@ div.modal-dialog {
     box-shadow: inset 0 3px 9px rgba(0,0,0,.25);
 }
 */
-.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a {
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.open>a {
     background-image: -webkit-linear-gradient(top, #ffa400, #a96d00);
     background-image: -o-linear-gradient(top, #ffa400 0, #a96d00 100%);
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#ffa400), to(#a96d00));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffa400), to(#a96d00));
     background-image: linear-gradient(180deg, #ffa400 0, #a96d00);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#ff080808",endColorstr="#ff0f0f0f",GradientType=0);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#ff080808", endColorstr="#ff0f0f0f", GradientType=0);
     background-repeat: repeat-x;
-    -webkit-box-shadow: inset 0 3px 9px rgba(0,0,0,.25);
-    box-shadow: inset 0 3px 9px rgba(0,0,0,.25);
+    -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, .25);
+    box-shadow: inset 0 3px 9px rgba(0, 0, 0, .25);
 }
 
 
@@ -1072,10 +1071,9 @@ h2.school_question {
     color: #767816;
     text-shadow: #dbef96 1px 1px;
 }
-   
 
-@media (max-width: 1100px)
-{
+
+@media (max-width: 1100px) {
     .panel-heading {
         min-height: 80px;
         font-size: 19px !important;
@@ -1083,8 +1081,7 @@ h2.school_question {
     }
 }
 
-@media (max-width: 920px)
-{
+@media (max-width: 920px) {
     .panel-heading {
         min-height: 104px;
         font-size: 18px !important;
@@ -1092,8 +1089,7 @@ h2.school_question {
     }
 }
 
-@media (max-width: 700px)
-{
+@media (max-width: 700px) {
     .panel-heading {
         min-height: 104px;
         font-size: 16px !important;
@@ -1101,8 +1097,7 @@ h2.school_question {
     }
 }
 
-@media (max-width: 550px)
-{
+@media (max-width: 550px) {
     .panel-heading {
         min-height: 125px;
         font-size: 16px !important;
@@ -1110,8 +1105,7 @@ h2.school_question {
     }
 }
 
-@media (min-width:740px)
-{
+@media (min-width:740px) {
     .modal-dialog.popup-register.popup-sms-verify {
         margin-right: 150px !important;
     }
@@ -1119,8 +1113,7 @@ h2.school_question {
 
 
 
-@media (min-width:580px)
-{
+@media (min-width:580px) {
     .modal-dialog.popup-register.popup-sms-verify {
         margin-right: 70px !important;
     }
@@ -1158,10 +1151,9 @@ div.popup-sms-verify>.modal-content {
     margin-right: 0 !important;
     margin-left: 0 !important;
     margin-top: 60px !important;
-}   
+}
 
-@media (max-width:1042px)
-{
+@media (max-width:1042px) {
     .modal-dialog.popup-register.popup-sms-verify {
         float: right;
         min-height: 210px;
@@ -1173,7 +1165,7 @@ div.popup-sms-verify>.modal-content {
         margin-top: 130px !important;
         margin-bottom: 10px !important;
     }
-    
+
     .modal-dialog.popup-content {
         float: right;
         min-height: 350px;
@@ -1183,11 +1175,10 @@ div.popup-sms-verify>.modal-content {
         margin-right: 20% !important;
         margin-left: 20% !important;
         margin-top: 20px !important;
-    }    
+    }
 }
 
-@media (max-width:742px)
-{
+@media (max-width:742px) {
     .modal-dialog.popup-register.popup-sms-verify {
         float: right;
         min-height: 210px;
@@ -1199,7 +1190,7 @@ div.popup-sms-verify>.modal-content {
         margin-top: 130px !important;
         margin-bottom: 10px !important;
     }
-    
+
     .modal-dialog.popup-content {
         float: right;
         min-height: 350px;
@@ -1209,11 +1200,10 @@ div.popup-sms-verify>.modal-content {
         margin-right: 15% !important;
         margin-left: 15% !important;
         margin-top: 20px !important;
-    }    
+    }
 }
 
-@media (max-width:542px)
-{
+@media (max-width:542px) {
     .modal-dialog.popup-register.popup-sms-verify {
         float: right;
         min-height: 210px;
@@ -1225,7 +1215,7 @@ div.popup-sms-verify>.modal-content {
         margin-top: 130px !important;
         margin-bottom: 10px !important;
     }
-    
+
     .modal-dialog.popup-content {
         float: right;
         min-height: 350px;
@@ -1235,11 +1225,10 @@ div.popup-sms-verify>.modal-content {
         margin-right: 10% !important;
         margin-left: 10% !important;
         margin-top: 20px !important;
-    }    
+    }
 }
 
-@media (max-width:442px)
-{
+@media (max-width:442px) {
     .modal-dialog.popup-register.popup-sms-verify {
         float: right;
         min-height: 210px;
@@ -1251,7 +1240,7 @@ div.popup-sms-verify>.modal-content {
         margin-top: 130px !important;
         margin-bottom: 10px !important;
     }
-    
+
     .modal-dialog.popup-content {
         float: right;
         min-height: 350px;
@@ -1261,7 +1250,7 @@ div.popup-sms-verify>.modal-content {
         margin-right: 5% !important;
         margin-left: 5% !important;
         margin-top: 20px !important;
-    }    
+    }
 }
 
 
@@ -1327,22 +1316,22 @@ span.niceicon>img {
     margin-left: 2%;
     margin-top: 25px;
     min-width: 300px !important;
-    float:left !important;
+    float: left !important;
 }
 
 @media screen and (max-width: 1404px) {
     .hzm-btn-blocs li {
         width: 70% !important;
         margin-left: 5%;
-        float:left !important;
+        float: left !important;
         margin-top: 25px;
     }
 }
 
 @media screen and (max-width: 946px) {
-        .hzm-btn-blocs li {
-            width: 99% !important;
-        }
+    .hzm-btn-blocs li {
+        width: 99% !important;
+    }
 }
 
 .hzm-btn-blocs {
@@ -1409,8 +1398,8 @@ span.prog-name.prog-archive {
         margin-left: 3% !important;
     }
 
-    .my_school_ticket{
-        padding:5px !important;
+    .my_school_ticket {
+        padding: 5px !important;
     }
 }
 
@@ -1422,8 +1411,8 @@ span.prog-name.prog-archive {
         margin-left: 2% !important;
     }
 
-    .my_school_ticket{
-        padding:4px !important;
+    .my_school_ticket {
+        padding: 4px !important;
     }
 
     .my_school_ticket.width_pct_75 {
@@ -1459,14 +1448,14 @@ span.prog-name.prog-archive {
         width: 98% !important;
         margin-right: 1% !important;
         margin-left: 1% !important;
-                
+
     }
 
-    .my_school_ticket{
-        padding:3px !important;
+    .my_school_ticket {
+        padding: 3px !important;
     }
 
-    .my_school_ticket.timbre4.top{
+    .my_school_ticket.timbre4.top {
         min-height: 60px !important;
         max-height: 60px;
     }
@@ -1506,17 +1495,17 @@ span.prog-name.prog-archive {
 
 
     .front_bloc.hzm_school_bloc.ticket {
-                min-width: 100%  !important;
-                width: 100%  !important;
-                margin-right: 0 !important;
-                margin-left: 0 !important;
-                
+        min-width: 100% !important;
+        width: 100% !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+
     }
 
-    .my_school_ticket{
-        padding:2px;
+    .my_school_ticket {
+        padding: 2px;
     }
-    
+
     .notevaluated_display {
         padding: 2px 6px 6px 6px;
         width: 40px;
@@ -1524,7 +1513,7 @@ span.prog-name.prog-archive {
         white-space: pre-wrap;
         line-height: 18px !important;
     }
-    
+
     .verypoor_display {
         padding: 2px 6px 6px 6px;
         width: 40px;
@@ -1532,7 +1521,7 @@ span.prog-name.prog-archive {
         white-space: pre-wrap;
         line-height: 18px !important;
     }
-    
+
     .poor_display {
         padding: 2px 6px 6px 6px;
         width: 40px;
@@ -1540,7 +1529,7 @@ span.prog-name.prog-archive {
         white-space: pre-wrap;
         line-height: 18px !important;
     }
-    
+
     .accepted_display {
         padding: 2px 6px 6px 6px;
         width: 40px;
@@ -1548,15 +1537,15 @@ span.prog-name.prog-archive {
         white-space: pre-wrap;
         line-height: 18px !important;
     }
-    
+
     .good_display {
         padding: 2px 6px 6px 6px;
         width: 40px;
-        height: 60px;        
+        height: 60px;
         white-space: pre-wrap;
         line-height: 18px !important;
     }
-    
+
     .verygood_display {
         padding: 2px 6px 6px 6px;
         width: 40px;
@@ -1564,7 +1553,7 @@ span.prog-name.prog-archive {
         white-space: pre-wrap;
         line-height: 18px !important;
     }
-    
+
     .excellent_display {
         padding: 2px 6px 6px 6px;
         width: 40px;
@@ -1573,7 +1562,10 @@ span.prog-name.prog-archive {
         line-height: 18px !important;
     }
 
-    .on_time_display, .on_late_display, .absent_display, .good_quitted_display {
+    .on_time_display,
+    .on_late_display,
+    .absent_display,
+    .good_quitted_display {
         width: 30px;
         overflow: hidden;
         white-space: nowrap;
@@ -1582,12 +1574,12 @@ span.prog-name.prog-archive {
         max-width: 35px !important;
     }
 
-    .my_school_ticket.timbre4.top{
+    .my_school_ticket.timbre4.top {
         min-height: 60px !important;
         max-height: 60px;
     }
 
-    
+
 }
 
 
@@ -1607,26 +1599,26 @@ span.prog-name.prog-archive {
 
 
 .mb_med_title.my_ticket {
-        font-size: 22px;
-        width: 99.9%;
-        min-height: 60px;
-        height: -webkit-fill-available;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        text-align: right;
-        margin-top: 0px;
-        /* border: 1px solid #cfd4db;*/
-        float: right;
+    font-size: 22px;
+    width: 99.9%;
+    min-height: 60px;
+    height: -webkit-fill-available;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    text-align: right;
+    margin-top: 0px;
+    /* border: 1px solid #cfd4db;*/
+    float: right;
 }
 
 .mb_med_title.my_ticket>div.school_calendar {
-        margin-right: 0;
+    margin-right: 0;
 }
 
 .fleft.mb_med_title.my_ticket {
-        float: left;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
+    float: left;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
 }
 
 .status_comments {
@@ -1653,7 +1645,8 @@ span.prog-name.prog-archive {
     margin-right: 5px;
     margin-left: 5px;
     min-width: 48px !important;
-    max-width: 200px; /*rafik : make word wrap ??*/
+    max-width: 200px;
+    /*rafik : make word wrap ??*/
     text-align: center;
     width: 100%;
     float: left;
@@ -1661,7 +1654,7 @@ span.prog-name.prog-archive {
 
 
 .school_status.status_100 {
-        background-color: #3eb3c7;
+    background-color: #3eb3c7;
 }
 
 .school_status.status_101 {
@@ -1692,20 +1685,20 @@ span.prog-name.prog-archive {
 
 
 .school_status.status_300 {
-        background-color: #8e8282;
+    background-color: #8e8282;
 }
 
 
 .school_status.status_301 {
-    background-color:#c38f8f;
+    background-color: #c38f8f;
 }
 
 .school_status.status_302 {
-        background-color: #3599c5;
+    background-color: #3599c5;
 }
 
 .school_status.status_303 {
-        background-color: #7ab37d;
+    background-color: #7ab37d;
 }
 
 
@@ -1724,9 +1717,9 @@ span.prog-name.prog-archive {
 }
 
 .my_school_ticket_data {
-        width: 100%;
-        float: right;
-        margin: 0 !important;
+    width: 100%;
+    float: right;
+    margin: 0 !important;
 }
 
 .my_school_ticket.width_pct_100 {
@@ -1797,7 +1790,7 @@ div.school_data.survey>label {
 
 .hzm_data_prop.survey.easy_fastN {
     background-color: red;
-    color:white;
+    color: white;
 }
 
 
@@ -1812,7 +1805,7 @@ div.school_data.survey>label {
 
 .hzm_data_prop.survey.service_satisfiedN {
     background-color: red;
-    color:white;
+    color: white;
 }
 
 .hzm_data_prop.survey.pb_resolvedW {
@@ -1826,7 +1819,7 @@ div.school_data.survey>label {
 
 .hzm_data_prop.survey.pb_resolvedN {
     background-color: red;
-    color:white;
+    color: white;
 }
 
 .btn_container.taqib>div>a.question {
@@ -1875,9 +1868,9 @@ div.school_data.survey>label {
 }
 
 @media screen and (max-width: 850px) {
-        div.school_data>label {
-                width: 99% !important;
-        }
+    div.school_data>label {
+        width: 99% !important;
+    }
 }
 
 
@@ -1886,66 +1879,66 @@ div.school_data>label {
     width: 100%;
     color: black;
     font-weight: bold;
-    /* white-space: nowrap; rafik : cause pb for mobile version see picture bugs/adm-001.png*/ 
+    /* white-space: nowrap; rafik : cause pb for mobile version see picture bugs/adm-001.png*/
     min-height: 26px !important;
     margin-bottom: 0px;
 }
 
 div.school_calendar {
-        font-size: 18px;
-        background-color: #ffffff;
-        padding: 0;
-        color: #131313;
-        width: auto !important;
-        /* max-width: max-content; */
-        margin-left: 0;
-        margin-right: 0;
-        line-height: 22px;
+    font-size: 18px;
+    background-color: #ffffff;
+    padding: 0;
+    color: #131313;
+    width: auto !important;
+    /* max-width: max-content; */
+    margin-left: 0;
+    margin-right: 0;
+    line-height: 22px;
 }
 
 .school_calendar>span.school_time {
-        font-size: 14px !important;
-        color: #e56711;
-        font-weight: normal !important;
+    font-size: 14px !important;
+    color: #e56711;
+    font-weight: normal !important;
 }
 
 .school_calendar>span.request_date {
-        font-size: 16px !important;
-        color: #00a2e8;
-        font-weight: normal;
-        padding-right: 4px;
+    font-size: 16px !important;
+    color: #00a2e8;
+    font-weight: normal;
+    padding-right: 4px;
 }
 
 .my_ticket>.row.school_data {
-        border: none !important;
+    border: none !important;
 }
 
 .front_bloc.school_data_props {
-        width: 90%;
-        margin-left: 5%;
-        margin-right: 5%;
-        margin-bottom: 20px;
-        float: right;
-        background-color: #ffffffa1;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 20px;
+    float: right;
+    background-color: #ffffffa1;
 }
 
 .my_school_dates {
-        background-color: white;
-        width: 96%;
-        margin-left: 2%;
-        margin-right: 2%;
-        margin-top: 20px;
-        height: max-content;
-        float: right;
+    background-color: white;
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 20px;
+    height: max-content;
+    float: right;
 }
 
 .school_small_calendar.calendar_left {
-        margin-top: 4px;
-        margin-bottom: 8px;
-        margin-right: 45px;
-        margin-left: 45px;
-        background-color: #fcfcd2;
-        padding: 5px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    margin-right: 45px;
+    margin-left: 45px;
+    background-color: #fcfcd2;
+    padding: 5px;
 }
 
 label {
@@ -1957,12 +1950,12 @@ label {
     color: #023145;
 }
 
-div.row.odd.school_data.school_response.type1 > div.hzm_small_calendar > label {
+div.row.odd.school_data.school_response.type1>div.hzm_small_calendar>label {
     display: revert;
     background-color: #b0f75f7d;
 }
 
-.hzm_small_calendar > label {
+.hzm_small_calendar>label {
     display: revert;
     background-color: #eee6c85c;
     color: #064839;
@@ -2007,6 +2000,7 @@ div.row.odd.school_data.school_response.type1 > div.hzm_small_calendar > label {
     background-color: #3ac4e1 !important;
     border-color: #21899f !important;
 }
+
 input.btnbtsp.btn-primary.btnregister {
     width: 90%;
     margin-left: 5%;
@@ -2093,10 +2087,8 @@ input.btnbtsp.btn-primary.btncheck {
     float: right;
 }
 
-@media (max-width:660px)
-{
-    .request_container
-    {
+@media (max-width:660px) {
+    .request_container {
         width: 98% !important;
         margin: 0 1% 23px 1% !important;
     }
@@ -2113,8 +2105,7 @@ input.btnbtsp.btn-primary.btncheck {
 
 }*/
 
-@media (max-width:460px)
-{
+@media (max-width:460px) {
     .request_container {
         width: 100% !important;
         margin: 0 0% 23px 0% !important;
@@ -2141,8 +2132,7 @@ input.btnbtsp.btn-primary.btncheck {
     min-width: 360px;
 }
 
-@media (max-width:720px)
-{
+@media (max-width:720px) {
     .hzm_wd2 {
         width: 100%;
     }
@@ -2180,7 +2170,7 @@ span.hzm_time.hzm_small_time {
 .row.odd.school_data.school_response.type1 {
     background-color: #d8ffd8;
     border-color: green;
-  }
+}
 
 .row.school_data.title_school {
     font-size: 120%;
@@ -2189,6 +2179,7 @@ span.hzm_time.hzm_small_time {
     min-height: 0;
     background-color: #eaf4a959;
 }
+
 /*
 this is wrong as way to center the ticket_div because 880 is not the width it is the max width
 @media screen and (min-width: 890px) {
@@ -2200,8 +2191,7 @@ this is wrong as way to center the ticket_div because 880 is not the width it is
     }
 }
 */
-.perf_perfect
-{
+.perf_perfect {
     background-color: green;
     width: 68px !important;
     max-width: 68px !important;
@@ -2213,8 +2203,7 @@ this is wrong as way to center the ticket_div because 880 is not the width it is
     padding-top: 4px;
 }
 
-.perf_excellent
-{
+.perf_excellent {
     background-color: #1b6abc;
     width: 68px !important;
     max-width: 68px !important;
@@ -2226,8 +2215,7 @@ this is wrong as way to center the ticket_div because 880 is not the width it is
     padding-top: 4px;
 }
 
-.perf_good
-{
+.perf_good {
     background-color: #516274;
     width: 68px !important;
     max-width: 68px !important;
@@ -2239,8 +2227,7 @@ this is wrong as way to center the ticket_div because 880 is not the width it is
     padding-top: 4px;
 }
 
-.perf_poor
-{
+.perf_poor {
     background-color: #c85c1d;
     width: 68px !important;
     max-width: 68px !important;
@@ -2252,8 +2239,7 @@ this is wrong as way to center the ticket_div because 880 is not the width it is
     padding-top: 4px;
 }
 
-.perf_very_poor
-{
+.perf_very_poor {
     background-color: red;
     width: 68px !important;
     max-width: 68px !important;
@@ -2266,7 +2252,7 @@ this is wrong as way to center the ticket_div because 880 is not the width it is
 }
 
 
-.perf_total{
+.perf_total {
     background-color: black;
     width: 68px !important;
     max-width: 68px !important;
@@ -2278,7 +2264,7 @@ this is wrong as way to center the ticket_div because 880 is not the width it is
     padding-top: 4px;
 }
 
-.perf_open{
+.perf_open {
     background-color: gray;
     width: 68px !important;
     max-width: 68px !important;
@@ -2290,30 +2276,35 @@ this is wrong as way to center the ticket_div because 880 is not the width it is
     padding-top: 4px;
 }
 
-.perf_late{
+.perf_late {
     color: red;
     font-weight: bold;
 }
 
-.perf_return{
+.perf_return {
     color: #d2690c;
     font-weight: bold;
 }
 
 
-th.stats_count_request, td.stats_count_request, th.stats_perf, td.stats_perf {
+th.stats_count_request,
+td.stats_count_request,
+th.stats_perf,
+td.stats_perf {
     border-left: 1px solid silver;
     border-right: 1px solid silver;
     text-align: center !important;
 }
 
-th.stats_count_request, td.stats_count_request, th.stats_perf {
+th.stats_count_request,
+td.stats_count_request,
+th.stats_perf {
     font-size: 110%;
-    font-weight: bold;    
+    font-weight: bold;
 
 }
 
-div.stats_perf{
+div.stats_perf {
     margin-left: auto;
     margin-right: auto;
 }
@@ -2326,7 +2317,8 @@ div.stats_perf{
     float: right !important;
 }
 
-table.dataTable thead th.stats_orgunit_id, td.stats_orgunit_id {
+table.dataTable thead th.stats_orgunit_id,
+td.stats_orgunit_id {
     font-weight: bold !important;
     font-size: 110% !important;
 }
@@ -2352,7 +2344,7 @@ a.btnbtsp.btn_link:hover {
     margin-right: 3%;
     margin-left: 3%;
     background-image: url(../pic/bg_2022.png);
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     /* background-size: contain;*/
     background-size: cover;
     background-position-y: 25px;
@@ -2364,16 +2356,16 @@ a.btnbtsp.btn_link:hover {
     padding-bottom: 0px;
 }
 
-@media print, screen and (max-width: 999px)
-{
+@media print,
+screen and (max-width: 999px) {
     li.wizardv1_li {
         width: 25% !important;
         min-width: 220px !important;
     }
 }
 
-@media print, screen and (max-width: 600px)
-{
+@media print,
+screen and (max-width: 600px) {
     li.wizardv1_li {
         margin-right: 4%;
         width: 92% !important;
@@ -2384,8 +2376,7 @@ a.btnbtsp.btn_link:hover {
 
 
 
-.hzm-icon-inbox
-{
+.hzm-icon-inbox {
     font-family: FontAwesome;
     display: inline-block;
     font-weight: normal;
@@ -2481,7 +2472,7 @@ a.btnbtsp.btn_link:hover {
 
 .hzm_data.hzm_data_response_type_id.inputreadonly {
     border: none;
-}  
+}
 
 input.respbtn {
     float: right;
@@ -2497,7 +2488,7 @@ input.respbtn {
     min-height: 850px;
     float: right;
     padding-bottom: 40px;
-    
+
 }
 
 .cms_bg.school_new_request {
@@ -2510,8 +2501,8 @@ input.respbtn {
     border: none;
 }
 
-@media print, screen and (min-width: 1048px)
-{
+@media print,
+screen and (min-width: 1048px) {
     .cms_bg_pic.contact {
         width: 60%;
         margin-right: 20%;
@@ -2549,15 +2540,14 @@ input#save_form {
     padding: 15px;
 }
 
-@media (max-width: 660px)
-{
+@media (max-width: 660px) {
     input#save_form {
         font-size: 25px !important;
         padding: 15px !important;
         width: 97% !important;
     }
 
-    
+
 }
 
 div#fg-warn {
@@ -2587,7 +2577,9 @@ div#fg-body.attrib-err {
 }
 
 ul.hzm_front_menu_bar.hzm_front_menu_bar.nav.navbar-nav>li>a {
-    background-color: #ffffff40 /* !important : here no but in sub-modules */;
+    background-color: #ffffff40
+        /* !important : here no but in sub-modules */
+    ;
     text-align: center;
 }
 
@@ -2709,16 +2701,15 @@ ul.hzm_front_menu_bar.hzm_front_menu_bar.nav.navbar-nav>li>a.navbar-brand:hover 
     border-top: 1px solid #6c9be58a !important;
 }
 
-@media (max-width:640px)
-{
-    .panel-heading > h3 > span {
+@media (max-width:640px) {
+    .panel-heading>h3>span {
         white-space: pre-wrap;
         font-size: 19px;
         font-family: title;
         line-height: 28px;
     }
 
-    div.filebox.editcard > div.panel-heading {
+    div.filebox.editcard>div.panel-heading {
         height: min-content !important;
     }
 }
@@ -2784,8 +2775,7 @@ ul.hzm_front_menu_bar.hzm_front_menu_bar.nav.navbar-nav>li>a.navbar-brand:hover 
     font-weight: bold;
 }
 
-@media (max-width:614px)
-{
+@media (max-width:614px) {
     .hzm_data.hzm_data_invester_id.form-control.inputreadonly {
         height: auto !important;
     }
@@ -2794,7 +2784,7 @@ ul.hzm_front_menu_bar.hzm_front_menu_bar.nav.navbar-nav>li>a.navbar-brand:hover 
 
 @media screen and (max-width: 484px) {
     .modal-dialog.popup-login {
-            margin-right: 10% !important;    
+        margin-right: 10% !important;
     }
 
     .modal-dialog.popup-register {
@@ -2803,7 +2793,7 @@ ul.hzm_front_menu_bar.hzm_front_menu_bar.nav.navbar-nav>li>a.navbar-brand:hover 
         width: 88% !important;
     }
 
-    
+
 }
 
 
@@ -2914,7 +2904,8 @@ div.content-annonce>ul {
 }
 
 
-.xqe_inputtext:active, .xqe_inputtext:focus {
+.xqe_inputtext:active,
+.xqe_inputtext:focus {
     border-color: #6b930d !important;
 }
 
@@ -2941,7 +2932,6 @@ ul.hzm_front_menu_bar>li:hover {
 ul.hzm_front_menu_bar.hzm_front_menu_bar.nav.navbar-nav>li>a:hover {
     color: #ffffff !important;
     background-color: #023960 !important
-    
 }
 
 
@@ -2971,7 +2961,8 @@ div.content_form>form>.in-group-invester_data {
 
 
 
-.small-up-1 > .column, .small-up-1 > .columns {
+.small-up-1>.column,
+.small-up-1>.columns {
     float: right;
     width: 35%;
     margin-right: 2%;
@@ -3057,14 +3048,13 @@ input.form-control.invester_cpt {
 }
 
 table.dataTable.display>thead>tr>th,
-table.dataTable.display>tfoot>tr>th
-{
+table.dataTable.display>tfoot>tr>th {
     text-align: right;
     padding: 6px 2px 8px 8px;
 }
 
 
-   
+
 
 .xqe_data_loaded {
     border: 1px solid #a9922a !important;
@@ -3074,44 +3064,44 @@ table.dataTable.display>tfoot>tr>th
 
 
 
-@media (max-width:1300px)
-{
+@media (max-width:1300px) {
     .editcard {
         width: 99%;
-    }    
+    }
 }
 
 
-@media (max-width:1100px)
-{
+@media (max-width:1100px) {
     .editcard {
         width: 100%;
-    }    
+    }
 }
 
 
-@media (max-width:900px)
-{
+@media (max-width:900px) {
     .editcard {
         width: 100%;
-    } 
-    
-    table.dataTable thead th, table.dataTable thead td, 
-    table.dataTable tfoot th, table.dataTable tfoot td, 
+    }
+
+    table.dataTable thead th,
+    table.dataTable thead td,
+    table.dataTable tfoot th,
+    table.dataTable tfoot td,
     table.dataTable tbody td {
         font-size: 90% !important;
     }
-    
+
 }
 
-@media (max-width:700px)
-{
+@media (max-width:700px) {
     .editcard {
         width: 100%;
-    }    
+    }
 
-    table.dataTable thead th, table.dataTable thead td, 
-    table.dataTable tfoot th, table.dataTable tfoot td, 
+    table.dataTable thead th,
+    table.dataTable thead td,
+    table.dataTable tfoot th,
+    table.dataTable tfoot td,
     table.dataTable tbody td {
         font-size: 80% !important;
     }
@@ -3141,21 +3131,20 @@ div.filebox.editcard>div.panel-heading {
 
 /* ______________________________________________________________________________________________________ */
 
-/*   module_mobile.css later start */ 
+/*   module_mobile.css later start */
 
 .hzm_wd4 {
     min-width: 260px !important;
 }
 
-@media (max-width:430px)
-{
+@media (max-width:430px) {
     input.wizardbtn {
         font-size: 14px !important;
         min-width: 100px !important;
     }
 }
 
-/*   module_mobile.css end  */ 
+/*   module_mobile.css end  */
 
 /* ______________________________________________________________________________________________________ */
 
@@ -3198,11 +3187,11 @@ table.dataTable thead .sorting_desc_disabled {
     font-weight: bold;
 }
 
-.school_front_form > .form-group {
+.school_front_form>.form-group {
     min-height: 0;
 }
 
-.school_front_form > .form-group > p {
+.school_front_form>.form-group>p {
     padding-right: 5px;
     margin: 0 !important;
     padding-top: 0;
@@ -3251,7 +3240,8 @@ div.request_response>.row.odd.school_data.school_response {
     background-color: #f5fdff;
 }
 
-div.request_response>.row.odd.school_data.school_response, div.request_response>.row.school_data.school_response {
+div.request_response>.row.odd.school_data.school_response,
+div.request_response>.row.school_data.school_response {
     border-top: 1px solid #54a0ab;
     margin-top: 8px;
 }
@@ -3269,12 +3259,13 @@ div.request_response>div>div.hzm_small_calendar>label {
     font-size: 100% !important;
 }
 
-a:focus, a:hover {
+a:focus,
+a:hover {
     font-size: 100%;
     font-weight: normal;
 }
 
-div.hzm_data_ul_cl_files>ul>li.smooth-active>a{
+div.hzm_data_ul_cl_files>ul>li.smooth-active>a {
     line-height: 50px;
     height: 50px;
     width: 50%;
@@ -3309,7 +3300,9 @@ div.hzm_data_ul_cl_files>ul.smooth-dots {
     background-position-x: center;
 }
 
-.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
     background-color: #b5b0b08f !important;
     opacity: 1;
     border: 1px solid #9b9898 !important;
@@ -3389,6 +3382,7 @@ pre.school_instructions>ol {
     margin-right: 10px;
     margin-left: 10px;
 }
+
 pre.school_instructions>ol>li {
     word-break: break-word;
 }
@@ -3500,7 +3494,8 @@ div#fg-decision_stats {
     width: 100% !important;
 }
 
-.in-group-coef.cssgroup_pct_100, .in-group-distrib.cssgroup_pct_100 {
+.in-group-coef.cssgroup_pct_100,
+.in-group-distrib.cssgroup_pct_100 {
     max-height: 245px !important;
     min-height: 245px;
     margin-bottom: 10px;
@@ -3678,7 +3673,7 @@ span.aya.technical.len {
 
 .my_school_ticket.transp {
     background-color: transparent;
-    color : white;
+    color: white;
 }
 
 .my_school_ticket.blue {
@@ -3693,28 +3688,28 @@ span.aya.technical.len {
 
 .my_school_ticket.vert {
     background-color: #0ec90e;
-    color : white;
+    color: white;
 }
 
 .my_school_ticket.orange {
     background-color: #ef8e2e;
-    color : white;
+    color: white;
 }
 
 .my_school_ticket.rouge {
     background-color: #FF3E3F;
-    color : white;
+    color: white;
 }
 
 .my_school_ticket.gray {
     background-color: #0c4266;
-    color : white;
+    color: white;
 }
 
 .my_school_ticket.disabled {
     background-color: #435866;
-    color : white;
-} 
+    color: white;
+}
 
 .my_school_ticket.timbre {
     min-height: 120px;
@@ -3722,12 +3717,12 @@ span.aya.technical.len {
 }
 
 .my_school_ticket.timbre2 {
-    margin-top:4px;
+    margin-top: 4px;
     min-height: 56px;
 }
 
 .my_school_ticket.timbre2.top {
-    margin-top:0px;
+    margin-top: 0px;
     min-height: 60px;
 }
 
@@ -3743,19 +3738,19 @@ span.aya.technical.len {
 }
 
 .my_school_ticket.timbre4 {
-    margin-top:4px;
+    margin-top: 4px;
     min-height: 26px;
     padding: 3px !important;
     max-height: 60px;
 }
 
 .my_school_ticket.timbre4.top {
-    margin-top:0px;
+    margin-top: 0px;
     min-height: 30px;
 }
 
 .my_school_ticket.timbre8 {
-    margin-top:3px;
+    margin-top: 3px;
     min-height: 12px;
     line-height: 12px;
     white-space: nowrap;
@@ -3763,19 +3758,20 @@ span.aya.technical.len {
 }
 
 .my_school_ticket.timbre8.top {
-    margin-top:0px;
+    margin-top: 0px;
     min-height: 15px;
 }
 
-.nopad{
+.nopad {
     padding: 0px !important;
 }
 
-.spad{
+.spad {
     padding: 2px !important;
 }
 
-.my_school_ticket.students, .my_school_ticket.sclass {
+.my_school_ticket.students,
+.my_school_ticket.sclass {
     padding: 17px !important;
     background-color: #093450;
 }
@@ -3784,54 +3780,54 @@ span.aya.technical.len {
     margin-top: 10px;
 }
 
-.big_label{
+.big_label {
     font-size: 26px;
     font-weight: bold;
     padding: 0 !important;
 }
 
-.label{
+.label {
     font-size: 20px;
     font-weight: bold;
     padding: 0 !important;
 }
 
-.big_medium_label{
+.big_medium_label {
     font-size: 18px;
     font-weight: bold;
     padding-top: 5px !important;
     padding-bottom: 0 !important;
 }
 
-.medium_label{
+.medium_label {
     font-size: 17px;
     padding: 0 !important;
 }
 
-.small_label{
+.small_label {
     font-size: 14px;
     padding: 0 !important;
 }
 
 @media screen and (max-width: 1200px) {
-    .big_label{
+    .big_label {
         font-size: 20px;
         font-weight: bold;
         padding-top: 10px !important;
     }
-    
-    .label{
+
+    .label {
         font-size: 16px;
         font-weight: bold;
         padding-top: 8px !important;
     }
-    
-    .medium_label{
+
+    .medium_label {
         font-size: 13px;
         padding: 0 !important;
     }
-    
-    .small_label{
+
+    .small_label {
         font-size: 11px;
         padding: 0 !important;
     }
@@ -3839,31 +3835,31 @@ span.aya.technical.len {
 }
 
 @media screen and (max-width: 500px) {
-    .big_label{
+    .big_label {
         font-size: 16px;
         font-weight: bold;
         padding-top: 10px !important;
     }
-    
-    .label{
+
+    .label {
         font-size: 14px;
         font-weight: bold;
         padding-top: 8px !important;
     }
-    
-    .medium_label{
+
+    .medium_label {
         font-size: 12px;
         padding: 0 !important;
     }
-    
-    .small_label{
+
+    .small_label {
         font-size: 10px;
         padding: 0 !important;
     }
 
 }
 
-.corner-left{
+.corner-left {
     text-align: left !important;
     float: left !important;
     padding-top: 4px !important;
@@ -3990,7 +3986,7 @@ span.ums.hrmorange {
 
 span.ums.hrmyellow {
     background-color: yellow;
-    color:balck;
+    color: balck;
 }
 
 .hzm_data.hzm_data_hrm_ums.form-control.inputreadonly {
@@ -3999,7 +3995,9 @@ span.ums.hrmyellow {
     box-shadow: none;
 }
 
-input#mainwork_mistakes, input#homework_mistakes, input#homework2_mistakes {
+input#mainwork_mistakes,
+input#homework_mistakes,
+input#homework2_mistakes {
     width: 80%;
     margin-right: 10%;
     max-height: 38px;
@@ -4025,11 +4023,13 @@ td.col-qe-mainwork_rank_id {
     padding: 0 !important;
 }
 
-th.col-qe-country_id, td.col-qe-country_id {
+th.col-qe-country_id,
+td.col-qe-country_id {
     max-width: 160px;
 }
 
-th.col-qe-idn_type_id, td.col-qe-idn_type_id {
+th.col-qe-idn_type_id,
+td.col-qe-idn_type_id {
     max-width: 120px;
 }
 
@@ -4044,6 +4044,7 @@ td.col-qe-birth_date_en {
 .hzm_data.hzm_data_panel {
     min-height: 800px;
 }
+
 /* mode qedit multilines for StudentSession*/
 table.dataTable tbody tr.StudentSession {
     background-color: white !important;
@@ -4062,6 +4063,7 @@ tr.qerow2.StudentSession>td {
     border-bottom: 4px dashed #000 !important;
     padding-bottom: 20px;
 }
+
 /* end mode qedit multilines for StudentSession*/
 
 /* mode qedit multilines for StudentBook*/
@@ -4082,6 +4084,7 @@ tr.qerow2.StudentBook>td {
     border-bottom: 4px dashed #000 !important;
     padding-bottom: 20px;
 }
+
 /* end mode qedit multilines for StudentBook*/
 
 /* mode qedit multilines for StudentFileCourse*/
@@ -4108,12 +4111,12 @@ td.col-qe-homework_start_page_num>div.form-control.inputreadonly,
 td.col-qe-homework2_start_page_num>div.form-control.inputreadonly,
 td.col-qe-mainwork_end_page_num>div.form-control.inputreadonly,
 td.col-qe-homework_end_page_num>div.form-control.inputreadonly,
-td.col-qe-homework2_end_page_num>div.form-control.inputreadonly
-{
+td.col-qe-homework2_end_page_num>div.form-control.inputreadonly {
     color: gray;
 }
 
-td.end.calculated>div, td.end.calculated>label {
+td.end.calculated>div,
+td.end.calculated>label {
     color: #0670bb;
     font-weight: bold;
     font-style: italic;
@@ -4122,7 +4125,8 @@ td.end.calculated>div, td.end.calculated>label {
 
 /* end mode qedit multilines for StudentFileCourse*/
 
-.hzm_data.hzm_data_trainingUnitCollegeList, .hzm_data.hzm_data_academicTermList {
+.hzm_data.hzm_data_trainingUnitCollegeList,
+.hzm_data.hzm_data_academicTermList {
     min-height: 300px !important;
 }
 
@@ -4278,9 +4282,9 @@ td.end.calculated>div, td.end.calculated>label {
     min-height: 300px;
     height: fit-content !important;
     background-color: white !important;
-}\f19d
+}
 
-.hzm_data.hzm_data_aconditionOriginList.form-control.inputreadonly.inputarea {
+\f19d .hzm_data.hzm_data_aconditionOriginList.form-control.inputreadonly.inputarea {
     min-height: 150px !important;
 }
 
@@ -4301,16 +4305,20 @@ td.end.calculated>div, td.end.calculated>label {
     z-index: 9999;
 }
 
-th.col-qe.col-qe-active, th.col-qe.col-qe-is_open, th.col-qe.col-qe-deaf_specialty {
+th.col-qe.col-qe-active,
+th.col-qe.col-qe-is_open,
+th.col-qe.col-qe-deaf_specialty {
     width: 4%;
 }
-   
-th.col-qe.col-qe-seats_capacity, th.col-qe.col-qe-direct_adm_capacity, th.col-qe.col-qe-application_days, th.col-qe.col-qe-confirmation_days {
+
+th.col-qe.col-qe-seats_capacity,
+th.col-qe.col-qe-direct_adm_capacity,
+th.col-qe.col-qe-application_days,
+th.col-qe.col-qe-confirmation_days {
     width: 7%;
 }
 
-th.col-qe.col-qe-application_model_id
-{
+th.col-qe.col-qe-application_model_id {
     width: 40%;
 }
 
@@ -4396,7 +4404,8 @@ img.tooltip-icon {
     border: 1px solid white;
 }
 
-.fixmgrid td, .fixmgrid th {
+.fixmgrid td,
+.fixmgrid th {
     border: 1px #7fc5e5 solid !important;
 }
 
@@ -4480,4 +4489,8 @@ div#div_data_key_words_found {
 div#div_data_bfIcon {
     min-height: min-content;
     white-space: pre;
+}
+
+div#div_data_php_code {
+    min-height: fit-content;
 }

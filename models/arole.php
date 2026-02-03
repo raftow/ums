@@ -21,7 +21,7 @@ class Arole extends UmsObject
     public function __construct($tablename = "arole")
     {
         parent::__construct($tablename, "id", "ums");
-        UmsAroleAfwStructure::initInstance($this);    
+        UmsAroleAfwStructure::initInstance($this);
     }
 
     public static function loadById($id)
@@ -34,7 +34,7 @@ class Arole extends UmsObject
     }
 
 
-    public function proposeIcons($returnKeys=false, $debugg=false)
+    public function proposeIcons($returnKeys = false, $debugg = false)
     {
         $strings = [];
         $strings[] = $this->getVal("role_code");
@@ -42,10 +42,10 @@ class Arole extends UmsObject
         $strings[] = $this->getVal("titre_en");
         $strings[] = $this->getVal("titre_short");
         $strings[] = $this->getVal("titre");
-             
-        return AfwIconHelper::proposeIcons($strings,$returnKeys, $debugg);
+
+        return AfwIconHelper::proposeIcons($strings, $returnKeys, $debugg);
     }
-    
+
 
     public static function loadByMainIndex($module_id, $role_code, $create_obj_if_not_found = false)
     {
@@ -1065,16 +1065,15 @@ class Arole extends UmsObject
     }
 
 
-    public function calcPhp_code($what="value") {        
+    public function calcPhp_code($what = "value")
+    {
         $moduleObj = $this->het("module_id");
         if ($moduleObj) {
             $module_code = $moduleObj->getVal("module_code");
             if ($module_code) list($role_infoItem, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $this, $genereFile = true);
             else $php_code = "No module code defined for the module of this role";
-        }
-        else $php_code = "No module defined for this role";
+        } else $php_code = "No module defined for this role";
 
-        return "<textarea cols='80' rows='30'>".$php_code."</textarea>";
-        
+        return "<textarea cols='150' rows='30' style='direction: ltr;'" . $php_code . "</textarea>";
     }
 }
