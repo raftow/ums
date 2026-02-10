@@ -83,7 +83,7 @@ if ($r == "control") {
   }
 } elseif ($r) {
 
-  if ($objme->hasRole($module, $r)) {
+  if ($objme->isSuperAdmin() or $objme->hasRole($module, $r)) {
     list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($a, $r, $lang);
     // die("rafik see menu_folder = ".var_export($menu_folder,true));
     $role_item_display = AfwReplacement::trans_replace($role_item_display, $module, $lang);
