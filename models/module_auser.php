@@ -141,7 +141,7 @@ class ModuleAuser extends AFWObject
           $head = "";
           $head .= "<thead>\n";
           $head .= "<tr>\n";
-          $head .= "  <th class='rtd tb'>الجدول</td>\n";
+          $head .= "  <th class='rtd tb'>الوحدة</td>\n";
           $head .= "  <th class='rtd ed'>تعديل</td>\n";
           $head .= "  <th class='rtd vw'>مشاهدة</td>\n";
           $head .= "  <th class='rtd dl'>حذف</td>\n";
@@ -155,10 +155,13 @@ class ModuleAuser extends AFWObject
           $checked_picture = "<img src='../lib/images/on-blue.png'>";
           $cl = "item";
           $rows = 0;
-          foreach ($tableList as $tableItem) {
-
+          foreach ($tableList as $tableItem) 
+          {
+               /**
+                * @var Atable $tableItem
+                */
                $tableId = $tableItem->id;
-               $tableName = $tableItem->getDisplay($lang);
+               $tableName = $tableItem->getDisplayForUser($lang, $objme);
                $tableCode = $tableItem->getVal("atable_name");
 
                $tableEdit = $userItem->iCanDoOperation($moduleCode, $tableCode, "edit", true) ? $checked_picture : ""; // $moduleCode, $tableCode, no edit
