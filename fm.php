@@ -27,11 +27,22 @@ if ($r == "control") {
   $uri_module = AfwUrlManager::currentURIModule();
   $control_panel_title = AfwLanguageHelper::tarjemText("control panel", $lang);
   $options_title = AfwLanguageHelper::tarjemText("options", $lang);
+  $help_title = AfwLanguageHelper::tarjemText("support & help", $lang);
   $upload_files_title = AfwLanguageHelper::tarjemText("upload files", $lang);
   $my_account_title = AfwLanguageHelper::tarjemText("my account", $lang);
   $command_line = AfwLanguageHelper::tarjemText("command-line", $lang);
   $s12 = "s12";
   $out_scr .= "<h3> $control_panel_title </h3>";
+  $out_scr .= "<div id='menu-item-control-help' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
+                                <a class='hzm3-button hzm3-light-grey hzm3-block' href='main.php?Main_Page=help.php' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
+                                    <div class=\"hzm-width-100 hzm-text-center hzm_margin_bottom \">
+                                      <div class=\"hzm-vertical-align hzm-container-center hzm-custom hzm-custom-icon-container only-border border-primary\">
+                                        <i class=\"hzm-container-center hzm-vertical-align-middle hzm-icon-settings\"></i>
+                                      </div>
+                                    </div>
+                                    <div class='hzm4-title'>$help_title</div>
+                                </a>
+                             </div>";
   $out_scr .= "<div id='menu-item-control-options' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
                                 <a class='hzm3-button hzm3-light-grey hzm3-block' href='main.php?Main_Page=toggle_option.php&My_Module=ums' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
                                     <div class=\"hzm-width-100 hzm-text-center hzm_margin_bottom \">
