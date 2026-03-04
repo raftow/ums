@@ -3,7 +3,6 @@
         <!-- Sing in  Form -->
         <section class="sign-in">
             <div class="container">
-                <!-- <div class="signin-header">جامعة نايف العربية للعلوم الأمنية</div> -->
                 [login_banner_s]
                     <style>
                         .signin-content {
