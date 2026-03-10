@@ -14,7 +14,10 @@ else
 }
 
 $table = null;
-if(isset($_REQUEST["cl"])) $table = AfwStringHelper::classToTable($_REQUEST["cl"]);
+if(isset($_REQUEST["cl"])) {
+    require("$file_dir_name/../lib/afw/helpers/afw_string_helper.php"); 
+    $table = AfwStringHelper::classToTable($_REQUEST["cl"]);
+}
 if(!$table) $table = "all";
 $options = AfwMainPage::getDefaultOptions($Main_Page, $MODULE, $table);
 
