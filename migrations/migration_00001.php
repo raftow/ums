@@ -42,7 +42,7 @@ Records: 98  Duplicates: 0  Warnings: 0
 alter table ttc_ums.module change id_module_status id_module_status int null;
 */
 
-// AfwDatabase::db_query("ALTER TABLE " . $server_db_prefix . "ums.country add   external_code varchar(16)  DEFAULT NULL  AFTER lookup_code;");
+AfwDatabase::db_query("ALTER TABLE " . $server_db_prefix . "ums.country add   external_code varchar(16)  DEFAULT NULL  AFTER lookup_code;");
 
 // AfwDatabase::db_query("DROP TABLE IF EXISTS " . $server_db_prefix . "ums.user_param");
 
