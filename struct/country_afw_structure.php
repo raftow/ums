@@ -29,6 +29,10 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
+			'external_code' => array(
+				'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SIZE' => 64,  'QEDIT' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),	
 
 			/*'govern_code' => array(
 					'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SIZE' => 32,  'QEDIT' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  

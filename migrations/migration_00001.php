@@ -42,8 +42,9 @@ Records: 98  Duplicates: 0  Warnings: 0
 alter table ttc_ums.module change id_module_status id_module_status int null;
 */
 
+// AfwDatabase::db_query("ALTER TABLE " . $server_db_prefix . "ums.country add   external_code varchar(16)  DEFAULT NULL  AFTER lookup_code;");
 
-AfwDatabase::db_query("DROP TABLE IF EXISTS " . $server_db_prefix . "ums.user_param");
+// AfwDatabase::db_query("DROP TABLE IF EXISTS " . $server_db_prefix . "ums.user_param");
 
 AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS " . $server_db_prefix . "ums.`user_param` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -53,7 +54,7 @@ AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS " . $server_db_prefix . "ums.`
   `date_mod` datetime NOT NULL,
   `id_valid` int(11) DEFAULT NULL,
   `date_valid` datetime DEFAULT NULL,
-  `avail` char(1) NOT NULL,
+  `avail` char(1) NOT NULL default 'Y',
   `draft` char(1) NOT NULL default 'Y',
   `version` int(4) DEFAULT NULL,
   `update_groups_mfk` varchar(255) DEFAULT NULL,
@@ -70,13 +71,6 @@ AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS " . $server_db_prefix . "ums.`
    answer_table_id smallint DEFAULT NULL , 
    measurement_unit_ar varchar(32)  DEFAULT NULL , 
    measurement_unit_en varchar(32)  DEFAULT NULL , 
-   avail char(1) DEFAULT NULL , 
-   id_aut int(11) DEFAULT NULL , 
-   date_aut datetime DEFAULT NULL , 
-   id_mod int(11) DEFAULT NULL , 
-   date_mod datetime DEFAULT NULL , 
-   id_valid int(11) DEFAULT NULL , 
-   date_valid datetime DEFAULT NULL , 
 
   
   PRIMARY KEY (`id`)
@@ -89,7 +83,7 @@ AfwDatabase::db_query("CREATE unique index uk_user_param on " . $server_db_prefi
 
 
 
-AfwDatabase::db_query("DROP TABLE IF EXISTS " . $server_db_prefix . "ums.user_param_value");
+// AfwDatabase::db_query("DROP TABLE IF EXISTS " . $server_db_prefix . "ums.user_param_value");
 
 AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS " . $server_db_prefix . "ums.`user_param_value` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -115,12 +109,6 @@ AfwDatabase::db_query("CREATE TABLE IF NOT EXISTS " . $server_db_prefix . "ums.`
    employee_id int(11) DEFAULT NULL , 
    avail char(1) DEFAULT NULL , 
    value varchar(255)  NOT NULL , 
-   id_aut int(11) DEFAULT NULL , 
-   date_aut datetime DEFAULT NULL , 
-   id_mod int(11) DEFAULT NULL , 
-   date_mod datetime DEFAULT NULL , 
-   id_valid int(11) DEFAULT NULL , 
-   date_valid datetime DEFAULT NULL , 
 
   
   PRIMARY KEY (`id`)
