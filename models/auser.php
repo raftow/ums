@@ -2045,6 +2045,16 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                         );
                                 }
                         }
+                } else {
+                        $company = AfwSession::currentCompany();
+                        $main_company_domain = AfwSession::config("main_company_domain", "$company.gov.sa");       
+                        $url_ppa = AfwSession::config("url_ppa", "https://$main_company_domain/ar/Pages/PrivacyPolicy.aspx");       
+                        $quick_links_arr[] = array(
+                                                'target' => "ppa",
+                                                'name_ar' => "سياسة الخصوصية",
+                                                'name_en' => "Privacy policy",
+                                                'url' => $url_ppa
+                                        );
                 }
 
                 return $quick_links_arr;
