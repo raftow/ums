@@ -424,15 +424,18 @@ class UmsBfunctionAfwStructure
 			'EDIT-UGROUPS' => '',
 		),
 
-		/*
-		 * 'userStoryList' => array(
-		 * 		'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b au',
-		 * 		'CATEGORY' => 'ITEMS',  'ITEM' => 'bfunction_id',
-		 * 		'WHERE' => "",
-		 * 				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => true,  'FGROUP' => 'userStoryList',  'STEP' => 3,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
-		 * 		'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
-		 * 		),
-		 */
+		
+		 'userStoryList' => array(
+		 		'TYPE' => 'FK',  'ANSWER' => 'user_story',  'ANSMODULE' => 'b'.'au',
+		 		'CATEGORY' => 'ITEMS',  'ITEM' => 'bfunction_id',
+		 		'WHERE' => "",
+		 		'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  
+				'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+				'NO-LABEL' => true,  'FGROUP' => 'userStoryList',  
+				'STEP' => 99,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+		 		'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
+		 		),
+		
 		'tobinus' => array(
 			'CATEGORY' => 'FORMULA',
 			'SHOW' => true,

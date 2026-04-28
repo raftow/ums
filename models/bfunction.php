@@ -273,22 +273,11 @@ class Bfunction extends UmsObject{
                 $count_affected = 0;
                 
                 $ustr0->resetUpdates();
-                $ustr0->select("bfunction_id",$this->getId());
-                $ustr0->where("source not like '%-manual'");
-                $count_affected += $ustr0->logicDelete(true,false);
-                
-                $ustr0->resetUpdates();
+                $ustr0->set("avail", "N", true);
                 $ustr0->set("user_story_goal_id", 0, true);
-                $ustr0->select("bfunction_id",$this->getId());
-                $ustr0->where("source not like '%-manual'");
-                //$ustr0->where("user_story_goal_id not in (select id from ${server_db_prefix}b au.goal where system_id=$system_id and goal_code like 'manual%')");
-                $count_affected += $ustr0->update(false);
-                
-                $ustr0->resetUpdates();
                 $ustr0->set("arole_id", 0, true);
                 $ustr0->select("bfunction_id",$this->getId());
                 $ustr0->where("source not like '%-manual'");
-                //$ustr0->where("arole_id not in (select id from ${server_db_prefix}ums.arole where system_id=$system_id and role_code like 'manual%')");
                 $count_affected += $ustr0->update(false);
                 
                 return array("","$count_affected user storie(s) affected");
@@ -409,10 +398,15 @@ class Bfunction extends UmsObject{
                                   {
                                         $ustr = UserStory::loadByMainIndex($system_id, $module_id, $jroleObj->getId(), $this->getId(), $create_obj_if_not_found=true);
                                         $goal_id = $goalConcernObj->getVal("goal_id");
+                                        $arole_id = $goalConcernObj->getVal("arole_id");
                                         $ustr->set("user_story_goal_id", $goal_id);
+                                        $ustr->set("arole_id", $arole_id);
                                         $ustr->set("source","auto-generated-v2");
                                         $ustr->set("comments","goal concern v2 : ". $goalConcernObj->getDisplay($lang));
                                         $ustr->update();
+                                        list($err, $info) = $ustr->genereMenusForMe($lang);
+                                        if($err) $errors[]  = $err;
+                                        if($info) $infos[]  = $info;
                                   }
                                   else
                                   {
@@ -766,7 +760,7 @@ class Bfunction extends UmsObject{
                         $rl = new Arole();
                         
                         $bf_id = $this->getId();
-                        $sql_cond = "avail='Y' and id in (select arole_id from ".$server_db_prefix."ums.arole_bf where bfunction_id='$bf_id' and avail='Y')"; // obsolete : bfunction_mfk like '%,$bf_id,%' or 
+                        $sql_cond = "avail='Y' and id in (select arole_id from ".$server_db_prefix."ums.arole_bf where bfunction_id='$bf_id' and avail='Y')"; 
                         $rl->where($sql_cond); 
                         $rl_list = $rl->loadMany();
 

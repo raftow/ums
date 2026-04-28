@@ -4494,3 +4494,7 @@ div#div_data_bfIcon {
 div#div_data_php_code {
     min-height: fit-content;
 }
+
+div#div_data_arole_mfk {
+    min-height: 200px;
+}
