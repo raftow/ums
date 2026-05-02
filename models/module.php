@@ -1900,7 +1900,7 @@ class Module extends UmsObject
 
             $module_def = $this->genereIniPhp();
 
-            AfwFileSystem::write($dest_path . $currmod . "/ini.php", $module_def . $this->php_ini, false);
+            UfwFileSystem::write($dest_path . $currmod . "/ini.php", $module_def . $this->php_ini, false);
 
             // no need we should use same logo except if define const CUSTOM_COMPANY_DATA
             // copy company logo and title
@@ -2253,7 +2253,7 @@ class Module extends UmsObject
         else $information  = "لا يوجد تعديلات";
 
         $MODE_SQL_PROCESS_LOURD = $old_MODE_SQL_PROCESS_LOURD;
-        AfwQueryAnalyzer::$nb_queries_executed = 0;
+        UfwQueryAnalyzer::$nb_queries_executed = 0;
         return array("", $information);
     }
 

@@ -1,6 +1,6 @@
 <?php
     $lang = AfwLanguageHelper::getGlobalLanguage(); 
-    if(!$MODULE) $MODULE = AfwUrlManager::currentURIModule();
+    if(!$MODULE) $MODULE = UfwUrlManager::currentURIModule();
 
     $file_dir_name = dirname(__FILE__);
     $objme = AfwSession::getUserConnected(); 

@@ -35,7 +35,7 @@ else
         // $tokens["message"] = "Please login";
 }
 $logbl = substr(md5($_SERVER["HTTP_USER_AGENT"] . "-" . date("Y-m-d")),0,10);
-$uri_module = AfwUrlManager::currentURIModule();
+$uri_module = UfwUrlManager::currentURIModule();
 $xmodule = AfwSession::getCurrentlyExecutedModule();
 $site_name = AfwSession::getCurrentSiteName($lang);
 $tokens["module"] = $uri_module;

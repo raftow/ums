@@ -24,7 +24,7 @@ if (!$a) {
 }
 
 if ($r == "control") {
-  $uri_module = AfwUrlManager::currentURIModule();
+  $uri_module = UfwUrlManager::currentURIModule();
   $control_panel_title = AfwLanguageHelper::tarjemText("control panel", $lang);
   $options_title = AfwLanguageHelper::tarjemText("options", $lang);
   $help_title = AfwLanguageHelper::tarjemText("support & help", $lang);
@@ -97,7 +97,7 @@ if ($r == "control") {
   if ($objme->isSuperAdmin() or $objme->hasRole($module, $r)) {
     list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($a, $r, $lang);
     // die("rafik see menu_folder = ".var_export($menu_folder,true));
-    $role_item_display = AfwReplacement::trans_replace($role_item_display, $module, $lang);
+    $role_item_display = UfwReplacement::trans_replace($role_item_display, $module, $lang);
     /**
      * @var array $menu_folder
      */
@@ -112,7 +112,7 @@ if ($r == "control") {
         $menu_item_level = $menu_folder_item["level"];
         $menu_item_title = $menu_folder_item["menu_name_$lang"];
         if (!$menu_item_title) $menu_item_title = $menu_folder_item["menu_name"];
-        $menu_item_title = AfwReplacement::trans_replace($menu_item_title, $module, $lang);
+        $menu_item_title = UfwReplacement::trans_replace($menu_item_title, $module, $lang);
 
         if ($menu_item_level >= $myLevel) {
           $out_scr .= "<!-- OK => $menu_item_title BFID=$menu_item_id BFL=$menu_item_level >= UHL=$myLevel (User=$myName ID=$myId)-->";
@@ -143,7 +143,7 @@ if ($r == "control") {
         if (($iamAdmin) or (!$menu_sub_folder["need_admin"])) {
           $menu_folder_title = $menu_sub_folder["menu_name"];
 
-          $menu_folder_title = AfwReplacement::trans_replace($menu_folder_title, $module, $lang);
+          $menu_folder_title = UfwReplacement::trans_replace($menu_folder_title, $module, $lang);
 
           $menu_folder_id = $menu_sub_folder["id"];
           $menu_folder_page = $menu_sub_folder["page"];

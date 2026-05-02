@@ -187,7 +187,7 @@ class Bfunction extends UmsObject{
                         $curr_class_module_code = AfwPrevilege::moduleCodeOfModuleId($curr_class_module_id);
                         if($curr_class_module_code)
                         {
-                                $fn = AfwReplacement::trans_replace($fn, $curr_class_module_code, $lang);
+                                $fn = UfwReplacement::trans_replace($fn, $curr_class_module_code, $lang);
                         }
                 }
 

@@ -6,6 +6,6 @@ include("$direct_dir_name/ums_start.php");
 $Main_Page = "work.php";
 $file_dir_name = dirname(__FILE__);
 $MODULE = $My_Module = "ums";
-AfwMainPage::echoMainPage($My_Module, $Main_Page, $file_dir_name);
+CmsMainPage::echoMainPage($My_Module, $Main_Page, $file_dir_name);
 
 ?>

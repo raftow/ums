@@ -13,7 +13,7 @@ class UmsLoginService extends AFWRoot
 
 
                 if ($user_domain_c) {
-                        if (!AfwLoginUtilities::isInternalDomain($user_domain_c)) {
+                        if (!UfwLoginUtilities::isInternalDomain($user_domain_c)) {
                                 $user_name_c  = $email_initial;
                                 $this_user_is_internal = false;
                         } else {
@@ -27,13 +27,13 @@ class UmsLoginService extends AFWRoot
 
                 // die("rafik 1 : $user_name_c, $password");
                 // 1. try Active directory first (if enabled)
-                list($user_connected, $user_not_connected_reason, $info, $login_dbg[]) = AfwLoginUtilities::ldap_login($user_name_c, $password);
+                list($user_connected, $user_not_connected_reason, $info, $login_dbg[]) = UfwLoginUtilities::ldap_login($user_name_c, $password);
                 // die()
                 // 2. try database or golden login after
                 if (!$user_connected) {
                         //die("rafik 2 reason=$user_not_connected_reason, info=$info login_dbg=".var_export($login_dbg,true));
                         $login_dbg[] = "try to db_or_golden_login";
-                        list($user_connected, $user_not_connected_reason, $user_infos, $login_dbg[]) = AfwLoginUtilities::db_or_golden_login($user_name_c, $password);
+                        list($user_connected, $user_not_connected_reason, $user_infos, $login_dbg[]) = UfwLoginUtilities::db_or_golden_login($user_name_c, $password);
                         $user_found = $user_connected;
                         // die("rafik 3 user_connected=$user_connected reason=$user_not_connected_reason, info=$user_infos login_dbg=".var_export($login_dbg,true));
 
@@ -41,14 +41,14 @@ class UmsLoginService extends AFWRoot
                         $user_name_ldap =  $info["samaccountname"][0];
                         if ($user_name_ldap) {
                                 $login_dbg[] = "try to db_retrieve_user_info with ldap user name : $user_name_ldap";
-                                list($user_found, $user_not_found_reason, $user_infos, $login_dbg[]) = AfwLoginUtilities::db_retrieve_user_info($user_name_ldap);
+                                list($user_found, $user_not_found_reason, $user_infos, $login_dbg[]) = UfwLoginUtilities::db_retrieve_user_info($user_name_ldap);
                                 if (!$user_found) {
                                         $email =  $info["mail"][0];
                                         list($firstname, $fathername, $lastname) = explode(" ", $info["displayname"][0]);
                                         $login_dbg[] = "Auser::findOrCreateUser($user_name_ldap, $email, $firstname, $fathername, $lastname)";
                                         $usr = Auser::findOrCreateUser($user_name_ldap, $email, $firstname, $fathername, $lastname);
 
-                                        list($user_connected, $user_not_connected_reason, $user_infos, $login_dbg[]) = AfwLoginUtilities::db_retrieve_user_info($user_name_ldap);
+                                        list($user_connected, $user_not_connected_reason, $user_infos, $login_dbg[]) = UfwLoginUtilities::db_retrieve_user_info($user_name_ldap);
                                 } else {
                                         $login_dbg[] = "user $user_name_ldap found :" . var_export($user_infos, true);
                                 }
@@ -78,7 +78,7 @@ class UmsLoginService extends AFWRoot
                 $x_module_means_company = AfwSession::config("x_module_means_company", false);
                 $required_modules = AfwSession::config("required_modules", []);
                 // die("dbg x_module_means_company=$x_module_means_company ".AfwSession::log_config());
-                $uri_module = AfwUrlManager::currentURIModule();
+                $uri_module = UfwUrlManager::currentURIModule();
                 $main_module = AfwSession::config("main_module", "");
 
                 if ($debugg_login and (!$user_connected) and ($debugg_login == $username)) {

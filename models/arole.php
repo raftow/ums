@@ -91,7 +91,7 @@ class Arole extends UmsObject
 
         if ($moduleObj) {
             $module_code = $moduleObj->getVal("module_code");
-            if ($module_code) $fn = AfwReplacement::trans_replace($fn, $module_code, $lang);
+            if ($module_code) $fn = UfwReplacement::trans_replace($fn, $module_code, $lang);
             // else die("check module code for module id = $moduleId name ".$moduleObj->getDisplay($lang));
         }
 

@@ -34,7 +34,7 @@ $file_dir_name = dirname(__FILE__);
 
 // old include of afw.php
 // AfwAutoLoader::init();
-
+include_once("$file_dir_name/../../lib/afw/interfaces/afw_front_end_user.php");
 class Auser extends UmsObject implements AfwFrontEndUser
 {
         private $myEmployeeObj = null;
@@ -1531,7 +1531,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         }
 
                         $php = $this->calcPhp(false);
-                        AfwFileSystem::write($fileFullName, $php, 'erase', true);
+                        UfwFileSystem::write($fileFullName, $php, 'erase', true);
                         return array('', "$fileFullName created successfully");
                 } catch (Exception $e) {
                         if ($throwError)
@@ -1590,7 +1590,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                         $sms_mobile = $this->getVal('mobile');
                                 // @todo : send SMS / Email with the new password
                                 if ($sms_mobile) {
-                                        list($send_succeeded, $sms_info) = AfwSmsSender::sendSMS($sms_mobile, $message);
+                                        list($send_succeeded, $sms_info) = UfwSmsSender::sendSMS($sms_mobile, $message);
                                         // if send succeeded
                                         if ($send_succeeded) {
                                                 $sent_to = $sms_mobile;
@@ -2013,7 +2013,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
         public function isInternalDomain()
         {
                 list($user_name, $user_domain) = explode('@', strtolower($this->getVal('email')));
-                return AfwLoginUtilities::isInternalDomain($user_domain);
+                return UfwLoginUtilities::isInternalDomain($user_domain);
         }
 
         public function canDisableRO($desc, $module_code)

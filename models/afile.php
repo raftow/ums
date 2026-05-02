@@ -435,7 +435,7 @@ zoomWindowOffety:-200
                                 throw new AfwRuntimeException("File not found : $file_path");
                         }
 
-                        return AfwExcel::getExcelFileData($file_path, $row_num_start, $row_num_end, $caller);
+                        return UfwExcel::getExcelFileData($file_path, $row_num_start, $row_num_end, $caller);
                 } else {
                         throw new AfwRuntimeException("getExcelData method can not work on non excel or non importable files, your file extension : $afile_ext, doc type = " . $this->het("doc_type_id"));
                 }
