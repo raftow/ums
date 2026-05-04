@@ -987,7 +987,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return $fn;
         }
 
-        public function getMyCode($not_defined_code = 'not_defined_code')
+        public function getMyCode()
         {
                 $str = md5($this->getVal('email') . $this->getVal('id') . date('Ymd'));
                 return substr($str, 0, 10);
@@ -1952,10 +1952,11 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                                 $bfList = $roleItem->get('bfList');
                                                 foreach ($bfList as $bfItem) {
                                                         $bfId = $bfItem->id;
-                                                        if (!isset($mau_info_item['bf' . $bfId])) {
-                                                                $mau_info_item['bf' . $bfId] = array();
+                                                        $bfCode0 = 'bf' . $bfId;
+                                                        if (!isset($mau_info_item[$bfCode0])) {
+                                                                $mau_info_item[$bfCode0] = array();
                                                         }
-                                                        $mau_info_item['bf' . $bfId][$roleId] = true;
+                                                        $mau_info_item[$bfCode0][$roleId] = true;
                                                 }
                                         }
                                 }
