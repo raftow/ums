@@ -340,6 +340,12 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return (in_array($this->getId(), $arr_supervisor));
         }
 
+        /**
+         * giveMeTheseModulesAnRoles
+         * give access to the user to some modules and roles according to his job responsibilities, it can be used for example when we want to give access to a user to some modules and roles after he get a specific job position
+         * @param array $moduleToGiveArr an array with module code as key and array
+         */
+
         public function giveMeTheseModulesAnRoles($moduleToGiveArr)  // ,$my_org_id = 3
         {
                 $countGived = 0;
@@ -348,6 +354,8 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         $gived = $this->giveMeModule($module_id, $module_roles, 3, true);
                         if (is_array($module_roles))
                                 $module_roles_txt = implode(',', $module_roles);
+                        else $module_roles_txt = $module_roles;
+                        
                         $log_arr[] = "For module $module_id try to give ($module_roles_txt) gived ($gived)";
                         $countGived++;
                 }
@@ -1506,8 +1514,15 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $war = array();
                 if ((!$from_active_directory) and $reset_password) {
                         if (!$this->pwd)
+                        {
                                 list($err[], $info[], $war[], $pwd, $sent_by, $sent_to) = $this->resetPassword($lang);
-                        if (count($err) == 0)
+                        }
+                        else {
+                                $sent_by = false; 
+                                $sent_to = "none";
+                        }
+                                
+                        if ($sent_by and count($err) == 0)
                                 $info[] = $this->tm('Password has been resetted. The new password has been sent by', $lang) . ' : ' . $this->tm($sent_by, $lang) . ' ' . $this->tm('to', $lang) . ' ' . $sent_to;
                 } else {
                 }
