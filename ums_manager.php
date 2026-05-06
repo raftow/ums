@@ -224,6 +224,12 @@ class UmsManager extends AFWRoot
         );
     }
 
+    /**
+     * @param string $module_id
+     * @param string $table
+     * @return int|mixed|string
+     */
+
     public static function decodeTable($module_id, $table, $ignore_cache = false)
     {
         $table_cache_code = "table-$module_id-$table";
@@ -389,7 +395,7 @@ class UmsManager extends AFWRoot
         // else $code_pbm_to_check = "xxyxx";
         // if(!$pbm_arr[$code_pbm_to_check]) throw new AfwRuntimeException("pb code $code_pbm_to_check not found, pbm_arr = ".var_export($pbm_arr,true));
         $code_pbm_to_check = 'cL1o4s';
-
+        $reason = '';
         $final_pbm_arr = [];
         foreach ($pbm_arr as $pbm_code => $pbm_item) {
             if (
@@ -456,7 +462,13 @@ class UmsManager extends AFWRoot
         return $final_pbm_arr;
     }
 
-
+    /**
+     * Generates a table privileges file
+     * @param string $moduleCode
+     * @param object $objTable
+     * @param bool $genereFile
+     * @return array
+     */
     public static function genereTablePrevilegesFile($moduleCode, $objTable, $genereFile = false)
     {
         $afw_modes_arr = ['display', 'search', 'qsearch', 'edit', 'qedit', 'crossed', 'stats', 'ddb', 'minibox', 'delete'];
@@ -479,7 +491,11 @@ class UmsManager extends AFWRoot
         if ($genereFile) {
             $fileName = "previleges_$moduleCode" . "_table_$tableName"  . ".php";
             list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges/table");
-        } else $fileName = "";
+        } else {
+            $fileName = "";
+            $mv_cmd = "";
+            $arr_cmd_lines = [];
+        }
 
         return [$tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd];
     }
@@ -510,7 +526,10 @@ class UmsManager extends AFWRoot
 
             $fileName = "previleges_$moduleCode" . "_role$roleId"  . ".php";
             list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges/role");
-        } else $fileName = "";
+        } else {
+            $mv_cmd = "";
+            $fileName = "";
+        } 
 
 
         return [$role_infoItem, $fileName, $php_code, $mv_cmd];

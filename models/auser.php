@@ -355,7 +355,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         if (is_array($module_roles))
                                 $module_roles_txt = implode(',', $module_roles);
                         else $module_roles_txt = $module_roles;
-                        
+
                         $log_arr[] = "For module $module_id try to give ($module_roles_txt) gived ($gived)";
                         $countGived++;
                 }
@@ -1691,7 +1691,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $idn_type_id = 0;
                 $idn_type_ok = false;
                 if ($idn_type)
-                        list($idn_type_ok, $idn_type_id) = AfwStringHelper::parseAttribute($this, 'idn_type_id', $idn_type, $lang, false);
+                        list($idn_type_ok, $idn_type_id) = AfwFormatHelper::parseAttribute($this, 'idn_type_id', $idn_type, $lang, false);
                 if (!$idn_type_ok) {
                         // find it from idn format
                         list($idn_correct, $idn_type_id) = AfwFormatHelper::getIdnTypeId($idn);
@@ -1702,49 +1702,49 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                         if ($overwrite_data or $user->is_new) {
                                 if ($genre)
-                                        list($val_ok, $val_parsed_or_error) = AfwStringHelper::parseAttribute($user, 'genre_id', $genre, $lang);
+                                        list($val_ok, $val_parsed_or_error) = AfwFormatHelper::parseAttribute($user, 'genre_id', $genre, $lang);
                                 else
                                         $val_ok = true;
                                 if (!$val_ok)
                                         $errors[] = $val_parsed_or_error;
 
                                 if ($nationality)
-                                        list($val_ok, $val_parsed_or_error) = AfwStringHelper::parseAttribute($user, 'country_id', $nationality, $lang);
+                                        list($val_ok, $val_parsed_or_error) = AfwFormatHelper::parseAttribute($user, 'country_id', $nationality, $lang);
                                 else
                                         $val_ok = true;
                                 if (!$val_ok)
                                         $errors[] = $val_parsed_or_error;
 
                                 if ($firstname)
-                                        list($val_ok, $val_parsed_or_error) = AfwStringHelper::parseAttribute($user, 'firstname', $firstname, $lang);
+                                        list($val_ok, $val_parsed_or_error) = AfwFormatHelper::parseAttribute($user, 'firstname', $firstname, $lang);
                                 else
                                         $val_ok = true;
                                 if (!$val_ok)
                                         $errors[] = $val_parsed_or_error;
 
                                 if ($fatherfirstname)
-                                        list($val_ok, $val_parsed_or_error) = AfwStringHelper::parseAttribute($user, 'f_firstname', $fatherfirstname, $lang);
+                                        list($val_ok, $val_parsed_or_error) = AfwFormatHelper::parseAttribute($user, 'f_firstname', $fatherfirstname, $lang);
                                 else
                                         $val_ok = true;
                                 if (!$val_ok)
                                         $errors[] = $val_parsed_or_error;
 
                                 if ($grandfathername)
-                                        list($val_ok, $val_parsed_or_error) = AfwStringHelper::parseAttribute($user, 'g_f_firstname', $grandfathername, $lang);
+                                        list($val_ok, $val_parsed_or_error) = AfwFormatHelper::parseAttribute($user, 'g_f_firstname', $grandfathername, $lang);
                                 else
                                         $val_ok = true;
                                 if (!$val_ok)
                                         $errors[] = $val_parsed_or_error;
 
                                 if ($lastname)
-                                        list($val_ok, $val_parsed_or_error) = AfwStringHelper::parseAttribute($user, 'lastname', $lastname, $lang);
+                                        list($val_ok, $val_parsed_or_error) = AfwFormatHelper::parseAttribute($user, 'lastname', $lastname, $lang);
                                 else
                                         $val_ok = true;
                                 if (!$val_ok)
                                         $errors[] = $val_parsed_or_error;
 
                                 if ($mobile)
-                                        list($val_ok, $val_parsed_or_error) = AfwStringHelper::parseAttribute($user, 'mobile', $mobile, $lang);
+                                        list($val_ok, $val_parsed_or_error) = AfwFormatHelper::parseAttribute($user, 'mobile', $mobile, $lang);
                                 else
                                         $val_ok = true;
                                 if (!$val_ok)
