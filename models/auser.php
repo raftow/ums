@@ -1091,6 +1091,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         return 0;
         }
 
+        /**
+         * @return Employee
+         */
         public function getEmployee($company_id = 0)
         {
                 $file_dir_name = dirname(__FILE__);
