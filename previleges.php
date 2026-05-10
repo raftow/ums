@@ -1,980 +1,980 @@
 <?php
 
-	$tab_info = array (
-  13921 => 
-  array (
+$tab_info = array(
+  13921 =>
+  array(
     'name' => 'afile',
   ),
-  1409 => 
-  array (
+  1409 =>
+  array(
     'name' => 'arole',
   ),
-  13481 => 
-  array (
+  13481 =>
+  array(
     'name' => 'arole_bf',
   ),
-  3483 => 
-  array (
+  3483 =>
+  array(
     'name' => 'arole_type',
   ),
-  1407 => 
-  array (
+  1407 =>
+  array(
     'name' => 'auser',
   ),
-  1403 => 
-  array (
+  1403 =>
+  array(
     'name' => 'bfunction',
   ),
-  1426 => 
-  array (
+  1426 =>
+  array(
     'name' => 'bfunction_type',
   ),
-  13920 => 
-  array (
+  13920 =>
+  array(
     'name' => 'city',
   ),
-  13919 => 
-  array (
+  13919 =>
+  array(
     'name' => 'country',
   ),
-  13926 => 
-  array (
+  13926 =>
+  array(
     'name' => 'doc_type',
   ),
-  13925 => 
-  array (
+  13925 =>
+  array(
     'name' => 'jobrole',
   ),
-  3505 => 
-  array (
+  3505 =>
+  array(
     'name' => 'job_arole',
   ),
-  1005 => 
-  array (
+  1005 =>
+  array(
     'name' => 'module',
   ),
-  1427 => 
-  array (
+  1427 =>
+  array(
     'name' => 'module_auser',
   ),
-  3493 => 
-  array (
+  3493 =>
+  array(
     'name' => 'module_orgunit',
   ),
-  426 => 
-  array (
+  426 =>
+  array(
     'name' => 'module_status',
   ),
-  425 => 
-  array (
+  425 =>
+  array(
     'name' => 'module_type',
   ),
-  1422 => 
-  array (
+  1422 =>
+  array(
     'name' => 'ugroup',
   ),
-  3503 => 
-  array (
+  3503 =>
+  array(
     'name' => 'ugroup_scope',
   ),
-  3504 => 
-  array (
+  3504 =>
+  array(
     'name' => 'ugroup_type',
   ),
 );
-	$tbf_info = array (
-  'afile' => 
-  array (
+$tbf_info = array(
+  'afile' =>
+  array(
     'id' => '13921',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => -1,
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => -1,
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => -1,
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => -1,
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => -1,
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => -1,
     ),
   ),
-  'arole' => 
-  array (
+  'arole' =>
+  array(
     'id' => '1409',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102858',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102859',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102860',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102855',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102856',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102861',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102857',
     ),
   ),
-  'arole_bf' => 
-  array (
+  'arole_bf' =>
+  array(
     'id' => '13481',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102875',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102876',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102877',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102872',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102873',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102878',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102874',
     ),
   ),
-  'arole_type' => 
-  array (
+  'arole_type' =>
+  array(
     'id' => '3483',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102871',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '104587',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '104588',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '104586',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102869',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102870',
     ),
   ),
-  'auser' => 
-  array (
+  'auser' =>
+  array(
     'id' => '1407',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102896',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102897',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102898',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102893',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102894',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102899',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102895',
     ),
   ),
-  'bfunction' => 
-  array (
+  'bfunction' =>
+  array(
     'id' => '1403',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102865',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102866',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102867',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102862',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102863',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102868',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102864',
     ),
   ),
-  'bfunction_type' => 
-  array (
+  'bfunction_type' =>
+  array(
     'id' => '1426',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102854',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => -1,
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => -1,
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => -1,
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102852',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102853',
     ),
   ),
-  'city' => 
-  array (
+  'city' =>
+  array(
     'id' => '13920',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => -1,
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => -1,
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => -1,
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => -1,
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => -1,
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => -1,
     ),
   ),
-  'country' => 
-  array (
+  'country' =>
+  array(
     'id' => '13919',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => -1,
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => -1,
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => -1,
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => -1,
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => -1,
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => -1,
     ),
   ),
-  'doc_type' => 
-  array (
+  'doc_type' =>
+  array(
     'id' => '13926',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => -1,
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => -1,
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => -1,
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => -1,
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => -1,
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => -1,
     ),
   ),
-  'jobrole' => 
-  array (
+  'jobrole' =>
+  array(
     'id' => '13925',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '104592',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '104593',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '104594',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '104589',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '104590',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '104591',
     ),
   ),
-  'job_arole' => 
-  array (
+  'job_arole' =>
+  array(
     'id' => '3505',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '103343',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '103344',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '103345',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '103340',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '103341',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '103346',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '103342',
     ),
   ),
-  'module' => 
-  array (
+  'module' =>
+  array(
     'id' => '1005',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102842',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102843',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102844',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102839',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102840',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102845',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102841',
     ),
   ),
-  'module_auser' => 
-  array (
+  'module_auser' =>
+  array(
     'id' => '1427',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102882',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102883',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102884',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102879',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102880',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102885',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102881',
     ),
   ),
-  'module_orgunit' => 
-  array (
+  'module_orgunit' =>
+  array(
     'id' => '3493',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102835',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102836',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102837',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102832',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102833',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102838',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102834',
     ),
   ),
-  'module_status' => 
-  array (
+  'module_status' =>
+  array(
     'id' => '426',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102848',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => -1,
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => -1,
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => -1,
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102846',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102847',
     ),
   ),
-  'module_type' => 
-  array (
+  'module_type' =>
+  array(
     'id' => '425',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102851',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => -1,
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => -1,
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => -1,
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102849',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102850',
     ),
   ),
-  'ugroup' => 
-  array (
+  'ugroup' =>
+  array(
     'id' => '1422',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102889',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102890',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102891',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102886',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102887',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102892',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102888',
     ),
   ),
-  'ugroup_scope' => 
-  array (
+  'ugroup_scope' =>
+  array(
     'id' => '3503',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102903',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => '102904',
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => '102905',
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => '102900',
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102901',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => '102906',
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102902',
     ),
   ),
-  'ugroup_type' => 
-  array (
+  'ugroup_type' =>
+  array(
     'id' => '3504',
-    'display' => 
-    array (
+    'display' =>
+    array(
       'id' => '102909',
     ),
-    'search' => 
-    array (
+    'search' =>
+    array(
       'id' => -1,
     ),
-    'qsearch' => 
-    array (
+    'qsearch' =>
+    array(
       'id' => -1,
     ),
-    'edit' => 
-    array (
+    'edit' =>
+    array(
       'id' => -1,
     ),
-    'qedit' => 
-    array (
+    'qedit' =>
+    array(
       'id' => '102907',
     ),
-    'crossed' => 
-    array (
+    'crossed' =>
+    array(
       'id' => -1,
     ),
-    'stats' => 
-    array (
+    'stats' =>
+    array(
       'id' => -1,
     ),
-    'ddb' => 
-    array (
+    'ddb' =>
+    array(
       'id' => -1,
     ),
-    'minibox' => 
-    array (
+    'minibox' =>
+    array(
       'id' => -1,
     ),
-    'delete' => 
-    array (
+    'delete' =>
+    array(
       'id' => '102908',
     ),
   ),
 );
-	$role_info = array (
-  35 => 
-  array (
+$role_info = array(
+  35 =>
+  array(
     'code' => '',
-    'name' => 
-    array (
+    'name' =>
+    array(
       'ar' => 'المطور',
       'en' => 'Developer',
     ),
-    'menu' => 
-    array (
+    'menu' =>
+    array(
       'need_admin' => false,
       'id' => '35',
       'menu_name_' => 'المطور',
@@ -984,27 +984,24 @@
       'css' => 'info',
       'icon' => ' icon-35',
       'showme' => true,
-      'items' => 
-      array (
-      ),
-      'otherbfs' => 
-      array (
-      ),
-      'sub-folders' => 
-      array (
-      ),
+      'items' =>
+      array(),
+      'otherbfs' =>
+      array(),
+      'sub-folders' =>
+      array(),
     ),
   ),
-  203 => 
-  array (
+  203 =>
+  array(
     'code' => 'goal-35',
-    'name' => 
-    array (
+    'name' =>
+    array(
       'ar' => 'إدارة الصلاحيات',
       'en' => 'arole.203',
     ),
-    'menu' => 
-    array (
+    'menu' =>
+    array(
       'need_admin' => false,
       'id' => '203',
       'menu_name_' => 'إدارة الصلاحيات',
@@ -1014,10 +1011,10 @@
       'css' => 'info',
       'icon' => ' icon-203',
       'showme' => true,
-      'items' => 
-      array (
-        102862 => 
-        array (
+      'items' =>
+      array(
+        102862 =>
+        array(
           'id' => '102862',
           'code' => 'f2-a-bfunction/edit',
           'level' => '999',
@@ -1027,8 +1024,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102862 bfc-',
         ),
-        102867 => 
-        array (
+        102867 =>
+        array(
           'id' => '102867',
           'code' => 'f2-a-bfunction/qsearch',
           'level' => '999',
@@ -1038,8 +1035,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102867 bfc-',
         ),
-        102893 => 
-        array (
+        102893 =>
+        array(
           'id' => '102893',
           'code' => 'f2-a-auser/edit',
           'level' => '999',
@@ -1049,8 +1046,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102893 bfc-',
         ),
-        102898 => 
-        array (
+        102898 =>
+        array(
           'id' => '102898',
           'code' => 'f2-a-auser/qsearch',
           'level' => '999',
@@ -1060,8 +1057,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102898 bfc-',
         ),
-        102860 => 
-        array (
+        102860 =>
+        array(
           'id' => '102860',
           'code' => 'f2-a-arole/qsearch',
           'level' => '999',
@@ -1071,8 +1068,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102860 bfc-',
         ),
-        102886 => 
-        array (
+        102886 =>
+        array(
           'id' => '102886',
           'code' => 'f1-a-tb1422/edit',
           'level' => '999',
@@ -1082,8 +1079,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102886 bfc-',
         ),
-        102891 => 
-        array (
+        102891 =>
+        array(
           'id' => '102891',
           'code' => 'f1-a-tb1422/qsearch',
           'level' => '999',
@@ -1093,8 +1090,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102891 bfc-',
         ),
-        102879 => 
-        array (
+        102879 =>
+        array(
           'id' => '102879',
           'code' => 'f2-a-module_auser/edit',
           'level' => '999',
@@ -1104,8 +1101,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102879 bfc-',
         ),
-        102884 => 
-        array (
+        102884 =>
+        array(
           'id' => '102884',
           'code' => 'f2-a-module_auser/qsearch',
           'level' => '999',
@@ -1115,8 +1112,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102884 bfc-',
         ),
-        102900 => 
-        array (
+        102900 =>
+        array(
           'id' => '102900',
           'code' => 'f1-a-tb3503/edit',
           'level' => '999',
@@ -1126,8 +1123,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102900 bfc-',
         ),
-        102905 => 
-        array (
+        102905 =>
+        array(
           'id' => '102905',
           'code' => 'f1-a-tb3503/qsearch',
           'level' => '999',
@@ -1137,8 +1134,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102905 bfc-',
         ),
-        103340 => 
-        array (
+        103340 =>
+        array(
           'id' => '103340',
           'code' => 'f2-a-job_arole/edit',
           'level' => '999',
@@ -1148,8 +1145,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103340 bfc-',
         ),
-        103345 => 
-        array (
+        103345 =>
+        array(
           'id' => '103345',
           'code' => 'f2-a-job_arole/qsearch',
           'level' => '999',
@@ -1159,8 +1156,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103345 bfc-',
         ),
-        102877 => 
-        array (
+        102877 =>
+        array(
           'id' => '102877',
           'code' => 'f2-a-arole_bf/qsearch',
           'level' => '999',
@@ -1171,10 +1168,10 @@
           'icon' => 'bficon-102877 bfc-',
         ),
       ),
-      'otherbfs' => 
-      array (
-        102855 => 
-        array (
+      'otherbfs' =>
+      array(
+        102855 =>
+        array(
           'id' => '102855',
           'code' => 'f2-a-arole/edit',
           'level' => '999',
@@ -1184,8 +1181,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102855 bfc-',
         ),
-        102856 => 
-        array (
+        102856 =>
+        array(
           'id' => '102856',
           'code' => 'f2-a-arole/qedit',
           'level' => '999',
@@ -1195,8 +1192,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102856 bfc-',
         ),
-        102857 => 
-        array (
+        102857 =>
+        array(
           'id' => '102857',
           'code' => 'f2-a-arole/delete',
           'level' => '999',
@@ -1206,8 +1203,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102857 bfc-',
         ),
-        102858 => 
-        array (
+        102858 =>
+        array(
           'id' => '102858',
           'code' => 'f2-a-arole/display',
           'level' => '999',
@@ -1217,8 +1214,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102858 bfc-',
         ),
-        102859 => 
-        array (
+        102859 =>
+        array(
           'id' => '102859',
           'code' => 'f2-a-arole/search',
           'level' => '999',
@@ -1228,8 +1225,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102859 bfc-',
         ),
-        102860 => 
-        array (
+        102860 =>
+        array(
           'id' => '102860',
           'code' => 'f2-a-arole/qsearch',
           'level' => '999',
@@ -1239,8 +1236,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102860 bfc-',
         ),
-        102861 => 
-        array (
+        102861 =>
+        array(
           'id' => '102861',
           'code' => 'f1-a-tb1409/stats',
           'level' => '999',
@@ -1250,8 +1247,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102861 bfc-',
         ),
-        102862 => 
-        array (
+        102862 =>
+        array(
           'id' => '102862',
           'code' => 'f2-a-bfunction/edit',
           'level' => '999',
@@ -1261,8 +1258,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102862 bfc-',
         ),
-        102863 => 
-        array (
+        102863 =>
+        array(
           'id' => '102863',
           'code' => 'f2-a-bfunction/qedit',
           'level' => '999',
@@ -1272,8 +1269,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102863 bfc-',
         ),
-        102864 => 
-        array (
+        102864 =>
+        array(
           'id' => '102864',
           'code' => 'f2-a-bfunction/delete',
           'level' => '999',
@@ -1283,8 +1280,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102864 bfc-',
         ),
-        102865 => 
-        array (
+        102865 =>
+        array(
           'id' => '102865',
           'code' => 'f2-a-bfunction/display',
           'level' => '999',
@@ -1294,8 +1291,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102865 bfc-',
         ),
-        102866 => 
-        array (
+        102866 =>
+        array(
           'id' => '102866',
           'code' => 'f2-a-bfunction/search',
           'level' => '999',
@@ -1305,8 +1302,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102866 bfc-',
         ),
-        102867 => 
-        array (
+        102867 =>
+        array(
           'id' => '102867',
           'code' => 'f2-a-bfunction/qsearch',
           'level' => '999',
@@ -1316,8 +1313,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102867 bfc-',
         ),
-        102868 => 
-        array (
+        102868 =>
+        array(
           'id' => '102868',
           'code' => 'f1-a-tb1403/stats',
           'level' => '999',
@@ -1327,8 +1324,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102868 bfc-',
         ),
-        102872 => 
-        array (
+        102872 =>
+        array(
           'id' => '102872',
           'code' => 'f2-a-arole_bf/edit',
           'level' => '999',
@@ -1338,8 +1335,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102872 bfc-',
         ),
-        102873 => 
-        array (
+        102873 =>
+        array(
           'id' => '102873',
           'code' => 'f2-a-arole_bf/qedit',
           'level' => '999',
@@ -1349,8 +1346,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102873 bfc-',
         ),
-        102874 => 
-        array (
+        102874 =>
+        array(
           'id' => '102874',
           'code' => 'f2-a-arole_bf/delete',
           'level' => '999',
@@ -1360,8 +1357,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102874 bfc-',
         ),
-        102875 => 
-        array (
+        102875 =>
+        array(
           'id' => '102875',
           'code' => 'f2-a-arole_bf/display',
           'level' => '999',
@@ -1371,8 +1368,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102875 bfc-',
         ),
-        102876 => 
-        array (
+        102876 =>
+        array(
           'id' => '102876',
           'code' => 'f2-a-arole_bf/search',
           'level' => '999',
@@ -1382,8 +1379,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102876 bfc-',
         ),
-        102877 => 
-        array (
+        102877 =>
+        array(
           'id' => '102877',
           'code' => 'f2-a-arole_bf/qsearch',
           'level' => '999',
@@ -1393,8 +1390,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102877 bfc-',
         ),
-        102878 => 
-        array (
+        102878 =>
+        array(
           'id' => '102878',
           'code' => 'f1-a-tb13481/stats',
           'level' => '999',
@@ -1404,8 +1401,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102878 bfc-',
         ),
-        102879 => 
-        array (
+        102879 =>
+        array(
           'id' => '102879',
           'code' => 'f2-a-module_auser/edit',
           'level' => '999',
@@ -1415,8 +1412,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102879 bfc-',
         ),
-        102880 => 
-        array (
+        102880 =>
+        array(
           'id' => '102880',
           'code' => 'f2-a-module_auser/qedit',
           'level' => '999',
@@ -1426,8 +1423,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102880 bfc-',
         ),
-        102881 => 
-        array (
+        102881 =>
+        array(
           'id' => '102881',
           'code' => 'f2-a-module_auser/delete',
           'level' => '999',
@@ -1437,8 +1434,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102881 bfc-',
         ),
-        102882 => 
-        array (
+        102882 =>
+        array(
           'id' => '102882',
           'code' => 'f2-a-module_auser/display',
           'level' => '999',
@@ -1448,8 +1445,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102882 bfc-',
         ),
-        102883 => 
-        array (
+        102883 =>
+        array(
           'id' => '102883',
           'code' => 'f2-a-module_auser/search',
           'level' => '999',
@@ -1459,8 +1456,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102883 bfc-',
         ),
-        102884 => 
-        array (
+        102884 =>
+        array(
           'id' => '102884',
           'code' => 'f2-a-module_auser/qsearch',
           'level' => '999',
@@ -1470,8 +1467,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102884 bfc-',
         ),
-        102885 => 
-        array (
+        102885 =>
+        array(
           'id' => '102885',
           'code' => 'f1-a-tb1427/stats',
           'level' => '999',
@@ -1481,8 +1478,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102885 bfc-',
         ),
-        102886 => 
-        array (
+        102886 =>
+        array(
           'id' => '102886',
           'code' => 'f1-a-tb1422/edit',
           'level' => '999',
@@ -1492,8 +1489,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102886 bfc-',
         ),
-        102887 => 
-        array (
+        102887 =>
+        array(
           'id' => '102887',
           'code' => 'f1-a-tb1422/qedit',
           'level' => '999',
@@ -1503,8 +1500,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102887 bfc-',
         ),
-        102888 => 
-        array (
+        102888 =>
+        array(
           'id' => '102888',
           'code' => 'f1-a-tb1422/delete',
           'level' => '999',
@@ -1514,8 +1511,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102888 bfc-',
         ),
-        102889 => 
-        array (
+        102889 =>
+        array(
           'id' => '102889',
           'code' => 'f1-a-tb1422/display',
           'level' => '999',
@@ -1525,8 +1522,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102889 bfc-',
         ),
-        102890 => 
-        array (
+        102890 =>
+        array(
           'id' => '102890',
           'code' => 'f1-a-tb1422/search',
           'level' => '999',
@@ -1536,8 +1533,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102890 bfc-',
         ),
-        102891 => 
-        array (
+        102891 =>
+        array(
           'id' => '102891',
           'code' => 'f1-a-tb1422/qsearch',
           'level' => '999',
@@ -1547,8 +1544,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102891 bfc-',
         ),
-        102892 => 
-        array (
+        102892 =>
+        array(
           'id' => '102892',
           'code' => 'f1-a-tb1422/stats',
           'level' => '999',
@@ -1558,8 +1555,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102892 bfc-',
         ),
-        102893 => 
-        array (
+        102893 =>
+        array(
           'id' => '102893',
           'code' => 'f2-a-auser/edit',
           'level' => '999',
@@ -1569,8 +1566,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102893 bfc-',
         ),
-        102894 => 
-        array (
+        102894 =>
+        array(
           'id' => '102894',
           'code' => 'f2-a-auser/qedit',
           'level' => '999',
@@ -1580,8 +1577,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102894 bfc-',
         ),
-        102895 => 
-        array (
+        102895 =>
+        array(
           'id' => '102895',
           'code' => 'f2-a-auser/delete',
           'level' => '999',
@@ -1591,8 +1588,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102895 bfc-',
         ),
-        102896 => 
-        array (
+        102896 =>
+        array(
           'id' => '102896',
           'code' => 'f2-a-auser/display',
           'level' => '999',
@@ -1602,8 +1599,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102896 bfc-',
         ),
-        102897 => 
-        array (
+        102897 =>
+        array(
           'id' => '102897',
           'code' => 'f2-a-auser/search',
           'level' => '999',
@@ -1613,8 +1610,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102897 bfc-',
         ),
-        102898 => 
-        array (
+        102898 =>
+        array(
           'id' => '102898',
           'code' => 'f2-a-auser/qsearch',
           'level' => '999',
@@ -1624,8 +1621,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102898 bfc-',
         ),
-        102899 => 
-        array (
+        102899 =>
+        array(
           'id' => '102899',
           'code' => 'f1-a-tb1407/stats',
           'level' => '999',
@@ -1635,8 +1632,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102899 bfc-',
         ),
-        102900 => 
-        array (
+        102900 =>
+        array(
           'id' => '102900',
           'code' => 'f1-a-tb3503/edit',
           'level' => '999',
@@ -1646,8 +1643,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102900 bfc-',
         ),
-        102901 => 
-        array (
+        102901 =>
+        array(
           'id' => '102901',
           'code' => 'f1-a-tb3503/qedit',
           'level' => '999',
@@ -1657,8 +1654,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102901 bfc-',
         ),
-        102902 => 
-        array (
+        102902 =>
+        array(
           'id' => '102902',
           'code' => 'f1-a-tb3503/delete',
           'level' => '999',
@@ -1668,8 +1665,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102902 bfc-',
         ),
-        102903 => 
-        array (
+        102903 =>
+        array(
           'id' => '102903',
           'code' => 'f1-a-tb3503/display',
           'level' => '999',
@@ -1679,8 +1676,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102903 bfc-',
         ),
-        102904 => 
-        array (
+        102904 =>
+        array(
           'id' => '102904',
           'code' => 'f1-a-tb3503/search',
           'level' => '999',
@@ -1690,8 +1687,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102904 bfc-',
         ),
-        102905 => 
-        array (
+        102905 =>
+        array(
           'id' => '102905',
           'code' => 'f1-a-tb3503/qsearch',
           'level' => '999',
@@ -1701,8 +1698,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102905 bfc-',
         ),
-        102906 => 
-        array (
+        102906 =>
+        array(
           'id' => '102906',
           'code' => 'f1-a-tb3503/stats',
           'level' => '999',
@@ -1712,8 +1709,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102906 bfc-',
         ),
-        103340 => 
-        array (
+        103340 =>
+        array(
           'id' => '103340',
           'code' => 'f2-a-job_arole/edit',
           'level' => '999',
@@ -1723,8 +1720,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103340 bfc-',
         ),
-        103341 => 
-        array (
+        103341 =>
+        array(
           'id' => '103341',
           'code' => 'f2-a-job_arole/qedit',
           'level' => '999',
@@ -1734,8 +1731,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103341 bfc-',
         ),
-        103342 => 
-        array (
+        103342 =>
+        array(
           'id' => '103342',
           'code' => 'f2-a-job_arole/delete',
           'level' => '999',
@@ -1745,8 +1742,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103342 bfc-',
         ),
-        103343 => 
-        array (
+        103343 =>
+        array(
           'id' => '103343',
           'code' => 'f2-a-job_arole/display',
           'level' => '999',
@@ -1756,8 +1753,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103343 bfc-',
         ),
-        103344 => 
-        array (
+        103344 =>
+        array(
           'id' => '103344',
           'code' => 'f2-a-job_arole/search',
           'level' => '999',
@@ -1767,8 +1764,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103344 bfc-',
         ),
-        103345 => 
-        array (
+        103345 =>
+        array(
           'id' => '103345',
           'code' => 'f2-a-job_arole/qsearch',
           'level' => '999',
@@ -1778,8 +1775,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103345 bfc-',
         ),
-        103346 => 
-        array (
+        103346 =>
+        array(
           'id' => '103346',
           'code' => 'f1-a-tb3505/stats',
           'level' => '999',
@@ -1790,21 +1787,20 @@
           'icon' => 'bficon-103346 bfc-',
         ),
       ),
-      'sub-folders' => 
-      array (
-      ),
+      'sub-folders' =>
+      array(),
     ),
   ),
-  204 => 
-  array (
+  204 =>
+  array(
     'code' => 'goal-manual-system-design',
-    'name' => 
-    array (
+    'name' =>
+    array(
       'ar' => 'تصميم النظم',
       'en' => 'arole.204',
     ),
-    'menu' => 
-    array (
+    'menu' =>
+    array(
       'need_admin' => false,
       'id' => '204',
       'menu_name_' => 'تصميم النظم',
@@ -1814,10 +1810,10 @@
       'css' => 'info',
       'icon' => ' icon-204',
       'showme' => true,
-      'items' => 
-      array (
-        102839 => 
-        array (
+      'items' =>
+      array(
+        102839 =>
+        array(
           'id' => '102839',
           'code' => 'f1-a-tb1005/edit',
           'level' => '999',
@@ -1827,8 +1823,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102839 bfc-',
         ),
-        102844 => 
-        array (
+        102844 =>
+        array(
           'id' => '102844',
           'code' => 'f1-a-tb1005/qsearch',
           'level' => '999',
@@ -1838,8 +1834,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102844 bfc-',
         ),
-        102832 => 
-        array (
+        102832 =>
+        array(
           'id' => '102832',
           'code' => 'f1-a-tb3493/edit',
           'level' => '999',
@@ -1849,8 +1845,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102832 bfc-',
         ),
-        102837 => 
-        array (
+        102837 =>
+        array(
           'id' => '102837',
           'code' => 'f1-a-tb3493/qsearch',
           'level' => '999',
@@ -1861,10 +1857,10 @@
           'icon' => 'bficon-102837 bfc-',
         ),
       ),
-      'otherbfs' => 
-      array (
-        102832 => 
-        array (
+      'otherbfs' =>
+      array(
+        102832 =>
+        array(
           'id' => '102832',
           'code' => 'f1-a-tb3493/edit',
           'level' => '999',
@@ -1874,8 +1870,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102832 bfc-',
         ),
-        102833 => 
-        array (
+        102833 =>
+        array(
           'id' => '102833',
           'code' => 'f1-a-tb3493/qedit',
           'level' => '999',
@@ -1885,8 +1881,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102833 bfc-',
         ),
-        102834 => 
-        array (
+        102834 =>
+        array(
           'id' => '102834',
           'code' => 'f1-a-tb3493/delete',
           'level' => '999',
@@ -1896,8 +1892,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102834 bfc-',
         ),
-        102835 => 
-        array (
+        102835 =>
+        array(
           'id' => '102835',
           'code' => 'f1-a-tb3493/display',
           'level' => '999',
@@ -1907,8 +1903,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102835 bfc-',
         ),
-        102836 => 
-        array (
+        102836 =>
+        array(
           'id' => '102836',
           'code' => 'f1-a-tb3493/search',
           'level' => '999',
@@ -1918,8 +1914,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102836 bfc-',
         ),
-        102837 => 
-        array (
+        102837 =>
+        array(
           'id' => '102837',
           'code' => 'f1-a-tb3493/qsearch',
           'level' => '999',
@@ -1929,8 +1925,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102837 bfc-',
         ),
-        102838 => 
-        array (
+        102838 =>
+        array(
           'id' => '102838',
           'code' => 'f1-a-tb3493/stats',
           'level' => '999',
@@ -1940,8 +1936,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102838 bfc-',
         ),
-        102839 => 
-        array (
+        102839 =>
+        array(
           'id' => '102839',
           'code' => 'f1-a-tb1005/edit',
           'level' => '999',
@@ -1951,8 +1947,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102839 bfc-',
         ),
-        102841 => 
-        array (
+        102841 =>
+        array(
           'id' => '102841',
           'code' => 'f1-a-tb1005/delete',
           'level' => '999',
@@ -1962,8 +1958,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102841 bfc-',
         ),
-        102842 => 
-        array (
+        102842 =>
+        array(
           'id' => '102842',
           'code' => 'f1-a-tb1005/display',
           'level' => '999',
@@ -1973,8 +1969,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102842 bfc-',
         ),
-        102843 => 
-        array (
+        102843 =>
+        array(
           'id' => '102843',
           'code' => 'f1-a-tb1005/search',
           'level' => '999',
@@ -1984,8 +1980,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102843 bfc-',
         ),
-        102844 => 
-        array (
+        102844 =>
+        array(
           'id' => '102844',
           'code' => 'f1-a-tb1005/qsearch',
           'level' => '999',
@@ -1996,21 +1992,20 @@
           'icon' => 'bficon-102844 bfc-',
         ),
       ),
-      'sub-folders' => 
-      array (
-      ),
+      'sub-folders' =>
+      array(),
     ),
   ),
-  378 => 
-  array (
+  378 =>
+  array(
     'code' => 'goal-users-roles',
-    'name' => 
-    array (
+    'name' =>
+    array(
       'ar' => 'إدارة الصلاحيات',
       'en' => 'arole.378',
     ),
-    'menu' => 
-    array (
+    'menu' =>
+    array(
       'need_admin' => false,
       'id' => '378',
       'menu_name_' => 'إدارة الصلاحيات',
@@ -2020,10 +2015,10 @@
       'css' => 'info',
       'icon' => ' icon-378',
       'showme' => true,
-      'items' => 
-      array (
-        102867 => 
-        array (
+      'items' =>
+      array(
+        102867 =>
+        array(
           'id' => '102867',
           'code' => 'f2-a-bfunction/qsearch',
           'level' => '999',
@@ -2033,8 +2028,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102867 bfc-',
         ),
-        102898 => 
-        array (
+        102898 =>
+        array(
           'id' => '102898',
           'code' => 'f2-a-auser/qsearch',
           'level' => '999',
@@ -2044,8 +2039,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102898 bfc-',
         ),
-        102860 => 
-        array (
+        102860 =>
+        array(
           'id' => '102860',
           'code' => 'f2-a-arole/qsearch',
           'level' => '999',
@@ -2055,8 +2050,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102860 bfc-',
         ),
-        102884 => 
-        array (
+        102884 =>
+        array(
           'id' => '102884',
           'code' => 'f2-a-module_auser/qsearch',
           'level' => '999',
@@ -2066,8 +2061,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102884 bfc-',
         ),
-        103345 => 
-        array (
+        103345 =>
+        array(
           'id' => '103345',
           'code' => 'f2-a-job_arole/qsearch',
           'level' => '999',
@@ -2077,8 +2072,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103345 bfc-',
         ),
-        102877 => 
-        array (
+        102877 =>
+        array(
           'id' => '102877',
           'code' => 'f2-a-arole_bf/qsearch',
           'level' => '999',
@@ -2088,22 +2083,22 @@
           'css' => 'bf',
           'icon' => 'bficon-102877 bfc-',
         ),
-        104594 => 
-        array (
+        104594 =>
+        array(
           'id' => '104594',
           'code' => 'f2-a-jobrole/qsearch',
           'level' => '1',
-          'menu_name_ar' => 'المهام الوظيفية',
+          'menu_name_ar' => 'الصلاحيات الوظيفية',
           'menu_name_en' => 'Jobroles',
           'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Jobrole&currmod=ums',
           'css' => 'bf',
           'icon' => 'bficon-104594 bfc-',
         ),
       ),
-      'otherbfs' => 
-      array (
-        102855 => 
-        array (
+      'otherbfs' =>
+      array(
+        102855 =>
+        array(
           'id' => '102855',
           'code' => 'f2-a-arole/edit',
           'level' => '999',
@@ -2113,8 +2108,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102855 bfc-',
         ),
-        102857 => 
-        array (
+        102857 =>
+        array(
           'id' => '102857',
           'code' => 'f2-a-arole/delete',
           'level' => '999',
@@ -2124,8 +2119,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102857 bfc-',
         ),
-        102858 => 
-        array (
+        102858 =>
+        array(
           'id' => '102858',
           'code' => 'f2-a-arole/display',
           'level' => '999',
@@ -2135,8 +2130,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102858 bfc-',
         ),
-        102859 => 
-        array (
+        102859 =>
+        array(
           'id' => '102859',
           'code' => 'f2-a-arole/search',
           'level' => '999',
@@ -2146,8 +2141,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102859 bfc-',
         ),
-        102860 => 
-        array (
+        102860 =>
+        array(
           'id' => '102860',
           'code' => 'f2-a-arole/qsearch',
           'level' => '999',
@@ -2157,8 +2152,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102860 bfc-',
         ),
-        102862 => 
-        array (
+        102862 =>
+        array(
           'id' => '102862',
           'code' => 'f2-a-bfunction/edit',
           'level' => '999',
@@ -2168,8 +2163,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102862 bfc-',
         ),
-        102864 => 
-        array (
+        102864 =>
+        array(
           'id' => '102864',
           'code' => 'f2-a-bfunction/delete',
           'level' => '999',
@@ -2179,8 +2174,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102864 bfc-',
         ),
-        102865 => 
-        array (
+        102865 =>
+        array(
           'id' => '102865',
           'code' => 'f2-a-bfunction/display',
           'level' => '999',
@@ -2190,8 +2185,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102865 bfc-',
         ),
-        102866 => 
-        array (
+        102866 =>
+        array(
           'id' => '102866',
           'code' => 'f2-a-bfunction/search',
           'level' => '999',
@@ -2201,8 +2196,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102866 bfc-',
         ),
-        102867 => 
-        array (
+        102867 =>
+        array(
           'id' => '102867',
           'code' => 'f2-a-bfunction/qsearch',
           'level' => '999',
@@ -2212,8 +2207,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102867 bfc-',
         ),
-        102872 => 
-        array (
+        102872 =>
+        array(
           'id' => '102872',
           'code' => 'f2-a-arole_bf/edit',
           'level' => '999',
@@ -2223,8 +2218,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102872 bfc-',
         ),
-        102874 => 
-        array (
+        102874 =>
+        array(
           'id' => '102874',
           'code' => 'f2-a-arole_bf/delete',
           'level' => '999',
@@ -2234,8 +2229,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102874 bfc-',
         ),
-        102875 => 
-        array (
+        102875 =>
+        array(
           'id' => '102875',
           'code' => 'f2-a-arole_bf/display',
           'level' => '999',
@@ -2245,8 +2240,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102875 bfc-',
         ),
-        102876 => 
-        array (
+        102876 =>
+        array(
           'id' => '102876',
           'code' => 'f2-a-arole_bf/search',
           'level' => '999',
@@ -2256,8 +2251,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102876 bfc-',
         ),
-        102877 => 
-        array (
+        102877 =>
+        array(
           'id' => '102877',
           'code' => 'f2-a-arole_bf/qsearch',
           'level' => '999',
@@ -2267,8 +2262,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102877 bfc-',
         ),
-        102879 => 
-        array (
+        102879 =>
+        array(
           'id' => '102879',
           'code' => 'f2-a-module_auser/edit',
           'level' => '999',
@@ -2278,8 +2273,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102879 bfc-',
         ),
-        102881 => 
-        array (
+        102881 =>
+        array(
           'id' => '102881',
           'code' => 'f2-a-module_auser/delete',
           'level' => '999',
@@ -2289,8 +2284,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102881 bfc-',
         ),
-        102882 => 
-        array (
+        102882 =>
+        array(
           'id' => '102882',
           'code' => 'f2-a-module_auser/display',
           'level' => '999',
@@ -2300,8 +2295,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102882 bfc-',
         ),
-        102883 => 
-        array (
+        102883 =>
+        array(
           'id' => '102883',
           'code' => 'f2-a-module_auser/search',
           'level' => '999',
@@ -2311,8 +2306,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102883 bfc-',
         ),
-        102884 => 
-        array (
+        102884 =>
+        array(
           'id' => '102884',
           'code' => 'f2-a-module_auser/qsearch',
           'level' => '999',
@@ -2322,8 +2317,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102884 bfc-',
         ),
-        102893 => 
-        array (
+        102893 =>
+        array(
           'id' => '102893',
           'code' => 'f2-a-auser/edit',
           'level' => '999',
@@ -2333,8 +2328,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102893 bfc-',
         ),
-        102895 => 
-        array (
+        102895 =>
+        array(
           'id' => '102895',
           'code' => 'f2-a-auser/delete',
           'level' => '999',
@@ -2344,8 +2339,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102895 bfc-',
         ),
-        102896 => 
-        array (
+        102896 =>
+        array(
           'id' => '102896',
           'code' => 'f2-a-auser/display',
           'level' => '999',
@@ -2355,8 +2350,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102896 bfc-',
         ),
-        102897 => 
-        array (
+        102897 =>
+        array(
           'id' => '102897',
           'code' => 'f2-a-auser/search',
           'level' => '999',
@@ -2366,8 +2361,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102897 bfc-',
         ),
-        102898 => 
-        array (
+        102898 =>
+        array(
           'id' => '102898',
           'code' => 'f2-a-auser/qsearch',
           'level' => '999',
@@ -2377,8 +2372,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102898 bfc-',
         ),
-        103340 => 
-        array (
+        103340 =>
+        array(
           'id' => '103340',
           'code' => 'f2-a-job_arole/edit',
           'level' => '999',
@@ -2388,8 +2383,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103340 bfc-',
         ),
-        103342 => 
-        array (
+        103342 =>
+        array(
           'id' => '103342',
           'code' => 'f2-a-job_arole/delete',
           'level' => '999',
@@ -2399,8 +2394,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103342 bfc-',
         ),
-        103343 => 
-        array (
+        103343 =>
+        array(
           'id' => '103343',
           'code' => 'f2-a-job_arole/display',
           'level' => '999',
@@ -2410,8 +2405,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103343 bfc-',
         ),
-        103344 => 
-        array (
+        103344 =>
+        array(
           'id' => '103344',
           'code' => 'f2-a-job_arole/search',
           'level' => '999',
@@ -2421,8 +2416,8 @@
           'css' => 'bf',
           'icon' => 'bficon-103344 bfc-',
         ),
-        103345 => 
-        array (
+        103345 =>
+        array(
           'id' => '103345',
           'code' => 'f2-a-job_arole/qsearch',
           'level' => '999',
@@ -2432,77 +2427,76 @@
           'css' => 'bf',
           'icon' => 'bficon-103345 bfc-',
         ),
-        104589 => 
-        array (
+        104589 =>
+        array(
           'id' => '104589',
           'code' => 'f2-a-jobrole/edit',
           'level' => '1',
-          'menu_name_ar' => 'إنشاء مهمة وظيفية',
+          'menu_name_ar' => 'إنشاء صلاحية وظيفية',
           'menu_name_en' => 'create Jobrole',
           'page' => 'main.php?Main_Page=afw_mode_edit.php&cl=Jobrole&currmod=ums',
           'css' => 'bf',
           'icon' => 'bficon-104589 bfc-',
         ),
-        104591 => 
-        array (
+        104591 =>
+        array(
           'id' => '104591',
           'code' => 'f2-a-jobrole/delete',
           'level' => '1',
-          'menu_name_ar' => 'مسح مهمة وظيفية',
+          'menu_name_ar' => 'مسح صلاحية وظيفية',
           'menu_name_en' => 'delete Jobrole',
           'page' => 'main.php?Main_Page=afw_mode_delete.php&cl=Jobrole&currmod=ums',
           'css' => 'bf',
           'icon' => 'bficon-104591 bfc-',
         ),
-        104592 => 
-        array (
+        104592 =>
+        array(
           'id' => '104592',
           'code' => 'f2-a-jobrole/display',
           'level' => '1',
-          'menu_name_ar' => 'عرض تفاصيل مهمة وظيفية',
+          'menu_name_ar' => 'عرض تفاصيل صلاحية وظيفية',
           'menu_name_en' => 'display details of Jobrole',
           'page' => 'main.php?Main_Page=afw_mode_display.php&cl=Jobrole&currmod=ums',
           'css' => 'bf',
           'icon' => 'bficon-104592 bfc-',
         ),
-        104593 => 
-        array (
+        104593 =>
+        array(
           'id' => '104593',
           'code' => 'f2-a-jobrole/search',
           'level' => '1',
-          'menu_name_ar' => 'البحث في المهام الوظيفية',
+          'menu_name_ar' => 'البحث في الصلاحيات الوظيفية',
           'menu_name_en' => 'Jobroles search',
           'page' => 'main.php?Main_Page=afw_mode_search.php&cl=Jobrole&currmod=ums',
           'css' => 'bf',
           'icon' => 'bficon-104593 bfc-',
         ),
-        104594 => 
-        array (
+        104594 =>
+        array(
           'id' => '104594',
           'code' => 'f2-a-jobrole/qsearch',
           'level' => '1',
-          'menu_name_ar' => 'المهام الوظيفية',
+          'menu_name_ar' => 'الصلاحيات الوظيفية',
           'menu_name_en' => 'Jobroles',
           'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Jobrole&currmod=ums',
           'css' => 'bf',
           'icon' => 'bficon-104594 bfc-',
         ),
       ),
-      'sub-folders' => 
-      array (
-      ),
+      'sub-folders' =>
+      array(),
     ),
   ),
-  199 => 
-  array (
+  199 =>
+  array(
     'code' => 'ums-lookup',
-    'name' => 
-    array (
+    'name' =>
+    array(
       'ar' => 'البيانات المرجعية',
       'en' => 'Lookup data',
     ),
-    'menu' => 
-    array (
+    'menu' =>
+    array(
       'need_admin' => false,
       'id' => '199',
       'menu_name_' => 'البيانات المرجعية',
@@ -2512,16 +2506,14 @@
       'css' => 'info',
       'icon' => ' icon-199',
       'showme' => true,
-      'items' => 
-      array (
-      ),
-      'otherbfs' => 
-      array (
-      ),
-      'sub-folders' => 
-      array (
-        200 => 
-        array (
+      'items' =>
+      array(),
+      'otherbfs' =>
+      array(),
+      'sub-folders' =>
+      array(
+        200 =>
+        array(
           'need_admin' => false,
           'id' => '200',
           'menu_name_' => 'الأنظمة والتطبيقات',
@@ -2531,10 +2523,10 @@
           'css' => 'info',
           'icon' => ' icon-200',
           'showme' => true,
-          'items' => 
-          array (
-            102849 => 
-            array (
+          'items' =>
+          array(
+            102849 =>
+            array(
               'id' => '102849',
               'code' => 'f1-a-tb425/qedit',
               'level' => '999',
@@ -2544,8 +2536,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102849 bfc-',
             ),
-            102846 => 
-            array (
+            102846 =>
+            array(
               'id' => '102846',
               'code' => 'f1-a-tb426/qedit',
               'level' => '999',
@@ -2556,10 +2548,10 @@
               'icon' => 'bficon-102846 bfc-',
             ),
           ),
-          'otherbfs' => 
-          array (
-            102846 => 
-            array (
+          'otherbfs' =>
+          array(
+            102846 =>
+            array(
               'id' => '102846',
               'code' => 'f1-a-tb426/qedit',
               'level' => '999',
@@ -2569,8 +2561,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102846 bfc-',
             ),
-            102847 => 
-            array (
+            102847 =>
+            array(
               'id' => '102847',
               'code' => 'f1-a-tb426/delete',
               'level' => '999',
@@ -2580,8 +2572,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102847 bfc-',
             ),
-            102848 => 
-            array (
+            102848 =>
+            array(
               'id' => '102848',
               'code' => 'f1-a-tb426/display',
               'level' => '999',
@@ -2591,8 +2583,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102848 bfc-',
             ),
-            102849 => 
-            array (
+            102849 =>
+            array(
               'id' => '102849',
               'code' => 'f1-a-tb425/qedit',
               'level' => '999',
@@ -2602,8 +2594,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102849 bfc-',
             ),
-            102850 => 
-            array (
+            102850 =>
+            array(
               'id' => '102850',
               'code' => 'f1-a-tb425/delete',
               'level' => '999',
@@ -2613,8 +2605,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102850 bfc-',
             ),
-            102851 => 
-            array (
+            102851 =>
+            array(
               'id' => '102851',
               'code' => 'f1-a-tb425/display',
               'level' => '999',
@@ -2625,12 +2617,11 @@
               'icon' => 'bficon-102851 bfc-',
             ),
           ),
-          'sub-folders' => 
-          array (
-          ),
+          'sub-folders' =>
+          array(),
         ),
-        201 => 
-        array (
+        201 =>
+        array(
           'need_admin' => false,
           'id' => '201',
           'menu_name_' => 'الوظائف العملية',
@@ -2640,10 +2631,10 @@
           'css' => 'info',
           'icon' => ' icon-201',
           'showme' => true,
-          'items' => 
-          array (
-            102852 => 
-            array (
+          'items' =>
+          array(
+            102852 =>
+            array(
               'id' => '102852',
               'code' => 'f1-a-tb1426/qedit',
               'level' => '999',
@@ -2653,8 +2644,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102852 bfc-',
             ),
-            102869 => 
-            array (
+            102869 =>
+            array(
               'id' => '102869',
               'code' => 'f2-a-arole_type/qedit',
               'level' => '999',
@@ -2665,10 +2656,10 @@
               'icon' => 'bficon-102869 bfc-',
             ),
           ),
-          'otherbfs' => 
-          array (
-            102852 => 
-            array (
+          'otherbfs' =>
+          array(
+            102852 =>
+            array(
               'id' => '102852',
               'code' => 'f1-a-tb1426/qedit',
               'level' => '999',
@@ -2678,8 +2669,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102852 bfc-',
             ),
-            102853 => 
-            array (
+            102853 =>
+            array(
               'id' => '102853',
               'code' => 'f1-a-tb1426/delete',
               'level' => '999',
@@ -2689,8 +2680,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102853 bfc-',
             ),
-            102854 => 
-            array (
+            102854 =>
+            array(
               'id' => '102854',
               'code' => 'f1-a-tb1426/display',
               'level' => '999',
@@ -2700,8 +2691,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102854 bfc-',
             ),
-            102869 => 
-            array (
+            102869 =>
+            array(
               'id' => '102869',
               'code' => 'f2-a-arole_type/qedit',
               'level' => '999',
@@ -2711,8 +2702,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102869 bfc-',
             ),
-            102870 => 
-            array (
+            102870 =>
+            array(
               'id' => '102870',
               'code' => 'f2-a-arole_type/delete',
               'level' => '999',
@@ -2722,8 +2713,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102870 bfc-',
             ),
-            102871 => 
-            array (
+            102871 =>
+            array(
               'id' => '102871',
               'code' => 'f2-a-arole_type/display',
               'level' => '999',
@@ -2733,8 +2724,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102871 bfc-',
             ),
-            104586 => 
-            array (
+            104586 =>
+            array(
               'id' => '104586',
               'code' => 'f2-a-arole_type/edit',
               'level' => '1',
@@ -2744,8 +2735,8 @@
               'css' => 'bf',
               'icon' => 'bficon-104586 bfc-',
             ),
-            104587 => 
-            array (
+            104587 =>
+            array(
               'id' => '104587',
               'code' => 'f2-a-arole_type/search',
               'level' => '1',
@@ -2755,8 +2746,8 @@
               'css' => 'bf',
               'icon' => 'bficon-104587 bfc-',
             ),
-            104588 => 
-            array (
+            104588 =>
+            array(
               'id' => '104588',
               'code' => 'f2-a-arole_type/qsearch',
               'level' => '1',
@@ -2767,12 +2758,11 @@
               'icon' => 'bficon-104588 bfc-',
             ),
           ),
-          'sub-folders' => 
-          array (
-          ),
+          'sub-folders' =>
+          array(),
         ),
-        202 => 
-        array (
+        202 =>
+        array(
           'need_admin' => false,
           'id' => '202',
           'menu_name_' => 'المستخدمين',
@@ -2782,10 +2772,10 @@
           'css' => 'info',
           'icon' => ' icon-202',
           'showme' => true,
-          'items' => 
-          array (
-            102907 => 
-            array (
+          'items' =>
+          array(
+            102907 =>
+            array(
               'id' => '102907',
               'code' => 'f1-a-tb3504/qedit',
               'level' => '999',
@@ -2796,10 +2786,10 @@
               'icon' => 'bficon-102907 bfc-',
             ),
           ),
-          'otherbfs' => 
-          array (
-            102907 => 
-            array (
+          'otherbfs' =>
+          array(
+            102907 =>
+            array(
               'id' => '102907',
               'code' => 'f1-a-tb3504/qedit',
               'level' => '999',
@@ -2809,8 +2799,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102907 bfc-',
             ),
-            102908 => 
-            array (
+            102908 =>
+            array(
               'id' => '102908',
               'code' => 'f1-a-tb3504/delete',
               'level' => '999',
@@ -2820,8 +2810,8 @@
               'css' => 'bf',
               'icon' => 'bficon-102908 bfc-',
             ),
-            102909 => 
-            array (
+            102909 =>
+            array(
               'id' => '102909',
               'code' => 'f1-a-tb3504/display',
               'level' => '999',
@@ -2832,23 +2822,22 @@
               'icon' => 'bficon-102909 bfc-',
             ),
           ),
-          'sub-folders' => 
-          array (
-          ),
+          'sub-folders' =>
+          array(),
         ),
       ),
     ),
   ),
-  200 => 
-  array (
+  200 =>
+  array(
     'code' => 'ums-module-1082',
-    'name' => 
-    array (
+    'name' =>
+    array(
       'ar' => 'الأنظمة والتطبيقات',
       'en' => 'Systems & applications',
     ),
-    'menu' => 
-    array (
+    'menu' =>
+    array(
       'need_admin' => false,
       'id' => '200',
       'menu_name_' => 'الأنظمة والتطبيقات',
@@ -2858,10 +2847,10 @@
       'css' => 'info',
       'icon' => ' icon-200',
       'showme' => true,
-      'items' => 
-      array (
-        102849 => 
-        array (
+      'items' =>
+      array(
+        102849 =>
+        array(
           'id' => '102849',
           'code' => 'f1-a-tb425/qedit',
           'level' => '999',
@@ -2871,8 +2860,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102849 bfc-',
         ),
-        102846 => 
-        array (
+        102846 =>
+        array(
           'id' => '102846',
           'code' => 'f1-a-tb426/qedit',
           'level' => '999',
@@ -2883,10 +2872,10 @@
           'icon' => 'bficon-102846 bfc-',
         ),
       ),
-      'otherbfs' => 
-      array (
-        102846 => 
-        array (
+      'otherbfs' =>
+      array(
+        102846 =>
+        array(
           'id' => '102846',
           'code' => 'f1-a-tb426/qedit',
           'level' => '999',
@@ -2896,8 +2885,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102846 bfc-',
         ),
-        102847 => 
-        array (
+        102847 =>
+        array(
           'id' => '102847',
           'code' => 'f1-a-tb426/delete',
           'level' => '999',
@@ -2907,8 +2896,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102847 bfc-',
         ),
-        102848 => 
-        array (
+        102848 =>
+        array(
           'id' => '102848',
           'code' => 'f1-a-tb426/display',
           'level' => '999',
@@ -2918,8 +2907,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102848 bfc-',
         ),
-        102849 => 
-        array (
+        102849 =>
+        array(
           'id' => '102849',
           'code' => 'f1-a-tb425/qedit',
           'level' => '999',
@@ -2929,8 +2918,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102849 bfc-',
         ),
-        102850 => 
-        array (
+        102850 =>
+        array(
           'id' => '102850',
           'code' => 'f1-a-tb425/delete',
           'level' => '999',
@@ -2940,8 +2929,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102850 bfc-',
         ),
-        102851 => 
-        array (
+        102851 =>
+        array(
           'id' => '102851',
           'code' => 'f1-a-tb425/display',
           'level' => '999',
@@ -2952,21 +2941,20 @@
           'icon' => 'bficon-102851 bfc-',
         ),
       ),
-      'sub-folders' => 
-      array (
-      ),
+      'sub-folders' =>
+      array(),
     ),
   ),
-  201 => 
-  array (
+  201 =>
+  array(
     'code' => 'ums-module-1083',
-    'name' => 
-    array (
+    'name' =>
+    array(
       'ar' => 'الوظائف العملية',
       'en' => '????? ??????? ??????? ??????????',
     ),
-    'menu' => 
-    array (
+    'menu' =>
+    array(
       'need_admin' => false,
       'id' => '201',
       'menu_name_' => 'الوظائف العملية',
@@ -2976,10 +2964,10 @@
       'css' => 'info',
       'icon' => ' icon-201',
       'showme' => true,
-      'items' => 
-      array (
-        102852 => 
-        array (
+      'items' =>
+      array(
+        102852 =>
+        array(
           'id' => '102852',
           'code' => 'f1-a-tb1426/qedit',
           'level' => '999',
@@ -2989,8 +2977,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102852 bfc-',
         ),
-        102869 => 
-        array (
+        102869 =>
+        array(
           'id' => '102869',
           'code' => 'f2-a-arole_type/qedit',
           'level' => '999',
@@ -3001,10 +2989,10 @@
           'icon' => 'bficon-102869 bfc-',
         ),
       ),
-      'otherbfs' => 
-      array (
-        102852 => 
-        array (
+      'otherbfs' =>
+      array(
+        102852 =>
+        array(
           'id' => '102852',
           'code' => 'f1-a-tb1426/qedit',
           'level' => '999',
@@ -3014,8 +3002,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102852 bfc-',
         ),
-        102853 => 
-        array (
+        102853 =>
+        array(
           'id' => '102853',
           'code' => 'f1-a-tb1426/delete',
           'level' => '999',
@@ -3025,8 +3013,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102853 bfc-',
         ),
-        102854 => 
-        array (
+        102854 =>
+        array(
           'id' => '102854',
           'code' => 'f1-a-tb1426/display',
           'level' => '999',
@@ -3036,8 +3024,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102854 bfc-',
         ),
-        102869 => 
-        array (
+        102869 =>
+        array(
           'id' => '102869',
           'code' => 'f2-a-arole_type/qedit',
           'level' => '999',
@@ -3047,8 +3035,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102869 bfc-',
         ),
-        102870 => 
-        array (
+        102870 =>
+        array(
           'id' => '102870',
           'code' => 'f2-a-arole_type/delete',
           'level' => '999',
@@ -3058,8 +3046,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102870 bfc-',
         ),
-        102871 => 
-        array (
+        102871 =>
+        array(
           'id' => '102871',
           'code' => 'f2-a-arole_type/display',
           'level' => '999',
@@ -3069,8 +3057,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102871 bfc-',
         ),
-        104586 => 
-        array (
+        104586 =>
+        array(
           'id' => '104586',
           'code' => 'f2-a-arole_type/edit',
           'level' => '1',
@@ -3080,8 +3068,8 @@
           'css' => 'bf',
           'icon' => 'bficon-104586 bfc-',
         ),
-        104587 => 
-        array (
+        104587 =>
+        array(
           'id' => '104587',
           'code' => 'f2-a-arole_type/search',
           'level' => '1',
@@ -3091,8 +3079,8 @@
           'css' => 'bf',
           'icon' => 'bficon-104587 bfc-',
         ),
-        104588 => 
-        array (
+        104588 =>
+        array(
           'id' => '104588',
           'code' => 'f2-a-arole_type/qsearch',
           'level' => '1',
@@ -3103,21 +3091,20 @@
           'icon' => 'bficon-104588 bfc-',
         ),
       ),
-      'sub-folders' => 
-      array (
-      ),
+      'sub-folders' =>
+      array(),
     ),
   ),
-  202 => 
-  array (
+  202 =>
+  array(
     'code' => 'ums-module-1084',
-    'name' => 
-    array (
+    'name' =>
+    array(
       'ar' => 'المستخدمين',
       'en' => '????? ??????????',
     ),
-    'menu' => 
-    array (
+    'menu' =>
+    array(
       'need_admin' => false,
       'id' => '202',
       'menu_name_' => 'المستخدمين',
@@ -3127,10 +3114,10 @@
       'css' => 'info',
       'icon' => ' icon-202',
       'showme' => true,
-      'items' => 
-      array (
-        102907 => 
-        array (
+      'items' =>
+      array(
+        102907 =>
+        array(
           'id' => '102907',
           'code' => 'f1-a-tb3504/qedit',
           'level' => '999',
@@ -3141,10 +3128,10 @@
           'icon' => 'bficon-102907 bfc-',
         ),
       ),
-      'otherbfs' => 
-      array (
-        102907 => 
-        array (
+      'otherbfs' =>
+      array(
+        102907 =>
+        array(
           'id' => '102907',
           'code' => 'f1-a-tb3504/qedit',
           'level' => '999',
@@ -3154,8 +3141,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102907 bfc-',
         ),
-        102908 => 
-        array (
+        102908 =>
+        array(
           'id' => '102908',
           'code' => 'f1-a-tb3504/delete',
           'level' => '999',
@@ -3165,8 +3152,8 @@
           'css' => 'bf',
           'icon' => 'bficon-102908 bfc-',
         ),
-        102909 => 
-        array (
+        102909 =>
+        array(
           'id' => '102909',
           'code' => 'f1-a-tb3504/display',
           'level' => '999',
@@ -3177,10 +3164,8 @@
           'icon' => 'bficon-102909 bfc-',
         ),
       ),
-      'sub-folders' => 
-      array (
-      ),
+      'sub-folders' =>
+      array(),
     ),
   ),
 );
- ?>

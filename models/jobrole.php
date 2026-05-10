@@ -594,7 +594,7 @@ class Jobrole extends UmsObject
                                 // $this->execQuery("delete from ".$server_db_prefix."sdd.job_permission where jobrole_id = '$id' ");
                                 // b au.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
                                 // $this->execQuery("delete from ".$server_db_prefix."b au.user_story where jobrole_id = '$id' ");
-                                // b au.goal_concern-المسؤولية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
+                                // b au.goal_concern-الصلاحية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
                                 // $this->execQuery("delete from ".$server_db_prefix."b au.goal_concern where jobrole_id = '$id' ");
 
                                 // FK not part of me - replaceable
@@ -626,7 +626,7 @@ class Jobrole extends UmsObject
                                 // $this->execQuery("update ".$server_db_prefix."sdd.job_permission set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // b au.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
                                 // $this->execQuery("update ".$server_db_prefix."b au.user_story set jobrole_id='$id_replace' where jobrole_id='$id' ");
-                                // b au.goal_concern-المسؤولية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
+                                // b au.goal_concern-الصلاحية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
                                 // $this->execQuery("update ".$server_db_prefix."b au.goal_concern set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // ums.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
                                 $this->execQuery('update ' . $server_db_prefix . "ums.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
