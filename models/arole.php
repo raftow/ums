@@ -17,6 +17,8 @@ class Arole extends UmsObject
     public static $TABLE            = "";
     public static $DB_STRUCTURE = null;
 
+    private $bfList = null;
+
 
     public function __construct($tablename = "arole")
     {
@@ -486,14 +488,16 @@ class Arole extends UmsObject
                 break;
 
             case "bfList":
-
-                $bfList = array();
-                $rbfList = $this->get("rbfList");
-                foreach ($rbfList as $rbf_id => $rbfItem) {
-                    $bfList[$rbfItem->getVal("bfunction_id")] = $rbfItem->get("bfunction_id");
+                if (!$this->bfList) {
+                    $rbfList = $this->get("rbfList");
+                    $this->bfList = [];
+                    foreach ($rbfList as $rbf_id => $rbfItem) {
+                        $this->bfList[$rbfItem->getVal("bfunction_id")] = $rbfItem->get("bfunction_id");
+                    }
                 }
 
-                return $bfList;
+
+                return $this->bfList;
                 break;
         }
 
