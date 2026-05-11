@@ -28,8 +28,10 @@
  */
 // rafik 27/9/2024
 // ALTER TABLE `auser` ADD `hierarchy_level_enum` SMALLINT NOT NULL DEFAULT '999' AFTER `lang_id`;
-// INSERT INTO `auser` (`id`, `id_aut`, `date_aut`, `id_mod`, `date_mod`, `id_valid`, `date_valid`, `avail`, `version`, `update_groups_mfk`, `delete_groups_mfk`, `display_groups_mfk`, `sci_id`, `city_id`, `country_id`, `mobile_type_id`, `idn_type_id`, `lang_id`, `hierarchy_level_enum`, `address`, `cp`, `email`, `genre_id`, `firstname`, `f_firstname`, `idn`, `lastname`, `mobile`, `mobile_sn`, `mobile_code`, `pwd`, `quarter`, `sim_card_sn`, `ggn_code`, `username`, `ldap`, `password`, `remember_token`, `fb_id`, `google_id`, `twitter_id`, `valide_email`, `valide_mobile`, `email_token`, `mobile_activation_id`, `email_token_expiry_date`, `remember_token_expiry_date`, `last_selected_school`) VALUES ('2', '1', '2024-12-26 07:45:10.000000', '1', '2024-12-26 07:45:10.000000', NULL, NULL, 'Y', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '999', NULL, NULL, 'robot@company.com', '1', 'المهمة', NULL, NULL, 'الآلية', NULL, NULL, NULL, '123456', NULL, NULL, NULL, NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
+// INSERT INTO `auser` (`id`, `id_aut`, `date_aut`, `id_mod`, `date_mod`, `id_valid`, `date_valid`, `avail`, `version`, `update_groups_mfk`, `delete_groups_mfk`, `display_groups_mfk`, `sci_id`, `city_id`, `country_id`, `mobile_type_id`, `idn_type_id`, `lang_id`, `hierarchy_level_enum`, `address`, `cp`, `email`, `genre_id`, `firstname`, `f_firstname`, `idn`, `lastname`, `mobile`, `mobile_sn`, `mobile_code`, `pwd`, `quarter`, `sim_card_sn`, `ggn_code`, `username`, `ldap`, `password`, `remember_token`, `fb_id`, `google_id`, `twitter_id`, `valide_email`, `valide_mobile`, `email_token`, `mobile_activation_id`, `email_token_expiry_date`, `remember_token_expiry_date`, `last_selected_school`) 
+// VALUES ('2', '1', '2024-12-26 07:45:10.000000', '1', '2024-12-26 07:45:10.000000', NULL, NULL, 'Y', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '999', NULL, NULL, 'robot@company.com', '1', 'المهمة', NULL, NULL, 'الآلية', NULL, NULL, NULL, '123456', NULL, NULL, NULL, NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+// INSERT INTO `auser` (`id`, `id_aut`, `date_aut`, `id_mod`, `date_mod`, `id_valid`, `date_valid`, `avail`, `version`, `update_groups_mfk`, `delete_groups_mfk`, `display_groups_mfk`, `sci_id`, `city_id`, `country_id`, `mobile_type_id`, `idn_type_id`, `lang_id`, `hierarchy_level_enum`, `address`, `cp`, `email`, `genre_id`, `firstname`, `f_firstname`, `idn`, `lastname`, `mobile`, `mobile_sn`, `mobile_code`, `pwd`, `quarter`, `sim_card_sn`, `ggn_code`, `username`, `ldap`, `password`, `remember_token`, `fb_id`, `google_id`, `twitter_id`, `valide_email`, `valide_mobile`, `email_token`, `mobile_activation_id`, `email_token_expiry_date`, `remember_token_expiry_date`, `last_selected_school`)
+// VALUES ('3', '1', '2026-05-11 11:30:39', '1', '2026-05-11 11:30:39', '1', '2026-05-11 11:30:39', 'Y', '0', NULL, NULL, NULL, '1', '1', '213', NULL, '2', '1', '999', 'SA', '00001', 'student@company.com', '1', 'واجهة', NULL, NULL, 'المتقدم', NULL, NULL, NULL, '0000', NULL, NULL, NULL, NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 $file_dir_name = dirname(__FILE__);
 
 // old include of afw.php
@@ -1516,15 +1518,13 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $err = array();
                 $war = array();
                 if ((!$from_active_directory) and $reset_password) {
-                        if (!$this->pwd)
-                        {
+                        if (!$this->pwd) {
                                 list($err[], $info[], $war[], $pwd, $sent_by, $sent_to) = $this->resetPassword($lang);
-                        }
-                        else {
-                                $sent_by = false; 
+                        } else {
+                                $sent_by = false;
                                 $sent_to = "none";
                         }
-                                
+
                         if ($sent_by and count($err) == 0)
                                 $info[] = $this->tm('Password has been resetted. The new password has been sent by', $lang) . ' : ' . $this->tm($sent_by, $lang) . ' ' . $this->tm('to', $lang) . ' ' . $sent_to;
                 } else {
@@ -2066,14 +2066,14 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         }
                 } else {
                         $company = AfwSession::currentCompany();
-                        $main_company_domain = AfwSession::config("main_company_domain", "$company.gov.sa");       
-                        $url_ppa = AfwSession::config("url_ppa", "https://$main_company_domain/ar/Pages/PrivacyPolicy.aspx");       
+                        $main_company_domain = AfwSession::config("main_company_domain", "$company.gov.sa");
+                        $url_ppa = AfwSession::config("url_ppa", "https://$main_company_domain/ar/Pages/PrivacyPolicy.aspx");
                         $quick_links_arr[] = array(
-                                                'target' => "ppa",
-                                                'name_ar' => "سياسة الخصوصية",
-                                                'name_en' => "Privacy policy",
-                                                'url' => $url_ppa
-                                        );
+                                'target' => "ppa",
+                                'name_ar' => "سياسة الخصوصية",
+                                'name_en' => "Privacy policy",
+                                'url' => $url_ppa
+                        );
                 }
 
                 return $quick_links_arr;
