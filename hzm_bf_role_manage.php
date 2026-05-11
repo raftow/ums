@@ -1,6 +1,6 @@
 <?php
-      
-     /* to be reviewed or obsolete   
+
+/* to be reviewed or obsolete   
       
       
       
@@ -167,7 +167,7 @@ foreach($tbrg_mat as $tblId => $tblSubMat)
 ?>
 <tr>
    <td class="xqe_<?=$odd?>_<?=$alt?>" align="center"><?=$tblSubMat["obj"]?></td>
-<?   
+<?php   
 foreach($framework_mode_list as $framework_mode => $framework_mode_item)
 {
     $bf_data = $tblSubMat[$framework_mode];
@@ -207,13 +207,13 @@ foreach($framework_mode_list as $framework_mode => $framework_mode_item)
 ?>        
              <img src="../images/redc_d.png">
              <input type="hidden" value="1" id="<?=$checkbox_name?>" name="<?=$checkbox_name?>">
-<?  
+<?php  
         }
         else
         {
 ?>        
               <input type="checkbox" value="1"  id="<?=$checkbox_name?>" name="<?=$checkbox_name?>" <?=$checkbox_checked?> class="<?=$checkbox_extra_class?>">
-<?  
+<?php  
         }
 ?>  
         <input type="hidden" value="<?=$checkbox_value?>" id="old_<?=$checkbox_name?>" name="old_<?=$checkbox_name?>">
@@ -223,7 +223,7 @@ foreach($framework_mode_list as $framework_mode => $framework_mode_item)
     else echo "&nbsp;"
 ?>
   </td>
-<?    
+<?php    
 }
 ?>
 </tr>
@@ -248,4 +248,3 @@ foreach($framework_mode_list as $framework_mode => $framework_mode_item)
 
 <?
         $out_scr = ob_get_clean();*/
-?>

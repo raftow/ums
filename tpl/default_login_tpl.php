@@ -28,7 +28,7 @@
             [no_message_e]
             <h1 class='modal-title'>[site_name]</h1>
             <div class="modal-body">
-                <form id="formlogin0" name="formlogin0" class="login default" method="post" action="<? echo $action_page ?>" onSubmit="return checkForm();" dir="ltr" enctype="multipart/form-data" autocomplete="off">
+                <form id="formlogin0" name="formlogin0" class="login default" method="post" action="<?php echo $action_page ?>" onSubmit="return checkForm();" dir="ltr" enctype="multipart/form-data" autocomplete="off">
                     <div class="form-group">
                         <label class="label login">[login_by]
                         </label>

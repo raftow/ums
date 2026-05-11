@@ -394,7 +394,7 @@ class Module extends UmsObject
                         if ($bf_code) $bfObj = Bfunction::loadByMainIndex($module_id, $bf_code);
                         elseif ($bf_id) {
                             $bfObj = Bfunction::loadById($bf_id);
-                            if ($bfObj->getUrl() != $bf_page_url) {
+                            if ($bfObj and ($bfObj->getUrl() != $bf_page_url)) {
                                 unset($bfObj);
                                 $bfObj = null;
                             }
@@ -1322,6 +1322,11 @@ class Module extends UmsObject
     {
         $info = "";
 
+        $jr1 = false;
+        $go1 = false;
+        $jr2 = false;
+        $go2 = false;
+
         if ($this->isApplication()) {
             list($jr1, $go1) = $this->getLookupJobResp(true, true);
             list($jr2, $go2) = $this->getDataJobResp(true, true);
@@ -1592,6 +1597,10 @@ class Module extends UmsObject
             $bf_name_ar = $bf_item->valTitre_short();
             if ($bf_item->valBfunction_code()) $bf_name_en = "[" . $bf_item->valBfunction_code() . "]";
             else $bf_name_en = "[EN bf name not defined]";
+
+            $specification_complexity = 30;
+            $development_complexity = 220;
+            $test_complexity = 100;
 
             if (!AfwStringHelper::stringStartsWith($bf_code, "crud-")) {
                 $specification_complexity = 10;
