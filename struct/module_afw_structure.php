@@ -96,8 +96,13 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-			'id_pm' => array('SHOW' => true,  'SHORTNAME' => 'domain',  'RETRIEVE' => true,  'EDIT' => true,  
-				'TYPE' => 'ENUM', 'ANSWER' => 'FUNCTION', 'FUNCTION_COL_NAME' => 'domain_enum',
+			'id_pm' => array('SHOW' => true,  
+				'SHORTNAME' => 'domain',  
+				'RETRIEVE' => true,  'EDIT' => true,  
+				'TYPE' => 'FK',
+				'ANSWER' => 'domain',
+				'ANSMODULE' => 'cmn',
+				/*'TYPE' => 'ENUM', 'ANSWER' => 'FUNCTION', 'FUNCTION_COL_NAME' => 'domain_enum',*/
 				'WHERE' => "", 
 				 'QEDIT' => true,  
 				'RELATION' => 'OneToMany',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
