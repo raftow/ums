@@ -6,7 +6,7 @@
 				if($obj instanceof Module)
 				{
 					$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
-					// $obj->IS_LOOKUP = true;
+					$obj->IS_LOOKUP = true;
 					$obj->editByStep = true;
 					$obj->editNbSteps = 13;
 					$obj->hzm_vtab_body_height = "100%";

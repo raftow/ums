@@ -123,10 +123,10 @@ class Module extends UmsObject
 
         if (count($object_code_arr) != 1) throw new AfwRuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
         $module_code = $object_code_arr[0];
-        // 1. reverse the config file
-        $file_dir_name = dirname(__FILE__);
-        include("$file_dir_name/../../$module_code/module_config.php");
-        if ($module_code != $MODULE) throw new AfwRuntimeException("reverseByCodes : module_code is not correct [\$MODULE=$MODULE] in $file_dir_name/../$module_code/module_config.php file");
+        // 1. reverse the module_config file
+        $module_config_file = dirname(__FILE__)."/../../$module_code/module_config.php";
+        include($module_config_file);
+        if ($module_code != $MODULE) throw new AfwRuntimeException("reverseByCodes : module_code [$module_code] is not defined correctly in $module_config_file file [\$MODULE=$MODULE] ");
         $module_id = $THIS_MODULE_ID;
         if (!$THIS_MODULE_ID) throw new AfwRuntimeException("reverseByCodes : THIS_MODULE_ID is not defined in module_config file for module $module_code");
 
@@ -157,13 +157,14 @@ class Module extends UmsObject
 
         if ($objModule and $doReverse) {
             // 2. reverse the names ar and en from ini file
-            include("$file_dir_name/../../$module_code/ini.php");
+            include(dirname(__FILE__)."/../../$module_code/ini.php");
             $title_en = $NOM_SITE["en"];
             $title_ar = $NOM_SITE["ar"];
-
-            include("$file_dir_name/../../$module_code/application_config.php");
+            $application_config_file = dirname(__FILE__)."/../../$module_code/application_config.php";
+            include($application_config_file);
             if ($config_arr["application_id"] != $objModule->id) {
-                throw new AfwRuntimeException("reverseByCodes : application_id is not correct [=$objModule->id] in application_config file for module $module_code (vs id = $objByCodeId)");
+                $objModuleId = $objModule->id;
+                throw new AfwRuntimeException("reverseByCodes : application_id is not correctly defined in application_config file $application_config_file (vs = $objModuleId)");
             }
 
             if (!$title_ar or !$title_en) {
@@ -196,7 +197,7 @@ class Module extends UmsObject
             // 3. reverse the previleges file
             AfwAutoLoader::addModule("p" . "ag");
 
-            $file_previleges = "$file_dir_name/../../$module_code/previleges.php";
+            $file_previleges = dirname(__FILE__)."/../../$module_code/previleges.php";
             if (!file_exists($file_previleges)) {
                 $message_arr[] = self::prepareLog("Warning : The file $file_previleges not found");
             } else {
