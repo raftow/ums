@@ -78,57 +78,71 @@ class Arole extends UmsObject
 
 
     /**
-         * @param array $object_code_arr 
-         * @param string $object_name_en 
-         * @param string $object_name_ar 
-         * @param string $object_title_en 
-         * @param string $object_title_ar
-         */
-        public static function addByCodes(
-                $object_code_arr,
-                $object_name_en,
-                $object_name_ar,
-                $object_title_en,
-                $object_title_ar,
-                $update_if_exists = false,
-                $command_code_option = ''
-        ) 
-        {
-                if (count($object_code_arr) < 2)
-                        throw new AfwRuntimeException('addByCodes : 3 params are needed module and role code, given : ' . var_export($object_code_arr, true));
-                $module_code = $object_code_arr[1];
-                $role_code = $object_code_arr[0];
+     * @param array $object_code_arr 
+     * @param string $object_name_en 
+     * @param string $object_name_ar 
+     * @param string $object_title_en 
+     * @param string $object_title_ar
+     */
+    public static function addByCodes(
+        $object_code_arr,
+        $object_name_en,
+        $object_name_ar,
+        $object_title_en,
+        $object_title_ar,
+        $update_if_exists = false,
+        $command_code_option = ''
+    ) {
+        if (count($object_code_arr) < 2)
+            throw new AfwRuntimeException('addByCodes : 3 params are needed module and role code, given : ' . var_export($object_code_arr, true));
+        $module_code = $object_code_arr[1];
+        $goal_code = $object_code_arr[0];
+        $role_code = "goal-" . $goal_code;
 
-                AfwAutoLoader::addModule($module_code);
 
-                if (!$module_code or !$role_code)
-                        throw new AfwRuntimeException("addByCodes : module and role code are needed, given : module=$module_code and role_code=$role_code, given array : " . var_export($object_code_arr, true));
-                $objModule = Module::loadByMainIndex($module_code);
-                if (!$objModule or (!$objModule->id))
-                        throw new AfwRuntimeException("addByCodes : module $module_code not found");
-                $objModule_id = $objModule->id;
-                $objArole = Arole::loadByMainIndex($objModule_id, $role_code, true);
+        AfwAutoLoader::addModule($module_code);
 
-                if (!$objArole)
-                        $message = "Strange Error happened because Arole::loadByMainIndex($objModule_id, $role_code, true) failed !!";
-                else {
-                        if ((!$objArole->is_new) and (!$update_if_exists)) {
-                                throw new AfwRuntimeException('This role already exists');
-                        }
-                        /*
-                        $afObj->set('titre_short_en', $object_name_en);
-                        $afObj->set('titre_short', $object_name_ar);
-                        if ($object_title_en)
-                                $afObj->set('titre_en', $object_title_en);
-                        if ($object_title_ar)
-                                $afObj->set('titre', $object_title_ar);
-                        $afObj->commit();
-                        */
-                        $message = 'successfully done';
-                }
+        if (!$module_code or !$role_code)
+            throw new AfwRuntimeException("addByCodes : module and role code are needed, given : module=$module_code and role_code=$role_code, given array : " . var_export($object_code_arr, true));
+        $objModule = Module::loadByMainIndex($module_code);
+        if (!$objModule or (!$objModule->id))
+            throw new AfwRuntimeException("addByCodes : module $module_code not found");
+        $objModule_id = $objModule->id;
 
-                return [$objArole, $message];
+        $objGoal = Goal::addByCodes(
+            $object_code_arr,
+            $object_name_en,
+            $object_name_ar,
+            $object_title_en,
+            $object_title_ar,
+            $update_if_exists,
+            $command_code_option
+        );
+        $objArole = Arole::loadByMainIndex($objModule_id, $role_code, true);
+
+        if (!$objArole)
+            $message = "Strange Error happened because Arole::loadByMainIndex($objModule_id, $role_code, true) failed !!";
+        else {
+            if ((!$objArole->is_new) and (!$update_if_exists)) {
+                throw new AfwRuntimeException('This role already exists');
+            }
+            $objArole->set('arole_type_id', AroleType::$LOOKUP_MainMenu);
+            $objArole->set('titre_short_en', $object_name_en);
+            $objArole->set('titre_short', $object_name_ar);
+            if ($object_title_en)
+                $objArole->set('titre_en', $object_title_en);
+            if ($object_title_ar)
+                $objArole->set('titre', $object_title_ar);
+            $objArole->commit();
+
+            $superAdmin = Auser::loadById(1);
+            $superAdmin->giveMeModule($objModule_id, [$objArole->id]);
+
+            $message = 'successfully done';
         }
+
+        return [$objArole, $message];
+    }
 
     public function getShortDisplay($lang = "ar")
     {

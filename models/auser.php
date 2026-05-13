@@ -411,6 +411,10 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return array($mau->id => $mau);
         }
 
+        /**
+         * @param int|string $mod
+         * @param array|string $roles
+         */
         public function giveMeModule($mod, $roles, $my_org_id = 3, $returnDescription = false)
         {
                 global $file_dir_name;

@@ -14,11 +14,13 @@ $module_dir_name = $file_dir_name;
 AfwSession::startSession();
 
 $uri_module = UfwUrlManager::currentURIModule();
-
+/**
+ * @var array $config_arr
+ */
 include_once("$file_dir_name/../$uri_module/application_config.php");
 AfwSession::initConfig($config_arr, "system", "$file_dir_name/../$uri_module/application_config.php");
 
-
+$objme = AfwSession::getUserConnected();
 $NOM_SITE = AfwSession::config("application_name", "This Application");
 
 
