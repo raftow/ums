@@ -117,10 +117,7 @@ class ModuleAuser extends AFWObject
      public function calcRightsDiv()
      {
           $lang = AfwLanguageHelper::getGlobalLanguage();
-          global $MODE_SQL_PROCESS_LOURD, $nb_queries_executed;
-          $old_nb_queries_executed = $nb_queries_executed;
-          $old_MODE_SQL_PROCESS_LOURD = $MODE_SQL_PROCESS_LOURD;
-          $MODE_SQL_PROCESS_LOURD = true;
+          UfwQueryAnalyzer::startProcessLourdMode();
 
           $objme = AfwSession::getUserConnected();
 
@@ -193,8 +190,7 @@ class ModuleAuser extends AFWObject
           $html .= "</table>";
           $html .= "</div>";
 
-          $MODE_SQL_PROCESS_LOURD = $old_MODE_SQL_PROCESS_LOURD;
-          $nb_queries_executed = $old_nb_queries_executed;
+          UfwQueryAnalyzer::stopProcessLourdMode();
 
           return $html;
      }

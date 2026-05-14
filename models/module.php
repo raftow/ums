@@ -803,9 +803,7 @@ class Module extends UmsObject
 
     public function calcPhp_module($textArea = true)
     {
-        global $MODE_BATCH_LOURD, $MODE_SQL_PROCESS_LOURD;
-        $MODE_BATCH_LOURD = true;
-        $MODE_SQL_PROCESS_LOURD = true;
+        UfwQueryAnalyzer::startProcessLourdMode();
 
         $source_php = "";
         $source_php .= "<?php\n"; // ";
@@ -851,6 +849,8 @@ class Module extends UmsObject
 
         $file_source_php .= "<pre class='shell'>$mv_cmd_text</pre>";
         $file_source_php .= "<pre class='cline'>$cmd_lines</pre>";
+
+        UfwQueryAnalyzer::stopProcessLourdMode();
         return $file_source_php;
     }
 
@@ -2210,9 +2210,7 @@ class Module extends UmsObject
 
     public function pagAllTables($lang = "ar", $update_if_exists = true)
     {
-        global $MODE_SQL_PROCESS_LOURD;
-        $old_MODE_SQL_PROCESS_LOURD = $MODE_SQL_PROCESS_LOURD;
-        $MODE_SQL_PROCESS_LOURD = true;
+        UfwQueryAnalyzer::startProcessLourdMode();
         if ($this->getVal("id_module_type") != self::$MODULE_TYPE_APPLICATION) {
             return array("pagAllTables method is Only for application module", "");
         }
@@ -2262,8 +2260,7 @@ class Module extends UmsObject
         if ($m_fld_i + $m_fld_u > 0) $information  = "تم إضافة  $m_fld_i حقول  وتم $m_fld_u حقل ";
         else $information  = "لا يوجد تعديلات";
 
-        $MODE_SQL_PROCESS_LOURD = $old_MODE_SQL_PROCESS_LOURD;
-        UfwQueryAnalyzer::$nb_queries_executed = 0;
+        UfwQueryAnalyzer::stopProcessLourdMode();
         return array("", $information);
     }
 
