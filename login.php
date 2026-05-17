@@ -1,13 +1,13 @@
 <?php
-if((!isset($MODULE)) or (!$MODULE))
-{         
-        $file_dir_name = dirname(__FILE__);
-        include_once ("$file_dir_name/ini.php");
-        include_once ("$file_dir_name/module_config.php"); 
-        
+
+/**
+ * @var string $MODULE
+ */
+if ((!isset($MODULE)) or (!$MODULE)) {
+        include("ums_start.php");
 }
 $direct_page = "login_ums.php";
-$direct_page_path = dirname(__FILE__); 
+$direct_page_path = dirname(__FILE__);
 // require("$file_dir_name/../lib/afw/cms/cms_main_page.php"); 
 CmsMainPage::echoDirectPage($MODULE, $direct_page, $direct_page_path);
 
@@ -47,4 +47,3 @@ require_once ("$file_dir_name/../config/global_config.php");*/
 
 
 //$server_db_prefix = AfwSession::config("db_prefix","default_db_");
-

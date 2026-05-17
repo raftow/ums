@@ -13,12 +13,14 @@ require_once("$file_dir_name/../config/global_config.php");
 $MODULE = "ums";
 
 AfwAutoLoader::addMainModule($MODULE);
+/**
+ * @var array $config_arr
+ */
+include_once("$file_dir_name/../$MODULE/ini.php");
+include_once("$file_dir_name/../$MODULE/module_config.php");
+include_once("$file_dir_name/../$MODULE/application_config.php");
 
-include_once ("$file_dir_name/../$MODULE/ini.php");
-include_once ("$file_dir_name/../$MODULE/module_config.php");
-include_once ("$file_dir_name/../$MODULE/application_config.php");
-
-include_once ("$file_dir_name/../lib/afw/utilities/ufw_error_handler.php");
+include_once("$file_dir_name/../lib/afw/utilities/ufw_error_handler.php");
 
 AfwSession::initConfig($config_arr, "system", "$file_dir_name/../$MODULE/application_config.php");
 
