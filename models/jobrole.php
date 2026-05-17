@@ -22,7 +22,7 @@ class Jobrole extends UmsObject
                 $this->showQeditErrors = true;
                 $this->showRetrieveErrors = true;
                 $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
-                $this->after_save_edit = array('class' => 'Domain', 'attribute' => 'id_domain', 'currmod' => 'p' . 'ag', 'currstep' => 2);
+                $this->after_save_edit = array('class' => 'Domain', 'attribute' => 'id_domain', 'currmod' => 'cmn', 'currstep' => 2);
         }
 
         public static function loadById($id)

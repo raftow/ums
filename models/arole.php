@@ -90,8 +90,10 @@ class Arole extends UmsObject
         $object_name_ar,
         $object_title_en,
         $object_title_ar,
+        $other_settings,
         $update_if_exists = false,
-        $command_code_option = ''
+        $command_code_option = '',
+        $all_command = ''
     ) {
         if (count($object_code_arr) < 2)
             throw new AfwRuntimeException('addByCodes : 3 params are needed module and role code, given : ' . var_export($object_code_arr, true));
@@ -1149,5 +1151,19 @@ class Arole extends UmsObject
         } else $php_code = "No module defined for this role";
 
         return "<textarea cols='150' rows='30' style='direction: ltr;'>" . $php_code . "</textarea>";
+    }
+
+    public function beforeMaj($id, $fields_updated)
+    {
+        if (!$this->getVal("titre_ar") and $this->getVal("titre_short_ar")) {
+            $this->set("titre_ar", "إدارة " . $this->getVal("titre_short_ar"));
+        }
+
+        if (!$this->getVal("titre_en") and $this->getVal("titre_short_en")) {
+            $this->set("titre_en", "Management of " . $this->getVal("titre_short_en"));
+        }
+
+
+        return true;
     }
 }

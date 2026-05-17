@@ -71,8 +71,24 @@ class Module extends UmsObject
         } else return null;
     }
 
-    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false, $command_code_option = "")
-    {
+    /**
+     * @param array $object_code_arr 
+     * @param string $object_name_en 
+     * @param string $object_name_ar 
+     * @param string $object_title_en 
+     * @param string $object_title_ar
+     */
+    public static function addByCodes(
+        $object_code_arr,
+        $object_name_en,
+        $object_name_ar,
+        $object_title_en,
+        $object_title_ar,
+        $other_settings,
+        $update_if_exists = false,
+        $command_code_option = '',
+        $all_command = ''
+    ) {
         $bf_added = 0;
         $message_arr = [];
 
@@ -124,7 +140,7 @@ class Module extends UmsObject
         if (count($object_code_arr) != 1) throw new AfwRuntimeException("reverseByCodes : only one module_code is needed : object_code_arr=" . var_export($object_code_arr, true));
         $module_code = $object_code_arr[0];
         // 1. reverse the module_config file
-        $module_config_file = dirname(__FILE__)."/../../$module_code/module_config.php";
+        $module_config_file = dirname(__FILE__) . "/../../$module_code/module_config.php";
         include($module_config_file);
         if ($module_code != $MODULE) throw new AfwRuntimeException("reverseByCodes : module_code [$module_code] is not defined correctly in $module_config_file file [\$MODULE=$MODULE] ");
         $module_id = $THIS_MODULE_ID;
@@ -157,10 +173,10 @@ class Module extends UmsObject
 
         if ($objModule and $doReverse) {
             // 2. reverse the names ar and en from ini file
-            include(dirname(__FILE__)."/../../$module_code/ini.php");
+            include(dirname(__FILE__) . "/../../$module_code/ini.php");
             $title_en = $NOM_SITE["en"];
             $title_ar = $NOM_SITE["ar"];
-            $application_config_file = dirname(__FILE__)."/../../$module_code/application_config.php";
+            $application_config_file = dirname(__FILE__) . "/../../$module_code/application_config.php";
             include($application_config_file);
             if ($config_arr["application_id"] != $objModule->id) {
                 $objModuleId = $objModule->id;
@@ -197,7 +213,7 @@ class Module extends UmsObject
             // 3. reverse the previleges file
             AfwAutoLoader::addModule("p" . "ag");
 
-            $file_previleges = dirname(__FILE__)."/../../$module_code/previleges.php";
+            $file_previleges = dirname(__FILE__) . "/../../$module_code/previleges.php";
             if (!file_exists($file_previleges)) {
                 $message_arr[] = self::prepareLog("Warning : The file $file_previleges not found");
             } else {
@@ -238,7 +254,7 @@ class Module extends UmsObject
 
                     if ($tbl) {
                         $atable_name = $tbl->getVal("atable_name");
-                        $table_file_name = "$file_dir_name/../../$module_code/models/$atable_name.php";
+                        $table_file_name = dirname(__FILE__) . "/../../$module_code/models/$atable_name.php";
                         if (!file_exists($table_file_name)) {
                             $message_arr[] = self::prepareLog("Error : Module::reverseByCodes : The table file $table_file_name not found => table=$atable_name (from previleges.php)");
                             $tblFieldsCount = 0;
@@ -2845,14 +2861,15 @@ class Module extends UmsObject
 
     public function getMyDomain()
     {
+        /*
         $domain = null;
         if (AfwSession::config("MODE_DEVELOPMENT", false)) {
             $id_pm = $this->getVal("id_pm");
             AfwAutoLoader::addModule("p" . "ag");
             if ($id_pm) $domain = Domain::loadById($id_pm);
-        }
+        }*/
 
-        return $domain;
+        return $this->het("id_pm");
     }
 
     public function getLookupJobResp($create_obj_if_not_found = true, $always_update_name = false, $lang = "ar")

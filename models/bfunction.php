@@ -194,13 +194,6 @@ class Bfunction extends UmsObject
         }
 
 
-
-        public function beforeInsert($id, $fields_updated)
-        {
-                return $this->beforeMAJ($id, $fields_updated);
-        }
-
-
         public function beforeUpdate($id, $fields_updated)
         {
                 global $_SERVER;
@@ -213,11 +206,11 @@ class Bfunction extends UmsObject
                 // die("BF-$id_system-$file-$curr_class_module_id-$curr_class_atable_id-$bf_spec => ".var_export($_SERVER["BF-$id_system-$file-$curr_class_module_id-$curr_class_atable_id-$bf_spec"],true));
                 $_SERVER["BF-$id_system-$file-$curr_class_module_id-$curr_class_atable_id-$bf_spec"] = &$this;
 
-                return $this->beforeMAJ($id, $fields_updated);
+                return $this->beforeMaj($id, $fields_updated);
         }
 
 
-        public function beforeMAJ($id, $fields_updated)
+        public function beforeMaj($id, $fields_updated)
         {
                 $lang = AfwLanguageHelper::getGlobalLanguage();
 

@@ -238,7 +238,7 @@ class UmsManager extends AFWRoot
         }
         $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
         if (!$module_code)
-            AfwSession::pushWarning("System cache failed to decode m$module_id to module code");
+            AfwSession::pushWarning("System cache (..../client-company/modules_all) failed to decode m$module_id to module code");
         $table_id = 0;
         if (!$ignore_cache) {
             list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
@@ -529,7 +529,7 @@ class UmsManager extends AFWRoot
         } else {
             $mv_cmd = "";
             $fileName = "";
-        } 
+        }
 
 
         return [$role_infoItem, $fileName, $php_code, $mv_cmd];
