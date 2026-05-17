@@ -40,7 +40,49 @@ Query OK, 98 rows affected (0.03 sec)
 Records: 98  Duplicates: 0  Warnings: 0
 
 alter table ttc_ums.module change id_module_status id_module_status int null;
+
+
+
 */
+
+/*
+DROP TABLE IF EXISTS nauss_ums.new_role;
+
+CREATE TABLE IF NOT EXISTS nauss_ums.`new_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_aut` int(11) NOT NULL,
+  `date_aut`   datetime NOT NULL,
+  `id_mod` int(11) NOT NULL,
+  `date_mod` datetime NOT NULL,
+  `id_valid` int(11) DEFAULT NULL,
+  `date_valid` datetime DEFAULT NULL,
+  `avail` char(1) NOT NULL,
+  `draft` char(1) NOT NULL default  'Y' ,
+  `version` int(4) DEFAULT NULL,
+  `update_groups_mfk` varchar(255) DEFAULT NULL,
+  `delete_groups_mfk` varchar(255) DEFAULT NULL,
+  `display_groups_mfk` varchar(255) DEFAULT NULL,
+  `sci_id` int(11) DEFAULT NULL,
+  
+    
+   system_id int(11) NOT NULL , 
+   module_id int(11) NOT NULL , 
+   new_role_code varchar(16)  NOT NULL , 
+   domain_id int(11) NOT NULL DEFAULT 0 , 
+   jobrole_id int(11) NOT NULL DEFAULT 0 , 
+   new_role_name_ar varchar(64)  NOT NULL DEFAULT '' , 
+   new_role_desc_ar varchar(196)  NOT NULL DEFAULT '' , 
+   new_role_name_en varchar(64)  NOT NULL DEFAULT '' , 
+   new_role_desc_en varchar(196)  NOT NULL DEFAULT '' , 
+   atable_mfk varchar(255) NOT NULL DEFAULT ',' , 
+    log VARCHAR(255) null,
+  
+  PRIMARY KEY (`id`)
+) ENGINE=innodb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=1;DROP TABLE IF EXISTS nauss_ums.new_role_braudit;
+
+create unique index uk_new_role on nauss_ums.new_role(system_id,module_id,new_role_code);
+*/
+
 
 AfwDatabase::db_query("ALTER TABLE " . $server_db_prefix . "ums.country add   external_code varchar(16)  DEFAULT NULL  AFTER lookup_code;");
 
