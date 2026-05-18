@@ -370,8 +370,12 @@ class Arole extends UmsObject
 
         $all_bf_arr = array();
 
+        /**
+         * @var AroleBF $rbfObj
+         */
+
         foreach ($rbfList as $rbfId => $rbfObj) {
-            if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) and $rbfObj->is("menu", false)) {
+            if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) and $rbfObj->sureIs("menu")) {
                 $bfObj = $rbfObj->het("bfunction_id");
                 $bf_id = $rbfObj->getVal("bfunction_id");
                 // die("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");

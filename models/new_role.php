@@ -278,7 +278,11 @@ class NewRole extends AFWObject
 
         // show related BFs in menu
         $bfMenuObjectList = $this->getRelatedBfMenuObjectList();
-        $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, []);
+        if(count($bfMenuObjectList)>0) {
+            $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, []);
+        }
+        else $html .= "No menu related BFs generated. ".var_export($this,true);
+        
         // nothing generated
         if(!$html) $html = "nothing generated";
 
