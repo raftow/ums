@@ -13,8 +13,6 @@ class UmsNewRoleAfwStructure
 			// $obj->ENABLE_DISPLAY_MODE_IN_QEDIT=true;
 			$obj->ORDER_BY_FIELDS = "system_id, module_id, new_role_code";
 
-			$obj->AUDIT_DATA = "byrow_audit";
-
 			$obj->UNIQUE_KEY = array('system_id', 'module_id', 'new_role_code');
 			$obj->editByStep = false;
 			$obj->editNbSteps = 0;
