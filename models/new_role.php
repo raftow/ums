@@ -252,6 +252,71 @@ class NewRole extends AFWObject
             return true;
         }
     }
+
+    public function calcDivResults($what="value") {
+        $html = "";
+        $css = "";
+
+        $lang = AfwLanguageHelper::getGlobalLanguage();
+
+        // show related goal object
+        $goalObject = $this->getRelatedGoalObject();
+        if($goalObject) {
+            $hide_retrieve_cols = ["active", "xxx", ];
+            $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols];
+            $html .= AfwShowHelper::showRetrieveTable($goalObject, $lang, $options);
+        }
+        unset($goalObject);
+
+        // show related role object
+        $roleObject = $this->getRelatedRoleObject();
+        if($roleObject) {
+            $hide_retrieve_cols = ["active", "xxx", ];
+            $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols];
+            $html .= AfwShowHelper::showRetrieveTable($roleObject, $lang, $options);
+        }
+
+        // show related BFs in menu
+        $bfMenuObjectList = $this->getRelatedBfMenuObjectList();
+        $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, []);
+        // nothing generated
+        if(!$html) $html = "nothing generated";
+
+        return $html;
+    }
+
+    public function getRelatedGoalObject() {
+        $goal_code = $this->getVal("new_role_code");
+        $objModule = $this->het("module_id");
+        $objModule_id = $objModule->id;
+        $system_id = $objModule->getVal("id_system");
+        return Goal::loadByMainIndex($system_id, $objModule_id, $goal_code);
+    }
+
+    public function getRelatedRoleObject() {
+        $goal_code = $this->getVal("new_role_code");
+        $objModule = $this->het("module_id");
+        $objModule_id = $objModule->id;
+        // $system_id = $objModule->getVal("id_system");
+        $arole_code = "ar-" . $goal_code;
+        return Arole::loadByMainIndex($objModule_id, $arole_code);
+        
+    }
+
+
+    public function getRelatedBfMenuObjectList() {
+        $goal_code = $this->getVal("new_role_code");
+        $objModule = $this->het("module_id");
+        $objModule_id = $objModule->id;
+        $objArole = $this->getRelatedRoleObject();
+
+        return $objArole->getMenuBFs();
+    }
+
+
+    
+
+
 }
 
 
