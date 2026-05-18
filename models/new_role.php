@@ -262,8 +262,9 @@ class NewRole extends AFWObject
         // show related goal object
         $goalObject = $this->getRelatedGoalObject();
         if($goalObject) {
-            $hide_retrieve_cols = ["active", "xxx", ];
-            $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols];
+            $hide_retrieve_cols = ["gggg", "xxx", ];
+            $force_retrieve_cols = ["id", ];
+            $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($goalObject, $lang, $options);
         }
         unset($goalObject);
@@ -271,15 +272,19 @@ class NewRole extends AFWObject
         // show related role object
         $roleObject = $this->getRelatedRoleObject();
         if($roleObject) {
-            $hide_retrieve_cols = ["active", "xxx", ];
-            $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols];
+            $hide_retrieve_cols = ["gggg", "xxx", ];
+            $force_retrieve_cols = ["id", "active",];
+            $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($roleObject, $lang, $options);
         }
 
         // show related BFs in menu
         $bfMenuObjectList = $this->getRelatedBfMenuObjectList();
         if(count($bfMenuObjectList)>0) {
-            $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, []);
+            $hide_retrieve_cols = ["gggg", "xxx", ];
+            $force_retrieve_cols = ["id", "active", "menu"];
+            $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
+            $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, $options);
         }
         else $html .= "No menu related BFs generated. ".var_export($this,true);
         
