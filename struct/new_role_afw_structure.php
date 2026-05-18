@@ -84,6 +84,9 @@ class UmsNewRoleAfwStructure
 			'ANSWER' => 'module',
 			'ANSMODULE' => 'ums',
 			'WHERE' => "id_module_type in (4,7) ",
+			'DEPENDENT_OFME' => array(
+				0 => 'module_id',
+			),
 			'RELATION' => 'OneToMany',
 			'READONLY' => false,
 			'DNA' => true,
