@@ -173,8 +173,8 @@ class Arole extends UmsObject
     }
 
     public function getDropDownDisplay($lang = "ar")
-    {
-        $count = $this->calc("rbfListCount") + $this->calc("childListCount");
+    {        
+        $count = $this->calc("rbfListCount") ." | ". $this->calc("childListCount");
 
         return $this->getShortDisplay($lang) . " ($count)";
     }

@@ -263,6 +263,9 @@ class NewRole extends AFWObject
         $title_rg = $this->tm("related goal", $lang);
         $title_rr = $this->tm("related role", $lang);
         $title_rbfs = $this->tm("related BFs", $lang);
+        $title_rbfs_details = $this->tm("related BFs details", $lang);
+
+        
 
 
         // show related goal object
@@ -297,6 +300,7 @@ class NewRole extends AFWObject
         }
 
         if(count($bfMenuObjectList)>0) {
+            $html .= "<h5 class=\"bluetitle\"><i></i>$title_rbfs_details</h5>";
             $hide_retrieve_cols = ["gggg", "xxx", ];
             $force_retrieve_cols = ["id", "active"];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];

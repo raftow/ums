@@ -17,6 +17,7 @@
      $messages["related goal"] = "الهدف ذو الصلة";
      $messages["related role"] = "الدور ذو الصلة";
      $messages["related BFs"] = "الوظائف ذات الصلة";
+     $messages["related BFs details"] = "تفاصيل الوظائف ذات الصلة";
 
      // $messages[""] = "";
 
