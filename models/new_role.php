@@ -43,7 +43,6 @@ class NewRole extends AFWObject
 
     public function getScenarioItemId($currstep)
     {
-
         return 0;
     }
 
@@ -120,23 +119,53 @@ class NewRole extends AFWObject
         $pbms = array();
 
         $color = "green";
-        $title_ar = "xxxxxxxxxxxxxxxxxxxx";
-        $title_en = "xxxxxxxxxxxxxxxxxxxx";
-        $methodName = "mmmmmmmmmmmmmmmmmmmmmmm";
-        //$pbms[AfwStringHelper::hzmEncode($methodName)] = 
-        array(
-            "METHOD" => $methodName,
-            "COLOR" => $color,
-            "LABEL_AR" => $title_ar,
-            "LABEL_EN" => $title_en,
-            "ADMIN-ONLY" => true,
-            "BF-ID" => "",
-            'STEP' => $this->stepOfAttribute("xxyy")
-        );
+        $title_ar = "تنفيذ الطلب";
+        $title_en = "Execute request";
+        $methodName = "executeNewRoleRequest";
+        $pbms[AfwStringHelper::hzmEncode($methodName)] = 
+                            array(
+                                "METHOD" => $methodName,
+                                "COLOR" => $color,
+                                "LABEL_AR" => $title_ar,
+                                "LABEL_EN" => $title_en,
+                                "ADMIN-ONLY" => true,
+                                "BF-ID" => "",
+                                'STEP' => $this->stepOfAttribute("divResults")
+                            );
 
 
 
         return $pbms;
+    }
+
+    public function executeNewRoleRequest($lang="ar") {
+            $update_if_exists = true;
+            $object_code_arr = [];
+            /**
+             * @var Module $moduleObject
+             */
+            $moduleObject = $this->het("module_id");
+            if(!$moduleObject) return ["can't create the role without define the application module", ""];
+            $jrole_code = "";
+            $jrObject = $this->het("jobrole_id");
+            if($jrObject) $jrole_code = $jrObject->getVal("jobrole_code");
+            $module_code = $moduleObject->getModuleCode();
+            $goal_code = $this->getVal("new_role_code");
+            $object_code_arr[0] = $goal_code;
+            $object_code_arr[1] = $module_code;
+            $object_code_arr[2] = $jrole_code;
+            $object_code_arr[3] = $lang;
+            $object_name_ar  = $this->getVal("new_role_name_ar"); 
+            $object_title_ar = $this->getVal("new_role_desc_ar");
+            $object_title_en = $this->getVal("new_role_desc_en");
+            $object_name_en  = $this->getVal("new_role_name_en");
+            
+            $other_settings = ",";
+            $aTableList = $this->get("atable_mfk");
+            foreach($aTableList as $aTableItem) {
+                $other_settings .= $aTableItem->getVal("atable_name").",";
+            }
+            list($objToShow, $message, $error, $warning, $jrObj) = Goal::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $other_settings, $update_if_exists);
     }
 
     public function fld_CREATION_USER_ID()

@@ -21,8 +21,13 @@ class NewRoleArTranslator
 		$trad["new_role"]["new_role_html_ar"] = "تحرير الصلاحية";
 		$trad["new_role"]["new_role_html_en"] = "تحرير الصلاحية بالانجليزي";
 		$trad["new_role"]["atable_mfk"] = "الكيانات المستعملة";
-		$trad["new_role"]["settings"] = "إعدادات الاستثناءات";
+		$trad["new_role"]["settings"] = "إعدادات الاستثناءات";		
 		$trad["new_role"]["divResults"] = "نتائج تنفيذ الطلب";
+
+
+		$trad["new_role"]["step2"] = "المسميات";
+		$trad["new_role"]["step3"] = "الإعدادات";
+		$trad["new_role"]["step4"] = "النتائج";
 		
 		
 

@@ -80,6 +80,8 @@ CREATE TABLE IF NOT EXISTS nauss_ums.`new_role` (
   PRIMARY KEY (`id`)
 ) ENGINE=innodb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=1;DROP TABLE IF EXISTS nauss_ums.new_role_braudit;
 
+alter table nauss_ums.new_role add settings text after atable_mfk;
+
 create unique index uk_new_role on nauss_ums.new_role(system_id,module_id,new_role_code);
 */
 
