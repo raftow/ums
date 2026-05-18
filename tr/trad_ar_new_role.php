@@ -28,6 +28,7 @@ class NewRoleArTranslator
 		$trad["new_role"]["step2"] = "المسميات";
 		$trad["new_role"]["step3"] = "الإعدادات";
 		$trad["new_role"]["step4"] = "النتائج";
+		$trad["new_role"]["step5"] = "برمجيات";
 		
 		
 

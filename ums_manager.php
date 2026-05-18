@@ -517,14 +517,18 @@ class UmsManager extends AFWRoot
 
         ];
 
+        $previlegeFilenameForRole = self::previlegeFilenameForRole($moduleCode, $roleId);
+
         $php_code = "";
         $php_code .= "<?php\n";
         $php_code .= "\n\t\$role_info[$roleId] = " . var_export($role_infoItem, true) . ";";
-        $php_code .= "\n\tinclude \"previleges_workflow_role$roleId" . "_special.php\";";
+        $php_code .= "\n\tinclude \"$previlegeFilenameForRole" . "_special.php\";";
+
+        
 
         if ($genereFile) {
 
-            $fileName = "previleges_$moduleCode" . "_role$roleId"  . ".php";
+            $fileName =  $previlegeFilenameForRole . ".php";
             list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges/role");
         } else {
             $mv_cmd = "";
@@ -533,5 +537,11 @@ class UmsManager extends AFWRoot
 
 
         return [$role_infoItem, $fileName, $php_code, $mv_cmd];
+    }
+
+
+    public static function previlegeFilenameForRole($moduleCode, $roleId)
+    {
+        return "previleges_$moduleCode" . "_role$roleId";
     }
 }

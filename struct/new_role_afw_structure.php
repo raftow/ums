@@ -15,7 +15,7 @@ class UmsNewRoleAfwStructure
 
 			$obj->UNIQUE_KEY = array('system_id', 'module_id', 'new_role_code');
 			$obj->editByStep = true;
-			$obj->editNbSteps = 4;
+			$obj->editNbSteps = 5;
 			$obj->showQeditErrors = true;
 			$obj->showRetrieveErrors = true;
 			$obj->general_check_errors = true;
@@ -298,7 +298,25 @@ class UmsNewRoleAfwStructure
                         'CSS' => 'width_pct_100',
                         'CAN-BE-SETTED' => false,
                         'INPUT_WIDE' => true,
-                ),	
+                ),
+				
+		'php_code' => array(
+			'TYPE' => 'TEXT',
+			'CATEGORY' => 'FORMULA',
+			'SHOW' => true,
+			'EDIT' => true,
+			'QEDIT' => false,
+			'READONLY' => true,
+			'RETRIEVE' => false,
+			'PRE' => true,
+			'CSS' => 'width_pct_100',
+			'TEXT-ALIGN' => 'left',
+			'STEP' => 4,
+			'SEARCH-BY-ONE' => '',
+			'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',
+			'EDIT-UGROUPS' => '',
+		),
 
 
 		'id_aut'         => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, "TECH_FIELDS-RETRIEVE" => true, 'RETRIEVE' => false,  'RETRIEVE' => false, 'QEDIT' => false, 'TYPE' => 'FK', 'ANSWER' => 'auser', 'ANSMODULE' => 'ums', 'FGROUP' => 'tech_fields'),

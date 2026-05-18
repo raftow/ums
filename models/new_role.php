@@ -347,6 +347,26 @@ class NewRole extends AFWObject
         else return [[], []];
     }
 
+    public function calcPhp_code($what = "value")
+    {
+        $objArole = $this->getRelatedRoleObject();
+        /**
+         * @var Module $objModule
+         */
+        $objModule = $this->het("module_id");
+        if($objArole and $objModule) {
+            
+            $moduleCode = $objModule->getModuleCode();
+            $previlegeFilenameForRole = UmsManager::previlegeFilenameForRole($moduleCode, $objArole->id);
+            $phpCode = $objArole->calcPhp_code($what);
+            $message = "<div class='help info'>Please create or erase/merge this file : $previlegeFilenameForRole <b>with below code</b></div>";
+            return $message.$phpCode;
+        }
+        elseif(!$objModule) return "<div class='warning'>No module defined</div>";
+        else return "<div class='warning'>No Arole associated</div>";
+        
+    }
+
 
     
 
