@@ -14,8 +14,8 @@ class UmsNewRoleAfwStructure
 			$obj->ORDER_BY_FIELDS = "system_id, module_id, new_role_code";
 
 			$obj->UNIQUE_KEY = array('system_id', 'module_id', 'new_role_code');
-			$obj->editByStep = false;
-			$obj->editNbSteps = 0;
+			$obj->editByStep = true;
+			$obj->editNbSteps = 3;
 			$obj->showQeditErrors = true;
 			$obj->showRetrieveErrors = true;
 			$obj->general_check_errors = true;
@@ -134,7 +134,7 @@ class UmsNewRoleAfwStructure
 			'UTF8' => true,
 			'TYPE' => 'TEXT',
 			'READONLY' => false,
-			'CSS' => 'width_pct_50',
+			'CSS' => 'width_pct_25',
 		),
 
 
@@ -163,7 +163,7 @@ class UmsNewRoleAfwStructure
 			'RELATION' => 'OneToMany',
 			'READONLY' => false,
 			'DNA' => true,
-			'CSS' => 'width_pct_50',
+			'CSS' => 'width_pct_25',
 		),
 
 		'new_role_name_ar' => array(
@@ -249,7 +249,7 @@ class UmsNewRoleAfwStructure
 
 
 		'atable_mfk' => array(
-			'STEP' => 1,
+			'STEP' => 2,
 			'SHORTNAME' => 'atables',
 			'SEARCH' => false,
 			'QSEARCH' => false,
@@ -265,11 +265,37 @@ class UmsNewRoleAfwStructure
 			'TYPE' => 'MFK',
 			'ANSWER' => 'atable',
 			'ANSMODULE' => 'pag',
+			'WHERE' => "id_module = §module_id§ and is_entity='Y' and avail = 'Y'",
 			'READONLY' => false,
 			'CSS' => 'width_pct_100',
 		),
 
+		'settings'            => ['STEP' => 2, 'SEARCH' => true, 'QSEARCH'     => true, 'SHOW'   => true, 'AUDIT'      => false, 'RETRIEVE'          => false,
+            'EDIT'                                 => true, 'QEDIT'       => false,
+            'SIZE'                                 => 'AREA', 'MAXLENGTH' => 3333, 'MIN-SIZE' => 1, 'CHAR_TEMPLATE' => 'ALPHABETIC,SPACE', 'UTF8' => false,
+            'TYPE'                                 => 'TEXT', 'READONLY'  => false, 'MANDATORY' => true,
+            'COLS' => 100, 'ROWS' => 20,
+            'CSS'                                  => 'width_pct_100'],
 
+		'divResults' => array(
+                        'STEP' => 3,
+                        'CATEGORY' => 'FORMULA',
+                        'SHOW' => true,
+                        'EDIT' => true,
+                        'DEFAUT' => 'Y',
+                        'TYPE' => 'TEXT',
+                        'SIZE' => 'AREA',
+                        'ROWS' => 16,
+                        'DISPLAY' => true,
+                        'NO-LABEL' => true,
+                        'READONLY' => true,
+                        'FORMAT' => 'HTML',
+                        'DISPLAY-UGROUPS' => '',
+                        'EDIT-UGROUPS' => '',
+                        'CSS' => 'width_pct_100',
+                        'CAN-BE-SETTED' => false,
+                        'INPUT_WIDE' => true,
+                ),	
 
 
 		'id_aut'         => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, "TECH_FIELDS-RETRIEVE" => true, 'RETRIEVE' => false,  'RETRIEVE' => false, 'QEDIT' => false, 'TYPE' => 'FK', 'ANSWER' => 'auser', 'ANSMODULE' => 'ums', 'FGROUP' => 'tech_fields'),
