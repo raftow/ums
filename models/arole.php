@@ -364,7 +364,7 @@ class Arole extends UmsObject
         return array($new_role, $cache_roles_arr[$module_id][$role_code]);
     }
 
-    public function getMenuBFs()
+    public function getMenuBFs($returnBoth=false)
     {
         $rbfList = $this->get("rbfList");
 
@@ -383,6 +383,7 @@ class Arole extends UmsObject
             }
         }
 
+        if($returnBoth) return [$all_bf_arr, $rbfList];
         return $all_bf_arr;
     }
 

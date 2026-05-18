@@ -259,7 +259,14 @@ class NewRole extends AFWObject
 
         $lang = AfwLanguageHelper::getGlobalLanguage();
 
+
+        $title_rg = $this->tm("related goal", $lang);
+        $title_rr = $this->tm("related role", $lang);
+        $title_rbfs = $this->tm("related BFs", $lang);
+
+
         // show related goal object
+        $html .= "<h5 class=\"bluetitle\"><i></i>$title_rg</h5>";
         $goalObject = $this->getRelatedGoalObject();
         if($goalObject) {
             $hide_retrieve_cols = ["gggg", "xxx", ];
@@ -270,6 +277,7 @@ class NewRole extends AFWObject
         unset($goalObject);
 
         // show related role object
+        $html .= "<h5 class=\"bluetitle\"><i></i>$title_rr</h5>";
         $roleObject = $this->getRelatedRoleObject();
         if($roleObject) {
             $hide_retrieve_cols = ["gggg", "xxx", ];
@@ -279,10 +287,18 @@ class NewRole extends AFWObject
         }
 
         // show related BFs in menu
-        $bfMenuObjectList = $this->getRelatedBfMenuObjectList();
-        if(count($bfMenuObjectList)>0) {
+        $html .= "<h5 class=\"bluetitle\"><i></i>$title_rbfs</h5>";
+        list($bfMenuObjectList, $rbfMenuObjectList) = $this->getRelatedBfMenuObjectList();
+        if(count($rbfMenuObjectList)>0) {
             $hide_retrieve_cols = ["gggg", "xxx", ];
             $force_retrieve_cols = ["id", "active", "menu"];
+            $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
+            $html .= AfwShowHelper::showRetrieveTable($rbfMenuObjectList, $lang, $options);
+        }
+
+        if(count($bfMenuObjectList)>0) {
+            $hide_retrieve_cols = ["gggg", "xxx", ];
+            $force_retrieve_cols = ["id", "active"];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, $options);
         }
@@ -321,8 +337,10 @@ class NewRole extends AFWObject
         $objModule_id = $objModule->id;
         $objArole = $this->getRelatedRoleObject();
 
-        if($objArole) return $objArole->getMenuBFs();
-        else return [];
+        if($objArole) {
+            return $objArole->getMenuBFs(true);
+        }
+        else return [[], []];
     }
 
 
