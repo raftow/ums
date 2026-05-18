@@ -288,6 +288,7 @@ class NewRole extends AFWObject
     public function getRelatedGoalObject() {
         $goal_code = $this->getVal("new_role_code");
         $objModule = $this->het("module_id");
+        if(!$objModule) return null;
         $objModule_id = $objModule->id;
         $system_id = $objModule->getVal("id_system");
         return Goal::loadByMainIndex($system_id, $objModule_id, $goal_code);
@@ -296,6 +297,7 @@ class NewRole extends AFWObject
     public function getRelatedRoleObject() {
         $goal_code = $this->getVal("new_role_code");
         $objModule = $this->het("module_id");
+        if(!$objModule) return null;
         $objModule_id = $objModule->id;
         // $system_id = $objModule->getVal("id_system");
         $arole_code = "ar-" . $goal_code;
@@ -310,7 +312,8 @@ class NewRole extends AFWObject
         $objModule_id = $objModule->id;
         $objArole = $this->getRelatedRoleObject();
 
-        return $objArole->getMenuBFs();
+        if($objArole) return $objArole->getMenuBFs();
+        else return [];
     }
 
 
