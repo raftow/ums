@@ -4498,3 +4498,8 @@ div#div_data_php_code {
 div#div_data_arole_mfk {
     min-height: 200px;
 }
+
+.help.fleft.ums {
+    font-size: 18px;
+    font-family: monospace;
+}

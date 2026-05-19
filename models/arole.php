@@ -1155,7 +1155,7 @@ class Arole extends UmsObject
             else $php_code = "No module code defined for the module of this role";
         } else $php_code = "No module defined for this role";
 
-        return "<textarea cols='150' rows='30' style='direction: ltr;'>" . $php_code . "</textarea>";
+        return "<textarea cols='150' rows='30' style='direction: ltr;float: left;background-color: #c6e2fbc4;width: 100%;font-size: 18px;font-family: revert;>" . $php_code . "</textarea>";
     }
 
     public function beforeMaj($id, $fields_updated)

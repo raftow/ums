@@ -359,8 +359,12 @@ class NewRole extends AFWObject
             $moduleCode = $objModule->getModuleCode();
             $previlegeFilenameForRole = UmsManager::previlegeFilenameForRole($moduleCode, $objArole->id);
             $phpCode = $objArole->calcPhp_code($what);
-            $message = "<div class='help info'>Please create or erase/merge this file : $previlegeFilenameForRole <b>with below code</b></div>";
-            return $message.$phpCode;
+            $message = "<div class='help fleft ums'>Please create or erase or merge this file : /$moduleCode/previleges/role/$previlegeFilenameForRole.php <b>with below code</b></div>";
+            $message2 = "<div class='help fleft ums'>Also Please add at the end of this file : /$moduleCode/previleges.php the line below :<br>
+                        include('previleges/role/$previlegeFilenameForRole.php');<br>
+                        Finally deploy this change to see this new previleges or roles
+                        </div>";
+            return $message.$phpCode.$message2;
         }
         elseif(!$objModule) return "<div class='warning'>No module defined</div>";
         else return "<div class='warning'>No Arole associated</div>";
