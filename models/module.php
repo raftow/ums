@@ -2874,10 +2874,9 @@ class Module extends UmsObject
 
     public function getLookupJobResp($create_obj_if_not_found = true, $always_update_name = false, $lang = "ar")
     {
-
         $appCode = $this->getVal("module_code");
 
-        $code_jr = $appCode . "-lookup";
+        $code_jr = $appCode . "-lookups";
 
         $domain = $this->getMyDomain();
         if ((!$domain) or (!$domain->getId())) {
