@@ -1900,6 +1900,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
         /* NEW UMS  ************** */
 
+        /**
+         * @param string $MODULE
+         */
         public function initWithModule($MODULE)
         {
                 global $PUBLIC_MODULE_ROLES, $ACCEPT_WITHOUT_ROLE_MODULE;
@@ -1919,7 +1922,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                         return array(true, 'done-from-cache');
                                 } else {
                                         $mau_info_export = var_export($mau_info, true);
-                                        $message_after_init = 'roles-authorization not found in-cache for module ' . $MODULE . " in $company _user_$me_id" . '_data';
+                                        $message_after_init = 'roles-authorized not found in-cache for module ' . $MODULE . " in $company _user_$me_id" . '_data';
                                         $message_after_init .= " <!-- after inc $file_full_path \n cached mau_info = $mau_info_export -->";
                                         return array(false, $message_after_init);
                                 }
@@ -1930,7 +1933,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                 $mau_found = $this->getMyModulesAndRoles($MODULE);
                                 if ($mau_found and (count($mau_found) > 0))
                                         return array(true, 'already exists');
-                                return array(false, 'roles-authorization not found');
+                                return array(false, 'roles-authorized not found at all (in cache+db) for module ' . $MODULE. ' for user : '.$this->getDisplay('en'));
                         }
                 }
         }
