@@ -123,7 +123,7 @@ class UmsJobroleAfwStructure
 			'CATEGORY' => 'ITEMS',
 			'ITEM' => 'jobrole_id',
 			'SHORTNAME' => 'roles',
-			'MANDATORY' => true,
+			'MANDATORY' => false,
 			'ERROR-CHECK' => true,
 			'WHERE' => '',
 			'SHOW' => true,
