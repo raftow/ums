@@ -230,7 +230,8 @@ class Jobrole extends UmsObject
                                                 $createdArolesCount++;
                                         else
                                                 $updatedArolesCount++;
-
+                                        // because the aroles are like folders and sub-folders    
+                                        // we add the root folder (anceter) to the job    
                                         $ancetre = $ar->getAncetre();
                                         if ($ancetre) {
                                                 $jar = JobArole::loadByMainIndex($this->getId(), $jobGoal->getVal('module_id'), $ancetre->getId(), $create_obj_if_not_found = true);

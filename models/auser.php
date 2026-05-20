@@ -366,6 +366,11 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return implode("<br>\n", $log_arr);
         }
 
+        /**
+         * removeMeTheseRoles
+         * remove access to the user to some modules and roles according to his job responsibilities, it can be used for example when we want to give access to a user to some modules and roles after he get a specific job position
+         * @param array $rolesToRemoveArr an array with module code as key and array
+         */
         public function removeMeTheseRoles($rolesToRemoveArr)
         {
                 $countRemoved = 0;
