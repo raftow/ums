@@ -584,7 +584,7 @@ class Arole extends UmsObject
 
 
 
-    public function getRoleMenu($sub_folders = true, $returnItems = true)
+    public function getRoleMenu($returnSubFolders = true, $returnItems = true)
     {
         global $lang, $MENU_ICONS, $menu_css_arr;
 
@@ -703,7 +703,7 @@ class Arole extends UmsObject
               }*/
 
         $menu_folder["sub-folders"] = array();
-        if ($sub_folders) {
+        if ($returnSubFolders) {
             $this_folders = $this->get("childList");
 
             foreach ($this_folders as $folder_item) {

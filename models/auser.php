@@ -906,7 +906,10 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return Arole::getAllRolesForModuleAndUser($module_id, $this->id, $only_ids);
         }
 
-        public function getMenuFor($module_id, $lang = '', $sub_folders = false, $items = false)
+        /**
+         * @param int $module_id
+         */
+        public function getMenuFor($module_id, $lang = '', $returnSubFolders = false, $returnItems = false)
         {
                 if (!$lang) $lang = AfwLanguageHelper::getGlobalLanguage();
 
@@ -950,7 +953,14 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         /** @var Arole $role_item */
                         if ($role_item) {
                                 if ($role_item->isActive())
-                                        $menu_arr[$role_item->getId()] = $role_item->getRoleMenu($sub_folders, $items);
+                                        $menu_arr[$role_item->getId()] = $role_item->getRoleMenu($returnSubFolders, $returnItems);
+                                else {
+                                        $message = "Disabled role [$role_id] found on $module_id for user $this";
+                                        if ($role_item->id == 408) {
+                                                throw new AfwRuntimeException("rafik dbg 260522bbbb : getMenuFor($module_id) : $message.");
+                                        }
+                                        $menu_arr['warnings'][] = $message;
+                                }
                         } else {
                                 $message = "Error : Deleted or fictive role [$role_id] found on $module_id for user $this";
                                 $menu_arr['warnings'][] = $message;
