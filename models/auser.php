@@ -954,7 +954,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         if ($role_item) {
                                 if ($role_item->isActive()) {
                                         $menu_arr[$role_item->getId()] = $role_item->getRoleMenu($returnSubFolders, $returnItems);
-                                        $message = "Done for role [$role_id]";
+                                        $message = "Done for role [$role_id] : id = " . $role_item->id;
                                         $menu_arr['warnings'][] = $message;
                                 } else {
                                         $message = "Disabled role [$role_id] found on $module_id for user $this";
