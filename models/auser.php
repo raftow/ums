@@ -1999,9 +1999,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                                         $mau_info_item[$bfCode0][$roleId] = true;
                                                 }
 
-                                                if (($moduleId == 1282) and ($roleId == 408)) {
-                                                        die("rafik dbg 260521019 bfList = " . var_export($bfList, true) . " mau_info_item = " . var_export($mau_info_item, true));
-                                                }
+                                                /*if (($moduleId == 1282) and ($roleId == 408)) {
+                                                        die("rafik dbg 260521019 bfList = " . var_export($bfList, true) . "<br> mau_info_item = " . var_export($mau_info_item, true));
+                                                }*/
                                         }
                                 }
 
