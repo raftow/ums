@@ -581,7 +581,27 @@ class Arole extends UmsObject
         return AfwFormulaHelper::calculateFormulaResult($this, $attribute, $what);
     }
 
+    public function genereRoleMenuPhp($lang = 'ar')
+    {
+        $menu = $this->getRoleMenu();
+        return ["", "menu => " . var_export($menu, true)];
+    }
 
+    protected function getPublicMethods()
+    {
+
+        $pbms = array();
+
+        $color = "yellow";
+        $title_ar = "كود php";
+        $pbms["xc19CB"] = array("METHOD" => "genereRoleMenuPhp", "COLOR" => $color, "LABEL_AR" => $title_ar, "ADMIN-ONLY" => true);
+
+
+
+
+
+        return $pbms;
+    }
 
 
     public function getRoleMenu($returnSubFolders = true, $returnItems = true)
