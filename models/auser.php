@@ -909,7 +909,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
         /**
          * @param int $module_id
          */
-        public function getMenuFor($module_id, $lang = '', $returnSubFolders = false, $returnItems = false)
+        public function getMenuFor($module_id, $lang = '', $returnSubFolders = false, $returnItems = false, $returnWarnings = false)
         {
                 if (!$lang) $lang = AfwLanguageHelper::getGlobalLanguage();
 
@@ -943,7 +943,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         if (!count($mau_found_roles)) {
                                 $message = $this->tm("No roles assigned to this module for user %s <br>\nuser_id : %d<br>\nmodule_id : %d");
                                 $message = sprintf($message, $this->getDisplay($lang), $this->id, $module_id);
-                                $menu_arr['warnings'][] = $message;
+                                if ($returnWarnings) $menu_arr['warnings'][] = $message;
                                 AfwSession::pushWarning($message);
                         }
                 }
@@ -955,17 +955,17 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                 if ($role_item->isActive()) {
                                         $menu_arr[$role_item->getId()] = $role_item->getRoleMenu($returnSubFolders, $returnItems);
                                         $message = "Done getRoleMenu($returnSubFolders, $returnItems) for role [$role_id] : id = " . $role_item->id;
-                                        $menu_arr['warnings'][] = $message;
+                                        if ($returnWarnings) $menu_arr['warnings'][] = $message;
                                 } else {
                                         $message = "Disabled role [$role_id] found on $module_id for user $this";
                                         if ($role_item->id == 408) {
                                                 throw new AfwRuntimeException("rafik dbg 260522bbbb : getMenuFor($module_id) : $message.");
                                         }
-                                        $menu_arr['warnings'][] = $message;
+                                        if ($returnWarnings) $menu_arr['warnings'][] = $message;
                                 }
                         } else {
                                 $message = "Error : Deleted or fictive role [$role_id] found on $module_id for user $this";
-                                $menu_arr['warnings'][] = $message;
+                                if ($returnWarnings) $menu_arr['warnings'][] = $message;
                                 AfwSession::pushError($message);
                         }
                 }
