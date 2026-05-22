@@ -984,7 +984,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 // if(!$this->cache_me nu[$module_id][$lang]) $this->cache_me nu[$module_id][$lang] = $menu_arr;
 
-                die($this->getDisplay("ar") . "->getMenuFor($module_id, $lang, $returnSubFolders, $returnItems) will return " . var_export($menu_arr, true));
+                // die($this->getDisplay("ar") . "->getMenuFor($module_id, $lang, $returnSubFolders, $returnItems) will return " . var_export($menu_arr, true));
                 return $menu_arr;
         }
 
