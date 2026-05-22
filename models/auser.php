@@ -1987,9 +1987,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                         if ($roleItem) {
                                                 $roleId = $roleItem->id;
                                                 $bfList = $roleItem->get('bfList');
-                                                if (($moduleId == 1282) and ($roleId == 408)) {
+                                                /*if (($moduleId == 1282) and ($roleId == 408)) {
                                                         die("rafik dbg 260521019 bfList = " . var_export($bfList, true));
-                                                }
+                                                }*/
                                                 foreach ($bfList as $bfItem) {
                                                         $bfId = $bfItem->id;
                                                         $bfCode0 = 'bf' . $bfId;
