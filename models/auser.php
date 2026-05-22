@@ -958,9 +958,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                         if ($returnWarnings) $menu_arr['warnings'][] = $message;
                                 } else {
                                         $message = "Disabled role [$role_id] found on $module_id for user $this";
-                                        if ($role_item->id == 408) {
+                                        /*if ($role_item->id == 408) {
                                                 throw new AfwRuntimeException("rafik dbg 260522bbbb : getMenuFor($module_id) : $message.");
-                                        }
+                                        }*/
                                         if ($returnWarnings) $menu_arr['warnings'][] = $message;
                                 }
                         } else {
