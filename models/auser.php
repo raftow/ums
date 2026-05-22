@@ -952,9 +952,11 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         // if(!is_object($role_item)) die("auser::getMenuFor -> mau_found_roles : ".var_export($mau_found_roles,true));
                         /** @var Arole $role_item */
                         if ($role_item) {
-                                if ($role_item->isActive())
+                                if ($role_item->isActive()) {
                                         $menu_arr[$role_item->getId()] = $role_item->getRoleMenu($returnSubFolders, $returnItems);
-                                else {
+                                        $message = "Done for role [$role_id]";
+                                        $menu_arr['warnings'][] = $message;
+                                } else {
                                         $message = "Disabled role [$role_id] found on $module_id for user $this";
                                         if ($role_item->id == 408) {
                                                 throw new AfwRuntimeException("rafik dbg 260522bbbb : getMenuFor($module_id) : $message.");
@@ -982,7 +984,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 // if(!$this->cache_me nu[$module_id][$lang]) $this->cache_me nu[$module_id][$lang] = $menu_arr;
 
-                // die($this->getDisplay("ar")."->getMenuFor($module_id, $lang, $sub_folders, $items) will return ".var_export($menu_arr,true));
+                die($this->getDisplay("ar") . "->getMenuFor($module_id, $lang, $returnSubFolders, $returnItems) will return " . var_export($menu_arr, true));
                 return $menu_arr;
         }
 
