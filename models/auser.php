@@ -1933,7 +1933,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                 $mau_found = $this->getMyModulesAndRoles($MODULE);
                                 if ($mau_found and (count($mau_found) > 0))
                                         return array(true, 'already exists');
-                                return array(false, 'roles-authorized not found at all (in cache+db) for module ' . $MODULE. ' for user : '.$this->getDisplay('en'));
+                                return array(false, 'roles-authorized not found at all (in cache+db) for module ' . $MODULE . ' for user : ' . $this->getDisplay('en'));
                         }
                 }
         }
