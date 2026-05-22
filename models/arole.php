@@ -637,7 +637,7 @@ class Arole extends UmsObject
             array_multisort($this_bfs_atable_arr, $this_bfs);
 
             if ($this->getId() == 408) {
-                throw new AfwRuntimeException("this_bfs = " . var_export($this_bfs[0], true));
+                throw new AfwRuntimeException("rafik dbg 260522 : getRoleMenu : this_bfs = " . var_export($this_bfs[0], true));
             }
 
             foreach ($this_bfs as $bf_item) {

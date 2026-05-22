@@ -1556,13 +1556,16 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         $file_path = $parent_project_path . '/cache/chusers';
                         $fileName = $company . "_user_$me_id" . '_data.php';
                         $fileFullName = $file_path . '/' . $fileName;
-                        if ($onlyIfNotDone and file_exists($fileFullName)) {
-                                return ['', "already generated file $fileFullName"];
-                        }
+                        $action_on_file = "created";
+                        if (file_exists($fileFullName)) {
 
-                        $php = $this->calcPhp(false);
+                                $action_on_file = "updated";
+                                if ($onlyIfNotDone) return ['', "already generated file $fileFullName"];
+                        }
+                        $php_datetime = date("Y-m-d H:i:s");
+                        $php = $this->calcPhp(false, $php_datetime);
                         UfwFileSystem::write($fileFullName, $php, 'erase', true);
-                        return array('', "$fileFullName created successfully");
+                        return array('', "$fileFullName $action_on_file successfully");
                 } catch (Exception $e) {
                         if ($throwError)
                                 throw $e;
@@ -1941,12 +1944,13 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 }
         }
 
-        public function calcPhp($text_area = true)
+        public function calcPhp($text_area = true, $php_datetime = "")
         {
                 $source_php = '';
                 if ($text_area)
                         $source_php .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
-                $source_php .= "<?php\n";  // ";
+                $source_php .= "<?php\n\t\t// generated at : $php_datetime\n";  // ";
+
                 $user_info = array();
                 $mau_info = array();
                 $menu = array();
@@ -1983,6 +1987,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                         if ($roleItem) {
                                                 $roleId = $roleItem->id;
                                                 $bfList = $roleItem->get('bfList');
+                                                if (($moduleId == 1282) and ($roleId == 408)) {
+                                                        die("rafik dbg 260521019 bfList = " . var_export($bfList, true));
+                                                }
                                                 foreach ($bfList as $bfItem) {
                                                         $bfId = $bfItem->id;
                                                         $bfCode0 = 'bf' . $bfId;
