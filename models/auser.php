@@ -940,6 +940,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         if (!count($mau_found_roles)) {
                                 $message = $this->tm("No roles assigned to this module for user %s <br>\nuser_id : %d<br>\nmodule_id : %d");
                                 $message = sprintf($message, $this->getDisplay($lang), $this->id, $module_id);
+                                $menu_arr['warnings'][] = $message;
                                 AfwSession::pushWarning($message);
                         }
                 }
@@ -951,7 +952,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                 if ($role_item->isActive())
                                         $menu_arr[$role_item->getId()] = $role_item->getRoleMenu($sub_folders, $items);
                         } else {
-                                AfwSession::pushError("Deleted or fictive role [$role_id] found on $module_id for user $this");
+                                $message = "Error : Deleted or fictive role [$role_id] found on $module_id for user $this";
+                                $menu_arr['warnings'][] = $message;
+                                AfwSession::pushError($message);
                         }
                 }
 

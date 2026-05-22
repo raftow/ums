@@ -173,8 +173,8 @@ class Arole extends UmsObject
     }
 
     public function getDropDownDisplay($lang = "ar")
-    {        
-        $count = $this->calc("rbfListCount") ." | ". $this->calc("childListCount");
+    {
+        $count = $this->calc("rbfListCount") . " | " . $this->calc("childListCount");
 
         return $this->getShortDisplay($lang) . " ($count)";
     }
@@ -364,7 +364,7 @@ class Arole extends UmsObject
         return array($new_role, $cache_roles_arr[$module_id][$role_code]);
     }
 
-    public function getMenuBFs($returnBoth=false)
+    public function getMenuBFs($returnBoth = false)
     {
         $rbfList = $this->get("rbfList");
 
@@ -383,7 +383,7 @@ class Arole extends UmsObject
             }
         }
 
-        if($returnBoth) return [$all_bf_arr, $rbfList];
+        if ($returnBoth) return [$all_bf_arr, $rbfList];
         return $all_bf_arr;
     }
 
@@ -584,7 +584,7 @@ class Arole extends UmsObject
 
 
 
-    public function getRoleMenu($sub_folders = true, $items = true)
+    public function getRoleMenu($sub_folders = true, $returnItems = true)
     {
         global $lang, $MENU_ICONS, $menu_css_arr;
 
@@ -615,7 +615,7 @@ class Arole extends UmsObject
         $menu_folder["showme"] = true;
         $menu_folder["items"] = array();
         $menu_folder["otherbfs"] = array();
-        if ($items) {
+        if ($returnItems) {
             $this_bfs_list = array(); //$this->get("bfunction_mfk");
             $this_bfs_menu = $this->getMenuBFs();
             $other_bfs = $this->getOtherBFs();
@@ -635,11 +635,10 @@ class Arole extends UmsObject
             }
 
             array_multisort($this_bfs_atable_arr, $this_bfs);
-            /*
-                    if($this->getId()==80)
-                    {
-                        throw new AfwRuntimeException("this_bfs[0] = ".$this_bfs[0]);
-                    }*/
+
+            if ($this->getId() == 408) {
+                throw new AfwRuntimeException("this_bfs = " . var_export($this_bfs[0], true));
+            }
 
             foreach ($this_bfs as $bf_item) {
                 if ($bf_item and (is_object($bf_item)) and $bf_item->isActive()) {
