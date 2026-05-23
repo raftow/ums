@@ -489,14 +489,14 @@ class UmsManager extends AFWRoot
      * @param bool $genereFile
      * @return array
      */
-    public static function genereTablePrevilegesFile($moduleCode, $objTable, $genereFile = false)
+    public static function genereTablePrevilegesFile($moduleCode, $objTable, $genereFile = false, $generePhp = true)
     {
         $afw_modes_arr = ['display', 'search', 'qsearch', 'edit', 'qedit', 'crossed', 'stats', 'ddb', 'minibox', 'delete'];
         $tableId = $objTable->id;
         $tableName = $objTable->getVal("atable_name");
 
         $tab_info_item = array('name' => $tableName);
-
+        if ($genereFile) $generePhp = true;
         $tbf_info_item = array();
         $tbf_info_item["id"] = $tableId;
         $php_code = "<?php\n";
@@ -505,9 +505,14 @@ class UmsManager extends AFWRoot
             $tbf_info_item[$afw_mode] = array('id' => $bf_id);
         }
 
-        $php_code .= "\n\t\$tbf_info['$tableName'] = " . var_export($tbf_info_item, true) . ";\n\n";
-        $php_code .= "\n\t\$tab_info[$tableId] = " . var_export($tab_info_item, true) . ";\n\n";
+        $mv_cmd = "";
+        $php_code = "";
+        $fileName = "no-file";
 
+        if ($generePhp) {
+            $php_code .= "\n\t\$tbf_info['$tableName'] = " . var_export($tbf_info_item, true) . ";\n\n";
+            $php_code .= "\n\t\$tab_info[$tableId] = " . var_export($tab_info_item, true) . ";\n\n";
+        }
         if ($genereFile) {
             $fileName = "previleges_$moduleCode" . "_table_$tableName"  . ".php";
             list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges/table");
@@ -521,11 +526,17 @@ class UmsManager extends AFWRoot
     }
 
 
-    public static function genereRolePrevilegesFile($moduleCode, $roleItem, $genereFile = false)
+    /**
+     * @param string $moduleCode, 
+     * @param Arole $roleItem
+     */
+    public static function genereRolePrevilegesFile($moduleCode, $roleItem, $genereFile = false, $generePhp = true)
     {
         $roleId = $roleItem->id;
         $roleCode = $roleItem->getVal("role_code");
         $roleMenu = $roleItem->getRoleMenu();
+
+        if ($genereFile) $generePhp = true;
 
         $role_infoItem = [
             'code' => $roleCode,
@@ -537,12 +548,20 @@ class UmsManager extends AFWRoot
 
         ];
 
-        $previlegeFilenameForRole = self::previlegeFilenameForRole($moduleCode, $roleId);
-
+        $mv_cmd = "";
         $php_code = "";
-        $php_code .= "<?php\n";
-        $php_code .= "\n\t\$role_info[$roleId] = " . var_export($role_infoItem, true) . ";";
-        $php_code .= "\n\tinclude \"$previlegeFilenameForRole" . "_special.php\";";
+        $previlegeFilenameForRole = "no-file";
+
+        if ($generePhp) {
+
+            $previlegeFilenameForRole = self::previlegeFilenameForRole($moduleCode, $roleId);
+
+
+            $php_code .= "<?php\n";
+            $php_code .= "\n\t\$role_info[$roleId] = " . var_export($role_infoItem, true) . ";";
+            $php_code .= "\n\tinclude \"$previlegeFilenameForRole" . "_special.php\";";
+        }
+
 
 
 
@@ -559,6 +578,11 @@ class UmsManager extends AFWRoot
         return [$role_infoItem, $fileName, $php_code, $mv_cmd];
     }
 
+
+    /**
+     * @param string $moduleCode, 
+     * @param int $roleId
+     */
 
     public static function previlegeFilenameForRole($moduleCode, $roleId)
     {
