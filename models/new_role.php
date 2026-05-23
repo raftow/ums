@@ -303,6 +303,8 @@ class NewRole extends AFWObject
         list($html_table, $ids) = AfwShowHelper::tableToHtml($hierarchy_level, array_keys($hierarchy_level));
 
         $html .= $html_table;
+
+        return $html;
     }
 
     public function calcDivResults($what = "value")
