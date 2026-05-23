@@ -223,6 +223,18 @@ class NewRole extends AFWObject
 
     public function beforeMaj($id, $fields_updated)
     {
+        if ($fields_updated["atable_mfk"]) {
+            $settings = $this->getVal("settings");
+            $aTableList = $this->get("atable_mfk");
+            foreach ($aTableList as $aTableItem) {
+                $v_atable_name = $aTableItem->getVal("atable_name");
+                // hierrarchy level from setttings
+                $hl = AfwSettingsHelper::readParamValue($this, "settings", "hl-" . $v_atable_name);
+                if (!$hl) $settings .= "\nhl-$v_atable_name:1";
+            }
+
+            $this->set("settings", $settings);
+        }
         return true;
     }
 
