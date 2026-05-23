@@ -86,7 +86,7 @@ class UmsManager extends AFWRoot
             AfwSession::pushError('No role_id specified to give role details');
             return;
         }
-
+        $sources = "";
         $module_code = self::decodeModuleCodeOrIdToModuleCode($module);
         if (!$module_code)
             AfwSession::pushError("No module code for module $module check your php file chsys->modules->all");
@@ -94,12 +94,14 @@ class UmsManager extends AFWRoot
             $found = false;
             if (!$ignore_cache) {
                 list($found, $role_info, $module_sys_file) = AfwPrevilege::loadModuleRolePrevileges($module_code, $role_id);
+                $sources .= " >> $module_code/previleges.php file";
             }
 
             if (!$found) {
                 if (!$ignore_cache) AfwSession::pushWarning("System need cache optimisation by creating module_$module_code file <!-- file not found $module_sys_file -->");
                 $role_info = null;
                 $roleItem = Arole::loadById($role_id);
+                $sources .= " >> in db loadById($role_id)";
                 if ($roleItem) list($role_info, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $roleItem, true);
                 $found = $role_info ? true : false;
             }
@@ -109,7 +111,7 @@ class UmsManager extends AFWRoot
                 if ($role_data) {
                     return array($role_data['name'][$lang], $role_data['menu'], $role_data);
                 } else
-                    AfwSession::pushWarning("Missed role_info[$role_id] data in $module_code/previleges.php file");
+                    AfwSession::pushWarning("Missed role_info[$role_id] data from $sources : is " . var_export($role_info, true));
             }
         }
 
