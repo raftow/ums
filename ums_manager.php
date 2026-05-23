@@ -169,6 +169,10 @@ class UmsManager extends AFWRoot
             $curr_class_atable_id,
             $bf_spec
         );
+        /*
+        if($operation=="qedit" && $curr_class_atable_id==13952) {
+            if (!$bf) 
+        }*/
         if (!$bf and $create_with_names_if_not_exists) {
             $bf = Bfunction::createNewBfunction(
                 $id_system,
@@ -524,7 +528,7 @@ class UmsManager extends AFWRoot
         $php_code .= "\n\t\$role_info[$roleId] = " . var_export($role_infoItem, true) . ";";
         $php_code .= "\n\tinclude \"$previlegeFilenameForRole" . "_special.php\";";
 
-        
+
 
         if ($genereFile) {
 
