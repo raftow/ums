@@ -301,15 +301,14 @@ class NewRole extends AFWObject
         $header = ['ar' => 'عربي', 'en' => 'انجليزي', 'id' => 'مسلسل'];
         foreach ($hierarchy_level as $id => $lookup_row) {
             $hierarchy_level[$id]['id'] = $id;
-            // if (!$header) $header = array_keys($hierarchy_level[$id]);
         }
 
         list($html_table, $ids) = AfwShowHelper::tableToHtml($hierarchy_level, $header);
 
         $html .= $html_table;
 
-        $html .= "<br>header=" . var_export($header, true);
-        $html .= "<br>hierarchy_level=" . var_export($hierarchy_level, true);
+        // $html .= "<br>header=" . var_export($header, true);
+        // $html .= "<br>hierarchy_level=" . var_export($hierarchy_level, true);
 
         return $html;
     }
