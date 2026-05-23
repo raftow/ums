@@ -134,12 +134,12 @@ class UmsManager extends AFWRoot
         $ignore_file_cache = false,
         $ignore_session_cache = false
     ) {
-
-        if ($operation == "qeditxxxxx" && $curr_class_atable_id == 13952000000) {
+        /* // !!!!! DEBUGG !!!!!!
+        if ($operation == "qedit" && $curr_class_atable_id == 13952) {
             // ignore all caches just to debugg this case
             $ignore_session_cache = true;
             $ignore_file_cache = true;
-        }
+        }*/
         if (!$ignore_file_cache) {
             // throw new AfwRuntimeException('rafik choof here is using cahce see why ...');
             $module_code = AfwPrevilege::moduleCodeOfModuleId($module_id);
@@ -162,8 +162,8 @@ class UmsManager extends AFWRoot
         // global $decodeBfunction;
 
         // die("the file $module_sys_file doen't contain \$tbf_info[$object_table][$operation][id]");
+        $bf_cache_code = "bf-$id_system-$operation-$module_id-$curr_class_atable_id-$bf_spec";
         if (!$ignore_session_cache) {
-            $bf_cache_code = "bf-$id_system-$operation-$module_id-$curr_class_atable_id-$bf_spec";
             $bf_id_from_cache = AfwSession::getVar($bf_cache_code);
             if (($bf_id_from_cache > 0) or ($bf_id_from_cache === -1)) {
                 return $bf_id_from_cache;
