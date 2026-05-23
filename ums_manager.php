@@ -156,11 +156,16 @@ class UmsManager extends AFWRoot
         // global $decodeBfunction;
 
         // die("the file $module_sys_file doen't contain \$tbf_info[$object_table][$operation][id]");
-        $bf_cache_code = "bf-$id_system-$operation-$module_id-$curr_class_atable_id-$bf_spec";
-        $bf_id_from_cache = AfwSession::getVar($bf_cache_code);
-        if (($bf_id_from_cache > 0) or ($bf_id_from_cache === -1)) {
-            return $bf_id_from_cache;
+        if ($operation == "qedit" && $curr_class_atable_id == 13952) {
+            // ignore cache just to debugg this case
+        } else {
+            $bf_cache_code = "bf-$id_system-$operation-$module_id-$curr_class_atable_id-$bf_spec";
+            $bf_id_from_cache = AfwSession::getVar($bf_cache_code);
+            if (($bf_id_from_cache > 0) or ($bf_id_from_cache === -1)) {
+                return $bf_id_from_cache;
+            }
         }
+
 
         $bf = Bfunction::getBfunction(
             $id_system,
