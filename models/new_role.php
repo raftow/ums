@@ -286,7 +286,7 @@ class NewRole extends AFWObject
 
     public function calcDivLevels($what = "value")
     {
-        $html = "";
+        $html = "<h1>مستويات الهيكل التنظيمي</h1>";
         $css = "";
         $lang = AfwLanguageHelper::getGlobalLanguage();
 
@@ -366,7 +366,7 @@ class NewRole extends AFWObject
             $force_retrieve_cols = ["id", "active"];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, $options);
-        } else $html .= "No menu related BFs generated. " . var_export($this, true);
+        } else $html .= "No menu related BFs generated. <br> this =>" . var_export($this, true);
 
         // nothing generated
         if (!$html) $html = "nothing generated";
@@ -391,7 +391,7 @@ class NewRole extends AFWObject
         if (!$objModule) return null;
         $objModule_id = $objModule->id;
         // $system_id = $objModule->getVal("id_system");
-        $arole_code = "ar-" . $goal_code;
+        $arole_code = "goal-" . $goal_code;
         return Arole::loadByMainIndex($objModule_id, $arole_code);
     }
 
