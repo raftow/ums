@@ -292,8 +292,7 @@ class NewRole extends AFWObject
 
         $main_company = AfwSession::currentCompany();
         $current_domain = 25;
-        $file_dir_name = dirname(__FILE__);
-        include($file_dir_name . "/../../../client-$main_company/extra/hierarchy_level-$main_company.php");
+        include(dirname(__FILE__) . "/../../client-$main_company/extra/hierarchy_level-$main_company.php");
         /**
          * @var array $hierarchy_level
          */
