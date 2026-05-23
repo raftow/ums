@@ -102,8 +102,8 @@ class UmsManager extends AFWRoot
                 $role_info = null;
                 $roleItem = Arole::loadById($role_id);
                 $sources .= " >> in db loadById($role_id)";
-                if ($roleItem) list($role_info, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $roleItem, true);
-                $found = $role_info ? true : false;
+                if ($roleItem) list($role_info[$role_id], $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $roleItem, true);
+                $found = $role_info[$role_id] ? true : false;
             }
 
             if ($found) {
