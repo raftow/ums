@@ -226,11 +226,18 @@ class NewRole extends AFWObject
         if ($fields_updated["atable_mfk"]) {
             $settings = $this->getVal("settings");
             $aTableList = $this->get("atable_mfk");
+            /**
+             * @var Atable $aTableItem
+             */
             foreach ($aTableList as $aTableItem) {
                 $v_atable_name = $aTableItem->getVal("atable_name");
+                $ar_atable_name = $aTableItem->getShortDisplay("ar");
                 // hierrarchy level from setttings
                 $hl = AfwSettingsHelper::readParamValue($this, "settings", "hl-" . $v_atable_name);
-                if (!$hl) $settings .= "\nhl-$v_atable_name:1";
+                if (!$hl) {
+                    $settings .= "\n--$v_atable_name-title:--$ar_atable_name--";
+                    $settings .= "\nhl-$v_atable_name:1";
+                }
             }
 
             $this->set("settings", $settings);
