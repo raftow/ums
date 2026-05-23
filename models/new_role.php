@@ -297,7 +297,9 @@ class NewRole extends AFWObject
          * @var array $hierarchy_level
          */
         if (!isset($hierarchy_level)) $hierarchy_level = [];
-
+        foreach ($hierarchy_level as $id => $lookup_row) {
+            $hierarchy_level[$id]['id'] = $id;
+        }
 
         list($html_table, $ids) = AfwShowHelper::tableToHtml($hierarchy_level, array_keys($hierarchy_level));
 
