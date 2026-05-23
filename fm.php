@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * @var string $out_scr
+ * @var string $a
+ * @var array $menu_icons_arr
+ */
 $out_scr .= "<div class='hzm3-row-padding hzm3-center hzm3-small hzm_home_bloc' style='margin:0 -16px'>";
 $objme = AfwSession::getUserConnected();
 if ($objme) {
@@ -17,10 +23,8 @@ if (!$a) {
   $module = $a = "ums";
 } else {
   $module_id = $a;
-  if ($module_id) {
-    $module = UmsManager::decodeModuleCodeOrIdToModuleCode($module_id);
-    if (!$module) throw new AfwRuntimeException("UmsManager::decodeModuleCodeOrIdToModuleCode failed from id=($module_id)");
-  }
+  $module = UmsManager::decodeModuleCodeOrIdToModuleCode($module_id);
+  if (!$module) throw new AfwRuntimeException("UmsManager::decodeModuleCodeOrIdToModuleCode failed from id=($module_id)");
 }
 
 if ($r == "control") {
@@ -166,9 +170,8 @@ if ($r == "control") {
       $out_scr .= " <!-- role_data = " . var_export($role_data, true) . " -->";
       // $out_scr .=" <!-- role_info = ".var_export($role_info,true)." -->";
     }
-  }
-  else {
-      $out_scr .= "You don't have this previlege";
+  } else {
+    $out_scr .= "You don't have this previlege";
   }
 }
 

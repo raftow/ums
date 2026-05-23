@@ -67,6 +67,12 @@ class UmsManager extends AFWRoot
         return AfwPrevilege::moduleIdOfModuleCode($module);
     }
 
+    /**
+     * @param string $module, 
+     * @param string $role_id, 
+     * @param string $lang
+     */
+
     public static function getRoleDetails($module, $role_id, $lang)
     {
         if (!$lang)
@@ -85,7 +91,7 @@ class UmsManager extends AFWRoot
         if (!$module_code)
             AfwSession::pushError("No module code for module $module check your php file chsys->modules->all");
         else {
-            list($found, $role_info, $tab_info, $tbf_info, $module_sys_file) = AfwPrevilege::loadModulePrevileges($module_code);
+            list($found, $role_info, $module_sys_file) = AfwPrevilege::loadModuleRolePrevileges($module_code, $role_id);
             if ($found) {
                 $role_data = $role_info[$role_id];
                 if ($role_data) {
@@ -132,7 +138,8 @@ class UmsManager extends AFWRoot
         $bf_spec,
         $create_with_names_if_not_exists = null,
         $ignore_file_cache = false,
-        $ignore_session_cache = false
+        $ignore_session_cache = false,
+        $full_optimization = false
     ) {
         /* // !!!!! DEBUGG !!!!!!
         if ($operation == "qedit" && $curr_class_atable_id == 13952) {
@@ -152,7 +159,7 @@ class UmsManager extends AFWRoot
                 if (count($tab_info) > 0) {
                     $object_table = $tab_info[$curr_class_atable_id]['name'];
                     $bf_id = $tbf_info[$object_table][$operation]['id'];
-                    if (($bf_id > 0) or ($bf_id === -1)) {
+                    if (($bf_id > 0) or (($bf_id === -1) and $full_optimization)) {
                         return $bf_id;
                     }
                 }
@@ -165,7 +172,7 @@ class UmsManager extends AFWRoot
         $bf_cache_code = "bf-$id_system-$operation-$module_id-$curr_class_atable_id-$bf_spec";
         if (!$ignore_session_cache) {
             $bf_id_from_cache = AfwSession::getVar($bf_cache_code);
-            if (($bf_id_from_cache > 0) or ($bf_id_from_cache === -1)) {
+            if (($bf_id_from_cache > 0) or (($bf_id_from_cache === -1) and $full_optimization)) {
                 return $bf_id_from_cache;
             }
         }
