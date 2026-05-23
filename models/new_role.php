@@ -304,6 +304,8 @@ class NewRole extends AFWObject
 
         $html .= $html_table;
 
+        $html .= var_export($hierarchy_level, true);
+
         return $html;
     }
 
