@@ -232,10 +232,11 @@ class NewRole extends AFWObject
             foreach ($aTableList as $aTableItem) {
                 $v_atable_name = $aTableItem->getVal("atable_name");
                 $ar_atable_name = $aTableItem->getShortDisplay("ar");
+                $hl_title = "اعدادات مستوى الهيكل التنظيمي المسموح له بادارةالجدول"; // $this->tm("")
                 // hierrarchy level from setttings
                 $hl = AfwSettingsHelper::readParamValue($this, "settings", "hl-" . $v_atable_name);
                 if (!$hl) {
-                    $settings .= "\n--$v_atable_name-title:--$ar_atable_name--";
+                    $settings .= "\n--$hl_title: $ar_atable_name--";
                     $settings .= "\nhl-$v_atable_name:1";
                 }
             }
@@ -299,8 +300,8 @@ class NewRole extends AFWObject
         if (!isset($hierarchy_level)) $hierarchy_level = [];
         $header = null;
         foreach ($hierarchy_level as $id => $lookup_row) {
-            if (!$header) $header = array_keys($lookup_row);
             $hierarchy_level[$id]['id'] = $id;
+            if (!$header) $header = array_keys($hierarchy_level[$id]);
         }
 
         list($html_table, $ids) = AfwShowHelper::tableToHtml($hierarchy_level, $header);
