@@ -513,11 +513,12 @@ class UmsManager extends AFWRoot
             $php_code .= "\n\t\$tbf_info['$tableName'] = " . var_export($tbf_info_item, true) . ";\n\n";
             $php_code .= "\n\t\$tab_info[$tableId] = " . var_export($tab_info_item, true) . ";\n\n";
         }
+
+        $fileName = "previleges_$moduleCode" . "_table_$tableName"  . ".php";
+
         if ($genereFile) {
-            $fileName = "previleges_$moduleCode" . "_table_$tableName"  . ".php";
             list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges/table");
         } else {
-            $fileName = "";
             $mv_cmd = "";
             $arr_cmd_lines = [];
         }
