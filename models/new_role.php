@@ -122,50 +122,61 @@ class NewRole extends AFWObject
         $title_ar = "تنفيذ الطلب";
         $title_en = "Execute request";
         $methodName = "executeNewRoleRequest";
-        $pbms[AfwStringHelper::hzmEncode($methodName)] = 
-                            array(
-                                "METHOD" => $methodName,
-                                "COLOR" => $color,
-                                "LABEL_AR" => $title_ar,
-                                "LABEL_EN" => $title_en,
-                                "ADMIN-ONLY" => true,
-                                "BF-ID" => "",
-                                'STEP' => $this->stepOfAttribute("divResults")
-                            );
+        $pbms[AfwStringHelper::hzmEncode($methodName)] =
+            array(
+                "METHOD" => $methodName,
+                "COLOR" => $color,
+                "LABEL_AR" => $title_ar,
+                "LABEL_EN" => $title_en,
+                "ADMIN-ONLY" => true,
+                "BF-ID" => "",
+                'STEP' => $this->stepOfAttribute("divResults")
+            );
 
 
 
         return $pbms;
     }
 
-    public function executeNewRoleRequest($lang="ar") {
-            $update_if_exists = true;
-            $object_code_arr = [];
-            /**
-             * @var Module $moduleObject
-             */
-            $moduleObject = $this->het("module_id");
-            if(!$moduleObject) return ["can't create the role without define the application module", ""];
-            $jrole_code = "";
-            $jrObject = $this->het("jobrole_id");
-            if($jrObject) $jrole_code = $jrObject->getVal("jobrole_code");
-            $module_code = $moduleObject->getModuleCode();
-            $goal_code = $this->getVal("new_role_code");
-            $object_code_arr[0] = $goal_code;
-            $object_code_arr[1] = $module_code;
-            $object_code_arr[2] = $jrole_code;
-            $object_code_arr[3] = $lang;
-            $object_name_ar  = $this->getVal("new_role_name_ar"); 
-            $object_title_ar = $this->getVal("new_role_desc_ar");
-            $object_title_en = $this->getVal("new_role_desc_en");
-            $object_name_en  = $this->getVal("new_role_name_en");
-            
-            $other_settings = ",";
-            $aTableList = $this->get("atable_mfk");
-            foreach($aTableList as $aTableItem) {
-                $other_settings .= $aTableItem->getVal("atable_name").",";
-            }
-            list($objToShow, $message, $error, $warning, $jrObj) = Goal::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $other_settings, $update_if_exists);
+    public function executeNewRoleRequest($lang = "ar")
+    {
+        $update_if_exists = true;
+        $object_code_arr = [];
+        /**
+         * @var Module $moduleObject
+         */
+        $moduleObject = $this->het("module_id");
+        if (!$moduleObject) return ["can't create the role without define the application module", ""];
+        $jrole_code = "";
+        $jrObject = $this->het("jobrole_id");
+        if ($jrObject) $jrole_code = $jrObject->getVal("jobrole_code");
+        $module_code = $moduleObject->getModuleCode();
+        $goal_code = $this->getVal("new_role_code");
+        $object_code_arr[0] = $goal_code;
+        $object_code_arr[1] = $module_code;
+        $object_code_arr[2] = $jrole_code;
+        $object_code_arr[3] = $lang;
+        $object_code_arr[4] = null; // arole code will be defined later by Goal::add-ByCodes
+
+        $object_name_ar  = $this->getVal("new_role_name_ar");
+        $object_title_ar = $this->getVal("new_role_desc_ar");
+        $object_title_en = $this->getVal("new_role_desc_en");
+        $object_name_en  = $this->getVal("new_role_name_en");
+
+
+
+        $other_settings = ",";
+        $aTableList = $this->get("atable_mfk");
+        $hlSettings = [];
+        foreach ($aTableList as $aTableItem) {
+            $v_atable_name = $aTableItem->getVal("atable_name");
+            // hierrarchy level from setttings
+            $hl = AfwSettingsHelper::readParamValue($this, "settings", "hl-" . $v_atable_name);
+            if ($hl) $hlSettings[$v_atable_name] = $hl;
+            $other_settings .= $v_atable_name . ",";
+        }
+        $object_code_arr[5] = $hlSettings;
+        list($objToShow, $message, $error, $warning, $jrObj) = Goal::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $other_settings, $update_if_exists);
     }
 
     public function fld_CREATION_USER_ID()
@@ -253,7 +264,30 @@ class NewRole extends AFWObject
         }
     }
 
-    public function calcDivResults($what="value") {
+    public function calcDivLevels($what = "value")
+    {
+        $html = "";
+        $css = "";
+        $lang = AfwLanguageHelper::getGlobalLanguage();
+
+
+        $main_company = AfwSession::currentCompany();
+        $current_domain = 25;
+        $file_dir_name = dirname(__FILE__);
+        include($file_dir_name . "/../../../client-$main_company/extra/hierarchy_level-$main_company.php");
+        /**
+         * @var array $hierarchy_level
+         */
+        if (!isset($hierarchy_level)) $hierarchy_level = [];
+
+
+        list($html_table, $ids) = AfwShowHelper::tableToHtml($hierarchy_level, array_keys($hierarchy_level));
+
+        $html .= $html_table;
+    }
+
+    public function calcDivResults($what = "value")
+    {
         $html = "";
         $css = "";
 
@@ -265,15 +299,15 @@ class NewRole extends AFWObject
         $title_rbfs = $this->tm("related BFs", $lang);
         $title_rbfs_details = $this->tm("related BFs details", $lang);
 
-        
+
 
 
         // show related goal object
         $html .= "<h5 class=\"bluetitle\"><i></i>$title_rg</h5>";
         $goalObject = $this->getRelatedGoalObject();
-        if($goalObject) {
-            $hide_retrieve_cols = ["gggg", "xxx", ];
-            $force_retrieve_cols = ["id", ];
+        if ($goalObject) {
+            $hide_retrieve_cols = ["gggg", "xxx",];
+            $force_retrieve_cols = ["id",];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($goalObject, $lang, $options);
         }
@@ -282,8 +316,8 @@ class NewRole extends AFWObject
         // show related role object
         $html .= "<h5 class=\"bluetitle\"><i></i>$title_rr</h5>";
         $roleObject = $this->getRelatedRoleObject();
-        if($roleObject) {
-            $hide_retrieve_cols = ["gggg", "xxx", ];
+        if ($roleObject) {
+            $hide_retrieve_cols = ["gggg", "xxx",];
             $force_retrieve_cols = ["id", "active",];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($roleObject, $lang, $options);
@@ -292,59 +326,59 @@ class NewRole extends AFWObject
         // show related BFs in menu
         $html .= "<h5 class=\"bluetitle\"><i></i>$title_rbfs</h5>";
         list($bfMenuObjectList, $rbfMenuObjectList) = $this->getRelatedBfMenuObjectList();
-        if(count($rbfMenuObjectList)>0) {
-            $hide_retrieve_cols = ["gggg", "xxx", ];
+        if (count($rbfMenuObjectList) > 0) {
+            $hide_retrieve_cols = ["gggg", "xxx",];
             $force_retrieve_cols = ["id", "active", "menu"];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($rbfMenuObjectList, $lang, $options);
         }
 
-        if(count($bfMenuObjectList)>0) {
+        if (count($bfMenuObjectList) > 0) {
             $html .= "<h5 class=\"bluetitle\"><i></i>$title_rbfs_details</h5>";
-            $hide_retrieve_cols = ["gggg", "xxx", ];
+            $hide_retrieve_cols = ["gggg", "xxx",];
             $force_retrieve_cols = ["id", "active"];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, $options);
-        }
-        else $html .= "No menu related BFs generated. ".var_export($this,true);
-        
+        } else $html .= "No menu related BFs generated. " . var_export($this, true);
+
         // nothing generated
-        if(!$html) $html = "nothing generated";
+        if (!$html) $html = "nothing generated";
 
         return $html;
     }
 
-    public function getRelatedGoalObject() {
+    public function getRelatedGoalObject()
+    {
         $goal_code = $this->getVal("new_role_code");
         $objModule = $this->het("module_id");
-        if(!$objModule) return null;
+        if (!$objModule) return null;
         $objModule_id = $objModule->id;
         $system_id = $objModule->getVal("id_system");
         return Goal::loadByMainIndex($system_id, $objModule_id, $goal_code);
     }
 
-    public function getRelatedRoleObject() {
+    public function getRelatedRoleObject()
+    {
         $goal_code = $this->getVal("new_role_code");
         $objModule = $this->het("module_id");
-        if(!$objModule) return null;
+        if (!$objModule) return null;
         $objModule_id = $objModule->id;
         // $system_id = $objModule->getVal("id_system");
         $arole_code = "ar-" . $goal_code;
         return Arole::loadByMainIndex($objModule_id, $arole_code);
-        
     }
 
 
-    public function getRelatedBfMenuObjectList() {
+    public function getRelatedBfMenuObjectList()
+    {
         $goal_code = $this->getVal("new_role_code");
         $objModule = $this->het("module_id");
         $objModule_id = $objModule->id;
         $objArole = $this->getRelatedRoleObject();
 
-        if($objArole) {
+        if ($objArole) {
             return $objArole->getMenuBFs(true);
-        }
-        else return [[], []];
+        } else return [[], []];
     }
 
     public function calcPhp_code($what = "value")
@@ -354,8 +388,8 @@ class NewRole extends AFWObject
          * @var Module $objModule
          */
         $objModule = $this->het("module_id");
-        if($objArole and $objModule) {
-            
+        if ($objArole and $objModule) {
+
             $moduleCode = $objModule->getModuleCode();
             $previlegeFilenameForRole = UmsManager::previlegeFilenameForRole($moduleCode, $objArole->id);
             $phpCode = $objArole->calcPhp_code($what);
@@ -364,17 +398,10 @@ class NewRole extends AFWObject
                         include('previleges/role/$previlegeFilenameForRole.php');<br>
                         Finally deploy this change to see this new previleges or roles
                         </div>";
-            return $message.$phpCode.$message2;
-        }
-        elseif(!$objModule) return "<div class='warning'>No module defined</div>";
+            return $message . $phpCode . $message2;
+        } elseif (!$objModule) return "<div class='warning'>No module defined</div>";
         else return "<div class='warning'>No Arole associated</div>";
-        
     }
-
-
-    
-
-
 }
 
 

@@ -561,16 +561,17 @@ class Bfunction extends UmsObject
                 return $bf;
         }
 
-        public static function createNewBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc = "", $bf_desc_en = "", $direct_access = "obsolete-param", $public = "N", $bf_type = 1, $bf_code = "", $bf_complexity = 0, $bf_priority = 0, $resetUS = false)
+        public static function createNewBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc = "", $bf_desc_en = "", $hierarchy_level_enum = 1, $public = "N", $bf_type = 1, $bf_code = "", $bf_complexity = 0, $bf_priority = 0, $resetUS = false)
         {
                 $bf = null;
 
                 if ($curr_class_module_id and $bf_code) $bf = Bfunction::loadByMainIndex($curr_class_module_id, $bf_code);
                 if (!$bf) $bf = new Bfunction();
 
+                $bf->set("curr_class_module_id", $curr_class_module_id);  // module itself (where table curr_class_atable_id is)
+                $bf->set("bfunction_code", $bf_code);
                 $bf->set("id_system", $id_system);    // system
                 $bf->set("file_specification", $file);  // source code of BF
-                $bf->set("curr_class_module_id", $curr_class_module_id);  // module itself (where table curr_class_atable_id is)
                 $bf->set("curr_class_atable_id", $curr_class_atable_id);  // related table
                 if (!$bf_spec) $bf_spec = 'none';
                 $bf->set("bf_specification", $bf_spec);
@@ -583,9 +584,9 @@ class Bfunction extends UmsObject
                 $bf->set("titre_en", $bf_desc_en);
                 $bf->set("bfunction_type_id", $bf_type);
                 $bf->set("avail", 'Y');
-                $bf->set("bfunction_code", $bf_code);
                 $bf->set("bf_complexity", $bf_complexity);
                 $bf->set("bf_priority", $bf_priority);
+                $bf->set("hierarchy_level_enum", $hierarchy_level_enum);
 
 
                 $bf->commit();
@@ -600,31 +601,69 @@ class Bfunction extends UmsObject
         // curr_class_atable_id
         // bf_specification
 
-        public static function getOrCreateBF($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc, $bf_desc_en, $direct_access = "N", $public = "N", $bf_type = 1, $bf_code = "", $bf_complexity = 0, $bf_priority = 0, $resetUS = false)
-        {
+        /**
+         * @param string $id_system
+         * @param string $file
+         * @param string $curr_class_module_id
+         * @param string $curr_class_atable_id
+         * @param string $bf_spec
+         * @param string $bf_name
+         * @param string $bf_name_en
+         * @param string $bf_desc
+         * @param string $bf_desc_en
+         */
 
+        public static function getOrCreateBF(
+                $id_system,
+                $file,
+                $curr_class_module_id,
+                $curr_class_atable_id,
+                $bf_spec,
+                $bf_name,
+                $bf_name_en,
+                $bf_desc,
+                $bf_desc_en,
+                $direct_access = "N",
+                $public = "N",
+                $bf_type = 1,
+                $bf_code = "",
+                $bf_complexity = 0,
+                $bf_priority = 0,
+                $resetUS = false,
+                $hierarchy_level_enum = 1
+        ) {
+                /**
+                 * @var Bfunction $bf
+                 */
+                $bf_new = false;
                 $bf = Bfunction::getBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec);
                 if (!$bf) {
-                        $bf = self::createNewBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc, $bf_desc_en, $direct_access, $public, $bf_type, $bf_code, $bf_complexity, $bf_priority, $resetUS);
+                        $bf = self::createNewBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc, $bf_desc_en, $hierarchy_level_enum, $public, $bf_type, $bf_code, $bf_complexity, $bf_priority, $resetUS);
                         // $id_bf = $bf->getId();
                         // obsolete
                         $bf_new = true;
                 }
-
+                /**
+                 * @var Bfunction $bf
+                 */
                 if ($bf) {
-                        $bf->set("direct_access", $direct_access);
-                        $bf->set("public", $public);
-                        $bf->set("titre_short", $bf_name);
-                        $bf->set("titre_short_en", $bf_name_en);
-                        $bf->set("titre", $bf_desc);
-                        $bf->set("titre_en", $bf_desc_en);
-                        $bf->set("bfunction_type_id", $bf_type);
-                        $bf->set($bf->fld_ACTIVE(), 'Y');
-                        $bf->set("bfunction_code", $bf_code);
-                        $bf->set("bf_complexity", $bf_complexity);
-                        $bf->set("bf_priority", $bf_priority);
+                        if ($bf_code) {
+                                $bf->set("direct_access", $direct_access);
+                                $bf->set("public", $public);
+                                $bf->set("titre_short", $bf_name);
+                                $bf->set("titre_short_en", $bf_name_en);
+                                $bf->set("titre", $bf_desc);
+                                $bf->set("titre_en", $bf_desc_en);
+                                $bf->set("bfunction_type_id", $bf_type);
+                                $bf->set($bf->fld_ACTIVE(), 'Y');
+                                $bf->set("bfunction_code", $bf_code);
+                                $bf->set("bf_complexity", $bf_complexity);
+                                $bf->set("bf_priority", $bf_priority);
+                                $bf->set("hierarchy_level_enum", $hierarchy_level_enum);
+                                $bf->update();
+                        }
+
                         if ($resetUS) $bf->resetAllGeneratedUserStories();
-                        $bf->update();
                 }
 
                 return array($bf, $bf_new);
@@ -783,6 +822,7 @@ class Bfunction extends UmsObject
                 $currmod_obj = null;
                 $curr_module_id = null;
                 $bfObj = null;
+                $atable_name = "";
                 $direct_page = "Y";
                 foreach ($url_items as $url_item) {
                         list($url_item_code, $url_item_value) = explode("=", $url_item);
