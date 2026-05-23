@@ -1326,7 +1326,7 @@ class Bfunction extends UmsObject
                 return AfwIconHelper::proposeIcons($strings, $returnKeys, $debugg);
         }
 
-        public function findMeInRoles($aroles_ids, $context = "log", $module_id = null)
+        public function findMeInRoles($aroles_ids, $context = "log", $module_id = null, $ignore_cache = false)
         {
                 if (!$module_id) $module_id = $this->getVal("curr_class_module_id");
                 if (!$module_id) return false;
@@ -1344,7 +1344,7 @@ class Bfunction extends UmsObject
                 // in system cache files
                 $aroles_ids_arr = explode(",", trim($aroles_ids, ","));
                 foreach ($aroles_ids_arr as $arole_id) {
-                        list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($module_id, $arole_id, $lang);
+                        list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($module_id, $arole_id, $lang, $ignore_cache);
                         if ($menu_folder['otherbfs'][$this->id]) return "bf found in system cache files in role " . $role_item_display;
                 }
 

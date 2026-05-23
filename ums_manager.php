@@ -73,7 +73,7 @@ class UmsManager extends AFWRoot
      * @param string $lang
      */
 
-    public static function getRoleDetails($module, $role_id, $lang)
+    public static function getRoleDetails($module, $role_id, $lang, $ignore_cache = false)
     {
         if (!$lang)
             $lang = 'ar';
@@ -91,14 +91,19 @@ class UmsManager extends AFWRoot
         if (!$module_code)
             AfwSession::pushError("No module code for module $module check your php file chsys->modules->all");
         else {
-            list($found, $role_info, $module_sys_file) = AfwPrevilege::loadModuleRolePrevileges($module_code, $role_id);
+            $found = false;
+            if (!$ignore_cache) {
+                list($found, $role_info, $module_sys_file) = AfwPrevilege::loadModuleRolePrevileges($module_code, $role_id);
+            }
+
             if (!$found) {
-                AfwSession::pushWarning("System need cache optimisation by creating module_$module_code file <!-- file not found $module_sys_file -->");
+                if (!$ignore_cache) AfwSession::pushWarning("System need cache optimisation by creating module_$module_code file <!-- file not found $module_sys_file -->");
                 $role_info = null;
                 $roleItem = Arole::loadById($role_id);
                 if ($roleItem) list($role_info, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $roleItem, true);
                 $found = $role_info ? true : false;
             }
+
             if ($found) {
                 $role_data = $role_info[$role_id];
                 if ($role_data) {

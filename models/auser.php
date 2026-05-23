@@ -782,10 +782,14 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return $this->iCanDoBF($bfObj);
         }
 
+
+        /**
+         * @param Bfunction $bfObj
+         */
         public function iCanDoBF($bfObj)
         {
-                // return true;
-                global $file_dir_name;
+                $ignore_cache = AfwSession::hasOption("IGNORE_PREVILEGE_CACHE");
+
 
                 AfwSession::contextLog("iCanDoBF : start of iCanDoBF find BF [$bfObj]", 'iCanDo');
                 if ($this->isSuperAdmin()) {
@@ -858,7 +862,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         return false;
                 }
 
-                $foundInRoles = $bfObj->findMeInRoles($mau_found_roles_ids, 'iCanDo');
+                $foundInRoles = $bfObj->findMeInRoles($mau_found_roles_ids, 'iCanDo', null, $ignore_cache);
                 if ($foundInRoles) {
                         AfwSession::contextLog("iCanDoBF : YES I can because foundInRoles=$foundInRoles. & BFL=$bf_hierarchy_level_enum >= UHL=$user_hierarchy_level_enum !", 'iCanDo');
                         AfwSession::setVar($cache_user_can_bf_code, 'Y');

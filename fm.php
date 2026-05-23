@@ -99,7 +99,7 @@ if ($r == "control") {
 } elseif ($r) {
 
   if ($objme->isSuperAdmin() or $objme->hasRole($module, $r)) {
-    list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($a, $r, $lang);
+    list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($a, $r, $lang, AfwSession::hasOption("IGNORE_PREVILEGE_CACHE"));
     // die("rafik see menu_folder = ".var_export($menu_folder,true));
     $role_item_display = UfwReplacement::trans_replace($role_item_display, $module, $lang);
     /**
