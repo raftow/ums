@@ -135,7 +135,7 @@ class UmsManager extends AFWRoot
         $ignore_session_cache = false
     ) {
 
-        if ($operation == "qedit" && $curr_class_atable_id == 13952) {
+        if ($operation == "qeditxxxxx" && $curr_class_atable_id == 13952000000) {
             // ignore all caches just to debugg this case
             $ignore_session_cache = true;
             $ignore_file_cache = true;
