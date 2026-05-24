@@ -278,8 +278,10 @@ class Bfunction extends UmsObject
         {
                 if (self::pagIsThere()) {
                         $tableObj_id = $this->getVal("curr_class_atable_id");
-                        return Atable::loadById($tableObj_id);
+                        if ($tableObj_id) return Atable::loadById($tableObj_id);
                 }
+
+                return null;
         }
 
         public function enumLookupModule()
