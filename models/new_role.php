@@ -378,7 +378,7 @@ class NewRole extends AFWObject
             $hide_retrieve_cols = ["gggg", "xxx",];
             $force_retrieve_cols = ["id",];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
-            $goalObject->viewIcon = true;
+            $goalObject->viewIcon = 2;
             $html .= AfwShowHelper::showRetrieveTable($goalObject, $lang, $options);
         }
         unset($goalObject);
@@ -390,7 +390,7 @@ class NewRole extends AFWObject
             $hide_retrieve_cols = ["gggg", "xxx",];
             $force_retrieve_cols = ["id", "active",];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
-            $jrObject->viewIcon = true;
+            $jrObject->viewIcon = 2;
             $html .= AfwShowHelper::showRetrieveTable($jrObject, $lang, $options);
         }
 
@@ -401,7 +401,7 @@ class NewRole extends AFWObject
             $hide_retrieve_cols = ["gggg", "xxx",];
             $force_retrieve_cols = ["id", "active",];
             $options = ['mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
-            $roleObject->viewIcon = true;
+            $roleObject->viewIcon = 2;
             $html .= AfwShowHelper::showRetrieveTable($roleObject, $lang, $options);
         }
 
@@ -411,7 +411,7 @@ class NewRole extends AFWObject
         if (count($rbfMenuObjectList) > 0) {
             $hide_retrieve_cols = ["gggg", "xxx",];
             $force_retrieve_cols = ["id", "active", "menu"];
-            $options = ['view_icon' => true, 'mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
+            $options = ['view_icon' => 2, 'mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($rbfMenuObjectList, $lang, $options);
         }
 
@@ -419,7 +419,7 @@ class NewRole extends AFWObject
             $html .= "<h5 class=\"bluetitle\"><i></i>$title_rbfs_details</h5>";
             $hide_retrieve_cols = ["gggg", "xxx",];
             $force_retrieve_cols = ["id", "active"];
-            $options = ['view_icon' => true, 'mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
+            $options = ['view_icon' => 2, 'mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, $options);
         } else $html .= "No menu related BFs generated. <br> this =>" . var_export($this, true);
 
