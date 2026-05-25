@@ -140,6 +140,9 @@ class NewRole extends AFWObject
 
     public function executeNewRoleRequest($lang = "ar")
     {
+        $error_arr = [];
+        $info_arr = [];
+        $war_arr = [];
         $update_if_exists = true;
         $object_code_arr = [];
         /**
@@ -176,7 +179,45 @@ class NewRole extends AFWObject
             $other_settings .= $v_atable_name . ",";
         }
         $object_code_arr[5] = $hlSettings;
-        list($objToShow, $message, $error, $warning, $jrObj) = Goal::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $other_settings, $update_if_exists);
+        list($objToShow, $message, $error, $warning, $jrObj, $arObj) = Goal::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $other_settings, $update_if_exists);
+        if ($objToShow) {
+            $info_arr[] = "Goal created succesfully";
+        } else {
+            $error_arr[] = "failed to create goal";
+        }
+
+        if ($message) {
+            $info_arr[] = $message;
+        }
+
+        if ($error) {
+            $error_arr[] = $error;
+        }
+
+        if ($warning) {
+            $war_arr[] = $warning;
+        }
+
+        if ($arObj) {
+            $info_arr[] = "Arole created succesfully";
+        } else {
+            $error_arr[] = "failed to create Arole";
+        }
+
+
+        if ($jrObj) {
+            if (!$jrObject) {
+                $info_arr[] = "new jobrole created and assigned to this request";
+                $this->set("jobrole_id", $jrObj->id);
+                $this->commit();
+            } elseif ($jrObject->id != $jrObj->id) {
+                $error_arr[] = "conflict : another jobrole created not the same in config";
+            }
+        } else {
+            $error_arr[] = "failed to create/find jobrole";
+        }
+
+        return AfwFormatHelper::pbm_result($error_arr, $info_arr, $war_arr);
     }
 
     public function fld_CREATION_USER_ID()
@@ -322,6 +363,7 @@ class NewRole extends AFWObject
 
 
         $title_rg = $this->tm("related goal", $lang);
+        $title_rj = $this->tm("related job role", $lang);
         $title_rr = $this->tm("related role", $lang);
         $title_rbfs = $this->tm("related BFs", $lang);
         $title_rbfs_details = $this->tm("related BFs details", $lang);
@@ -339,6 +381,9 @@ class NewRole extends AFWObject
             $html .= AfwShowHelper::showRetrieveTable($goalObject, $lang, $options);
         }
         unset($goalObject);
+
+        // show related job role object
+        $html .= "<h5 class=\"bluetitle\"><i></i>$title_rj</h5>";
 
         // show related role object
         $html .= "<h5 class=\"bluetitle\"><i></i>$title_rr</h5>";
