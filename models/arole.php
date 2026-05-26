@@ -1034,7 +1034,9 @@ class Arole extends UmsObject
                 // ums.job_arole-الصلاحية المسندة	arole_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update ${server_db_prefix}ums.job_arole set arole_id='$id_replace' where arole_id='$id' ");
                 // ums.arole_bf-الصلاحية	arole_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update ${server_db_prefix}ums.arole_bf set arole_id='$id_replace' where arole_id='$id' ");
+                if ($this->id == $id) {
+                    $this->moveMyBfsToArole($id_replace);
+                }
                 // b au.user_story-الصلاحية المستخدمة	arole_id  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("update ${server_db_prefix}b au.user_story set arole_id='$id_replace' where arole_id='$id' ");
 
@@ -1048,6 +1050,16 @@ class Arole extends UmsObject
                 $this->execQuery("update ${server_db_prefix}ums.module_auser set open_arole_mfk=REPLACE(open_arole_mfk, ',$id,', ',$id_replace,') where open_arole_mfk like '%,$id,%' ");
             }
             return true;
+        }
+    }
+
+    public function moveMyBfsToArole($arole_id)
+    {
+        $all_rbfList = $this->get("all_rbfList");
+        foreach ($all_rbfList as $rbfItem) {
+            if (!$rbfItem->tryToMoveToArole($arole_id)) {
+                $rbfItem->delete();
+            }
         }
     }
 
