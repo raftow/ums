@@ -474,7 +474,7 @@ class NewRole extends AFWObject
          */
         $objModule = $this->het("module_id");
         if ($objArole and $objModule) {
-
+            $return = "";
             $moduleCode = $objModule->getModuleCode();
             $previlegeFilenameForRole = UmsManager::previlegeFilenameForRole($moduleCode, $objArole->id);
             $phpCode = $objArole->calcPhp_code($what);
@@ -483,9 +483,20 @@ class NewRole extends AFWObject
                         include('previleges/role/$previlegeFilenameForRole.php');<br>
                         Finally deploy this change to see this new previleges or roles
                         </div>";
-            return $message . $phpCode . $message2;
-        } elseif (!$objModule) return "<div class='warning'>No module defined</div>";
-        else return "<div class='warning'>No Arole associated</div>";
+
+            $return .= $message . $phpCode . $message2;
+
+            $aTableList = $this->get("atable_mfk");
+            /**
+             * @var Atable aTableItem
+             */
+            foreach ($aTableList as $aTableItem) {
+                $return .= $aTableItem->calcPrevileges_code($what);
+            }
+        } elseif (!$objModule) $return = "<div class='warning'>No module defined</div>";
+        else $return =  "<div class='warning'>No Arole associated</div>";
+
+        return $return;
     }
 }
 
