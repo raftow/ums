@@ -421,7 +421,10 @@ class NewRole extends AFWObject
             $force_retrieve_cols = ["id", "active"];
             $options = ['view_icon' => 2, 'mode_force_cols' => true, 'hide_retrieve_cols' => $hide_retrieve_cols, 'force_retrieve_cols' => $force_retrieve_cols];
             $html .= AfwShowHelper::showRetrieveTable($bfMenuObjectList, $lang, $options);
-        } else $html .= "No menu related BFs generated. <br> this =>" . var_export($this, true);
+        } else {
+            $html .= "No menu related BFs generated.";
+            // $html .= "<br> this =>" . var_export($this, true);
+        }
 
         // nothing generated
         if (!$html) $html = "nothing generated";

@@ -205,7 +205,7 @@ class Jobrole extends UmsObject
                 $jobGoalList = $this->het('jobGoalList');
 
                 if ((!is_array($jobGoalList)) or (count($jobGoalList) == 0)) {
-                        return array('No goal found, create goals before', '');
+                        return array($this->tm('No goal found in this job role', $lang) . " : " . $this->getDisplay($lang), '');
                 }
 
                 $file_dir_name = dirname(__FILE__);
