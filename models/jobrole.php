@@ -273,7 +273,7 @@ class Jobrole extends UmsObject
                 $domainObj = $this->het("id_domain");
                 $mainApplication = null;
                 if ($domainObj)
-                        $mainApplication = $domainObj->get('mainApplication');
+                        $mainApplication = $domainObj->calcMainApplication();
 
                 if (!$mainApplication) {
                         $mainApplication = new Module();
