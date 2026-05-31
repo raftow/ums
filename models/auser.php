@@ -353,7 +353,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $countGived = 0;
                 $log_arr = array();
                 foreach ($moduleToGiveArr as $module_id => $module_roles) {
-                        $reset_roles = $rolesFromScratchForModules[$module_id];
+                        $reset_roles = true; // $rolesFromScratchForModules[$module_id];
                         $with_reset = $reset_roles ? "with reset" : "";
                         $gived = $this->giveMeModule($module_id, $module_roles, 3, true, $reset_roles);
                         if (is_array($module_roles))
