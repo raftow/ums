@@ -354,17 +354,18 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $log_arr = array();
                 foreach ($moduleToGiveArr as $module_id => $module_roles) {
                         $reset_roles = $rolesFromScratchForModules[$module_id];
+                        $with_reset = $reset_roles ? "with reset" : "";
                         $gived = $this->giveMeModule($module_id, $module_roles, 3, true, $reset_roles);
                         if (is_array($module_roles))
                                 $module_roles_txt = implode(',', $module_roles);
                         else $module_roles_txt = $module_roles;
 
-                        $log_arr[] = "For module $module_id try to give ($module_roles_txt) gived ($gived)";
+                        $log_arr[] = "For module $module_id we tried to give ($module_roles_txt) $with_reset we gived ($gived)";
                         $countGived++;
                 }
-                $log_arr[] = $countGived . ' ' . $this->tm('module-role(s) has been affected to this user according to his job respobilities');  // .var_export($moduleToGiveArr,true)
+                $log_arr[] = $countGived . ' ' . $this->tm('module-role(s) has been affected to this user according to his job responsibilities', 'en');  // .var_export($moduleToGiveArr,true)
 
-                return implode("<br>\n", $log_arr);
+                return $log_arr;
         }
 
         /**
