@@ -9,7 +9,7 @@ class UmsAroleAfwStructure
 			$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
 			$obj->DISPLAY_FIELD_BY_LANG = ['ar' => "titre_short", 'en' => "titre_short_en"];
 
-			$obj->ENABLE_DISPLAY_MODE_IN_QEDIT=true;
+			$obj->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
 			$obj->ORDER_BY_FIELDS = "module_id, role_code";
 			$obj->copypast = false;
 
@@ -353,7 +353,7 @@ class UmsAroleAfwStructure
 		),
 
 
-		
+
 
 		'all_rbfList' => array(
 			'TYPE' => 'FK',
@@ -398,6 +398,27 @@ class UmsAroleAfwStructure
 			'CATEGORY' => 'FORMULA',
 			'SHOW' => true,
 			'STEP' => 4,
+			'SEARCH-BY-ONE' => '',
+			'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',
+			'EDIT-UGROUPS' => '',
+		),
+
+		'jobAroleList' => array(
+			'TYPE' => 'FK',
+			'ANSWER' => 'job_arole',
+			'ANSMODULE' => 'ums',
+			'CATEGORY' => 'ITEMS',
+			'ITEM' => 'arole_id',
+			'MANDATORY' => false,
+			'ERROR-CHECK' => true,
+			'WHERE' => '',
+			'SHOW' => true,
+			'FORMAT' => 'retrieve',
+			'EDIT' => true,
+			'BUTTONS' => true,
+			'NO-LABEL' => false,
+			'STEP' => 5,
 			'SEARCH-BY-ONE' => '',
 			'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',

@@ -31,6 +31,7 @@ class AroleArTranslator
                 $trad["arole"]["parent_arole_id"] = "الصلاحية الأم";
 
                 $trad["arole"]["auser_mfk"] = "من ينتفع بهذه الصلاحية";
+                $trad["arole"]["jobAroleList"] = "المسؤليات التي تستخدم هذه الصلاحية";
 
                 $trad["arole"]["arole_type_id"] = "نوع الصلاحية";
                 $trad["arole"]["role_code"] = "رمز الصلاحية";
