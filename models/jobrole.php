@@ -37,13 +37,11 @@ class Jobrole extends UmsObject
 
         public static function loadAll($id_domain = 0)
         {
-                $obj = new CustomerType();
+                $obj = new Jobrole();
                 $obj->select('active', 'Y');
-                $obj->select('id_domain', $id_domain);
-                if ($id_domain)
-                        $objList = $obj->loadMany();
+                if ($id_domain) $obj->select('id_domain', $id_domain);
 
-                return $objList;
+                return  $obj->loadMany();
         }
 
         public static function loadByMainIndex($id_domain, $jobrole_code, $create_obj_if_not_found = false)
@@ -76,7 +74,7 @@ class Jobrole extends UmsObject
         {
                 if ($lang == 'ar')
                         $fn = trim($this->valtitre_short());
-                if ($lang == 'en')
+                else
                         $fn = trim($this->valtitre_short_en());
 
                 return $fn;  // $domain."->".
@@ -98,7 +96,7 @@ class Jobrole extends UmsObject
 
                 if ($lang == 'ar')
                         $fn = trim($this->valtitre_short());
-                if ($lang == 'en')
+                else
                         $fn = trim($this->valtitre_short_en());
 
                 $fn = $domain . '&rarr;' . $fn;
@@ -113,9 +111,13 @@ class Jobrole extends UmsObject
                 return "<a style='color:#fff !important' target='_jr_mode_display' href='main.php?Main_Page=afw_mode_display.php&cl=Jobrole&id=$id&currmod=ums'>$disp</a>";
         }
 
+
+        /**
+         * @param string $mode
+         */
         protected function getOtherLinksArray($mode, $genereLog = false, $step = 'all')
         {
-                global $lang, $Main_Page;
+                /*global $lang, $Main_Page;
 
                 if ($Main_Page == 'afw_mode_edit.php')
                         $mode_origin = 'edit';
@@ -124,7 +126,9 @@ class Jobrole extends UmsObject
                 if ($Main_Page == 'afw_mode_search.php')
                         $mode_origin = 'search';
                 if (!$mode_origin)
-                        $mode_origin = 'display';
+                        $mode_origin = 'display';*/
+
+                $lang = AfwLanguageHelper::getGlobalLanguage();
 
                 $otherLinksArray = $this->getOtherLinksArrayStandard($mode, false, $step);
                 $my_id = $this->getId();
@@ -259,109 +263,107 @@ class Jobrole extends UmsObject
                 return array('', "done : $createdUpdatedArolesCount,  created : $createdArolesCount updated : $updatedArolesCount attached : $attachedArolesCount already attached : $attachedAlready_text ignored : $ignored_text");
         }
 
+        public function calcMainApplication($what = 'object')
+        {
+                $server_db_prefix = AfwSession::currentDBPrefix();
+                $this_id = $this->getId();
+                /**
+                 * @var Domain $domainObj                                                
+                 */
+                $domainObj = $this->het("id_domain");
+                $mainApplication = null;
+                if ($domainObj)
+                        $mainApplication = $domainObj->get('mainApplication');
+
+                if (!$mainApplication) {
+                        $mainApplication = new Module();
+                }
+
+                if ($mainApplication->isEmpty()) {
+                        $jobrole_code = $this->getVal('jobrole_code');
+                        $jobrole_code_arr = explode('/', $jobrole_code);
+                        if (count($jobrole_code_arr) > 1) {
+                                $application_code = strtolower($jobrole_code_arr[0]);
+                                $mainApplication->clearSelect();
+                                $mainApplication->where("avail='Y' and id_module_type = 5 and module_code='$application_code'");
+                                $mainApplication->load();
+                        }
+                }
+
+                if ($mainApplication->isEmpty()) {
+                        $mainApplication->clearSelect();
+                        $mainApplication->where('id in (select distinct jar.module_id from ' . $server_db_prefix . "ums.job_arole jar 
+                                                    where jar.avail='Y'
+                                                      and jar.jobrole_id = $this_id) and avail='Y' and id_module_type = 5");
+
+                        $mainApplication->load();
+                }
+
+                if ($mainApplication->isEmpty()) {
+                        $jobrole_code = $this->getVal('jobrole_code');
+                        $jobrole_code_arr = explode('-', $jobrole_code);
+                        $application_code = strtolower($jobrole_code_arr[0]);
+                        $mainApplication->clearSelect();
+                        $mainApplication->where("avail='Y' and id_module_type = 5 and module_code='$application_code'");
+                        $mainApplication->load();
+                }
+                // else die("stop : mainApplication '$mainApplication' is not emplty id = ".$mainApplication->getId());
+
+                if ($mainApplication->isEmpty()) {
+                        $mainApplication->set('titre_short', 'غير معروف');
+                        $mainApplication->set('titre_short_en', 'unknown');
+                }
+
+                return AfwLoadHelper::giveWhat($mainApplication, $what);
+        }
+
+        public function calcStatsGoal($what = 'value')
+        {
+                if ($this->statsGoal)
+                        return $this->statsGoal;
+                $this->statsGoal = new Goal();
+                $this_id = $this->getId();
+                $this->statsGoal->where("avail='Y' and jobrole_id = $this_id and goal_code = 'stats'");
+                if (!$this->statsGoal->load()) $this->statsGoal = null;
+                return AfwLoadHelper::giveWhat($this->statsGoal, $what);
+        }
+
+        public function calcLookupGoal($what = 'value')
+        {
+
+                if ($this->lookupGoal)
+                        return $this->lookupGoal;
+                $this->lookupGoal = new Goal();
+                $this_id = $this->getId();
+                $this->lookupGoal->where("avail='Y' and jobrole_id = $this_id and goal_code like 'lookup%'");
+                if (!$this->lookupGoal->load()) $this->lookupGoal = null;
+                return AfwLoadHelper::giveWhat($this->lookupGoal, $what);
+        }
+
+        public function calcMainGoal($what = 'value')
+        {
+                if ($this->mainGoal)
+                        return $this->mainGoal;
+                $this->mainGoal = new Goal();
+                $this_id = $this->getId();
+                $jobrole_code = $this->getVal('jobrole_code');
+                $goal_code = strtoupper($jobrole_code);
+                if (!$goal_code)
+                        return '';
+
+                $this->mainGoal->where("avail='Y' and jobrole_id = $this_id and goal_code = '$goal_code'");
+                if (!$this->mainGoal->load()) $this->mainGoal = null;
+                return AfwLoadHelper::giveWhat($this->mainGoal, $what);
+        }
+
+
         public function getFormuleResult($attribute, $what = 'value')
         {
                 $server_db_prefix = AfwSession::currentDBPrefix();
 
                 switch ($attribute) {
-                        case 'mainApplication':
-                                $this_id = $this->getId();
-                                /**
-                                 * @var Domain $domainObj                                                
-                                 */
-                                $domainObj = $this->het("id_domain");
-                                $mainApplication = null;
-                                if ($domainObj)
-                                        $mainApplication = $domainObj->get('mainApplication');
-
-                                if (!$mainApplication) {
-                                        $mainApplication = new Module();
-                                }
-
-                                if ($mainApplication->isEmpty()) {
-                                        $jobrole_code = $this->getVal('jobrole_code');
-                                        $jobrole_code_arr = explode('/', $jobrole_code);
-                                        if (count($jobrole_code_arr) > 1) {
-                                                $application_code = strtolower($jobrole_code_arr[0]);
-                                                $mainApplication->clearSelect();
-                                                $mainApplication->where("avail='Y' and id_module_type = 5 and module_code='$application_code'");
-                                                $mainApplication->load();
-                                        }
-                                }
-
-                                if ($mainApplication->isEmpty()) {
-                                        $mainApplication->clearSelect();
-                                        $mainApplication->where('id in (select distinct jar.module_id from ' . $server_db_prefix . "ums.job_arole jar 
-                                                    where jar.avail='Y'
-                                                      and jar.jobrole_id = $this_id) and avail='Y' and id_module_type = 5");
-
-                                        $mainApplication->load();
-                                }
-
-                                if ($mainApplication->isEmpty()) {
-                                        $jobrole_code = $this->getVal('jobrole_code');
-                                        $jobrole_code_arr = explode('-', $jobrole_code);
-                                        $application_code = strtolower($jobrole_code_arr[0]);
-                                        $mainApplication->clearSelect();
-                                        $mainApplication->where("avail='Y' and id_module_type = 5 and module_code='$application_code'");
-                                        $mainApplication->load();
-                                }
-                                // else die("stop : mainApplication '$mainApplication' is not emplty id = ".$mainApplication->getId());
-
-                                if ($mainApplication->isEmpty()) {
-                                        $mainApplication->set('titre_short', 'غير معروف');
-                                        $mainApplication->set('titre_short_en', 'unknown');
-                                }
-
-                                return $mainApplication;
-                                break;
-
-                        case 'statsGoal':
-                                if ($this->statsGoal)
-                                        return $this->statsGoal;
-                                $this->statsGoal = new Goal();
-                                $this_id = $this->getId();
-                                $this->statsGoal->where("avail='Y' and jobrole_id = $this_id and goal_code = 'stats'");
-                                if ($this->statsGoal->load())
-                                        return $this->statsGoal;
-                                else {
-                                        return '';
-                                }
-                                break;
-
-                        case 'lookupGoal':
-                                if ($this->lookupGoal)
-                                        return $this->lookupGoal;
-                                $this->lookupGoal = new Goal();
-                                $this_id = $this->getId();
-                                $this->lookupGoal->where("avail='Y' and jobrole_id = $this_id and goal_code like 'lookup%'");
-                                if ($this->lookupGoal->load())
-                                        return $this->lookupGoal;
-                                else {
-                                        return '';
-                                }
-                                break;
-
-                        case 'mainGoal':
-                                if ($this->mainGoal)
-                                        return $this->mainGoal;
-                                $this->mainGoal = new Goal();
-                                $this_id = $this->getId();
-                                $jobrole_code = $this->getVal('jobrole_code');
-                                $goal_code = strtoupper($jobrole_code);
-                                if (!$goal_code)
-                                        return '';
-
-                                $this->mainGoal->where("avail='Y' and jobrole_id = $this_id and goal_code = '$goal_code'");
-                                if ($this->mainGoal->load())
-                                        return $this->mainGoal;
-                                else {
-                                        return '';
-                                }
-                                break;
-
                         case 'myRoles':
-                                $mainApplication = $this->get('mainApplication');
+                                $mainApplication = $this->calcMainApplication();
                                 if ($mainApplication)
                                         $mainApplication_id = $mainApplication->getId();
                                 else
@@ -379,6 +381,7 @@ class Jobrole extends UmsObject
                                 return $ar->loadMany();
                                 break;
                 }
+                return AfwFormulaHelper::calculateFormulaResult($this, $attribute, $what);
         }
 
         public function isFinished()
@@ -483,12 +486,14 @@ class Jobrole extends UmsObject
         public function findGoalWithCodeEndsWith($suffix, $atable_id = 0)
         {
                 $file_dir_name = dirname(__FILE__);
+                $goalListMatrix = [];
                 if ($atable_id)
                         $goalListMatrix[] = GoalConcern::getJobRoleGoalListUsingTable($this->id, $atable_id);
-                if (!$atable_id)
+                else {
                         $goalListMatrix[] = $this->get('jobGoalList');
-                if (!$atable_id)
                         $goalListMatrix[] = $this->get('otherGoalList');
+                }
+
                 foreach ($goalListMatrix as $goalList) {
                         foreach ($goalList as $goalItem) {
                                 $goalItemCode = $goalItem->getVal('goal_code');
@@ -503,7 +508,8 @@ class Jobrole extends UmsObject
         public function genereMainGoal($lang = 'ar')
         {
                 $goalObj = $this->get('mainGoal');
-
+                $info = '';
+                $err = '';
                 $mainApplication = $this->get('mainApplication');
                 $id_domain = $this->getVal('id_domain');
                 if (!$goalObj) {
@@ -520,10 +526,9 @@ class Jobrole extends UmsObject
                         if (!$goal_code)
                                 return array('you need to define the jobrole code for this jobrole', '');
 
-                        $info = '';
-                        $err = '';
 
-                        $file_dir_name = dirname(__FILE__);
+
+                        // $file_dir_name = dirname(__FILE__);
                         $goalObj = Goal::loadByMainIndex($system_id, $module_id, $goal_code, $create_obj_if_not_found = true);
 
                         $action = 'created';
