@@ -348,12 +348,13 @@ class Auser extends UmsObject implements AfwFrontEndUser
          * @param array $moduleToGiveArr an array with module code as key and array
          */
 
-        public function giveMeTheseModulesAnRoles($moduleToGiveArr)  // ,$my_org_id = 3
+        public function giveMeTheseModulesAnRoles($moduleToGiveArr, $rolesFromScratchForModules = [])  // ,$my_org_id = 3
         {
                 $countGived = 0;
                 $log_arr = array();
                 foreach ($moduleToGiveArr as $module_id => $module_roles) {
-                        $gived = $this->giveMeModule($module_id, $module_roles, 3, true);
+                        $reset_roles = $rolesFromScratchForModules[$module_id];
+                        $gived = $this->giveMeModule($module_id, $module_roles, 3, true, $reset_roles);
                         if (is_array($module_roles))
                                 $module_roles_txt = implode(',', $module_roles);
                         else $module_roles_txt = $module_roles;
@@ -420,7 +421,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
          * @param int|string $mod
          * @param array|string $roles
          */
-        public function giveMeModule($mod, $roles, $my_org_id = 3, $returnDescription = false)
+        public function giveMeModule($mod, $roles, $my_org_id = 3, $returnDescription = false, $reset_roles = false)
         {
                 global $file_dir_name;
                 if (is_array($roles)) {
@@ -449,12 +450,17 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 }
 
                 $mau = ModuleAuser::loadByMainIndex($my_module_id, $this->getId(), $create_obj_if_not_found = true);
-                $ids_to_remove_arr = array();
+                if ($reset_roles) {
+                        $new_arole_mfk = "," . implode(',', $ids_to_add_arr) . ",";
+                        $mau->set('arole_mfk', $new_arole_mfk);
+                } else {
+                        $ids_to_remove_arr = array();
+                        // throw new AfwRuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true));
+                        $arole_mfk_before = $mau->getVal('arole_mfk');
+                        $mau->addRemoveInMfk('arole_mfk', $ids_to_add_arr, $ids_to_remove_arr);
+                        $arole_mfk_after = $mau->getVal('arole_mfk');
+                }
 
-                // throw new AfwRuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true));
-                $arole_mfk_before = $mau->getVal('arole_mfk');
-                $mau->addRemoveInMfk('arole_mfk', $ids_to_add_arr, $ids_to_remove_arr);
-                $arole_mfk_after = $mau->getVal('arole_mfk');
 
                 // throw new AfwRuntimeException("ids_to_add_arr = ".var_export($ids_to_add_arr,true).", arole_mfk_before = $arole_mfk_before , arole_mfk_after=$arole_mfk_after");
 
