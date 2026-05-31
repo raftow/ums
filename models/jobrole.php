@@ -266,10 +266,13 @@ class Jobrole extends UmsObject
                 switch ($attribute) {
                         case 'mainApplication':
                                 $this_id = $this->getId();
+                                /**
+                                 * @var Domain $domainObj                                                
+                                 */
                                 $domainObj = $this->het("id_domain");
                                 $mainApplication = null;
                                 if ($domainObj)
-                                        $mainApplication = $domainObj->calc('mainApplication');
+                                        $mainApplication = $domainObj->get('mainApplication');
 
                                 if (!$mainApplication) {
                                         $mainApplication = new Module();
