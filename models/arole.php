@@ -17,7 +17,8 @@ class Arole extends UmsObject
     public static $TABLE            = "";
     public static $DB_STRUCTURE = null;
 
-    private $bfList = null;
+    private static $rbfList = [];
+    private static $bfList = [];
 
 
     public function __construct($tablename = "arole")
@@ -366,7 +367,11 @@ class Arole extends UmsObject
 
     public function getMenuBFs($returnBoth = false)
     {
-        $rbfList = $this->get("rbfList");
+        if(!isset(self::$rbfList[$this->id])) 
+        {
+            self::$rbfList[$this->id] = $this->get("rbfList");
+        }
+        
 
         $all_bf_arr = array();
 
@@ -374,7 +379,7 @@ class Arole extends UmsObject
          * @var AroleBF $rbfObj
          */
 
-        foreach ($rbfList as $rbfId => $rbfObj) {
+        foreach (self::$rbfList[$this->id] as $rbfId => $rbfObj) {
             if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) and $rbfObj->sureIs("menu")) {
                 $bfObj = $rbfObj->het("bfunction_id");
                 $bf_id = $rbfObj->getVal("bfunction_id");
@@ -383,7 +388,7 @@ class Arole extends UmsObject
             }
         }
 
-        if ($returnBoth) return [$all_bf_arr, $rbfList];
+        if ($returnBoth) return [$all_bf_arr, self::$rbfList[$this->id]];
         return $all_bf_arr;
     }
 
@@ -565,16 +570,16 @@ class Arole extends UmsObject
                 break;
 
             case "bfList":
-                if (!$this->bfList) {
+                if (!self::$bfList[$this->id]) {
                     $rbfList = $this->get("rbfList");
-                    $this->bfList = [];
+                    self::$bfList[$this->id] = [];
                     foreach ($rbfList as $rbf_id => $rbfItem) {
-                        $this->bfList[$rbfItem->getVal("bfunction_id")] = $rbfItem->get("bfunction_id");
+                        self::$bfList[$this->id][$rbfItem->getVal("bfunction_id")] = $rbfItem->het("bfunction_id");
                     }
                 }
 
 
-                return $this->bfList;
+                return self::$bfList[$this->id];
                 break;
         }
 
