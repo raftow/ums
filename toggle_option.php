@@ -1,5 +1,11 @@
 <?php
-
+      /**
+       * @var Auser $objme
+       * @var string $option
+       * @var string $MODULE
+       * @var string $out_scr
+       * @var array $options_arr
+       */
       $file_dir_name = dirname(__FILE__);
       $objme = AfwSession::getUserConnected();     
       include "$file_dir_name/../ums/module_options.php";

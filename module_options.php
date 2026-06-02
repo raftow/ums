@@ -17,3 +17,5 @@ if ($objme and $objme->isSuperAdmin()) {
    $options_arr["SWITCH_ROOT"] = ["ar" => "صلاحية الروت", "en" => "Root previleges"];
 }
 $options_arr["IGNORE_PREVILEGE_CACHE"] = ["ar" => "تجاهل ملفات ذاكرة التخزين المؤقت للأذونات", "en" => "Ignore prevlieges cache files"];
+$options_arr["RUN_CONSOLE"] = ["ar" => "تشغيل وحدة التحكم", "en" => "Run console"];
+$options_arr["PROCESS_LOURD_MODE"] = ["ar" => "تفعيل وضع العمليات الثقيلة", "en" => "Activate lourd processes mode"];

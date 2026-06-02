@@ -20,6 +20,7 @@ class Arole extends UmsObject
     private static $allRbfList = [];
     private static $rbfList = [];
     private static $bfList = [];
+    private static $childList = [];
 
 
     public function __construct($tablename = "arole")
@@ -440,6 +441,15 @@ class Arole extends UmsObject
         return $all_bf_arr;
     }
 
+
+    public function getMyChildList()
+    {
+        if (!isset(self::$childList[$this->id])) {
+            self::$childList[$this->id] = $this->get("childList");
+        }
+        return self::$childList[$this->id];
+    }
+
     /*
         
         canDoBF Mean that This role or one of its sub-folders have this BF in BF authorised list 
@@ -461,7 +471,7 @@ class Arole extends UmsObject
         if ($rbf->load()) {
             return true;
         } else {
-            $this_sub_folders = $this->get("childList");
+            $this_sub_folders = $this->getMyChildList();
             foreach ($this_sub_folders as $sub_folder_item) {
                 if ($sub_folder_item and (is_object($sub_folder_item)) and $sub_folder_item->isActive()) {
                     if ($sub_folder_item->canDoBF($bf_id)) return true;
@@ -490,7 +500,7 @@ class Arole extends UmsObject
         if ($rbf->load()) {
             return "bf $bf_id found in role $this_id as bf item authorized (tab.arole_bf)";
         } else {
-            $this_sub_folders = $this->get("childList");
+            $this_sub_folders = $this->getMyChildList();
             foreach ($this_sub_folders as $sub_folder_item) {
                 if ($sub_folder_item and (is_object($sub_folder_item)) and $sub_folder_item->isActive()) {
                     if ($sub_folder_item->canDoBF($bf_id)) {
@@ -517,7 +527,7 @@ class Arole extends UmsObject
                if (strpos($bfunction_mfk, $token) !== FALSE) return true;
                else 
                {
-                      $this_sub_folders = $this->get("childList");
+                      $this_sub_folders = $this->getMyChildList();
                       foreach($this_sub_folders as $sub_folder_item)
                       {
                          if($sub_folder_item and (is_object($sub_folder_item)) and $sub_folder_item->isActive())
@@ -739,7 +749,7 @@ class Arole extends UmsObject
 
         $menu_folder["sub-folders"] = array();
         if ($returnSubFolders) {
-            $this_folders = $this->get("childList");
+            $this_folders = $this->getMyChildList();
 
             foreach ($this_folders as $folder_item) {
                 if ($folder_item and (is_object($folder_item)) and $folder_item->isActive()) {
@@ -1111,7 +1121,7 @@ class Arole extends UmsObject
 
         $childs = array();
 
-        $childs[5] =  $this->get("childList");
+        $childs[5] =  $this->getMyChildList();
         $childs[6] =  $this->get("bfList");
 
         return array($category_id, $type_id, $code, $name_ar, $name_en, $specification, $childs);
