@@ -17,6 +17,7 @@ class Arole extends UmsObject
     public static $TABLE            = "";
     public static $DB_STRUCTURE = null;
 
+    private static $allRbfList = [];
     private static $rbfList = [];
     private static $bfList = [];
 
@@ -367,11 +368,9 @@ class Arole extends UmsObject
 
     public function getMenuBFs($returnBoth = false)
     {
-        if(!isset(self::$rbfList[$this->id])) 
-        {
-            self::$rbfList[$this->id] = $this->get("rbfList");
-        }
-        
+        self::loadMyRbfList();
+
+
 
         $all_bf_arr = array();
 
@@ -394,14 +393,16 @@ class Arole extends UmsObject
 
     public function getOtherBFs()
     {
-        $rbfList = $this->get("all_rbfList");
+        if (!isset(self::$allRbfList[$this->id])) {
+            self::$allRbfList[$this->id] = $this->get("all_rbfList");
+        };
 
         $all_bf_arr = array();
         /**
          * @var AroleBf $rbfObj
          * */
 
-        foreach ($rbfList as $rbfId => $rbfObj) {
+        foreach (self::$allRbfList[$this->id] as $rbfId => $rbfObj) {
             if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) /* and $rbfObj->isNot("menu")*/) {
                 $bfObj = $rbfObj->het("bfunction_id");
                 $bf_id = $rbfObj->getVal("bfunction_id");
@@ -413,15 +414,21 @@ class Arole extends UmsObject
         return $all_bf_arr;
     }
 
+    public function loadMyRbfList()
+    {
+        if (!isset(self::$rbfList[$this->id])) {
+            self::$rbfList[$this->id] = $this->get("rbfList");
+        }
+    }
 
 
     public function getAllBFs()
     {
-        $rbfList = $this->get("rbfList");
+        self::loadMyRbfList();
 
         $all_bf_arr = array();
 
-        foreach ($rbfList as $rbfId => $rbfObj) {
+        foreach (self::$rbfList[$this->id] as $rbfId => $rbfObj) {
             if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0)) {
                 $bfObj = $rbfObj->het("bfunction_id");
                 $bf_id = $rbfObj->getVal("bfunction_id");
@@ -570,20 +577,23 @@ class Arole extends UmsObject
                 break;
 
             case "bfList":
-                if (!self::$bfList[$this->id]) {
-                    $rbfList = $this->get("rbfList");
-                    self::$bfList[$this->id] = [];
-                    foreach ($rbfList as $rbf_id => $rbfItem) {
-                        self::$bfList[$this->id][$rbfItem->getVal("bfunction_id")] = $rbfItem->het("bfunction_id");
-                    }
-                }
-
-
-                return self::$bfList[$this->id];
+                return $this->getMyBFList();
                 break;
         }
 
         return AfwFormulaHelper::calculateFormulaResult($this, $attribute, $what);
+    }
+
+    public function getMyBFList()
+    {
+        if (!self::$bfList[$this->id]) {
+            self::loadMyRbfList();
+            self::$bfList[$this->id] = [];
+            foreach (self::$rbfList[$this->id] as $rbf_id => $rbfItem) {
+                self::$bfList[$this->id][$rbfItem->getVal("bfunction_id")] = $rbfItem->het("bfunction_id");
+            }
+        }
+        return self::$bfList[$this->id];
     }
 
     public function genereRoleMenuPhp($lang = 'ar')
