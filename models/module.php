@@ -2493,8 +2493,8 @@ class Module extends UmsObject
                     $this->deleteNotAllowedReason = "Used in some Aroles(s) as Module";
                     return false;
                 }
-                // b au.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("delete from $server_db_prefix"."b au.goal where system_id = '$id' and avail='N'");
+                // cmn.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("delete from $server_db_prefix"."cmn.goal where system_id = '$id' and avail='N'");
                 $obj = new Goal();
                 $obj->where("system_id = '$id'");
                 $nbRecords = $obj->count();
@@ -2502,9 +2502,9 @@ class Module extends UmsObject
                     $this->deleteNotAllowedReason = "Used in some Goals(s) as System";
                     return false;
                 }
-                // b au.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
-                // $this->execQuery("delete from $server_db_prefix"."b au.goal where module_id = '$id' and avail='N'");
-                // require_once "../b au/goal.php";
+                // cmn.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
+                // $this->execQuery("delete from $server_db_prefix"."cmn.goal where module_id = '$id' and avail='N'");
+                // require_once "../cmn/goal.php";
                 $obj = new Goal();
                 $obj->where("module_id = '$id'");
                 $nbRecords = $obj->count();
@@ -2562,10 +2562,10 @@ class Module extends UmsObject
                 $this->execQuery("update $server_db_prefix" . "ums.bfunction set curr_class_module_id='$id_replace' where curr_class_module_id='$id' ");
                 // ums.arole-التطبيق	module_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix" . "ums.arole set module_id='$id_replace' where module_id='$id' ");
-                // b au.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix" . "b" . "au.goal set system_id='$id_replace' where system_id='$id' ");
-                // b au.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
-                $this->execQuery("update $server_db_prefix" . "b" . "au.goal set module_id='$id_replace' where module_id='$id' ");
+                // cmn.goal-تحقيق الهدف عبر نظام	system_id  أنا تفاصيل لها-OneToMany
+                $this->execQuery("update $server_db_prefix" . "cmn.goal set system_id='$id_replace' where system_id='$id' ");
+                // cmn.goal-تحقيق الهدف عبر تطبيق	module_id  أنا تفاصيل لها-OneToMany
+                $this->execQuery("update $server_db_prefix" . "cmn.goal set module_id='$id_replace' where module_id='$id' ");
                 // ums.module_auser-الوحدة أو المشروع	id_module  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix" . "ums.module_auser set id_module='$id_replace' where id_module='$id' ");
                 // ums.module_orgunit-النظام/ التطبيق	id_module  أنا تفاصيل لها-OneToMany
@@ -2574,9 +2574,9 @@ class Module extends UmsObject
                 // $this->execQuery("update $server_db_prefix"."sdd.ptask set project_module_id='$id_replace' where project_module_id='$id' ");
                 // sdd.ptask-النظام / الـتطبيق	module_id  أنا تفاصيل لها-OneToMany
                 // $this->execQuery("update $server_db_prefix"."sdd.ptask set module_id='$id_replace' where module_id='$id' ");
-                // b au.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
+                // cmn.user_story-النظام	system_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix" . "b" . "au.user_story set system_id='$id_replace' where system_id='$id' ");
-                // b au.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
+                // cmn.user_story-التطبيق	module_id  أنا تفاصيل لها-OneToMany
                 $this->execQuery("update $server_db_prefix" . "b" . "au.user_story set module_id='$id_replace' where module_id='$id' ");
                 // ums.module-النظام	id_system  حقل يفلتر به-ManyToOne
                 $this->execQuery("update $server_db_prefix" . "ums.module set id_system='$id_replace' where id_system='$id' ");
@@ -2635,7 +2635,7 @@ class Module extends UmsObject
         $ustr0->set("user_story_goal_id", 0, true);
         $ustr0->select("source", "auto-generated");
         $ustr0->where("(system_id = $system_id or module_id = $module_id)");
-        $ustr0->where("user_story_goal_id not in (select id from $server_db_prefix"."b au.goal where system_id=$my_system_id and goal_code like 'manual%')");
+        $ustr0->where("user_story_goal_id not in (select id from $server_db_prefix"."cmn.goal where system_id=$my_system_id and goal_code like 'manual%')");
         $ustr0->update(false);*/
 
         // throw new AfwRuntimeException("see my query : ",array("SQL"=>true));
@@ -2666,7 +2666,7 @@ class Module extends UmsObject
         $rl0 = new Arole;
 
         $rl0->select("module_id", $module_id);
-        $rl0->where("(role_code like '$application_code-module-%' or role_code = '$application_code-lookup')");   // 
+        $rl0->where("(role_code like '$application_code-module-%' or role_code = '$application_code-lookups')");   // 
         $rl0->logicDelete(true, false);
     }
 
@@ -2911,7 +2911,7 @@ class Module extends UmsObject
 
         if (!$jrObj) {
             $appCode = $this->getVal("module_code");
-            $code_jr = $appCode . "-lookup";
+            $code_jr = $appCode . "-lookups";
             $jrObj = Jobrole::loadByMainIndex($domain->getId(), $code_jr, false);
         }
 

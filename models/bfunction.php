@@ -866,14 +866,18 @@ class Bfunction extends UmsObject
                         $bf_specification = $this->getVal("bf_specification");
                         $file_specification = $this->getVal("file_specification");
                         $tableObj = $this->getCurrTable();
-                        $tableObj_id = $tableObj->id;
-                        $tableObj_name = $tableObj->getVal("atable_name");
-                        $cl = $tableObj->getTableClass();
-                        $currmod_obj = $tableObj->hetModule();
-                        if (!$currmod_obj) throw new AfwRuntimeException("This BF id = $this_id ($file_specification) is related to table ($tableObj_id) $tableObj_name that does'nt have module defined !");
-                        $currmod = $currmod_obj->getVal("module_code");
-                        $url = "main.php?Main_Page=afw_mode_" . $file_specification . ".php&cl=$cl&currmod=$currmod";
-                        if ($bf_specification and ($bf_specification != "none")) $url .= "&$bf_specification";
+                        if($tableObj)
+                        {
+                                $tableObj_id = $tableObj->id;
+                                $tableObj_name = $tableObj->getVal("atable_name");
+                                $cl = $tableObj->getTableClass();
+                                $currmod_obj = $tableObj->hetModule();
+                                if (!$currmod_obj) throw new AfwRuntimeException("This BF id = $this_id ($file_specification) is related to table ($tableObj_id) $tableObj_name that does'nt have module defined !");
+                                $currmod = $currmod_obj->getVal("module_code");
+                                $url = "main.php?Main_Page=afw_mode_" . $file_specification . ".php&cl=$cl&currmod=$currmod";
+                                if ($bf_specification and ($bf_specification != "none")) $url .= "&$bf_specification";        
+                        }
+                        else return "not able to deduce url for this BF because related table with id ".$this->getVal("curr_class_atable_id")." not found !";                        
                 } else {
                         $direct_access = $this->is("direct_access");
                         $bf_specification = $this->getVal("bf_specification");

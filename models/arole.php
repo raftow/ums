@@ -281,7 +281,7 @@ class Arole extends UmsObject
 
         if (!$application_code) throw new AfwRuntimeException("$applicationObj has not an application code");
 
-        $role_code = "$application_code-lookup";
+        $role_code = "$application_code-lookups";
 
         $titre_short          = "البيانات المرجعية";
         $titre_short_en       = "Lookup data";

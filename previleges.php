@@ -2489,7 +2489,7 @@ $role_info = array(
   ),
   199 =>
   array(
-    'code' => 'ums-lookup',
+    'code' => 'ums-lookups',
     'name' =>
     array(
       'ar' => 'البيانات المرجعية',
