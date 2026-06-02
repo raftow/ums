@@ -271,7 +271,7 @@ class UmsAroleAfwStructure
 			'READONLY' => true,
 			'TYPE' => 'INT',
 			'CATEGORY' => 'FORMULA',
-			'PHP_FORMULA' => 'countItems.childList',
+			'PHP_FORMULA' => 'countFKItems.childList',
 			'STEP' => 3,
 			'SEARCH-BY-ONE' => '',
 			'DISPLAY' => true,
