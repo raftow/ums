@@ -585,8 +585,8 @@ class Jobrole extends UmsObject
                 if ($id) {
                         if ($id_replace == 0) {
                                 $server_db_prefix = AfwSession::currentDBPrefix();  // FK part of me - not deletable
-                                // cmn.goal-المهمة الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
-                                // $this->execQuery("delete from ".$server_db_prefix."cmn.goal where jobrole_id = '$id' and avail='N'");
+                                // bau.goal-المهمة الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
+                                // $this->execQuery("delete from ".$server_db_prefix."bau.goal where jobrole_id = '$id' and avail='N'");
                                 $obj = new Goal();
                                 $obj->where("jobrole_id = '$id'");
                                 $nbRecords = $obj->count();
@@ -626,16 +626,16 @@ class Jobrole extends UmsObject
                                 // $this->execQuery("update ".$server_db_prefix."crm.request_type set authorized_jobrole_mfk=REPLACE(authorized_jobrole_mfk, ',$id,', ',') where authorized_jobrole_mfk like '%,$id,%' ");
                         } else {
                                 $server_db_prefix = AfwSession::currentDBPrefix();  // FK on me
-                                // cmn.goal-المهمة الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
-                                $this->execQuery('update ' . $server_db_prefix . "cmn.goal set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                                // bau.goal-المهمة الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
+                                $this->execQuery('update ' . $server_db_prefix . "bau.goal set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // ums.job_arole-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
                                 $this->execQuery('update ' . $server_db_prefix . "ums.job_arole set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // sdd.job_permission-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
                                 // $this->execQuery("update ".$server_db_prefix."sdd.job_permission set jobrole_id='$id_replace' where jobrole_id='$id' ");
-                                // b au.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
-                                // $this->execQuery("update ".$server_db_prefix."b au.user_story set jobrole_id='$id_replace' where jobrole_id='$id' ");
-                                // b au.goal_concern-الصلاحية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
-                                // $this->execQuery("update ".$server_db_prefix."b au.goal_concern set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                                // cmn.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
+                                // $this->execQuery("update ".$server_db_prefix."cmn.user_story set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                                // cmn.goal_concern-الصلاحية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
+                                // $this->execQuery("update ".$server_db_prefix."cmn.goal_concern set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // ums.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
                                 $this->execQuery('update ' . $server_db_prefix . "ums.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // ums.module-وظيفة مسؤول الأعمال	id_analyst  حقل يفلتر به-ManyToOne
