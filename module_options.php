@@ -19,3 +19,4 @@ if ($objme and $objme->isSuperAdmin()) {
 $options_arr["IGNORE_PREVILEGE_CACHE"] = ["ar" => "تجاهل ملفات ذاكرة التخزين المؤقت للأذونات", "en" => "Ignore prevlieges cache files"];
 $options_arr["RUN_CONSOLE"] = ["ar" => "تشغيل وحدة التحكم", "en" => "Run console"];
 $options_arr["PROCESS_LOURD_MODE"] = ["ar" => "تفعيل وضع العمليات الثقيلة", "en" => "Activate lourd processes mode"];
+$options_arr["SHOW_ITEMS_ATTRIBUTES"] = ["ar" => "عرض حقول ايتمز", "en" => "Show items attributes"];
