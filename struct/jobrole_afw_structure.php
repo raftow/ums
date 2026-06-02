@@ -127,6 +127,7 @@ class UmsJobroleAfwStructure
 			'ERROR-CHECK' => true,
 			'WHERE' => '',
 			'SHOW' => true,
+			'RETRIEVE' => true,
 			'FORMAT' => 'retrieve',
 			'EDIT' => true,
 			'ICONS' => true,
