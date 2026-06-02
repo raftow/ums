@@ -363,9 +363,9 @@ class Bfunction extends UmsObject
                                 foreach ($goalConcernList as $goalConcernObj) {
                                         $goalConcernObj_display = $goalConcernObj->getShortDisplay($lang);
 
-                                        $jroleObj = $goalConcernObj->hetJobrole();
-                                        if ($jroleObj) {
-                                                $ustr = UserStory::loadByMainIndex($system_id, $module_id, $jroleObj->getId(), $this->getId(), $create_obj_if_not_found = true);
+                                        $jroleObj = $goalConcernObj->het("jobrole_id");
+                                        if ($jroleObj and $jroleObj->id) {
+                                                $ustr = UserStory::loadByMainIndex($system_id, $module_id, $jroleObj->id, $this->id, $create_obj_if_not_found = true);
                                                 $goal_id = $goalConcernObj->getVal("goal_id");
                                                 $arole_id = $goalConcernObj->getVal("arole_id");
                                                 $ustr->set("user_story_goal_id", $goal_id);
