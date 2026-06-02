@@ -321,7 +321,7 @@ class UmsJobroleAfwStructure
 			'TYPE' => 'TEXT',
 			'CATEGORY' => 'FORMULA',
 			'SHOW' => true,
-			'RETRIEVE' => true,
+			// 'RETRIEVE' => true,
 			'EDIT' => true,
 			'QEDIT' => false,
 			'READONLY' => true,
