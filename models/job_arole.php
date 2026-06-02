@@ -66,6 +66,16 @@ class JobArole extends AFWObject{
            
         }
 
+        public function getShortDisplay($lang="ar")
+        {
+               $data = array();
+               $link = array();
+               
+               list($data[1],$link[1]) = $this->displayAttribute("module_id",false, $lang);
+               list($data[2],$link[2]) = $this->displayAttribute("arole_id",false, $lang);
+               
+               return implode(" - ",$data);
+        }
 
         public function getDisplay($lang="ar")
         {
