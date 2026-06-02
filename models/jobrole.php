@@ -606,8 +606,8 @@ class Jobrole extends UmsObject
                                 // $this->execQuery("delete from ".$server_db_prefix."b au.goal_concern where jobrole_id = '$id' ");
 
                                 // FK not part of me - replaceable
-                                // ums.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
-                                $this->execQuery('update ' . $server_db_prefix . "ums.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                                // pag.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
+                                $this->execQuery('update ' . $server_db_prefix . "pag.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // ums.module-وظيفة مسؤول الأعمال	id_analyst  حقل يفلتر به-ManyToOne
                                 $this->execQuery('update ' . $server_db_prefix . "ums.module set id_analyst='$id_replace' where id_analyst='$id' ");
                                 // ums.module-وظيفة مسؤول المراقبة	id_hd  حقل يفلتر به-ManyToOne
@@ -616,8 +616,8 @@ class Jobrole extends UmsObject
                                 $this->execQuery('update ' . $server_db_prefix . "ums.module set id_br='$id_replace' where id_br='$id' ");
 
                                 // MFK
-                                // ums.atable-وظائف صلاحية العرض	jobrole_mfk
-                                $this->execQuery('update ' . $server_db_prefix . "ums.atable set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
+                                // pag.atable-وظائف صلاحية العرض	jobrole_mfk
+                                $this->execQuery('update ' . $server_db_prefix . "pag.atable set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
                                 // ums.module-وظائف صلاحية العرض	jobrole_mfk
                                 $this->execQuery('update ' . $server_db_prefix . "ums.module set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
                                 // hrm.employee-وظائف الصلاحيات	jobrole_mfk
@@ -636,8 +636,8 @@ class Jobrole extends UmsObject
                                 // $this->execQuery("update ".$server_db_prefix."cmn.user_story set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // cmn.goal_concern-الصلاحية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
                                 // $this->execQuery("update ".$server_db_prefix."cmn.goal_concern set jobrole_id='$id_replace' where jobrole_id='$id' ");
-                                // ums.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
-                                $this->execQuery('update ' . $server_db_prefix . "ums.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                                // pag.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
+                                $this->execQuery('update ' . $server_db_prefix . "pag.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
                                 // ums.module-وظيفة مسؤول الأعمال	id_analyst  حقل يفلتر به-ManyToOne
                                 $this->execQuery('update ' . $server_db_prefix . "ums.module set id_analyst='$id_replace' where id_analyst='$id' ");
                                 // ums.module-وظيفة مسؤول المراقبة	id_hd  حقل يفلتر به-ManyToOne
@@ -646,8 +646,8 @@ class Jobrole extends UmsObject
                                 $this->execQuery('update ' . $server_db_prefix . "ums.module set id_br='$id_replace' where id_br='$id' ");
 
                                 // MFK
-                                // ums.atable-وظائف صلاحية العرض	jobrole_mfk
-                                $this->execQuery('update ' . $server_db_prefix . "ums.atable set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
+                                // pag.atable-وظائف صلاحية العرض	jobrole_mfk
+                                $this->execQuery('update ' . $server_db_prefix . "pag.atable set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
                                 // ums.module-وظائف صلاحية العرض	jobrole_mfk
                                 $this->execQuery('update ' . $server_db_prefix . "ums.module set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
                                 // hrm.employee-وظائف الصلاحيات	jobrole_mfk
