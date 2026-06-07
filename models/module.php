@@ -21,8 +21,8 @@ class Module extends UmsObject
     // MINI_APPLICATION - mini_application  
     public static $MODULE_TYPE_MINI_APPLICATION = 8;
 
-    // MODULE - module  
-    public static $MODULE_TYPE_MODULE = 6;
+    // SCHEMA - sub-module  
+    public static $MODULE_TYPE_SCHEMA_SUB_MODULE = 6;
 
     // SYSTEM - system  
     public static $MODULE_TYPE_SYSTEM = 7;
@@ -1746,6 +1746,15 @@ class Module extends UmsObject
                     $pbms["1ac55M"] = array("METHOD"=>"createUpdateMyRole","COLOR"=>$color, "LABEL_AR"=>$title_ar);
             }
             */
+
+
+
+        if ($this->isSchema()) {
+            $color = "green";
+            $title_ar = "استخراج مخطط الوحدة حول جدول رئيسي معين";
+            $pbms["88a3xy"] = array("METHOD" => "loadAroundSchemaForMainAtableId", "COLOR" => $color, "LABEL_AR" => $title_ar);
+        }
+
         if ($this->isSystem()) {
             $color = "yellow";
             $title_ar = "توليد  المهمات";
@@ -2291,10 +2300,14 @@ class Module extends UmsObject
 
     public function isModule()
     {
-        return (($this->getVal("id_module_type") == self::$MODULE_TYPE_MINI_APPLICATION) or
-            ($this->getVal("id_module_type") == self::$MODULE_TYPE_MODULE)
-        );
+        return (($this->getVal("id_module_type") == self::$MODULE_TYPE_MINI_APPLICATION));
     }
+
+    public function isSchema()
+    {
+        return (($this->getVal("id_module_type") == self::$MODULE_TYPE_SCHEMA_SUB_MODULE));
+    }
+
 
     public function isApplication()
     {
@@ -2344,9 +2357,46 @@ class Module extends UmsObject
 
         if ($attribute == "applicationGoalList") return $this->isApplication();
 
+        if ($attribute == "schema_atable_mfk") return $this->isSchema();
+        if ($attribute == "schema_main_atable_id") return $this->isSchema();
+
         //this is false if($attribute=="module_code") return ($this->getVal("id_module_type")==5);
 
         return true;
+    }
+
+    public function loadAroundSchemaForMainAtableId($lang= "ar", $important = true) {
+        $errors = [];
+        $informations = [];
+        $warnings = [];
+        /**
+         * @var Atable $mainTable 
+         */
+        $mainTable = $this->het("schema_main_atable_id");
+        if($mainTable) {            
+            $schema_atable_arr = $mainTable->getAroundTables($important);
+            $this->addRemoveInMfk("schema_atable_mfk", $schema_atable_arr, []);
+            $this->update();
+        }
+
+        AfwFormatHelper::pbm_result($errors, $informations, $warnings);
+        
+    }
+
+    public function updateSchemaMainAtableId($commit=false, $force=false) {
+        if(!$this->getVal("schema_main_atable_id") or $force) {
+            $atableList = $this->get("schema_atable_mfk");
+            $nb_fks = 0;
+            $schema_main_atable_id = 0;
+            foreach ($atableList as $atableItem) {
+                    if ($atableItem->nbFKs() > $nb_fks) {
+                        $schema_main_atable_id = $atableItem->id;
+                        $nb_fks = $atableItem->nbFKs();
+                    }
+            }
+            $this->set("schema_main_atable_id", $schema_main_atable_id);
+            if($commit) $this->update();
+        }
     }
 
     public function findModule($new_id_module_parent, $new_id_system, $titre_short)

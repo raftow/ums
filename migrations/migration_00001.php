@@ -86,6 +86,9 @@ create unique index uk_new_role on nauss_ums.new_role(system_id,module_id,new_ro
 */
 
 
+AfwDatabase::db_query("ALTER TABLE " . $server_db_prefix . "ums.module add   schema_atable_mfk text  DEFAULT NULL  AFTER dbsystem_id;");
+AfwDatabase::db_query("ALTER TABLE " . $server_db_prefix . "ums.module add   schema_main_atable_id int(11)  DEFAULT 0  AFTER schema_atable_mfk;");
+
 AfwDatabase::db_query("ALTER TABLE " . $server_db_prefix . "ums.country add   external_code varchar(16)  DEFAULT NULL  AFTER lookup_code;");
 
 // AfwDatabase::db_query("DROP TABLE IF EXISTS " . $server_db_prefix . "ums.user_param");

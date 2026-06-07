@@ -53,6 +53,9 @@ $trad["module"]["id_module_type"] = "نوع التطبيق";
 $trad["module"]["id_module_parent"] = "التطبيق الأم";
 $trad["module"]["id_system"] = "النظام";
 
+$trad["module"]["schema_atable_mfk"] = "جداول السكيما";
+$trad["module"]["schema_main_atable_id"] = "الجدول الرئيسي للسكيما";
+
 $trad["module"]["shs"] =  "الجهات المستفيدة من التطبيق";
 $trad["module"]["smd"] =  "الوحدات الفرعية";
 $trad["module"]["mybfs"] =  "الوظائف لهذا التطبيق";
