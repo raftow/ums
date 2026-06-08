@@ -1970,6 +1970,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
         public function calcPhp($text_area = true, $php_datetime = "")
         {
                 $source_php = '';
+                UfwQueryAnalyzer::startProcessLourdMode();
                 if ($text_area)
                         $source_php .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
                 $source_php .= "<?php\n\t\t// generated at : $php_datetime\n";  // ";
@@ -2049,6 +2050,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 if ($text_area)
                         $source_php .= '</textarea>';  //
+
+
+                UfwQueryAnalyzer::stopProcessLourdMode();
 
                 return $source_php;
         }

@@ -21,6 +21,7 @@ class Arole extends UmsObject
     private static $rbfList = [];
     private static $bfList = [];
     private static $childList = [];
+    private static $otherBFs = [];
 
 
     public function __construct($tablename = "arole")
@@ -394,25 +395,27 @@ class Arole extends UmsObject
 
     public function getOtherBFs()
     {
-        if (!isset(self::$allRbfList[$this->id])) {
-            self::$allRbfList[$this->id] = $this->get("all_rbfList");
-        };
+        if (!isset(self::$otherBFs[$this->id])) {
+            if (!isset(self::$allRbfList[$this->id])) {
+                self::$allRbfList[$this->id] = $this->get("all_rbfList");
+            };
 
-        $all_bf_arr = array();
-        /**
-         * @var AroleBf $rbfObj
-         * */
+            self::$otherBFs[$this->id] = array();
+            /**
+             * @var AroleBf $rbfObj
+             * */
 
-        foreach (self::$allRbfList[$this->id] as $rbfId => $rbfObj) {
-            if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) /* and $rbfObj->isNot("menu")*/) {
-                $bfObj = $rbfObj->het("bfunction_id");
-                $bf_id = $rbfObj->getVal("bfunction_id");
-                // die("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
-                $all_bf_arr[$bf_id] = $bfObj;
+            foreach (self::$allRbfList[$this->id] as $rbfId => $rbfObj) {
+                if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) /* and $rbfObj->isNot("menu")*/) {
+                    $bfObj = $rbfObj->het("bfunction_id");
+                    $bf_id = $rbfObj->getVal("bfunction_id");
+                    // die("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
+                    self::$otherBFs[$this->id][$bf_id] = $bfObj;
+                }
             }
         }
 
-        return $all_bf_arr;
+        return self::$otherBFs[$this->id];
     }
 
     public function loadMyRbfList()

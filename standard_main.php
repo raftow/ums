@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var string $file_dir_name
+ * @var string $MODULE
+ */
 // IMPORTANT !!!!!!!!
 // keep $file_dir_name variable not defined here but coming from each module's main.php file
 include_once ("$file_dir_name/ini.php");

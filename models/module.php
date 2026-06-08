@@ -725,7 +725,10 @@ class Module extends UmsObject
         return AfwFormulaHelper::calculateFormulaResult($this, $attribute);
     }
 
+    public function calcSchema_html($what = "value")
+    {
 
+    }
 
 
     public function calcBfIcons($what = "value")
@@ -1731,6 +1734,9 @@ class Module extends UmsObject
         }
         return array("", "$ret tables migrated to new module (ID=$brotherModuleId)");
     }
+
+
+    
 
 
     protected function getPublicMethods()
