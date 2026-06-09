@@ -4503,3 +4503,88 @@ div#div_data_arole_mfk {
     font-size: 18px;
     font-family: monospace;
 }
+
+
+table#schema {
+    width: 1200px !important;
+    height: 1200px !important;
+}
+
+div#div_data_schema {
+    overflow: scroll;
+}
+
+th.thetitle {
+    text-align: center;
+    font-style: normal !important;
+    background-color: aliceblue;
+    font-family: menu;
+}
+
+
+th.thename {
+    text-align: center;
+    font-weight: normal;
+}
+
+td.scell {
+    width: 340px;
+    padding: 20px;
+}
+
+table.schema-table {
+    border: 1px solid gray;
+    margin: 0px;
+    min-width: 300px;
+}
+
+span.sql.title {
+    margin: 0;
+    float: right;
+    font-size: 80%;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+td.field {
+    border-bottom: 1px dashed silver !important;
+}
+
+span.sql.key {
+    background-color: #5d97fb;
+    padding: 0 4px;
+    border-radius: 6px;
+    margin-top: 3px;
+    margin-right: 3px;
+    color: white;
+    float: right;
+    font-size: 80%;
+}
+
+span.sql.fk {
+    background-color: #47c311;
+    padding: 0 4px;
+    border-radius: 6px;
+    margin-top: 3px;
+    margin-right: 3px;
+    color: white;
+    float: right;
+    font-size: 80%;
+}
+
+span.sql.om {
+    background-color: #9511c3;
+    padding: 0 4px;
+    border-radius: 6px;
+    margin-top: 3px;
+    margin-right: 3px;
+    color: white;
+    float: right;
+    font-size: 80%;
+}
+
+td.key {
+    background-color: #f1f1f1;
+    padding: 3px 9px;
+}

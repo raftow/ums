@@ -24,9 +24,9 @@ $trad["module"]["aroles"] = "صلاحيات التطبيق";
 $trad["module"]["allRoles"] = "شجرة صلاحيات التطبيق";
 
 
-$trad["module"]["module.single"] = "تطبيق";
-$trad["module"]["module.new"] = "جديد";
-$trad["module"]["module"] = "التطبيقات";
+$trad["module"]["module.single"] = "وحدة برمجية";
+$trad["module"]["module.new"] = "جديدة";
+$trad["module"]["module"] = "الوحدات البرمجية";
 
 $trad["module"]["titre"] = "مسمى التطبيق";
 $trad["module"]["titre_short"] = "المسمى المختصر للتطبيق";

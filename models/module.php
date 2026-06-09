@@ -1141,8 +1141,12 @@ class Module extends UmsObject
             // die("je suis la, id_module_type='".$this->getVal("id_module_type")."'");
 
 
-            if (($this->getVal("id_module_type") == 6) or
-                ($this->getVal("id_module_type") == 8)
+            
+            
+            
+
+            if (($this->getVal("id_module_type") == self::$MODULE_TYPE_APPLICATION) or
+                ($this->getVal("id_module_type") == self::$MODULE_TYPE_MINI_APPLICATION)
             ) {
 
                 $smod_id = $this->getId();
@@ -1757,8 +1761,12 @@ class Module extends UmsObject
 
         if ($this->isSchema()) {
             $color = "green";
-            $title_ar = "استخراج مخطط الوحدة حول جدول رئيسي معين";
+            $title_ar = "استخراج مخطط الوحدة حول جدول الجدول الرئيسي";
             $pbms["88a3xy"] = array("METHOD" => "loadAroundSchemaForMainAtableId", "COLOR" => $color, "LABEL_AR" => $title_ar);
+
+            $color = "orange";
+            $title_ar = "استخراج الجداول المطلوبة من قبل الجدول الرئيسي";
+            $pbms["8htmly"] = array("METHOD" => "loadMyNeededSchemaForMainAtableId", "COLOR" => $color, "LABEL_AR" => $title_ar);
         }
 
         if ($this->isSystem()) {
@@ -2362,7 +2370,12 @@ class Module extends UmsObject
         if ($attribute == "id_main_sh") return ($this->isSystem() or $this->isApplication());
 
         if ($attribute == "applicationGoalList") return $this->isApplication();
+        if ($attribute == "php_module") return $this->isApplication();
+        if ($attribute == "php_modules_all") return $this->isApplication();
+        
+        
 
+        if ($attribute == "schema") return $this->isSchema();
         if ($attribute == "schema_atable_mfk") return $this->isSchema();
         if ($attribute == "schema_main_atable_id") return $this->isSchema();
 
@@ -2380,12 +2393,41 @@ class Module extends UmsObject
          */
         $mainTable = $this->het("schema_main_atable_id");
         if($mainTable) {            
-            $schema_atable_arr = $mainTable->getAroundTables($important);
-            $this->addRemoveInMfk("schema_atable_mfk", $schema_atable_arr, []);
-            $this->update();
+            list($schema_atable_arr, $schema_atable_names_arr) = $mainTable->getAroundTables($important);
+            if(count($schema_atable_arr)>0) {
+                $this->addRemoveInMfk("schema_atable_mfk", $schema_atable_arr, []);
+                $this->update();
+                $informations[] = "tables around are : ".implode(",",$schema_atable_names_arr);
+            }
+            else $warnings[] = "no tables around";
         }
+        else $errors[] = "no valid main table selected";
 
-        AfwFormatHelper::pbm_result($errors, $informations, $warnings);
+        return AfwFormatHelper::pbm_result($errors, $informations, $warnings);
+        
+    }
+
+
+    public function loadMyNeededSchemaForMainAtableId($lang= "ar", $important = true) {
+        $errors = [];
+        $informations = [];
+        $warnings = [];
+        /**
+         * @var Atable $mainTable 
+         */
+        $mainTable = $this->het("schema_main_atable_id");
+        if($mainTable) {            
+            list($schema_atable_arr, $schema_atable_names_arr) = $mainTable->getNeededTables($important);
+            if(count($schema_atable_arr)>0) {
+                $this->addRemoveInMfk("schema_atable_mfk", $schema_atable_arr, []);
+                $this->update();
+                $informations[] = "tables around are : ".implode(",",$schema_atable_names_arr);
+            }
+            else $warnings[] = "no tables around";
+        }
+        else $errors[] = "no valid main table selected";
+
+        return AfwFormatHelper::pbm_result($errors, $informations, $warnings);
         
     }
 
@@ -3170,6 +3212,105 @@ class Module extends UmsObject
     }
 
     public function getSystem() {}
+
+    public function calcSchema($what="value") {
+            $cells = [];           
+
+            for($r=0; $r<5; $r++) for($k=0; $k<5; $k++)  $cells[$r][$k] = "&nbsp;";
+
+            $cObj = $this->het("schema_main_atable_id");
+
+            $cells[2][2] =& $cObj;
+
+
+            $atableList = $this->get("schema_atable_mfk");
+            $atableByImportance = [];
+            $max_nb_fks = 0;
+
+            // شكل لولبي
+            $arrPosSchema = [];
+            $arrPosSchema[1] = ['r'=> 1, 'k'=>2];
+            $arrPosSchema[2] = ['r'=> 1, 'k'=>3];//
+            $arrPosSchema[3] = ['r'=> 2, 'k'=>3];
+            $arrPosSchema[4] = ['r'=> 3, 'k'=>3];//
+            $arrPosSchema[5] = ['r'=> 3, 'k'=>2];
+            $arrPosSchema[6] = ['r'=> 3, 'k'=>1];//
+            $arrPosSchema[7] = ['r'=> 2, 'k'=>1];
+            $arrPosSchema[8] = ['r'=> 1, 'k'=>1];//
+
+             $arrPosSchema[9] = ['r'=>0 , 'k'=>2];
+            $arrPosSchema[11] = ['r'=>0 , 'k'=>3];
+            $arrPosSchema[11] = ['r'=>0 , 'k'=>4];//
+            $arrPosSchema[12] = ['r'=>1 , 'k'=>4];
+            $arrPosSchema[13] = ['r'=>2 , 'k'=>4];
+            $arrPosSchema[14] = ['r'=>3 , 'k'=>4];
+            $arrPosSchema[15] = ['r'=>4 , 'k'=>4];//
+            $arrPosSchema[16] = ['r'=>4 , 'k'=>3];
+            $arrPosSchema[17] = ['r'=>4 , 'k'=>2];
+            $arrPosSchema[18] = ['r'=>4 , 'k'=>1];
+            $arrPosSchema[19] = ['r'=>4 , 'k'=>0];//
+            $arrPosSchema[20] = ['r'=>3 , 'k'=>0];
+            $arrPosSchema[21] = ['r'=>2 , 'k'=>0];
+            $arrPosSchema[22] = ['r'=>1 , 'k'=>0];
+            $arrPosSchema[23] = ['r'=>0 , 'k'=>0];//
+            $arrPosSchema[24] = ['r'=>0 , 'k'=>1];
+
+            // return "rafik dbg atableList=".AfwExportHelper::afwExport($atableList, true);
+
+            foreach ($atableList as $atableItem) {
+                if($atableItem->id != $cObj->id) {
+                    /**
+                     * @var Atable $atableItem 
+                     * */    
+                    $nb_fks = $atableItem->nbFKs();
+                    $atableByImportance[$nb_fks][] = $atableItem;
+                    if ($nb_fks > $max_nb_fks) {
+                        $max_nb_fks = $nb_fks;
+                    }
+                }
+            }
+
+            $nextPos = 1;
+
+            //return "rafik dbg max_nb_fks=$max_nb_fks atableByImportance=".AfwExportHelper::afwExport($atableByImportance, true);
+
+            for($m=$max_nb_fks; $m>=0; $m--) {
+                if(is_array($atableByImportance[$m])) {
+                    foreach($atableByImportance[$m] as $atableSchema) {
+                        if($atableSchema and ($nextPos<=24)) {
+                            $r = $arrPosSchema[$nextPos]['r'];
+                            $k = $arrPosSchema[$nextPos]['k'];
+                            $cells[$r][$k] = $atableSchema;
+                            $nextPos++;
+                        }
+                    }
+                }
+            }
+
+
+            $tbl = new HtmlyTableau('schema', 'schema', 'ltr');
+
+            for($r=0;$r<5;$r++) {
+                $cellsArr = [];                
+                for($k=0;$k<5;$k++) {
+                    $cellsArr["scell r$r k$k"] =& $cells[$r][$k];
+                }
+
+                $tbl->addElement(new HtmlyRowBody("","","", $cellsArr));
+            }
+            
+
+            
+
+
+
+
+            return $tbl->renderHtml();
+            
+    }
+
+
+    
 
 
     /*

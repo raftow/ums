@@ -153,7 +153,13 @@
 				'TYPE' => 'TEXT',  
 				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true, 'MINIBOX' => true,  'READONLY' => true,  'CAN-BE-SETTED' => false,  'SIZE' => 255,  'INPUT_WIDE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),				
+				),		
+				
+		'schema' => array('STEP' => 3,  
+				'TYPE' => 'TEXT', 'FORMAT' => 'html', 
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true, 'MINIBOX' => true,  'READONLY' => true,  'CAN-BE-SETTED' => false,  'SIZE' => 255,  'INPUT_WIDE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),		
 
 
 		'tablecount' => array(
@@ -284,7 +290,7 @@
 			'NO-COTE' => true,
 			'UTF8' => false,
 			'AUTOCOMPLETE' => true,
-			'WHERE' => "id_module = §module_id§ and avail = 'Y'",
+			'WHERE' => "id_module = §id_module_parent§ and avail = 'Y'",
 
 			'DEPENDENCIES' => array(
 				0 => 'module_id',
@@ -312,8 +318,7 @@
 			'SIZE' => 40,
 			'MANDATORY' => true,
 			'UTF8' => false,
-			'AUTOCOMPLETE' => true,
-			'WHERE' => "id in (0,§schema_atable_mfk§,0) and avail = 'Y'",
+			'WHERE' => "id in (0§schema_atable_mfk§0) and avail = 'Y'",
 
 			'DEPENDENCIES' => array(
 				0 => 'module_id',
@@ -323,7 +328,7 @@
 			'ANSMODULE' => 'pag',
 			'SEARCH-BY-ONE' => false,
 			'DISPLAY' => true,
-			'STEP' => 10,
+			'STEP' => 9,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
