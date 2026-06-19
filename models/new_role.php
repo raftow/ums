@@ -264,6 +264,20 @@ class NewRole extends AFWObject
 
     public function beforeMaj($id, $fields_updated)
     {
+        if ($fields_updated["new_role_code"] or true) {
+            $objGoal = $this->getRelatedGoalObject();
+            if ($objGoal) {
+                $object_name_en = $objGoal->getVal('goal_name_en');
+                $object_name_ar = $objGoal->getVal('goal_name_ar');
+                $object_title_en = $objGoal->getVal('goal_desc_en');
+                $object_title_ar = $objGoal->getVal('goal_desc_ar');
+
+                $this->set("new_role_name_ar", $object_name_ar);
+                $this->set("new_role_desc_ar", $object_title_ar);
+                $this->set("new_role_desc_en", $object_title_en);
+                $this->set("new_role_name_en", $object_name_en);
+            }
+        }
         if ($fields_updated["atable_mfk"]) {
             $settings = $this->getVal("settings");
             $aTableList = $this->get("atable_mfk");
