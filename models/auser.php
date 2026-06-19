@@ -736,6 +736,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 AfwSession::contextLog("$atable_id = decodeTable($module_id, $table)", 'iCanDo');
                 AfwSession::contextLog("can i do [$operation] on table $table(id=$atable_id) from module [$module_code](id=$module_id) and system(id=$system_id)", 'iCanDo');
                 $operation_specification = $operation;
+                // for the moment until we manage audit wf operation/mode 
+                // we consider the audit and display same BF
+                if($operation=="audit") $operation="display";
                 $bf_id = UmsManager::decodeBfunction($system_id, $operation, $module_id, $atable_id, '', null, $ignore_cache);
                 // if($atable_id==13336)
                 // die("decoded Bfunction $bf_id ".AfwSession::log_all_data());
@@ -747,7 +750,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         AfwSession::contextLog("iCanDoBF($bf_id) => return=[$return]", 'iCanDo');
                 } else {
                         $return = false;
-                        AfwSession::contextLog("BF ID invalid or BF not found for operation $operation", 'iCanDo');
+                        AfwSession::contextLog("BF not found for operation $operation", 'iCanDo');
                 }
 
                 if (($operation_sql == 'edit') and ($table == 'major_department')) {
