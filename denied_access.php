@@ -64,19 +64,19 @@ if ($MODE_DEVELOPMENT) {
                                 </tr>
                                 <tr>
                                         <th>الخدمة المطلوبة / Requested service</th>
-                                        <td><?php echo AfwSession::pullSessionVar("operation") ?></td>
+                                        <td><?php echo AfwSession::getSessionVar("operation") ?></td>
                                 </tr>
                                 <tr>
                                         <th>النتيجة / Result</th>
-                                        <td><?php echo AfwSession::pullSessionVar("result") ?></td>
+                                        <td><?php echo AfwSession::getSessionVar("result") ?></td>
                                 </tr>
                                 <tr>
                                         <th>التقرير / report </th>
-                                        <td><?php echo AfwSession::pullSessionVar("report") ?></td>
+                                        <td><?php echo AfwSession::getSessionVar("report") ?></td>
                                 </tr>
                                 <tr>
                                         <th>بيانات فنية أخرى </th>
-                                        <td><?php echo AfwSession::pullSessionVar("other_log") ?></td>
+                                        <td><?php echo AfwSession::getSessionVar("other_log") ?></td>
                                 </tr>
                         </table>
         </center>
