@@ -18,7 +18,7 @@
 	$trad["bfunction"]["call_specification"] = "spécification de l'appel";
 	$trad["bfunction"]["module_mfk"] = "modules concernés";
 	$trad["bfunction"]["public"] = "publique";
-        $trad["bfunction"]["arole_mfk"] = "liste des roles permettant d'accéder à cette fonction";
+    $trad["bfunction"]["arole_mfk"] = "liste des groupes permettant d'accéder à cette fonction";
         
         // évèvè à
 ?>

@@ -2281,7 +2281,7 @@ class Module extends UmsObject
         }
 
         $modtopag = $currmod;
-        require_once("$file_dir_name/../../$cc/all_to_pag.php");
+        include_once("$file_dir_name/../../$cc/all_to_pag.php");
         foreach ($arr_all_files as $topag_table) {
             $cl = AfwStringHelper::tableToClass($topag_table);
             if ($cl and (!$pagged_arr[$cl])) {

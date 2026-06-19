@@ -521,7 +521,6 @@ class UmsManager extends AFWRoot
         }
 
         $mv_cmd = "";
-        $php_code = "";
         $fileName = "no-file";
 
         if ($generePhp) {

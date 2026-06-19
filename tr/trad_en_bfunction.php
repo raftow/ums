@@ -23,7 +23,7 @@
 	$trad["bfunction"]["call_specification"] = "specification of B.F call";
 	$trad["bfunction"]["module_mfk"] = "related modules";
 	$trad["bfunction"]["public"] = "public";
-        $trad["bfunction"]["arole_mfk"] = "roles allowing access to this B.F";
+    $trad["bfunction"]["arole_mfk"] = "groups allowing access to this B.F";
         
         
 ?>

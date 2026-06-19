@@ -18,25 +18,26 @@ class AroleArTranslator
                 $trad["arole"]["titre_short_en"] = "المسمى بالانجليزي";
                 $trad["arole"]["system_id"] = "النظام";
                 $trad["arole"]["module_id"] = "التطبيق";
-                $trad["arole"]["arole.single"] = "صلاحية";
+
+                $trad["arole"]["arole.single"] = "مجموعة";
                 $trad["arole"]["arole.new"] = "جديدة";
-                $trad["arole"]["arole"] = "الصلاحيات";
+                $trad["arole"]["arole"] = "المجموعات";
                 // obsolete $trad["arole"]["bfunction_mfk"] = "ما في القائمة من وظائف خاصة (غير الكرود)";
-                $trad["arole"]["childList"] = "الصلاحيات الفرعية";
+                $trad["arole"]["childList"] = "المجموعات الفرعية";
                 $trad["arole"]["rbfList"] = "الوظائف الفرعية المعروضة في القائمة";
                 $trad["arole"]["all_rbfList"] = "جميع الوظائف الفرعية";
                 $trad["arole"]["userStoryList"] = "قصص المستخدم";
 
                 // $trad["arole"]["arole_mfk"] = "مجموعات الخدمات الفرعية";
-                $trad["arole"]["parent_arole_id"] = "الصلاحية الأم";
+                $trad["arole"]["parent_arole_id"] = "المجموعة الأم";
 
-                $trad["arole"]["auser_mfk"] = "من ينتفع بهذه الصلاحية";
-                $trad["arole"]["jobAroleList"] = "المسؤليات التي تستخدم هذه الصلاحية";
+                $trad["arole"]["auser_mfk"] = "من ينتفع بهذه المجموعة";
+                $trad["arole"]["jobAroleList"] = "المسؤليات التي تستخدم هذه المجموعة";
 
-                $trad["arole"]["arole_type_id"] = "نوع الصلاحية";
-                $trad["arole"]["role_code"] = "رمز الصلاحية";
+                $trad["arole"]["arole_type_id"] = "نوع المجموعة";
+                $trad["arole"]["role_code"] = "رمز المجموعة";
 
-                $trad["arole"]["childListCount"] = "عدد الصلاحيات الفرعية";
+                $trad["arole"]["childListCount"] = "عدد المجموعات الفرعية";
                 $trad["arole"]["all_rbfListCount"] = "عدد الوظائف الفرعية";
 
                 return $trad;

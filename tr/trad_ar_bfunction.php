@@ -28,7 +28,7 @@ $trad["bfunction"]["call_specification"] = "طريقة نداء الميزة";
 $trad["bfunction"]["hierarchy_level_enum"] = "المستوى في الهيكل للانتفاع بالميزة";
 $trad["bfunction"]["module_mfk"] = "الوحدات المعنية";
 $trad["bfunction"]["public"] = "للعموم";
-$trad["bfunction"]["arole_mfk"] = "الصلاحيات التي تسمح بالانتفاع بهذه الميزة";
+$trad["bfunction"]["arole_mfk"] = "المجموعات التي تسمح بالانتفاع بهذه الميزة";
 $trad["bfunction"]["is_special"] = "ميزة خاصة غير كرود";
 $trad["bfunction"]["parent_bfunction_id"] = "الميزة العملية الأم";
 
