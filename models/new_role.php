@@ -276,6 +276,11 @@ class NewRole extends AFWObject
                 $this->set("new_role_desc_ar", $object_title_ar);
                 $this->set("new_role_desc_en", $object_title_en);
                 $this->set("new_role_name_en", $object_name_en);
+                $objModule = $this->het("module_id");
+                $objGoal->refreshMyRelatedObjectsAndInfos($objModule);
+
+                $this->set("atable_mfk", $objGoal->getVal('atable_mfk'));
+                $fields_updated["atable_mfk"] = true;
             }
         }
         if ($fields_updated["atable_mfk"]) {
