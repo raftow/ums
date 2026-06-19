@@ -4588,3 +4588,7 @@ td.key {
     background-color: #f1f1f1;
     padding: 3px 9px;
 }
+
+div#div_data_auser_mfk {
+    min-height: 500px;
+}
