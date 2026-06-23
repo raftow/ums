@@ -30,6 +30,10 @@ class UmsLoginService extends AFWRoot
                 list($user_connected, $user_not_connected_reason, $info, $login_dbg[]) = UfwLoginUtilities::ldap_login($user_name_c, $password);
                 // die()
                 // 2. try database or golden login after
+                /**
+                 * @var array $user_infos
+                 */
+                $user_infos = [];
                 if (!$user_connected) {
                         //die("rafik 2 reason=$user_not_connected_reason, info=$info login_dbg=".var_export($login_dbg,true));
                         $login_dbg[] = "try to db_or_golden_login";
@@ -230,10 +234,10 @@ class UmsLoginService extends AFWRoot
 
                 if (!$user_connected) {
                         $msg = "يوجد خطأ في كلمة المرور أو اسم المستخدم. الرجاء التأكد من البيانات المدخلة";
-                        if ($user_not_connected_reason) $msg .= "<!-- " . $user_not_connected_reason." -->";
+                        if ($user_not_connected_reason) $msg .= "<!-- " . $user_not_connected_reason . " -->";
                         $authenticationData["message"] = $msg;
                 }
 
                 return $authenticationData;
-        }        
+        }
 }

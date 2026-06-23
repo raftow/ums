@@ -110,7 +110,7 @@ class UmsManager extends AFWRoot
                 $role_data = $role_info[$role_id];
                 if ($role_data) {
                     return array($role_data['name'][$lang], $role_data['menu'], $role_data);
-                } else
+                } elseif (AfwSession::getSessionVar("user_golden"))
                     AfwSession::pushWarning("Missed role_info[$role_id] data from $sources : is " . var_export($role_info, true));
             }
         }
