@@ -634,7 +634,10 @@ class Arole extends UmsObject
 
     public function getRoleMenu($returnSubFolders = true, $returnItems = true)
     {
-        global $lang, $MENU_ICONS, $menu_css_arr;
+        //global $lang, $MENU_ICONS, $menu_css_arr;
+        $menu_css_arr = [];
+        $MENU_ICONS = [];
+        $lang = AfwLanguageHelper::getGlobalLanguage();
 
 
         $menu_folder = array();
