@@ -653,6 +653,7 @@ class Bfunction extends UmsObject
                  */
                 if ($bf) {
                         if ($bf_code) {
+
                                 $bf->set("direct_access", $direct_access);
                                 $bf->set("public", $public);
                                 $bf->set("titre_short", $bf_name);
