@@ -280,14 +280,14 @@ class UmsManager extends AFWRoot
             if ($found) {
                 $table_id = $tbf_info[$table]['id'];
                 if (!$table_id) {
-                    AfwSession::pushWarning("Missed tbf_info[$table]['id'] data in previleges file of $module_code");
+                    if (AfwSession::getSessionVar("user_golden")) AfwSession::pushWarning("Missed tbf_info[$table]['id'] data in previleges file of $module_code");
                 }
             }
         }
 
         if (!$table_id) {
             if ($module_sys_file) {
-                AfwSession::pushWarning("Can not find AtableID for table $table System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");
+                if (AfwSession::getSessionVar("user_golden")) AfwSession::pushWarning("Can not find AtableID for table $table System need cache optimisation by creating previleges file of $module_code <!-- file not found $module_sys_file -->");
             }
 
             $tableObj = Atable::getAtableByName($module_id, $table);

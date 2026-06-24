@@ -563,7 +563,7 @@ class Bfunction extends UmsObject
                 return $bf;
         }
 
-        public static function createNewBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc = "", $bf_desc_en = "", $hierarchy_level_enum = 1, $public = "N", $bf_type = 1, $bf_code = "", $bf_complexity = 0, $bf_priority = 0, $resetUS = false)
+        public static function createNewBfunction($id_system, $file, $curr_class_module_id, $curr_class_atable_id, $bf_spec, $bf_name, $bf_name_en, $bf_desc = "", $bf_desc_en = "", $hierarchy_level_enum = 999, $public = "N", $bf_type = 1, $bf_code = "", $bf_complexity = 0, $bf_priority = 0, $resetUS = false)
         {
                 $bf = null;
 
@@ -588,7 +588,10 @@ class Bfunction extends UmsObject
                 $bf->set("avail", 'Y');
                 $bf->set("bf_complexity", $bf_complexity);
                 $bf->set("bf_priority", $bf_priority);
-                $bf->set("hierarchy_level_enum", $hierarchy_level_enum);
+                if ($bf->getVal("hierarchy_level_enum") < $hierarchy_level_enum) {
+                        $bf->set("hierarchy_level_enum", $hierarchy_level_enum);
+                }
+
 
 
                 $bf->commit();
@@ -632,7 +635,7 @@ class Bfunction extends UmsObject
                 $bf_complexity = 0,
                 $bf_priority = 0,
                 $resetUS = false,
-                $hierarchy_level_enum = 1
+                $hierarchy_level_enum = 999
         ) {
                 /**
                  * @var Bfunction $bf
@@ -661,7 +664,9 @@ class Bfunction extends UmsObject
                                 $bf->set("bfunction_code", $bf_code);
                                 $bf->set("bf_complexity", $bf_complexity);
                                 $bf->set("bf_priority", $bf_priority);
-                                $bf->set("hierarchy_level_enum", $hierarchy_level_enum);
+                                if ($bf->getVal("hierarchy_level_enum") < $hierarchy_level_enum) {
+                                        $bf->set("hierarchy_level_enum", $hierarchy_level_enum);
+                                }
                                 $bf->update();
                         }
 
@@ -866,8 +871,7 @@ class Bfunction extends UmsObject
                         $bf_specification = $this->getVal("bf_specification");
                         $file_specification = $this->getVal("file_specification");
                         $tableObj = $this->getCurrTable();
-                        if($tableObj)
-                        {
+                        if ($tableObj) {
                                 $tableObj_id = $tableObj->id;
                                 $tableObj_name = $tableObj->getVal("atable_name");
                                 $cl = $tableObj->getTableClass();
@@ -875,9 +879,8 @@ class Bfunction extends UmsObject
                                 if (!$currmod_obj) throw new AfwRuntimeException("This BF id = $this_id ($file_specification) is related to table ($tableObj_id) $tableObj_name that does'nt have module defined !");
                                 $currmod = $currmod_obj->getVal("module_code");
                                 $url = "main.php?Main_Page=afw_mode_" . $file_specification . ".php&cl=$cl&currmod=$currmod";
-                                if ($bf_specification and ($bf_specification != "none")) $url .= "&$bf_specification";        
-                        }
-                        else return "not able to deduce url for this BF because related table with id ".$this->getVal("curr_class_atable_id")." not found !";                        
+                                if ($bf_specification and ($bf_specification != "none")) $url .= "&$bf_specification";
+                        } else return "not able to deduce url for this BF because related table with id " . $this->getVal("curr_class_atable_id") . " not found !";
                 } else {
                         $direct_access = $this->is("direct_access");
                         $bf_specification = $this->getVal("bf_specification");
