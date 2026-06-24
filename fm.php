@@ -112,11 +112,15 @@ if ($r == "control") {
       elseif ($count_all > 3) $s12 = "s6";
       else $s12 = "s12";
       foreach ($menu_folder["items"] as $menu_folder_item_id => $menu_folder_item) {
+        if (!is_array($menu_folder_item)) {
+          list($ff, $menu_folder_item, $src) = AfwPrevilege::loadModuleBfCache($module, $menu_folder_item_id);
+          if (!is_array($menu_folder_item)) $menu_folder_item = [];
+        }
         $menu_item_id = $menu_folder_item["id"];
         $menu_item_level = $menu_folder_item["level"];
         $menu_item_title = $menu_folder_item["menu_name_$lang"];
         if (!$menu_item_title) $menu_item_title = $menu_folder_item["menu_name"];
-        $menu_item_title = UfwReplacement::trans_replace($menu_item_title, $module, $lang);
+        if ($menu_item_title) $menu_item_title = UfwReplacement::trans_replace($menu_item_title, $module, $lang);
 
         if ($menu_item_level >= $myLevel) {
           $out_scr .= "<!-- OK => $menu_item_title BFID=$menu_item_id BFL=$menu_item_level >= UHL=$myLevel (User=$myName ID=$myId)-->";

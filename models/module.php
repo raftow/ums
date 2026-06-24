@@ -725,10 +725,7 @@ class Module extends UmsObject
         return AfwFormulaHelper::calculateFormulaResult($this, $attribute);
     }
 
-    public function calcSchema_html($what = "value")
-    {
-
-    }
+    public function calcSchema_html($what = "value") {}
 
 
     public function calcBfIcons($what = "value")
@@ -778,6 +775,18 @@ class Module extends UmsObject
         return "<pre class='css ltr'>" . implode("\n", $roles_icons) . "</pre>";
     }
 
+
+
+
+
+    public function getAllBFs()
+    {
+        $obj = new Bfunction();
+        $obj->select("curr_class_module_id", $this->id);
+        $obj->select("avail", "Y");
+
+        return $obj->loadMany();
+    }
 
     public function getAllRolesAndSubRoles()
     {
@@ -847,6 +856,12 @@ class Module extends UmsObject
             list($role_infoItem, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($moduleCode, $roleItem, true);
             $mv_cmd_all[] = $mv_cmd;
             $source_php .= "\tinclude('previleges/role/$fileName');\n";
+        }
+
+        $bfList = $this->getAllBFs();
+        foreach ($bfList as $bfItem) {
+            list($bfCache, $fileName, $php_code, $mv_cmd) = UmsManager::genereBfCacheFile($moduleCode, $bfItem, true);
+            $mv_cmd_all[] = $mv_cmd;
         }
 
 
@@ -1141,9 +1156,9 @@ class Module extends UmsObject
             // die("je suis la, id_module_type='".$this->getVal("id_module_type")."'");
 
 
-            
-            
-            
+
+
+
 
             if (($this->getVal("id_module_type") == self::$MODULE_TYPE_APPLICATION) or
                 ($this->getVal("id_module_type") == self::$MODULE_TYPE_MINI_APPLICATION)
@@ -1740,7 +1755,7 @@ class Module extends UmsObject
     }
 
 
-    
+
 
 
     protected function getPublicMethods()
@@ -2372,8 +2387,8 @@ class Module extends UmsObject
         if ($attribute == "applicationGoalList") return $this->isApplication();
         if ($attribute == "php_module") return $this->isApplication();
         if ($attribute == "php_modules_all") return $this->isApplication();
-        
-        
+
+
 
         if ($attribute == "schema") return $this->isSchema();
         if ($attribute == "schema_atable_mfk") return $this->isSchema();
@@ -2384,7 +2399,8 @@ class Module extends UmsObject
         return true;
     }
 
-    public function loadAroundSchemaForMainAtableId($lang= "ar", $important = true) {
+    public function loadAroundSchemaForMainAtableId($lang = "ar", $important = true)
+    {
         $errors = [];
         $informations = [];
         $warnings = [];
@@ -2392,23 +2408,21 @@ class Module extends UmsObject
          * @var Atable $mainTable 
          */
         $mainTable = $this->het("schema_main_atable_id");
-        if($mainTable) {            
+        if ($mainTable) {
             list($schema_atable_arr, $schema_atable_names_arr) = $mainTable->getAroundTables($important);
-            if(count($schema_atable_arr)>0) {
+            if (count($schema_atable_arr) > 0) {
                 $this->addRemoveInMfk("schema_atable_mfk", $schema_atable_arr, []);
                 $this->update();
-                $informations[] = "tables around are : ".implode(",",$schema_atable_names_arr);
-            }
-            else $warnings[] = "no tables around";
-        }
-        else $errors[] = "no valid main table selected";
+                $informations[] = "tables around are : " . implode(",", $schema_atable_names_arr);
+            } else $warnings[] = "no tables around";
+        } else $errors[] = "no valid main table selected";
 
         return AfwFormatHelper::pbm_result($errors, $informations, $warnings);
-        
     }
 
 
-    public function loadMyNeededSchemaForMainAtableId($lang= "ar", $important = true) {
+    public function loadMyNeededSchemaForMainAtableId($lang = "ar", $important = true)
+    {
         $errors = [];
         $informations = [];
         $warnings = [];
@@ -2416,34 +2430,32 @@ class Module extends UmsObject
          * @var Atable $mainTable 
          */
         $mainTable = $this->het("schema_main_atable_id");
-        if($mainTable) {            
+        if ($mainTable) {
             list($schema_atable_arr, $schema_atable_names_arr) = $mainTable->getNeededTables($important);
-            if(count($schema_atable_arr)>0) {
+            if (count($schema_atable_arr) > 0) {
                 $this->addRemoveInMfk("schema_atable_mfk", $schema_atable_arr, []);
                 $this->update();
-                $informations[] = "tables around are : ".implode(",",$schema_atable_names_arr);
-            }
-            else $warnings[] = "no tables around";
-        }
-        else $errors[] = "no valid main table selected";
+                $informations[] = "tables around are : " . implode(",", $schema_atable_names_arr);
+            } else $warnings[] = "no tables around";
+        } else $errors[] = "no valid main table selected";
 
         return AfwFormatHelper::pbm_result($errors, $informations, $warnings);
-        
     }
 
-    public function updateSchemaMainAtableId($commit=false, $force=false) {
-        if(!$this->getVal("schema_main_atable_id") or $force) {
+    public function updateSchemaMainAtableId($commit = false, $force = false)
+    {
+        if (!$this->getVal("schema_main_atable_id") or $force) {
             $atableList = $this->get("schema_atable_mfk");
             $nb_fks = 0;
             $schema_main_atable_id = 0;
             foreach ($atableList as $atableItem) {
-                    if ($atableItem->nbFKs() > $nb_fks) {
-                        $schema_main_atable_id = $atableItem->id;
-                        $nb_fks = $atableItem->nbFKs();
-                    }
+                if ($atableItem->nbFKs() > $nb_fks) {
+                    $schema_main_atable_id = $atableItem->id;
+                    $nb_fks = $atableItem->nbFKs();
+                }
             }
             $this->set("schema_main_atable_id", $schema_main_atable_id);
-            if($commit) $this->update();
+            if ($commit) $this->update();
         }
     }
 
@@ -3213,104 +3225,104 @@ class Module extends UmsObject
 
     public function getSystem() {}
 
-    public function calcSchema($what="value") {
-            $cells = [];           
+    public function calcSchema($what = "value")
+    {
+        $cells = [];
 
-            for($r=0; $r<5; $r++) for($k=0; $k<5; $k++)  $cells[$r][$k] = "&nbsp;";
+        for ($r = 0; $r < 5; $r++) for ($k = 0; $k < 5; $k++)  $cells[$r][$k] = "&nbsp;";
 
-            $cObj = $this->het("schema_main_atable_id");
+        $cObj = $this->het("schema_main_atable_id");
 
-            $cells[2][2] =& $cObj;
+        $cells[2][2] = &$cObj;
 
 
-            $atableList = $this->get("schema_atable_mfk");
-            $atableByImportance = [];
-            $max_nb_fks = 0;
+        $atableList = $this->get("schema_atable_mfk");
+        $atableByImportance = [];
+        $max_nb_fks = 0;
 
-            // شكل لولبي
-            $arrPosSchema = [];
-            $arrPosSchema[1] = ['r'=> 1, 'k'=>2];
-            $arrPosSchema[2] = ['r'=> 1, 'k'=>3];//
-            $arrPosSchema[3] = ['r'=> 2, 'k'=>3];
-            $arrPosSchema[4] = ['r'=> 3, 'k'=>3];//
-            $arrPosSchema[5] = ['r'=> 3, 'k'=>2];
-            $arrPosSchema[6] = ['r'=> 3, 'k'=>1];//
-            $arrPosSchema[7] = ['r'=> 2, 'k'=>1];
-            $arrPosSchema[8] = ['r'=> 1, 'k'=>1];//
+        // شكل لولبي
+        $arrPosSchema = [];
+        $arrPosSchema[1] = ['r' => 1, 'k' => 2];
+        $arrPosSchema[2] = ['r' => 1, 'k' => 3]; //
+        $arrPosSchema[3] = ['r' => 2, 'k' => 3];
+        $arrPosSchema[4] = ['r' => 3, 'k' => 3]; //
+        $arrPosSchema[5] = ['r' => 3, 'k' => 2];
+        $arrPosSchema[6] = ['r' => 3, 'k' => 1]; //
+        $arrPosSchema[7] = ['r' => 2, 'k' => 1];
+        $arrPosSchema[8] = ['r' => 1, 'k' => 1]; //
 
-             $arrPosSchema[9] = ['r'=>0 , 'k'=>2];
-            $arrPosSchema[11] = ['r'=>0 , 'k'=>3];
-            $arrPosSchema[11] = ['r'=>0 , 'k'=>4];//
-            $arrPosSchema[12] = ['r'=>1 , 'k'=>4];
-            $arrPosSchema[13] = ['r'=>2 , 'k'=>4];
-            $arrPosSchema[14] = ['r'=>3 , 'k'=>4];
-            $arrPosSchema[15] = ['r'=>4 , 'k'=>4];//
-            $arrPosSchema[16] = ['r'=>4 , 'k'=>3];
-            $arrPosSchema[17] = ['r'=>4 , 'k'=>2];
-            $arrPosSchema[18] = ['r'=>4 , 'k'=>1];
-            $arrPosSchema[19] = ['r'=>4 , 'k'=>0];//
-            $arrPosSchema[20] = ['r'=>3 , 'k'=>0];
-            $arrPosSchema[21] = ['r'=>2 , 'k'=>0];
-            $arrPosSchema[22] = ['r'=>1 , 'k'=>0];
-            $arrPosSchema[23] = ['r'=>0 , 'k'=>0];//
-            $arrPosSchema[24] = ['r'=>0 , 'k'=>1];
+        $arrPosSchema[9] = ['r' => 0, 'k' => 2];
+        $arrPosSchema[11] = ['r' => 0, 'k' => 3];
+        $arrPosSchema[11] = ['r' => 0, 'k' => 4]; //
+        $arrPosSchema[12] = ['r' => 1, 'k' => 4];
+        $arrPosSchema[13] = ['r' => 2, 'k' => 4];
+        $arrPosSchema[14] = ['r' => 3, 'k' => 4];
+        $arrPosSchema[15] = ['r' => 4, 'k' => 4]; //
+        $arrPosSchema[16] = ['r' => 4, 'k' => 3];
+        $arrPosSchema[17] = ['r' => 4, 'k' => 2];
+        $arrPosSchema[18] = ['r' => 4, 'k' => 1];
+        $arrPosSchema[19] = ['r' => 4, 'k' => 0]; //
+        $arrPosSchema[20] = ['r' => 3, 'k' => 0];
+        $arrPosSchema[21] = ['r' => 2, 'k' => 0];
+        $arrPosSchema[22] = ['r' => 1, 'k' => 0];
+        $arrPosSchema[23] = ['r' => 0, 'k' => 0]; //
+        $arrPosSchema[24] = ['r' => 0, 'k' => 1];
 
-            // return "rafik dbg atableList=".AfwExportHelper::afwExport($atableList, true);
+        // return "rafik dbg atableList=".AfwExportHelper::afwExport($atableList, true);
 
-            foreach ($atableList as $atableItem) {
-                if($atableItem->id != $cObj->id) {
-                    /**
-                     * @var Atable $atableItem 
-                     * */    
-                    $nb_fks = $atableItem->nbFKs();
-                    $atableByImportance[$nb_fks][] = $atableItem;
-                    if ($nb_fks > $max_nb_fks) {
-                        $max_nb_fks = $nb_fks;
+        foreach ($atableList as $atableItem) {
+            if ($atableItem->id != $cObj->id) {
+                /**
+                 * @var Atable $atableItem 
+                 * */
+                $nb_fks = $atableItem->nbFKs();
+                $atableByImportance[$nb_fks][] = $atableItem;
+                if ($nb_fks > $max_nb_fks) {
+                    $max_nb_fks = $nb_fks;
+                }
+            }
+        }
+
+        $nextPos = 1;
+
+        //return "rafik dbg max_nb_fks=$max_nb_fks atableByImportance=".AfwExportHelper::afwExport($atableByImportance, true);
+
+        for ($m = $max_nb_fks; $m >= 0; $m--) {
+            if (is_array($atableByImportance[$m])) {
+                foreach ($atableByImportance[$m] as $atableSchema) {
+                    if ($atableSchema and ($nextPos <= 24)) {
+                        $r = $arrPosSchema[$nextPos]['r'];
+                        $k = $arrPosSchema[$nextPos]['k'];
+                        $cells[$r][$k] = $atableSchema;
+                        $nextPos++;
                     }
                 }
             }
+        }
 
-            $nextPos = 1;
 
-            //return "rafik dbg max_nb_fks=$max_nb_fks atableByImportance=".AfwExportHelper::afwExport($atableByImportance, true);
+        $tbl = new HtmlyTableau('schema', 'schema', 'ltr');
 
-            for($m=$max_nb_fks; $m>=0; $m--) {
-                if(is_array($atableByImportance[$m])) {
-                    foreach($atableByImportance[$m] as $atableSchema) {
-                        if($atableSchema and ($nextPos<=24)) {
-                            $r = $arrPosSchema[$nextPos]['r'];
-                            $k = $arrPosSchema[$nextPos]['k'];
-                            $cells[$r][$k] = $atableSchema;
-                            $nextPos++;
-                        }
-                    }
-                }
+        for ($r = 0; $r < 5; $r++) {
+            $cellsArr = [];
+            for ($k = 0; $k < 5; $k++) {
+                $cellsArr["scell r$r k$k"] = &$cells[$r][$k];
             }
 
-
-            $tbl = new HtmlyTableau('schema', 'schema', 'ltr');
-
-            for($r=0;$r<5;$r++) {
-                $cellsArr = [];                
-                for($k=0;$k<5;$k++) {
-                    $cellsArr["scell r$r k$k"] =& $cells[$r][$k];
-                }
-
-                $tbl->addElement(new HtmlyRowBody("","","", $cellsArr));
-            }
-            
-
-            
+            $tbl->addElement(new HtmlyRowBody("", "", "", $cellsArr));
+        }
 
 
 
 
-            return $tbl->renderHtml();
-            
+
+
+
+        return $tbl->renderHtml();
     }
 
 
-    
+
 
 
     /*

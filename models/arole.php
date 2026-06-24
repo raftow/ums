@@ -673,7 +673,9 @@ class Arole extends UmsObject
 
             $this_bfs = array_merge($this_bfs_list, $this_bfs_menu);
 
-
+            /**
+             * @var Bfunction $bf_item
+             */
 
             $this_bfs_atable_arr = array();
 
@@ -693,23 +695,9 @@ class Arole extends UmsObject
 
             foreach ($this_bfs as $bf_item) {
                 if ($bf_item and (is_object($bf_item)) and $bf_item->isActive()) {
-                    $menu_folder["items"][$bf_item->getId()] = array();
-                    $bf_item_id =  $bf_item->getId();
-                    $title_ar =  $bf_item->getShortDisplay("ar");
-                    if (!$title_ar) $title_ar = "bf-$bf_item_id-ar";
-                    $title_en =  $bf_item->getShortDisplay("en");
-                    if (!$title_en) $title_ar = "bf-$bf_item_id-en";
-
-
-                    $menu_folder["items"][$bf_item->getId()]["id"] = $bf_item->getId();
-                    $menu_folder["items"][$bf_item->getId()]["code"] = $bf_item->getVal("bfunction_code");
-                    $menu_folder["items"][$bf_item->getId()]["level"] = $bf_item->getVal("hierarchy_level_enum");
-                    $menu_folder["items"][$bf_item->getId()]["menu_name_ar"] = $title_ar;
-                    $menu_folder["items"][$bf_item->getId()]["menu_name_en"] = $title_en;
-                    $menu_folder["items"][$bf_item->getId()]["page"] = $bf_item->getUrl();
-                    $menu_folder["items"][$bf_item->getId()]["css"] = "bf";
-                    $menu_folder["items"][$bf_item->getId()]["icon"] = $bf_item->getIcon();
-                    //$menu_folder["items"][$bf_item->getId()]["png"] = $bf_item->getPng();
+                    $bf_item_id = $bf_item->getId();
+                    $menu_folder["items"][$bf_item_id] = $bf_item->getVal("hierarchy_level_enum");
+                    //  // $bf_item->getCacheArray(); // "include('../bf/bf$bf_item_id.php')"
                 } else {
                     /*
                             if($this->getId()==80)
@@ -729,15 +717,7 @@ class Arole extends UmsObject
                     if (!$title_en) $title_ar = "bf-$bf_item_id-en";
 
 
-                    $menu_folder["otherbfs"][$bf_item->getId()]["id"] = $bf_item->getId();
-                    $menu_folder["otherbfs"][$bf_item->getId()]["code"] = $bf_item->getVal("bfunction_code");
-                    $menu_folder["otherbfs"][$bf_item->getId()]["level"] = $bf_item->getVal("hierarchy_level_enum");
-                    $menu_folder["otherbfs"][$bf_item->getId()]["menu_name_ar"] = $title_ar;
-                    $menu_folder["otherbfs"][$bf_item->getId()]["menu_name_en"] = $title_en;
-                    $menu_folder["otherbfs"][$bf_item->getId()]["page"] = $bf_item->getUrl();
-                    $menu_folder["otherbfs"][$bf_item->getId()]["css"] = "bf";
-                    $menu_folder["otherbfs"][$bf_item->getId()]["icon"] = $bf_item->getIcon();
-                    //$menu_folder["items"][$bf_item->getId()]["png"] = $bf_item->getPng();
+                    $menu_folder["otherbfs"][$bf_item->getId()] = $bf_item->getVal("hierarchy_level_enum"); // $bf_item->getCacheArray();
                 } else {
                     /*
                             if($this->getId()==80)

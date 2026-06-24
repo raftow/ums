@@ -1336,7 +1336,11 @@ class Bfunction extends UmsObject
                 return AfwIconHelper::proposeIcons($strings, $returnKeys, $debugg);
         }
 
-        public function findMeInRoles($aroles_ids, $context = "log", $module_id = null, $ignore_cache = false)
+
+        /**
+         * @param string $aroles_ids
+         */
+        public function findMeInRoles($aroles_ids, $context = "log", $module_id = null, $ignore_cache = false, $hierarchy_level_of_user = 0)
         {
                 if (!$module_id) $module_id = $this->getVal("curr_class_module_id");
                 if (!$module_id) return false;
@@ -1355,7 +1359,9 @@ class Bfunction extends UmsObject
                 $aroles_ids_arr = explode(",", trim($aroles_ids, ","));
                 foreach ($aroles_ids_arr as $arole_id) {
                         list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($module_id, $arole_id, $lang, $ignore_cache);
-                        if ($menu_folder['otherbfs'][$this->id]) return "bf found in system cache files in role " . $role_item_display;
+                        $bf_info = $menu_folder['otherbfs'][$this->id];
+
+                        if ($bf_info) return "bf found in system cache files in role " . $role_item_display;
                 }
 
                 $lang = AfwLanguageHelper::getGlobalLanguage();
@@ -1398,6 +1404,29 @@ class Bfunction extends UmsObject
                 if ($currstep == 4) return 118;
 
                 return 0;
+        }
+
+        public function getCacheArray()
+        {
+                $cache = array();
+                $this_id =  $this->getId();
+                $title_ar =  $this->getShortDisplay("ar");
+                if (!$title_ar) $title_ar = "bf-$this_id-ar";
+                $title_en =  $this->getShortDisplay("en");
+                if (!$title_en) $title_ar = "bf-$this_id-en";
+
+
+                $cache["id"] = $this->getId();
+                $cache["code"] = $this->getVal("bfunction_code");
+                $cache["level"] = $this->getVal("hierarchy_level_enum");
+                $cache["menu_name_ar"] = $title_ar;
+                $cache["menu_name_en"] = $title_en;
+                $cache["page"] = $this->getUrl();
+                $cache["css"] = "bf";
+                $cache["icon"] = $this->getIcon();
+                //$cache["png"] = $this->getPng();
+
+                return $cache;
         }
 
 

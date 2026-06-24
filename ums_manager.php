@@ -67,6 +67,55 @@ class UmsManager extends AFWRoot
         return AfwPrevilege::moduleIdOfModuleCode($module);
     }
 
+
+
+    /**
+     * @param string $module, 
+     * @param string $bf_id, 
+     * @param string $lang
+     */
+
+    public static function getBfDetails($module, $bf_id, $lang, $ignore_cache = false)
+    {
+        if (!$lang)
+            $lang = 'ar';
+        if (!$module) {
+            AfwSession::pushError('No module specified to give bf details');
+            return;
+        }
+
+        if (!$bf_id) {
+            AfwSession::pushError('No bf_id specified to give bf details');
+            return;
+        }
+        $sources = "";
+        $module_code = self::decodeModuleCodeOrIdToModuleCode($module);
+        if (!$module_code)
+            AfwSession::pushError("No module code for module $module check your php file chsys->modules->all");
+        else {
+            $found = false;
+            if (!$ignore_cache) {
+                list($found, $bf_info, $bf_cache_file) = AfwPrevilege::loadModuleBfCache($module_code, $bf_id);
+                $sources .= " >> $bf_cache_file file";
+            }
+
+            if (!$found) {
+                if (!$ignore_cache) AfwSession::pushWarning("System need cache optimisation by creating file not found $bf_cache_file");
+                $bf_info = null;
+                $bfItem = Bfunction::loadById($bf_id);
+                $sources .= " >> in db loadById($bf_id)";
+                if ($bfItem) list($bf_info, $fileName, $php_code, $mv_cmd) = UmsManager::genereBFCacheFile($module_code, $bfItem, true);
+                $found = $bf_info ? true : false;
+            }
+
+            if ($found and $bf_info) {
+                return $bf_info;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @param string $module, 
      * @param string $role_id, 
@@ -602,5 +651,62 @@ class UmsManager extends AFWRoot
     public static function previlegeFilenameForRole($moduleCode, $roleId)
     {
         return "previleges_$moduleCode" . "_role$roleId";
+    }
+
+
+    /**
+     * @param string $moduleCode, 
+     * @param int $bfId
+     */
+
+    public static function previlegeFilenameForBF($moduleCode, $bfId)
+    {
+        return "bf$bfId"; // m$moduleCode" . "_
+    }
+
+
+    /**
+     * Genere BF infos cache array and genere the bf cache php file if you want
+     * @param string $moduleCode, 
+     * @param Bfunction $bfItem
+     * 
+     * @return array [$bfCache, $fileName, $php_code, $mv_cmd]
+     */
+    public static function genereBFCacheFile($moduleCode, $bfItem, $genereFile = false, $generePhp = true)
+    {
+        $bfId = $bfItem->id;
+        $bfCache = $bfItem->getCacheArray();
+
+        if ($genereFile) $generePhp = true;
+
+
+
+        $mv_cmd = "";
+        $php_code = "";
+        $previlegeFilenameForBF = "no-file";
+
+        if ($generePhp) {
+
+            $previlegeFilenameForBF = self::previlegeFilenameForBF($moduleCode, $bfId);
+
+
+            $php_code .= "<?php\n";
+            $php_code .= "\n\treturn " . var_export($bfCache, true) . ";";
+        }
+
+
+
+
+        if ($genereFile) {
+
+            $fileName =  $previlegeFilenameForBF . ".php";
+            list($arr_cmd_lines, $mv_cmd) = AfwCodeHelper::generatePhpFile($moduleCode, $fileName, $php_code, "previleges/bf");
+        } else {
+            $mv_cmd = "";
+            $fileName = "";
+        }
+
+
+        return [$bfCache, $fileName, $php_code, $mv_cmd];
     }
 }
