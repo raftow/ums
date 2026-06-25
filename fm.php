@@ -114,9 +114,9 @@ if ($r == "control") {
       foreach ($menu_folder["items"] as $menu_folder_item_id => $menu_folder_item) {
         if (!is_array($menu_folder_item)) {
           list($ff, $menu_folder_item, $src) = AfwPrevilege::loadModuleBfCache($module, $menu_folder_item_id);
-          if (($module == "ums") and ($menu_folder_item_id == 105471)) {
+          /* if (($module == "ums") and ($menu_folder_item_id == 105471)) {
             die("AfwPrevilege::loadModuleBfCache($module, $menu_folder_item_id) => found=$ff menu_folder_item=" . var_export($menu_folder_item, true));
-          }
+          }*/
           if (!is_array($menu_folder_item)) $menu_folder_item = [];
         }
         $menu_item_id = $menu_folder_item["id"];
