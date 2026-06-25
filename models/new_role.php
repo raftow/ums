@@ -5,7 +5,7 @@ $file_dir_name = dirname(__FILE__);
 
 // require_once("$file_dir_name/../afw/afw.php");
 
-class NewRole extends AFWObject
+class NewRole extends UmsObject
 {
 
     public static $MY_ATABLE_ID = 13982;
@@ -170,12 +170,24 @@ class NewRole extends AFWObject
 
         $other_settings = ",";
         $aTableList = $this->get("atable_mfk");
+        $settings = $this->getVal("settings");
+        $settings_arr = json_decode($settings);
         $hlSettings = [];
         foreach ($aTableList as $aTableItem) {
             $v_atable_name = $aTableItem->getVal("atable_name");
             // hierrarchy level from setttings
-            $hl = AfwSettingsHelper::readParamValue($this, "settings", "hl-" . $v_atable_name);
-            if ($hl) $hlSettings[$v_atable_name] = $hl;
+            // $hl = AfwSettingsHelper::readParamValue($this, "settings", "hl-" . $v_atable_name);
+            $hlSettings[$v_atable_name] = 999;
+            // $hledit = AfwSettingsHelper::readParamValue($this, "settings", "hl-edit-" . $v_atable_name);
+            $hledit = $settings_arr['data']['edit'][$v_atable_name];
+            if ($hledit) $hlSettings[$v_atable_name . "-edit"] = $hledit;
+            // $hldisplay = AfwSettingsHelper::readParamValue($this, "settings", "hl-display-" . $v_atable_name);
+            $hldisplay = $settings_arr['data']['display'][$v_atable_name];
+            if ($hldisplay) $hlSettings[$v_atable_name . "-display"] = $hldisplay;
+            // $hldelete = AfwSettingsHelper::readParamValue($this, "settings", "hl-delete-" . $v_atable_name);
+            $hldelete = $settings_arr['data']['delete'][$v_atable_name];
+            if ($hldelete) $hlSettings[$v_atable_name . "-delete"] = $hldelete;
+
             $other_settings .= $v_atable_name . ",";
         }
         $object_code_arr[5] = $hlSettings;
@@ -285,24 +297,44 @@ class NewRole extends AFWObject
         }
         if ($fields_updated["atable_mfk"]) {
             $settings = $this->getVal("settings");
+            $settings_arr = json_decode($settings);
+            if (!$settings_arr) $settings_arr = [];
+            $settings_arr['help'] = "اعدادات مستوى الهيكل التنظيمي المسموح له بادارةالجدول"; // $this->tm("")
+            $modes_axis = [
+                'display' => ['ar' => 'إختيار', 'en' => 'select',],
+                'edit' => ['ar' => 'تعديل', 'en' => 'select',],
+                'delete' => ['ar' => 'مسح', 'en' => 'delete',],
+                'audit' => ['ar' => 'تدقيق', 'en' => 'audit',],
+            ];
+
             $aTableList = $this->get("atable_mfk");
+            $hierarchy_level = UmsObject::hierarchy_level_list();
             /**
              * @var Atable $aTableItem
              */
+            $tables_axis = [];
+            $data = [];
             foreach ($aTableList as $aTableItem) {
                 $v_atable_name = $aTableItem->getVal("atable_name");
                 $ar_atable_name = $aTableItem->getShortDisplay("ar");
-                $hl_title = "اعدادات مستوى الهيكل التنظيمي المسموح له بادارةالجدول"; // $this->tm("")
-                // hierrarchy level from setttings
-                $hl = AfwSettingsHelper::readParamValue($this, "settings", "hl-" . $v_atable_name);
-                if (!$hl) {
-                    $settings .= "\n--$hl_title: $ar_atable_name--";
-                    $settings .= "\nhl-$v_atable_name:1";
+                $en_atable_name = $aTableItem->getShortDisplay("en");
+
+                $tables_axis[] = ['ar' => $ar_atable_name, 'en' => $en_atable_name,];
+
+                foreach ($modes_axis as $mode => $mode_row) {
+                    $data[$mode][$v_atable_name] = $aTableItem->getHierarchyLevelForMode($mode);
                 }
             }
+            $settings_arr['cell_list'] = $hierarchy_level;
+            $settings_arr['data'] = $data;
+            $settings_arr['x_axis'] = $modes_axis;
+            $settings_arr['y_axis'] = $tables_axis;
+
+            $settings = json_encode($settings_arr);
 
             $this->set("settings", $settings);
         }
+
         return true;
     }
 
@@ -344,6 +376,8 @@ class NewRole extends AFWObject
         }
     }
 
+
+
     public function calcDivLevels($what = "value")
     {
         $html = "<h1>مستويات الهيكل التنظيمي</h1>";
@@ -351,13 +385,7 @@ class NewRole extends AFWObject
         $lang = AfwLanguageHelper::getGlobalLanguage();
 
 
-        $main_company = AfwSession::currentCompany();
-        $current_domain = 25;
-        include(dirname(__FILE__) . "/../../client-$main_company/extra/hierarchy_level-$main_company.php");
-        /**
-         * @var array $hierarchy_level
-         */
-        if (!isset($hierarchy_level)) $hierarchy_level = [];
+        $hierarchy_level = UmsObject::hierarchy_level_list();
         $header = ['ar' => 'عربي', 'en' => 'انجليزي', 'id' => 'مسلسل'];
         foreach ($hierarchy_level as $id => $lookup_row) {
             $hierarchy_level[$id]['id'] = $id;
