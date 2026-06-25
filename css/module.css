@@ -4592,3 +4592,15 @@ td.key {
 div#div_data_auser_mfk {
     min-height: 500px;
 }
+
+div#fg-atable_mfk input.mbsc-textfield.mbsc-textfield-hidden.mbsc-textarea#atable_mfk-input {
+    min-height: 500px !important;
+}
+
+div#fg-atable_mfk span.mbsc-ios.mbsc-rtl.mbsc-textfield-inner.mbsc-textfield-inner-outline {
+    min-height: 500px !important;
+}
+
+div#fg-atable_mfk .mbsc-ios.mbsc-textfield.mbsc-textfield-tags {
+    min-height: 500px !important;
+}
