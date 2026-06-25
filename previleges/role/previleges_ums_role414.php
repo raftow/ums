@@ -1,14 +1,14 @@
 <?php
 
-	$role_info[414] = array (
+$role_info[414] = array(
   'code' => 'goal-previleges',
-  'name' => 
-  array (
+  'name' =>
+  array(
     'ar' => 'الصلاحيات',
     'en' => 'Previleges',
   ),
-  'menu' => 
-  array (
+  'menu' =>
+  array(
     'need_admin' => false,
     'id' => '414',
     'menu_name_ar' => 'الصلاحيات',
@@ -17,8 +17,8 @@
     'css' => 'info',
     'icon' => ' icon-414',
     'showme' => true,
-    'items' => 
-    array (
+    'items' =>
+    array(
       104887 => '999',
       104881 => '999',
       104867 => '999',
@@ -26,9 +26,10 @@
       104895 => '999',
       104873 => '999',
       105397 => '999',
+      105471 => '999',
     ),
-    'otherbfs' => 
-    array (
+    'otherbfs' =>
+    array(
       104865 => '999',
       104866 => '999',
       104867 => '999',
@@ -65,9 +66,8 @@
       105398 => '999',
       105399 => '999',
     ),
-    'sub-folders' => 
-    array (
-    ),
+    'sub-folders' =>
+    array(),
   ),
 );
-	include "previleges_ums_role414_special.php";
+include "previleges_ums_role414_special.php";
