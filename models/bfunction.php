@@ -226,6 +226,11 @@ class Bfunction extends UmsObject
                         $this->generateUserStory($lang, 0, false);
                 }
 
+                if ($fields_updated['titre_short_en'] or $fields_updated['titre_short']  or $fields_updated['hierarchy_level_enum']) {
+                        $this->generateBfCache($lang);
+                }
+
+
                 return true;
         }
 
@@ -310,6 +315,15 @@ class Bfunction extends UmsObject
                 if ($oper == "qedit") return array(5, "إدارة سريعة");
 
                 return -1;
+        }
+
+        public function generateBfCache($lang = "ar")
+        {
+                $curr_class_module_id = $this->getVal("curr_class_module_id");
+                $curr_class_module_code = AfwPrevilege::moduleCodeOfModuleId($curr_class_module_id);
+                list($bfCache, $fileName, $php_code, $mv_cmd) = UmsManager::genereBFCacheFile($curr_class_module_code, $this, true, true);
+
+                return ["", "bf cache generated in $fileName to install : $mv_cmd"];
         }
 
         public function generateUserStory($lang = "ar", $framework = 0, $commit = true)
@@ -909,6 +923,10 @@ class Bfunction extends UmsObject
                 $color = "green";
                 $title_ar = "توليد قصص المستخدم";
                 $pbms["vc12CA"] = array("METHOD" => "generateUserStory", "COLOR" => $color, "LABEL_AR" => $title_ar, "ADMIN-ONLY" => true);
+
+                $color = "orange";
+                $title_ar = "توليد ملف الكاش";
+                $pbms["umTnSa"] = array("METHOD" => "generateBfCache", "COLOR" => $color, "LABEL_AR" => $title_ar, "ADMIN-ONLY" => true);
 
 
                 $color = "blue";
