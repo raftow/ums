@@ -125,6 +125,23 @@ class Bfunction extends UmsObject
                 } else return null;
         }
 
+        /**
+         * @param int $id_system, 
+         * @param int $curr_class_module_id, 
+         * @param int $curr_class_atable_id, 
+         * @param int $file_specification
+         */
+        public static function loadStandardBfunction($id_system, $curr_class_module_id, $curr_class_atable_id, $file_specification)
+        {
+                return self::loadByBusinessIndex($id_system, $curr_class_module_id, $curr_class_atable_id, $file_specification);
+        }
+
+        /**
+         * @param int $id_system, 
+         * @param int $curr_class_module_id, 
+         * @param int $curr_class_atable_id, 
+         * @param int $file_specification
+         */
         public static function loadByBusinessIndex($id_system, $curr_class_module_id, $curr_class_atable_id, $file_specification, $bf_specification = "", $create_obj_if_not_found = false)
         {
                 if (!$id_system) throw new AfwRuntimeException("loadByMainIndex : id_system is mandatory field");
@@ -138,7 +155,7 @@ class Bfunction extends UmsObject
                 $obj->select("curr_class_module_id", $curr_class_module_id);
                 $obj->select("curr_class_atable_id", $curr_class_atable_id);
                 $obj->select("file_specification", $file_specification);
-                $obj->select("bf_specification", $bf_specification);
+                if ($bf_specification) $obj->select("bf_specification", $bf_specification);
 
                 if ($obj->load()) {
                         if ($create_obj_if_not_found) $obj->activate();

@@ -35,6 +35,7 @@ class UmsBfunctionAfwStructure
 			'STEP' => 1,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
+			'CSS' => 'width_pct_50',
 		),
 		'id_system' => array(
 			'IMPORTANT' => 'IN',
@@ -56,6 +57,7 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
+			'CSS' => 'width_pct_50',
 		),
 
 		'curr_class_module_id' => array(
@@ -81,6 +83,7 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
+			'CSS' => 'width_pct_50',
 		),
 		'curr_class_atable_id' => array(
 			'IMPORTANT' => 'IN',
@@ -105,9 +108,11 @@ class UmsBfunctionAfwStructure
 			'DEPENDENCY' => 'curr_class_module_id',
 			'RELATION' => 'OneToMany',
 			'DISPLAY' => true,
+			'MANDATORY' => true,
 			'STEP' => 1,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
+			'CSS' => 'width_pct_50',
 		),
 
 
@@ -124,8 +129,10 @@ class UmsBfunctionAfwStructure
 			'STEP' => 1,
 			'SEARCH-BY-ONE' => true,
 			'DISPLAY' => true,
+			'MANDATORY' => true,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
+			'CSS' => 'width_pct_50',
 		),
 
 		'bfunction_code' => array(
@@ -145,6 +152,7 @@ class UmsBfunctionAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
+			'CSS' => 'width_pct_50',
 		),
 
 		'bf_specification' => array(
@@ -160,8 +168,10 @@ class UmsBfunctionAfwStructure
 			'STEP' => 1,
 			'SEARCH-BY-ONE' => true,
 			'DISPLAY' => true,
+			'MANDATORY' => true,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
+			'CSS' => 'width_pct_50',
 		),
 
 		'bfunction_type_id' => array(
