@@ -286,7 +286,7 @@ class NewRole extends UmsObject
     {
         $mode_list =    [
             'display' => ['ar' => 'إختيار', 'en' => 'select',],
-            'edit' => ['ar' => 'تعديل', 'en' => 'select',],
+            'edit' => ['ar' => 'تعديل', 'en' => 'edit',],
             'delete' => ['ar' => 'مسح', 'en' => 'delete',],
             'audit' => ['ar' => 'تدقيق', 'en' => 'audit',],
         ];
