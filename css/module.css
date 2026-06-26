@@ -4617,3 +4617,13 @@ table.matrix tr>td {
 table.matrix {
     margin-top: 10px !important;
 }
+
+tr.header-matrix>td {
+    background-color: black;
+    color: white;
+}
+
+table.matrix tr>td.matrix-yCol {
+    background-color: black;
+    color: white;
+}
