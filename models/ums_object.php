@@ -2,19 +2,16 @@
 
 class UmsObject extends AfwMomkenObject
 {
-
+    /*
     public static function hierarchy_level_list()
     {
         $main_company = AfwSession::currentCompany();
         $current_domain = 25;
         include(dirname(__FILE__) . "/../../client-$main_company/extra/hierarchy_level-$main_company.php");
-        /**
-         * @var array $hierarchy_level
-         */
-        if (!isset($hierarchy_level)) $hierarchy_level = [];
+               if (!isset($hierarchy_level)) $hierarchy_level = [];
 
         return $hierarchy_level;
-    }
+    }*/
 
     public function settings($field_name, $col_struct)
     {

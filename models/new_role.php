@@ -272,7 +272,49 @@ class NewRole extends UmsObject
         return  "avail";
     }
 
+    public function help_settings($lang)
+    {
+        return "اعدادات مستوى الهيكل التنظيمي المسموح له بادارةالجدول"; // $this->tm("");
+    }
 
+    /**
+     * @param string $field_name 
+     * @param string $col_struct
+     */
+
+    public function mode_list($field_name, $col_struct)
+    {
+        $mode_list =    [
+            'display' => ['ar' => 'إختيار', 'en' => 'select',],
+            'edit' => ['ar' => 'تعديل', 'en' => 'select',],
+            'delete' => ['ar' => 'مسح', 'en' => 'delete',],
+            'audit' => ['ar' => 'تدقيق', 'en' => 'audit',],
+        ];
+
+        return $mode_list;
+
+        // if ($this->getVal("auditable") == 'Y')
+    }
+
+    /**
+     * @param string $field_name 
+     * @param string $col_struct
+     */
+
+    public function table_list($field_name, $col_struct)
+    {
+        $aTableList = $this->get("atable_mfk");
+        $tables_axis = [];
+        foreach ($aTableList as $aTableItem) {
+            $v_atable_name = $aTableItem->getVal("atable_name");
+            $ar_atable_name = $aTableItem->getShortDisplay("ar");
+            $en_atable_name = $aTableItem->getShortDisplay("en");
+
+            $tables_axis[$v_atable_name] = ['ar' => $ar_atable_name, 'en' => $en_atable_name,];
+        }
+
+        return $tables_axis;
+    }
 
     public function beforeMaj($id, $fields_updated)
     {
@@ -297,38 +339,29 @@ class NewRole extends UmsObject
         }
         if ($fields_updated["atable_mfk"]) {
             $settings = $this->getVal("settings");
-            $settings_arr = json_decode($settings);
-            if (!$settings_arr) $settings_arr = [];
-            $settings_arr['help'] = "اعدادات مستوى الهيكل التنظيمي المسموح له بادارةالجدول"; // $this->tm("")
-            $modes_axis = [
-                'display' => ['ar' => 'إختيار', 'en' => 'select',],
-                'edit' => ['ar' => 'تعديل', 'en' => 'select',],
-                'delete' => ['ar' => 'مسح', 'en' => 'delete',],
-                'audit' => ['ar' => 'تدقيق', 'en' => 'audit',],
-            ];
+            $old_settings_arr = json_decode($settings);
+            if (!$old_settings_arr) $old_settings_arr = [];
+
+            $settings_arr = [];
+
+
 
             $aTableList = $this->get("atable_mfk");
-            $hierarchy_level = UmsObject::hierarchy_level_list();
             /**
              * @var Atable $aTableItem
              */
-            $tables_axis = [];
+
             $data = [];
+            $modes_axis = $this->mode_list('', '');
             foreach ($aTableList as $aTableItem) {
                 $v_atable_name = $aTableItem->getVal("atable_name");
-                $ar_atable_name = $aTableItem->getShortDisplay("ar");
-                $en_atable_name = $aTableItem->getShortDisplay("en");
-
-                $tables_axis[] = ['ar' => $ar_atable_name, 'en' => $en_atable_name,];
 
                 foreach ($modes_axis as $mode => $mode_row) {
                     $data[$mode][$v_atable_name] = $aTableItem->getHierarchyLevelForMode($mode);
                 }
             }
-            $settings_arr['cell_list'] = $hierarchy_level;
             $settings_arr['data'] = $data;
-            $settings_arr['x_axis'] = $modes_axis;
-            $settings_arr['y_axis'] = $tables_axis;
+
 
             $settings = json_encode($settings_arr);
 
@@ -377,7 +410,7 @@ class NewRole extends UmsObject
     }
 
 
-
+    /*
     public function calcDivLevels($what = "value")
     {
         $html = "<h1>مستويات الهيكل التنظيمي</h1>";
@@ -385,7 +418,7 @@ class NewRole extends UmsObject
         $lang = AfwLanguageHelper::getGlobalLanguage();
 
 
-        $hierarchy_level = UmsObject::hierarchy_level_list();
+        $hierarchy_level = UmsObject::hierarchy_level();
         $header = ['ar' => 'عربي', 'en' => 'انجليزي', 'id' => 'مسلسل'];
         foreach ($hierarchy_level as $id => $lookup_row) {
             $hierarchy_level[$id]['id'] = $id;
@@ -399,7 +432,7 @@ class NewRole extends UmsObject
         // $html .= "<br>hierarchy_level=" . var_export($hierarchy_level, true);
 
         return $html;
-    }
+    }*/
 
     public function calcDivResults($what = "value")
     {

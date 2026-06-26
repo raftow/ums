@@ -279,22 +279,30 @@ class UmsNewRoleAfwStructure
 			'QSEARCH'     => true,
 			'SHOW'   => true,
 			'AUDIT'      => false,
-			'RETRIEVE'          => false,
-			'EDIT'                                 => true,
+			'RETRIEVE'    => false,
+			'EDIT'        => true,
 			'QEDIT'       => false,
-			'SIZE'                                 => 'AREA',
 			'MAXLENGTH' => 3333,
 			'MIN-SIZE' => 1,
 			'CHAR_TEMPLATE' => 'ALPHABETIC,SPACE',
 			'UTF8' => false,
-			'TYPE'                                 => 'TEXT',
+			'TYPE'     => 'MATRIX',
+			'MATRIX_X_LIST' => '::mode_list',
+			'MATRIX_Y_LIST' => '::table_list',
+			'MATRIX_CELL' => array(
+				'TYPE' => 'ENUM',
+				'ANSWER' => 'FUNCTION',
+				'FUNCTION_COL_NAME' => 'hierarchy_level_enum',
+				'DEFAULT' => 0,
+			),
 			'READONLY'  => false,
 			'MANDATORY' => true,
 			'COLS' => 100,
 			'ROWS' => 20,
-			'CSS'                                  => 'width_pct_75'
+			'CSS'  => 'width_pct_100'
 		],
 
+		/*
 		'divLevels' => array(
 			'STEP' => 4,
 			'CATEGORY' => 'FORMULA',
@@ -313,7 +321,7 @@ class UmsNewRoleAfwStructure
 			'CSS' => 'width_pct_25',
 			'CAN-BE-SETTED' => false,
 			'INPUT_WIDE' => true,
-		),
+		),*/
 
 		'divResults' => array(
 			'STEP' => 5,
