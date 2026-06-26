@@ -321,7 +321,7 @@ class NewRole extends UmsObject
 
     public function beforeMaj($id, $fields_updated)
     {
-        if ($fields_updated["new_role_code"] or true) {
+        if ($fields_updated["new_role_code"]) {
             $objGoal = $this->getRelatedGoalObject();
             if ($objGoal) {
                 $object_name_en = $objGoal->getVal('goal_name_en');
@@ -336,8 +336,8 @@ class NewRole extends UmsObject
                 $objModule = $this->het("module_id");
                 $objGoal->refreshMyRelatedObjectsAndInfos($objModule);
 
+                $fields_updated["atable_mfk"] = $this->getVal("atable_mfk");
                 $this->set("atable_mfk", $objGoal->getVal('atable_mfk'));
-                $fields_updated["atable_mfk"] = true;
             }
         }
         if ($fields_updated["atable_mfk"]) {
@@ -582,13 +582,13 @@ class NewRole extends UmsObject
         return $return;
     }
 
-
+    /*
     protected function afterSetAttribute($attribute)
     {
         if (($attribute == "atable_mfk") and ($this->getVal($attribute) == ",13890,13966,14027,13917,")) {
             throw new AfwRuntimeException("Here the bug");
         }
-    }
+    }*/
 }
 
 
