@@ -4604,3 +4604,16 @@ div#fg-atable_mfk span.mbsc-ios.mbsc-rtl.mbsc-textfield-inner.mbsc-textfield-inn
 div#fg-atable_mfk .mbsc-ios.mbsc-textfield.mbsc-textfield-tags {
     min-height: 500px !important;
 }
+
+div#div_data_settings {
+    min-height: 500px;
+}
+
+table.matrix tr>td {
+    padding: 8px;
+    border: 1px solid #ebe5e5;
+}
+
+table.matrix {
+    margin-top: 10px !important;
+}
