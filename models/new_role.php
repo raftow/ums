@@ -581,6 +581,14 @@ class NewRole extends UmsObject
 
         return $return;
     }
+
+
+    protected function afterSetAttribute($attribute)
+    {
+        if (($attribute == "atable_mfk") and ($this->getVal($attribute) == ",13890,13966,14027,13917,")) {
+            throw new AfwRuntimeException("Here the bug");
+        }
+    }
 }
 
 
