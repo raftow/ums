@@ -306,6 +306,9 @@ class NewRole extends UmsObject
         $aTableList = $this->get("atable_mfk");
         $tables_axis = [];
         foreach ($aTableList as $aTableItem) {
+            /** 
+             * @var Atable $aTableItem 
+             * */
             $v_atable_name = $aTableItem->getVal("atable_name");
             $ar_atable_name = $aTableItem->getShortDisplay("ar");
             $en_atable_name = $aTableItem->getShortDisplay("en");
