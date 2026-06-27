@@ -4627,3 +4627,7 @@ table.matrix tr>td.matrix-yCol {
     background-color: black;
     color: white;
 }
+
+div#form-control-div-settings {
+    min-height: 600px;
+}

@@ -295,7 +295,7 @@ class UmsNewRoleAfwStructure
 				'FUNCTION_COL_NAME' => 'hierarchy_level_enum',
 				'DEFAULT' => 0,
 			),
-			'READONLY'  => true,
+			'READONLY'  => false,
 			'MANDATORY' => true,
 			'COLS' => 100,
 			'ROWS' => 20,
