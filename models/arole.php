@@ -625,7 +625,17 @@ class Arole extends UmsObject
         $pbms["xc19CB"] = array("METHOD" => "genereRoleMenuPhp", "COLOR" => $color, "LABEL_AR" => $title_ar, "ADMIN-ONLY" => true);
 
 
-
+        $color = 'orange';
+        $title_ar = 'استخراج وتفقد ملف الكاش';
+        $methodName = 'getCachePhpCode';
+        $pbms[AfwStringHelper::hzmEncode($methodName)] = array(
+            'METHOD' => $methodName,
+            'COLOR' => $color,
+            'LABEL_AR' => $title_ar,
+            // 'PUBLIC' => true,
+            'ADMIN-ONLY' => true,
+            'BF-ID' => '',
+        );
 
 
         return $pbms;
