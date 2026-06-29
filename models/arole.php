@@ -641,6 +641,25 @@ class Arole extends UmsObject
         return $pbms;
     }
 
+    public function getCachePhpCode($lang = 'ar')
+    {
+        /*$company = AfwSession::currentCompany();
+        $parent_project_path = AfwSession::config('parent_project_path', '');
+        if (!$parent_project_path)
+                return ['please define parent_project_path system config parameter', ''];
+        $me_id = $this->id;
+        $file_path = $parent_project_path . '/cache/pre';
+        $fileName = $company . "_user_$me_id" . '_data.php';
+        $fileFullName = $file_path . '/' . $fileName;
+
+        
+        self::$codePhp[$me_id] .= AfwCodeHelper::showCodeLines($fileFullName); */
+
+        return ['', 'done'];
+    }
+
+
+
 
     public function getRoleMenu($returnSubFolders = true, $returnItems = true)
     {
