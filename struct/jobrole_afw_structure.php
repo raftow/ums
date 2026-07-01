@@ -124,6 +124,7 @@ class UmsJobroleAfwStructure
 			'ITEM' => 'jobrole_id',
 			'SHORTNAME' => 'roles',
 			'MANDATORY' => false,
+			'PILLAR' => true,
 			'ERROR-CHECK' => true,
 			'WHERE' => '',
 			'SHOW' => true,

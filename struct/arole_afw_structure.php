@@ -372,6 +372,7 @@ class UmsAroleAfwStructure
 			'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
+			'PILLAR' => true,
 		),
 
 		'all_rbfListCount' => array(

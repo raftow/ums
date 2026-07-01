@@ -171,7 +171,7 @@ class NewRole extends UmsObject
         $other_settings = ",";
         $aTableList = $this->get("atable_mfk");
         $settings = $this->getVal("settings");
-        $settings_arr = json_decode($settings);
+        $settings_arr = json_decode($settings, true);
         $hlSettings = [];
         foreach ($aTableList as $aTableItem) {
             $v_atable_name = $aTableItem->getVal("atable_name");
@@ -342,7 +342,7 @@ class NewRole extends UmsObject
         }
         if ($fields_updated["atable_mfk"]) {
             $settings = $this->getVal("settings");
-            $old_settings_arr = json_decode($settings);
+            $old_settings_arr = json_decode($settings, true);
             if (!$old_settings_arr) $old_settings_arr = [];
 
             $settings_arr = [];

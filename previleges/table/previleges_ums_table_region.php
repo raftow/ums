@@ -1,26 +1,26 @@
 <?php
 
 	$tbf_info['region'] = array (
-  'id' => '14072',
+  'id' => '14069',
   'display' => 
   array (
-    'id' => '105437',
+    'id' => -1,
   ),
   'search' => 
   array (
-    'id' => '105438',
+    'id' => -1,
   ),
   'qsearch' => 
   array (
-    'id' => '105439',
+    'id' => -1,
   ),
   'edit' => 
   array (
-    'id' => '105434',
+    'id' => -1,
   ),
   'qedit' => 
   array (
-    'id' => '105435',
+    'id' => -1,
   ),
   'crossed' => 
   array (
@@ -40,12 +40,12 @@
   ),
   'delete' => 
   array (
-    'id' => '105436',
+    'id' => -1,
   ),
 );
 
 
-	$tab_info[14072] = array (
+	$tab_info[14069] = array (
   'name' => 'region',
 );
 

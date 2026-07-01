@@ -3,6 +3,7 @@
 /**
  * @var string $out_scr
  * @var string $a
+ * @var string $lang
  * @var array $menu_icons_arr
  */
 $out_scr .= "<div class='hzm3-row-padding hzm3-center hzm3-small hzm_home_bloc' style='margin:0 -16px'>";

@@ -4,23 +4,23 @@
   'id' => '13921',
   'display' => 
   array (
-    'id' => '104938',
+    'id' => -1,
   ),
   'search' => 
   array (
-    'id' => '104939',
+    'id' => -1,
   ),
   'qsearch' => 
   array (
-    'id' => '104940',
+    'id' => -1,
   ),
   'edit' => 
   array (
-    'id' => '104935',
+    'id' => -1,
   ),
   'qedit' => 
   array (
-    'id' => '104936',
+    'id' => -1,
   ),
   'crossed' => 
   array (
@@ -28,7 +28,7 @@
   ),
   'stats' => 
   array (
-    'id' => '104941',
+    'id' => -1,
   ),
   'ddb' => 
   array (
@@ -40,7 +40,7 @@
   ),
   'delete' => 
   array (
-    'id' => '104937',
+    'id' => -1,
   ),
 );
 
