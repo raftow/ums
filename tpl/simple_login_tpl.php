@@ -22,7 +22,7 @@
 
                 <div class="signin-form">
                     <h2 class="form-title">تسجيل دخول [admin_account_jobs]</h2>
-                    <form method="POST" class="register-form" id="login-form" action="<?php echo $action_page ?>" onSubmit="return checkForm();" dir="ltr" enctype="multipart/form-data" autocomplete="off">
+                    <form method="POST" class="register-form" id="login-form" action="[action_page]" onSubmit="return checkForm();" dir="ltr" enctype="multipart/form-data" autocomplete="off">
                         [companies_s]
                         <div class="form-group">
                             <label for="company"><i class="zmdi zmdi-layers"></i></label>

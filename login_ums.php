@@ -4,7 +4,7 @@
  * @var string $company
  * @var boolean $customer_authenticate
  */
-if (!$action_page) $action_page = "login.php";
+
 $login_dbg = array();
 $msg = "";
 $user_name_c = "";
@@ -35,6 +35,14 @@ if (AfwSession::userIsAuthenticated()) {
         $tokens = [];
         // $tokens["message"] = "Please login";
 }
+$otp_activated = AfwSession::config("otp_activated", false);
+if($otp_activated) {
+        $tokens["action_page"] = "login_otp.php";        
+}
+else {
+        $tokens["action_page"] = "login.php";
+}
+
 $logbl = substr(md5($_SERVER["HTTP_USER_AGENT"] . "-" . date("Y-m-d")), 0, 10);
 $uri_module = UfwUrlManager::currentURIModule();
 $xmodule = AfwSession::getCurrentlyExecutedModule();

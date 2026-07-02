@@ -1,34 +1,99 @@
 <?php
 
-	$role_info[378] = array (
-  'code' => 'goal-users-roles',
-  'name' => 
-  array (
-    'ar' => 'إدارة الصلاحيات',
-    'en' => 'arole.378',
+$role_info[378] = array(
+  'code' => 'goal-common',
+  'name' =>
+  array(
+    'ar' => 'البيانات المشتركة',
+    'en' => 'Common Data',
   ),
-  'menu' => 
-  array (
+  'menu' =>
+  array(
     'need_admin' => false,
     'id' => '378',
-    'menu_name_ar' => 'إدارة الصلاحيات',
-    'menu_name_en' => 'arole.378',
+    'menu_name_ar' => 'البيانات المشتركة',
+    'menu_name_en' => 'Common Data',
     'page' => 'main.php?Main_Page=fm.php&a=18&r=378',
     'css' => 'info',
     'icon' => ' icon-378',
     'showme' => true,
-    'items' => 
-    array (
-      102867 => '1',
-      102898 => '1',
-      102860 => '1',
-      102884 => '1',
-      103345 => '1',
-      102877 => '1',
-      104594 => '1',
+    'items' =>
+    array(
+      102918 =>
+      array(
+        'id' => '102918',
+        'menu_name' => 'إدارة الصلاحيات الوظيفية',
+        'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Jobrole&currmod=ums&ids=all&newo=3',
+        'css' => 'bf',
+        'icon' => 'edit',
+      ),
+      103896 =>
+      array(
+        'id' => '103896',
+        'menu_name' => 'التطبيقات التي في طور الانجاز',
+        'page' => 'main.php?Main_Page=applications_dev.php',
+        'css' => 'bf',
+        'icon' => ' bficon-103896 bfc-applications_dev',
+      ),
+      103897 =>
+      array(
+        'id' => '103897',
+        'menu_name' => 'التطبيقات المنجزة',
+        'page' => 'main.php?Main_Page=applications_dev.php&done=1',
+        'css' => 'bf',
+        'icon' => ' bficon-103897 bfc-applications_done',
+      ),
+      102937 =>
+      array(
+        'id' => '102937',
+        'menu_name' => 'إنشاء جدول',
+        'page' => 'main.php?Main_Page=afw_mode_edit.php&cl=Atable&currmod=pag',
+        'css' => 'bf',
+        'icon' => 'edit',
+      ),
+      102839 =>
+      array(
+        'id' => '102839',
+        'menu_name' => 'إنشاء تطبيق',
+        'page' => 'main.php?Main_Page=afw_mode_edit.php&cl=Module&currmod=ums',
+        'css' => 'bf',
+        'icon' => 'edit',
+      ),
+      103060 =>
+      array(
+        'id' => '103060',
+        'menu_name' => 'إنشاء رسالة مترجمة',
+        'page' => 'main.php?Main_Page=afw_mode_edit.php&cl=Pmessage&currmod=pag',
+        'css' => 'bf',
+        'icon' => 'edit',
+      ),
+      103065 =>
+      array(
+        'id' => '103065',
+        'menu_name' => 'الاستعلام عن رسالة مترجمة',
+        'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Pmessage&currmod=pag',
+        'css' => 'bf',
+        'icon' => 'search',
+      ),
+      103313 =>
+      array(
+        'id' => '103313',
+        'menu_name' => 'إدارة أنواع المستندات',
+        'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=DocType&currmod=pag&ids=all&newo=3',
+        'css' => 'bf',
+        'icon' => 'edit',
+      ),
+      103328 =>
+      array(
+        'id' => '103328',
+        'menu_name' => 'إدارة قطاعات الأعمال',
+        'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Domain&currmod=cmn&ids=all&newo=3',
+        'css' => 'bf',
+        'icon' => 'edit',
+      ),
     ),
-    'otherbfs' => 
-    array (
+    'otherbfs' =>
+    array(
       102855 => '1',
       102857 => '1',
       102858 => '1',
@@ -65,9 +130,8 @@
       102883 => '1',
       102884 => '1',
     ),
-    'sub-folders' => 
-    array (
-    ),
+    'sub-folders' =>
+    array(),
   ),
 );
-	include "previleges_ums_role378_special.php";
+include "previleges_ums_role378_special.php";
