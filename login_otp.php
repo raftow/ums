@@ -100,7 +100,7 @@ if (AfwSession::userIsAuthenticated()) {
 
 
     // send SMS to customer 
-    $otp_show_in_page = AfwSession::config("otp-show-in-page", true);
+    $otp_show_in_page = AfwSession::config("otp-show-in-page", false);
     
     if ($otp_show_in_page) {
         $tokens["otp_verify_the_message"] =  $otp_verify_the_message;
