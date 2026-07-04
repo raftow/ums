@@ -102,7 +102,7 @@ if (AfwSession::userIsAuthenticated()) {
     // send SMS to customer 
     $otp_show_in_page = AfwSession::config("otp-show-in-page", false);
     
-    if ($otp_show_in_page) {
+    if ($otp_show_in_page and false) {
         $tokens["otp_verify_the_message"] =  $otp_verify_the_message;
         $otp_ok = true;
         $otp_info = ["result" => "shown in page momken-console"];
