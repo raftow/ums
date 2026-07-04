@@ -21,6 +21,15 @@
                 </div>
 
                 <div class="signin-form">
+                    [no_message_s]
+                    <div class="quote">
+                        <div class="quoteinn">
+                            <p>
+                                <font color='red'>[message]</font>
+                            </p>
+                        </div>
+                    </div>
+                    [no_message_e]
                     <h2 class="form-title">تسجيل دخول [admin_account_jobs]</h2>
                     <form method="POST" class="register-form" id="login-form" action="[action_page]" onSubmit="return checkForm();" dir="ltr" enctype="multipart/form-data" autocomplete="off">
                         [companies_s]
@@ -58,15 +67,7 @@
     </section>
 
 </div>
-[no_message_s]
-<div class="quote">
-    <div class="quoteinn">
-        <p>
-            <font color='red'>[message]</font>
-        </p>
-    </div>
-</div>
-[no_message_e]
+
 <script type="text/javascript">
     $(document).ready(function() {
         $("html, body").animate({

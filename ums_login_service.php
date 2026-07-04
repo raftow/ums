@@ -4,11 +4,19 @@
 
 class UmsLoginService extends AFWRoot
 {
+        /**
+         * @param string $user_or_email
+         * @param string $password
+         * @param bool $user_or_email_lower_case
+         * @param bool $hardSecureCleanString
+         * @return array
+         */
         public static function umsAuthentication($user_or_email, $password, $user_or_email_lower_case = true, $hardSecureCleanString = true)
         {
                 $authenticationData = [];
                 if ($user_or_email_lower_case) $user_or_email = strtolower($user_or_email);
                 if ($hardSecureCleanString) $email_initial = AfwStringHelper::hardSecureCleanString($user_or_email);
+                else $email_initial = trim($user_or_email);
                 list($user_name_c, $user_domain_c) = explode("@", $user_or_email);
 
 
@@ -176,7 +184,7 @@ class UmsLoginService extends AFWRoot
                                 if ($user_connected) {
                                         $server_db_prefix = AfwSession::currentDBPrefix();
                                         //die("rafik 5 : user is connected");
-                                        $user_infos = AfwDatabase::db_recup_row("select id, avail, firstname, email 
+                                        $user_infos = AfwDatabase::db_recup_row("select id, avail, firstname, email, username 
                                                             from $server_db_prefix" . "ums.auser 
                                                             where avail = 'Y' and username='$username' limit 1");
                                         //die("rafik 6 : user_infos is ".var_export($user_infos,true));        
@@ -198,32 +206,27 @@ class UmsLoginService extends AFWRoot
                                 $user_not_connected_reason = "user name not defined";
                         }
 
+                        $authenticationData["connected"] = $user_connected;
+                        $authenticationData["authenticated"] = false;
+
                         //die("s=$time_s  e=$time_e ");
                         if ($user_connected) {
-                                $last_page = AfwSession::getSessionVar("lastpage");
-                                $lastget = AfwSession::getSessionVar("lastget");
-                                if (is_array($lastget) and count($lastget) > 0) {
-                                        $last_page .= "?redir=1";
-                                        foreach ($lastget as $param => $paramval) $last_page .= "&$param=$paramval";
+                                // user connected means password is correct and user is found in db or ldap and employee is found in hrm system
+                                // user authenticated is connected + 2 factor authenticated (if 2FA is enabled)
+                                list($user_id_logged_in, $user_name_logged_in) = AfwSession::userHasBeenLoggedIn($user_infos);
+                                $authenticationData["user_id_logged_in"] = $user_id_logged_in;
+                                $authenticationData["user_name_logged_in"] = $user_name_logged_in;
+                                
+                                $two_factor_authentication = AfwSession::config("two_factor_authentication", "otp");
+                                if($two_factor_authentication) {
+                                        $authenticationData["two_factor_authentication"] = $two_factor_authentication; 
                                 }
-
-                                //effacer les var d'une eventuelle session précédente
-                                AfwSession::resetSession("main_company");
-
-                                foreach ($user_infos as $col => $val) {
-                                        AfwSession::setSessionVar("user_$col", $val);
+                                else {
+                                        AfwSession::userHasBeenAuthenticated($user_infos);
+                                        exit();
+                                        
                                 }
-                                //die("rafik 7 : last_page=[$last_page]");
-                                // $objme = AfwSession::getUserConnected();
-                                // die("rafik 8 : user_id=".AfwSession::getSessionVar("user_id")." objme=".var_export($objme,true));
-                                if (($last_page) and ($last_page != "login.php")) {
-                                        header("Location: " . $last_page);
-                                } else {
-                                        //$objme = AfwSession::getUserConnected();
-                                        //die("rafik 9 : login success : user_id=".AfwSession::getSessionVar("user_id")." objme=".var_export($objme,true));
-                                        header("Location: index.php");
-                                }
-                                exit();
+                                
                         } else {
                                 if ($debugg_login) {
                                         AFWDebugg::log("!!!!!!!   login failed  !!!!!!!!");
@@ -235,6 +238,8 @@ class UmsLoginService extends AFWRoot
                 if (!$user_connected) {
                         $msg = "يوجد خطأ في كلمة المرور أو اسم المستخدم. الرجاء التأكد من البيانات المدخلة";
                         if ($user_not_connected_reason) $msg .= "<!-- " . $user_not_connected_reason . " -->";
+                        $authenticationData["connected"] = false;
+                        $authenticationData["authenticated"] = false;
                         $authenticationData["message"] = $msg;
                 }
 
