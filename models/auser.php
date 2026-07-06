@@ -738,7 +738,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $operation_specification = $operation;
                 // for the moment until we manage audit wf operation/mode 
                 // we consider the audit and display same BF
-                if($operation=="audit") $operation="display";
+                if ($operation == "audit") $operation = "display";
                 $bf_id = UmsManager::decodeBfunction($system_id, $operation, $module_id, $atable_id, '', null, $ignore_cache);
                 // if($atable_id==13336)
                 // die("decoded Bfunction $bf_id ".AfwSession::log_all_data());
@@ -1549,26 +1549,32 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return array($username, $domain_name);
         }
 
+        /**
+         * @return array
+         */
         public function initUser($from_active_directory = false, $reset_password = false)
         {
                 $lang = AfwLanguageHelper::getGlobalLanguage();
-                $info = array();
-                $err = array();
-                $war = array();
+                $info_arr = array();
+                $err_arr = array();
+                $war_arr = array();
                 if ((!$from_active_directory) and $reset_password) {
                         if (!$this->pwd) {
-                                list($err[], $info[], $war[], $pwd, $sent_by, $sent_to) = $this->resetPassword($lang);
+                                list($err, $inf, $war, $pwd, $sent_by, $sent_to) = $this->resetPassword($lang);
+                                if ($inf) $info_arr[] = $inf;
+                                if ($war) $war_arr[] = $war;
+                                if ($err) $err_arr[] = $err;
                         } else {
                                 $sent_by = false;
                                 $sent_to = "none";
                         }
 
-                        if ($sent_by and count($err) == 0)
+                        if ($sent_by and count($err_arr) == 0)
                                 $info[] = $this->tm('Password has been resetted. The new password has been sent by', $lang) . ' : ' . $this->tm($sent_by, $lang) . ' ' . $this->tm('to', $lang) . ' ' . $sent_to;
                 } else {
                 }
 
-                return AfwFormatHelper::pbm_result($err, $info);
+                return AfwFormatHelper::pbm_result($err_arr, $info_arr, $war_arr);
         }
 
         public function generateCacheFile($lang = 'ar', $onlyIfNotDone = false, $throwError = false)
