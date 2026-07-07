@@ -866,7 +866,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         return false;
                 }
 
-                $foundInRoles = $bfObj->findMeInRoles($mau_found_roles_ids, 'iCanDo', null, $ignore_cache);
+                $foundInRoles = Bfunction::findBFInRoles($module_id, $bfId, $mau_found_roles_ids, $ignore_cache);
                 if ($foundInRoles) {
                         AfwSession::contextLog("iCanDoBF : YES I can because foundInRoles=$foundInRoles. & BFL=$bf_hierarchy_level_enum >= UHL=$user_hierarchy_level_enum !", 'iCanDo');
                         AfwSession::setVar($cache_user_can_bf_code, 'Y');

@@ -1380,7 +1380,7 @@ class Bfunction extends UmsObject
                 $bf_id = $this->id;
                 if (!$module_id) $module_id = $this->getVal("curr_class_module_id");
 
-                return self::findBFInRoles($module_id, $bf_id, $aroles_ids, $context, $ignore_cache);
+                return self::findBFInRoles($module_id, $bf_id, $aroles_ids, $ignore_cache);
         }
 
         /**
@@ -1388,7 +1388,7 @@ class Bfunction extends UmsObject
          * @param int $bf_id
          * @param string $aroles_ids
          */
-        public static function findBFInRoles($module_id, $bf_id, $aroles_ids, $context = "log", $ignore_cache = false)
+        public static function findBFInRoles($module_id, $bf_id, $aroles_ids, $ignore_cache = false)
         {
                 if (!$module_id) return false;
                 if (!$aroles_ids) return false;
