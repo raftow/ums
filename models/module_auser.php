@@ -77,6 +77,43 @@ class ModuleAuser extends AFWObject
           } else return null;
      }
 
+
+     public static function loadFriendlyModuleAuser($module_id, $id_auser)
+     {
+          $mau = self::loadByMainIndex($module_id, $id_auser);
+          if (!$mau) return null;
+
+          // otherwise add Friendly `doned` roles
+          $freinds_all_menu = AfwSession::config('freinds-applications', [], "menu");
+          $main_company = AfwSession::currentCompany();
+          $freinds_company_menu = AfwSession::config('freinds-applications', [], "menu", 'force-client', $main_company);
+          $freinds = array_merge($freinds_all_menu, $freinds_company_menu);
+
+          foreach ($freinds as $donor => $recipient_row) {
+               $donorModuleId = substr($donor, 1);
+               if ($recipient_row["m$module_id"] and is_array($recipient_row["m$module_id"])) {
+                    $mauDonor = self::loadByMainIndex($donorModuleId, $id_auser);
+                    if ($mauDonor) {
+                         $ids_to_add_arr = [];
+                         foreach ($recipient_row["m$module_id"] as $freindRole) {
+                              $role_id = substr($freindRole, 1);
+
+                              // The donor can not give me role I dont have previleges for 
+                              // just the donation is like a shortcut from module donor to module receipient
+                              // but I have previlege on this role in the original module (donor)
+                              if ($mauDonor->findInMfk("arole_mfk", $role_id)) {
+                                   $ids_to_add_arr[] = $role_id;
+                              }
+                         }
+
+                         $mau->addInMfk("arole_mfk", $ids_to_add_arr);
+                    }
+               }
+          }
+
+          return $mau;
+     }
+
      protected function afterSetAttribute($attribute)
      {
           if (($attribute == "module_id") and ($this->getVal("module_id") == 1262)) {
@@ -152,8 +189,7 @@ class ModuleAuser extends AFWObject
           $checked_picture = "<img src='../lib/images/on-blue.png'>";
           $cl = "item";
           $rows = 0;
-          foreach ($tableList as $tableItem) 
-          {
+          foreach ($tableList as $tableItem) {
                /**
                 * @var Atable $tableItem
                 */

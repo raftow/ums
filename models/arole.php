@@ -1106,7 +1106,7 @@ class Arole extends UmsObject
     public static function getAllRolesForModuleAndUser($module_id, $user_id, $only_ids = false)
     {
         // die("rafik 2-6721 ($module_id, $user_id)");
-        $mau = ModuleAuser::loadByMainIndex($module_id, $user_id);
+        $mau = ModuleAuser::loadFriendlyModuleAuser($module_id, $user_id);
         if (!$mau) {
             // if(($module_id==18) and ($user_id==1)) die("getAllRolesForModuleAndUser($module_id, $user_id) = [$mau]");
             if ($only_ids) return array(false, "");
