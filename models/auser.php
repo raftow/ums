@@ -936,7 +936,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 }
 
                 list($authorized, $mau_found_roles) = $this->getMyRoles($module_id);
-                if (($this->id == 1) and ($module_id == 1283)) die(AfwExportHelper::afwExport(['mau_found_roles' => $mau_found_roles]));
+                // if (($this->id == 1) and ($module_id == 1283)) die(AfwExportHelper::afwExport(['mau_found_roles' => $mau_found_roles]));
                 $module_is_public = AfwSession::config("module_$module_id" . '_is_public', false);
                 if (!$module_is_public) {
                         if (!$authorized) {
