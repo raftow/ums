@@ -216,20 +216,10 @@ class UmsLoginService extends AFWRoot
                                 list($user_id_logged_in, $user_name_logged_in) = AfwSession::userHasBeenLoggedIn($user_infos);
                                 $authenticationData["user_id_logged_in"] = $user_id_logged_in;
                                 $authenticationData["user_name_logged_in"] = $user_name_logged_in;
-<<<<<<< HEAD
-                                
-                                $two_factor_authentication = AfwSession::config("two_factor_authentication", "");
-                                if($two_factor_authentication) {
-                                        $authenticationData["two_factor_authentication"] = $two_factor_authentication; 
-                                }
-                                else {
-=======
-
                                 $two_factor_authentication = AfwSession::config("two_factor_authentication", "");
                                 if ($two_factor_authentication) {
                                         $authenticationData["two_factor_authentication"] = $two_factor_authentication;
                                 } else {
->>>>>>> fea84736ed152cf6e85e4008a586bb43e1baf458
                                         AfwSession::userHasBeenAuthenticated($user_infos);
                                         exit();
                                 }
