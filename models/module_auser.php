@@ -94,7 +94,7 @@ class ModuleAuser extends AFWObject
                if ($recipient_row["m$module_id"] and is_array($recipient_row["m$module_id"])) {
                     $donorModuleId = substr($donor, 1);
                     $mauDonor = self::loadByMainIndex($donorModuleId, $id_auser);
-                    if ($id_auser == 1) die(AfwExportHelper::afwExport(["mauDonor" => $mauDonor]));
+                    // if ($id_auser == 1) die(AfwExportHelper::afwExport(["mauDonor" => $mauDonor]));
                     if ($mauDonor) {
                          $ids_to_add_arr = [];
                          foreach ($recipient_row["m$module_id"] as $freindRole) {
