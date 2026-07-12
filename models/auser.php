@@ -990,7 +990,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         'sub-folders' => array(),
                 );
 
-                if (($this->id == 1) and ($module_id == 1283)) die(AfwExportHelper::afwExport(['menu_arr' => $menu_arr]));
+                // if (($this->id == 1) and ($module_id == 1283)) die(AfwExportHelper::afwExport(['menu_arr' => $menu_arr]));
 
                 // if(!$this->cache_me nu[$module_id][$lang]) $this->cache_me nu[$module_id][$lang] = $menu_arr;
 
