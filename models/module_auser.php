@@ -88,7 +88,7 @@ class ModuleAuser extends AFWObject
           $main_company = AfwSession::currentCompany();
           $freinds_company_menu = AfwSession::config('freinds-applications', [], "menu", 'force-client', $main_company);
           $freinds = array_merge($freinds_all_menu, $freinds_company_menu);
-          if ($id_auser == 1) die(AfwExportHelper::afwExport(["freinds" => $freinds]));
+          // if ($id_auser == 1) die(AfwExportHelper::afwExport(["freinds" => $freinds]));
           foreach ($freinds as $donor => $recipient_row) {
 
                if ($recipient_row["m$module_id"] and is_array($recipient_row["m$module_id"])) {
