@@ -88,14 +88,14 @@ class Auser extends UmsObject implements AfwFrontEndUser
         {
                 $obj = new Auser();
                 if ($id) {
-                        // if($id != 1) die("before perform Auser::loadById($id)");
+                        // if($id != 1) d ie("before perform Auser::loadById($id)");
                         // no visibily horizontale for auser because used in all UMS processes and make infinite loops
                         // $obj->select_visibilite_horizontale();
                         if (!$obj->load($id)) {
                                 $obj = null;
                         }
 
-                        // if($id != 1) die("after perform Auser::loadById($id) = ".var_export($obj,true));
+                        // if($id != 1) d ie("after perform Auser::loadById($id) = ".var_export($obj,true));
                 }
 
                 return $obj;
@@ -110,8 +110,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $obj->select('email', $email);
 
                 if ($obj->load()) {
-                        if (!$obj->id)
-                                AfwRunHelper::lightSafeDie("Auser::loadByEmail($email) = Auser[$obj->id] => " . var_export($obj, true));
+                        // if (!$obj->id) d ie("Auser::loadByEmail($email) = Auser[$obj->id] => " . var_export($obj, true));
                         if ($create_obj_if_not_found)
                                 $obj->activate();
                         return $obj;
@@ -208,7 +207,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                 list($module_authorized, $role_code_authorized) = explode('.', $role_authorized);
                                 if ($module_authorized and $role_code_authorized) {
                                         list($org_id, $module_authorized_id, $mau_found) = $this->hasModule($module_authorized);
-                                        // if($role_authorized=="sdd.goal-45") die("$role_authorized (module=$module_authorized,role=$role_code_authorized) I have module ? => ($org_id, $module_authorized_id, $mau_found)");
+                                        // if($role_authorized=="sdd.goal-45") d ie("$role_authorized (module=$module_authorized,role=$role_code_authorized) I have module ? => ($org_id, $module_authorized_id, $mau_found)");
                                         if ($module_authorized_id and $mau_found) {
                                                 $role = Arole::findAroleByCode($module_authorized_id, $role_code_authorized);
                                                 if ($role)
@@ -216,11 +215,11 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                                 else
                                                         $role_id = 0;
 
-                                                // if($role_authorized=="sdd.goal-45") die("(module=$module_authorized,role=$role_code_authorized) findAroleByCode($module_authorized_id,$role_code_authorized) => $role_id($role) is it in arole_mfk : ".$mau_found->getVal("arole_mfk"));
+                                                // if($role_authorized=="sdd.goal-45") d ie("(module=$module_authorized,role=$role_code_authorized) findAroleByCode($module_authorized_id,$role_code_authorized) => $role_id($role) is it in arole_mfk : ".$mau_found->getVal("arole_mfk"));
                                                 if ($role) {
                                                         $role_found = $mau_found->findInMfk('arole_mfk', $role->getId());
                                                         if ($role_authorized == 'sdd.goal-45') {
-                                                                // if($role_found) die("الصلاحية $role موجودة في $mau_found");
+                                                                // if($role_found) d ie("الصلاحية $role موجودة في $mau_found");
                                                         }
                                                         if ($role_found)
                                                                 return true;
@@ -285,7 +284,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         return true;
                 if ((is_array($authorized_ugroups)) and (!count($authorized_ugroups)))
                         return true;  // si aucun role défini alors tout le monde a droit donc y compris moi
-                // die("authorized_ugroups=".var_export($authorized_ugroups,true));
+                // d ie("authorized_ugroups=".var_export($authorized_ugroups,true));
                 foreach ($authorized_ugroups as $ugroup) {
                         if (!is_object($ugroup)) {
                                 $ugroup = Ugroup::getSpecialGroup($ugroup);
@@ -686,7 +685,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         } else {
                                 if (($operation_sql == 'edit') and ($this->id == 1368))  // amjad
                                 {
-                                        // die("cantEditWithoutRoleReason=$editWithoutRoleReason ".AfwSession::getLog("iCanDo"));
+                                        // d ie("cantEditWithoutRoleReason=$editWithoutRoleReason ".AfwSession::getLog("iCanDo"));
                                 }
 
                                 AfwSession::contextLog('[' . $this->getDisplay($lang) . "] can not edit '$myObj_displ' without role : $editWithoutRoleReason", 'iCanDo');
@@ -741,7 +740,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 if ($operation == "audit") $operation = "display";
                 $bf_id = UmsManager::decodeBfunction($system_id, $operation, $module_id, $atable_id, '', null, $ignore_cache);
                 // if($atable_id==13336)
-                // die("decoded Bfunction $bf_id ".AfwSession::log_all_data());
+                // d ie("decoded Bfunction $bf_id ".AfwSession::log_all_data());
                 AfwSession::contextLog("UmsManager::decodeBfunction($system_id, $operation, $module_id, $atable_id) = $bf_id", 'iCanDo');
 
                 if ($bf_id > 0) {
@@ -753,7 +752,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 }
 
                 if (($operation_sql == 'edit') and ($table == 'major_department')) {
-                        // die(AfwSession::getLog("iCanDo"));
+                        // d ie(AfwSession::getLog("iCanDo"));
                 }
 
                 /*if((!$return or true) and ($this->id==758))
@@ -910,7 +909,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
         private function getMyRoles($module_id, $only_ids = false)
         {
-                // die("rafik 6721");
+                // d ie("rafik 6721");
                 return Arole::getAllRolesForModuleAndUser($module_id, $this->id, $only_ids);
         }
 
@@ -937,6 +936,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 }
 
                 list($authorized, $mau_found_roles) = $this->getMyRoles($module_id);
+                if (($this->id == 1) and ($module_id == 1283)) die(AfwExportHelper::afwExport(['mau_found_roles' => $mau_found_roles]));
                 $module_is_public = AfwSession::config("module_$module_id" . '_is_public', false);
                 if (!$module_is_public) {
                         if (!$authorized) {
@@ -957,7 +957,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 }
 
                 foreach ($mau_found_roles as $role_id => $role_item) {
-                        // if(!is_object($role_item)) die("auser::getMenuFor -> mau_found_roles : ".var_export($mau_found_roles,true));
+                        // if(!is_object($role_item)) d ie("auser::getMenuFor -> mau_found_roles : ".var_export($mau_found_roles,true));
                         /** @var Arole $role_item */
                         if ($role_item) {
                                 if ($role_item->isActive()) {
@@ -992,7 +992,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 // if(!$this->cache_me nu[$module_id][$lang]) $this->cache_me nu[$module_id][$lang] = $menu_arr;
 
-                // die($this->getDisplay("ar") . "->getMenuFor($module_id, $lang, $returnSubFolders, $returnItems) will return " . var_export($menu_arr, true));
+                // d ie($this->getDisplay("ar") . "->getMenuFor($module_id, $lang, $returnSubFolders, $returnItems) will return " . var_export($menu_arr, true));
                 return $menu_arr;
         }
 
@@ -1135,7 +1135,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 if ($this->myEmployeeObj)
                         return $this->myEmployeeObj;
 
-                // die("select * from ".$server_db_prefix."hrm.employee where auser_id = ".$this->getId());
+                // d ie("select * from ".$server_db_prefix."hrm.employee where auser_id = ".$this->getId());
                 $this->myEmployeeObj = new Employee();
                 $this->myEmployeeObj->select('auser_id', $this->getId());
                 // if($company_id) $empl->select("id_sh_org",$company_id);
@@ -1217,13 +1217,13 @@ class Auser extends UmsObject implements AfwFrontEndUser
                  *         $stdnt->select("auser_id",$this->getId());
                  *         $stdnt->load();
                  *         $student_id = $stdnt->getId();
-                 *         // die("i a m real user of student $student_id : stdnt obj = ".var_export($stdnt,true));
+                 *         // d ie("i a m real user of student $student_id : stdnt obj = ".var_export($stdnt,true));
                  * }
                  * else
                  * {
                  *         $student_id = $this->getId()-5000000;
                  *         $stdnt->load($student_id);
-                 *         // die("i a m virtual user of student $student_id : stdnt obj = ".var_export($stdnt,true));
+                 *         // d ie("i a m virtual user of student $student_id : stdnt obj = ".var_export($stdnt,true));
                  * }
                  *
                  *
@@ -1526,7 +1526,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 list($username, $domain_name) = explode('@', $email);
 
-                // if($username=="aalmalki") die("list($username, $domain_name) = explode(@,$email) and main_company_domain=$main_company_domain");
+                // if($username=="aalmalki") d ie("list($username, $domain_name) = explode(@,$email) and main_company_domain=$main_company_domain");
 
                 // rafik @doc:date:26/5/2021: as username should be unique the domain name is omitted only for the
                 // main company domain to avoid duplicated usernames like this case :
@@ -1538,7 +1538,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         $domain_name = '';
                 }
 
-                // if($username=="aalmalki") die("domains : $main_company_domain vs $domain_name");
+                // if($username=="aalmalki") d ie("domains : $main_company_domain vs $domain_name");
 
                 return array($username, $domain_name);
         }
@@ -1656,7 +1656,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                                 $sent_by = 'sms';
                                         }
                                 } else {
-                                        // die("auser without mobile : ".var_export($this,true));
+                                        // d ie("auser without mobile : ".var_export($this,true));
                                         $sms_info = 'no mobile number provided to send sms';
                                 }
                                 $info .= '/' . $sms_info;
@@ -2015,7 +2015,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                                 $roleId = $roleItem->id;
                                                 $bfList = $roleItem->get('bfList');
                                                 /*if (($moduleId == 1282) and ($roleId == 408)) {
-                                                        die("rafik dbg 260521019 bfList = " . var_export($bfList, true));
+                                                        d ie("rafik dbg 260521019 bfList = " . var_export($bfList, true));
                                                 }*/
                                                 foreach ($bfList as $bfItem) {
                                                         $bfId = $bfItem->id;
@@ -2027,7 +2027,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                                                 }
 
                                                 /*if (($moduleId == 1282) and ($roleId == 408)) {
-                                                        die("rafik dbg 260521019 bfList = " . var_export($bfList, true) . "<br> mau_info_item = " . var_export($mau_info_item, true));
+                                                        d ie("rafik dbg 260521019 bfList = " . var_export($bfList, true) . "<br> mau_info_item = " . var_export($mau_info_item, true));
                                                 }*/
                                         }
                                 }

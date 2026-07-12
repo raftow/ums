@@ -66,12 +66,12 @@ class ModuleAuser extends AFWObject
                if ($create_obj_if_not_found) $obj->activate();
                return $obj;
           } elseif ($create_obj_if_not_found) {
-               // die("failed to find id_module=$id_module and id_auser=$id_auser");
+               // d ie("failed to find id_module=$id_module and id_auser=$id_auser");
                $obj->set("id_module", $id_module);
                $obj->set("id_auser", $id_auser);
 
                $obj->insert();
-               // die("inserted id_module=$id_module and id_auser=$id_auser");
+               // d ie("inserted id_module=$id_module and id_auser=$id_auser");
                $obj->is_new = true;
                return $obj;
           } else return null;
@@ -88,13 +88,13 @@ class ModuleAuser extends AFWObject
           $main_company = AfwSession::currentCompany();
           $freinds_company_menu = AfwSession::config('freinds-applications', [], "menu", 'force-client', $main_company);
           $freinds = array_merge($freinds_all_menu, $freinds_company_menu);
-          // if ($id_auser == 1) die(AfwExportHelper::afwExport(["freinds" => $freinds]));
+          // if ($id_auser == 1) d ie(AfwExportHelper::afwExport(["freinds" => $freinds]));
           foreach ($freinds as $donor => $recipient_row) {
 
                if ($recipient_row["m$module_id"] and is_array($recipient_row["m$module_id"])) {
                     $donorModuleId = substr($donor, 1);
                     $mauDonor = self::loadByMainIndex($donorModuleId, $id_auser);
-                    // if ($id_auser == 1) die(AfwExportHelper::afwExport(["mauDonor" => $mauDonor]));
+                    // if ($id_auser == 1) d ie(AfwExportHelper::afwExport(["mauDonor" => $mauDonor]));
                     if ($mauDonor) {
                          $ids_to_add_arr = [];
                          foreach ($recipient_row["m$module_id"] as $freindRole) {
@@ -108,7 +108,7 @@ class ModuleAuser extends AFWObject
                               }
                          }
 
-                         if ($id_auser == 1) die(AfwExportHelper::afwExport(["ids_to_add_arr" => $ids_to_add_arr]));
+                         // if ($id_auser == 1) d ie(AfwExportHelper::afwExport(["ids_to_add_arr" => $ids_to_add_arr]));
 
                          $mau->addInMfk("arole_mfk", $ids_to_add_arr);
                     }

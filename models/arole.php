@@ -170,7 +170,7 @@ class Arole extends UmsObject
         if ($moduleObj) {
             $module_code = $moduleObj->getVal("module_code");
             if ($module_code) $fn = UfwReplacement::trans_replace($fn, $module_code, $lang);
-            // else die("check module code for module id = $moduleId name ".$moduleObj->getDisplay($lang));
+            // else d ie("check module code for module id = $moduleId name ".$moduleObj->getDisplay($lang));
         }
 
         return $fn;
@@ -384,7 +384,7 @@ class Arole extends UmsObject
             if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) and $rbfObj->sureIs("menu")) {
                 $bfObj = $rbfObj->het("bfunction_id");
                 $bf_id = $rbfObj->getVal("bfunction_id");
-                // die("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
+                // d ie("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
                 $all_bf_arr[$bf_id] = $bfObj;
             }
         }
@@ -409,7 +409,7 @@ class Arole extends UmsObject
                 if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) /* and $rbfObj->isNot("menu")*/) {
                     $bfObj = $rbfObj->het("bfunction_id");
                     $bf_id = $rbfObj->getVal("bfunction_id");
-                    // die("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
+                    // d ie("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
                     self::$otherBFs[$this->id][$bf_id] = $bfObj;
                 }
             }
@@ -676,7 +676,7 @@ class Arole extends UmsObject
 
         $menu_folder["need_admin"] = ($lkp_module_role_code == $role_code);
 
-        //if($this->getId()==84) die("($lkp_module_role_code == $role_code) ? => ".$menu_folder["need_admin"]);
+        //if($this->getId()==84) d ie("($lkp_module_role_code == $role_code) ? => ".$menu_folder["need_admin"]);
         $my_id = $this->getId();
         $menu_folder["id"] = $my_id;
         $default_menu_desc = "menu.arole" . $this->getId();
@@ -1008,7 +1008,7 @@ class Arole extends UmsObject
                     $bf_checked = $data_posted[$checkbox_name];
                     $bf_id = $data_posted[$bf_id_input_name];
 
-                    //if($checkbox_name == "chk_qsearch_25") die("old:$bf_old_checked != new:$bf_checked");
+                    //if($checkbox_name == "chk_qsearch_25") d ie("old:$bf_old_checked != new:$bf_checked");
 
                     if (($bf_old_checked != $bf_checked) and ($bf_id > 0)) {
                         if ($bf_checked) {
@@ -1105,14 +1105,14 @@ class Arole extends UmsObject
 
     public static function getAllRolesForModuleAndUser($module_id, $user_id, $only_ids = false)
     {
-        // die("rafik 2-6721 ($module_id, $user_id)");
+        // d ie("rafik 2-6721 ($module_id, $user_id)");
         $mau = ModuleAuser::loadFriendlyModuleAuser($module_id, $user_id);
         if (!$mau) {
-            // if(($module_id==18) and ($user_id==1)) die("getAllRolesForModuleAndUser($module_id, $user_id) = [$mau]");
+            // if(($module_id==18) and ($user_id==1)) d ie("getAllRolesForModuleAndUser($module_id, $user_id) = [$mau]");
             if ($only_ids) return array(false, "");
             else return array(false, array());
         }
-        // if(($module_id==18) and ($user_id==1)) die("getAllRolesForModuleAndUser($module_id, $user_id, $only_ids) => arole_mfk=".$mau->getVal("arole_mfk"));
+        // if(($module_id==18) and ($user_id==1)) d ie("getAllRolesForModuleAndUser($module_id, $user_id, $only_ids) => arole_mfk=".$mau->getVal("arole_mfk"));
         if ($only_ids) return array(true, trim($mau->getVal("arole_mfk"), ","));
         else return array(true, $mau->getRoles());
     }
