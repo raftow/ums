@@ -142,7 +142,7 @@ class UmsManager extends AFWRoot
         else {
             $found = false;
             if (!$ignore_cache) {
-                list($found, $role_info, $module_sys_file) = AfwPrevilege::loadModuleRolePrevileges($module_code, $role_id);
+                list($found, $role_info, $module_sys_file, $source_found) = AfwPrevilege::loadModuleRolePrevileges($module_code, $role_id);
                 $sources .= " >> $module_code/previleges.php file";
             }
 
@@ -153,12 +153,13 @@ class UmsManager extends AFWRoot
                 $sources .= " >> in db loadById($role_id)";
                 if ($roleItem) list($role_info[$role_id], $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $roleItem, true);
                 $found = $role_info[$role_id] ? true : false;
+                $source_found = "DB";
             }
 
             if ($found) {
                 $role_data = $role_info[$role_id];
                 if ($role_data) {
-                    return array($role_data['name'][$lang], $role_data['menu'], $role_data);
+                    return array($role_data['name'][$lang], $role_data['menu'], $role_data, $source_found);
                 } elseif (AfwSession::getSessionVar("user_golden"))
                     AfwSession::pushWarning("Missed role_info[$role_id] data from $sources : is " . var_export($role_info, true));
             }
@@ -467,6 +468,11 @@ class UmsManager extends AFWRoot
         return null;
     }
 
+    /**
+     * @param array $pbm_arr
+     * @param Auser $auser
+     */
+
     public static function getAllowedBFMethods(
         $pbm_arr,
         $auser,
@@ -498,12 +504,13 @@ class UmsManager extends AFWRoot
                 (($mode == 'display') and (!isset($pbm_item['MODE'])) and !isset($pbm_item['DISPLAY']))
             ) {
                 if (!$pbm_item['ADMIN-ONLY'] and !$pbm_item['SUPER-ADMIN-ONLY']) {
+                    if (!$pbm_item['BF-MODULE']) $pbm_item['BF-MODULE'] = UfwUrlManager::currentURIModule();
                     if (
                         $auser and
                         $auser->isAdmin() or
                         $pbm_item['BF-ID'] and
                         $auser and
-                        $auser->iCanDoBF($pbm_item['BF-ID']) or
+                        $auser->iCanDoBF($pbm_item['BF-ID'], $pbm_item['BF-MODULE']) or
                         $auser and
                         $auser->i_belong_to_one_of_ugroups(
                             $pbm_item['UGROUPS'],

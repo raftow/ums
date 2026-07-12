@@ -251,7 +251,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return in_array($role_id, $found_roles_ids_arr);
         }
 
-        public function i_have_one_of_bfs($bfs)
+        public function i_have_one_of_bfs($bfs, $moduleCode)
         {
                 if (!$bfs)
                         return true;
@@ -262,7 +262,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         return false;
 
                 foreach ($bfs as $bf_id) {
-                        if ($this->iCanDoBF($bf_id)) {
+                        if ($this->iCanDoBF($bf_id, $moduleCode)) {
                                 return true;
                         }
                 }
@@ -738,15 +738,14 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $operation_specification = $operation;
                 // for the moment until we manage audit wf operation/mode 
                 // we consider the audit and display same BF
-                if($operation=="audit") $operation="display";
+                if ($operation == "audit") $operation = "display";
                 $bf_id = UmsManager::decodeBfunction($system_id, $operation, $module_id, $atable_id, '', null, $ignore_cache);
                 // if($atable_id==13336)
                 // die("decoded Bfunction $bf_id ".AfwSession::log_all_data());
                 AfwSession::contextLog("UmsManager::decodeBfunction($system_id, $operation, $module_id, $atable_id) = $bf_id", 'iCanDo');
 
                 if ($bf_id > 0) {
-                        $return = $this->iCanDoBF($bf_id);
-                        // die("rafik 4567aa ($module_id, $system_id, $atable_id, $bf_id, $return = this->iCanDoBF)");
+                        $return = $this->iCanDoBF($bf_id, $module_code);
                         AfwSession::contextLog("iCanDoBF($bf_id) => return=[$return]", 'iCanDo');
                 } else {
                         $return = false;
@@ -785,42 +784,35 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return $return0;
         }
 
-        public function iCanDoBFCode($curr_class_module_id, $bfCode)
+        public function iCanDoBFCode($curr_class_module_id, $bfCode, $bfModue)
         {
                 // return true;
                 $bfObj = Bfunction::loadByMainIndex($curr_class_module_id, $bfCode);
-                return $this->iCanDoBF($bfObj);
+                return $this->iCanDoBF($bfObj->id, $bfModue);
         }
 
 
         /**
-         * @param Bfunction $bfObj
+         * @param int $bfId
          */
-        public function iCanDoBF($bfObj)
+        public function iCanDoBF($bfId, $moduleCode)
         {
+
                 $ignore_cache = AfwSession::hasOption("IGNORE_PREVILEGE_CACHE");
 
 
-                AfwSession::contextLog("iCanDoBF : start of iCanDoBF find BF [$bfObj]", 'iCanDo');
+                AfwSession::contextLog("iCanDoBF : start of iCanDoBF find BF [$bfId]", 'iCanDo');
                 if ($this->isSuperAdmin()) {
                         AfwSession::contextLog('iCanDoBF : because super admin iCanDoBF returned true ', 'iCanDo');
                         return true;
                 }
 
-                if (!$bfObj) {
-                        AfwSession::contextLog("iCanDoBF : because bf [$bfObj] is not defined returned null ", 'iCanDo');
+                if (!$bfId) {
+                        AfwSession::contextLog("iCanDoBF : because bf [$bfId] is not defined returned null ", 'iCanDo');
                         return null;
                 }
 
-                if (is_numeric($bfObj)) {
-                        $bfId = $bfObj;
-                        $bfObj = null;
-                } elseif (is_object($bfObj))
-                        $bfId = $bfObj->id;
-                else
-                        die("iCanDoBF($bfObj) strange BF");
-                if (!$bfId)
-                        die("iCanDoBF($bfObj) strange BF ID");
+                if (!is_numeric($bfId)) throw new AfwRuntimeException("iCanDoBF($bfId) strange BF ID");
 
                 $this_id = $this->id;
                 $cache_user_can_bf_code = "user_${this_id}_can_do_bf_$bfId";
@@ -835,22 +827,24 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 $can = 'N';
 
-                if (!is_object($bfObj)) {
-                        $bfObj = Bfunction::getBfunctionById($bfId);
+                list($found, $bf_info, $whereFound) = AfwPrevilege::loadModuleBfCache($moduleCode, $bfId);
+                if ($bf_info and $found) {
+                        $bf_info_export = AfwExportHelper::afwExport($bf_info, true);
+                        AfwSession::contextLog("iCanDoBF : bf ($moduleCode, $bfId) found : $bf_info_export", 'iCanDo');
+                } else {
+                        AfwSession::contextLog("iCanDoBF : bf not found : ($moduleCode, $bfId)", 'iCanDo');
                 }
-
-                if (!is_object($bfObj))
-                        return 'bf unknown, so you can if you want';
-                AfwSession::contextLog("iCanDoBF : bf found : $bfObj", 'iCanDo');
-                if ($bfObj->_isPublic()) {
-                        AfwSession::contextLog('iCanDoBF : bf is public', 'iCanDo');
+                $_isPublic = ($bf_info["public"] or ($bf_info["level"] = 9999));
+                if ($_isPublic) {
+                        AfwSession::contextLog("iCanDoBF : bf ($moduleCode, $bfId) is public", 'iCanDo');
                         AfwSession::setVar($cache_user_can_bf_code, 'Y');
                         return 'bf is public';
                 }
 
-                AfwSession::contextLog("iCanDoBF : bf $bfObj is not public", 'iCanDo');
+                AfwSession::contextLog("iCanDoBF : bf ($moduleCode, $bfId) is not public", 'iCanDo');
 
-                $module_id = $bfObj->getVal('curr_class_module_id');
+                $module_id = $bf_info["module_id"];
+                if (!$module_id) $module_id = AfwPrevilege::moduleIdOfModuleCode($moduleCode);
 
                 list($auth, $mau_found_roles_ids) = $this->getMyRoles($module_id, $only_ids = true);
                 if (!$mau_found_roles_ids)
@@ -862,7 +856,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 $user_hierarchy_level_enum = $this->getVal('hierarchy_level_enum');
                 if (!$user_hierarchy_level_enum)
                         $user_hierarchy_level_enum = 0;
-                $bf_hierarchy_level_enum = $bfObj->getVal('hierarchy_level_enum');
+                $bf_hierarchy_level_enum = $bf_info["level"];
                 if (!$bf_hierarchy_level_enum)
                         $bf_hierarchy_level_enum = 0;
 
@@ -872,7 +866,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         return false;
                 }
 
-                $foundInRoles = $bfObj->findMeInRoles($mau_found_roles_ids, 'iCanDo', null, $ignore_cache);
+                $foundInRoles = Bfunction::findBFInRoles($module_id, $bfId, $mau_found_roles_ids, $ignore_cache);
                 if ($foundInRoles) {
                         AfwSession::contextLog("iCanDoBF : YES I can because foundInRoles=$foundInRoles. & BFL=$bf_hierarchy_level_enum >= UHL=$user_hierarchy_level_enum !", 'iCanDo');
                         AfwSession::setVar($cache_user_can_bf_code, 'Y');
@@ -1549,26 +1543,32 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return array($username, $domain_name);
         }
 
+        /**
+         * @return array
+         */
         public function initUser($from_active_directory = false, $reset_password = false)
         {
                 $lang = AfwLanguageHelper::getGlobalLanguage();
-                $info = array();
-                $err = array();
-                $war = array();
+                $info_arr = array();
+                $err_arr = array();
+                $war_arr = array();
                 if ((!$from_active_directory) and $reset_password) {
                         if (!$this->pwd) {
-                                list($err[], $info[], $war[], $pwd, $sent_by, $sent_to) = $this->resetPassword($lang);
+                                list($err, $inf, $war, $pwd, $sent_by, $sent_to) = $this->resetPassword($lang);
+                                if ($inf) $info_arr[] = $inf;
+                                if ($war) $war_arr[] = $war;
+                                if ($err) $err_arr[] = $err;
                         } else {
                                 $sent_by = false;
                                 $sent_to = "none";
                         }
 
-                        if ($sent_by and count($err) == 0)
+                        if ($sent_by and count($err_arr) == 0)
                                 $info[] = $this->tm('Password has been resetted. The new password has been sent by', $lang) . ' : ' . $this->tm($sent_by, $lang) . ' ' . $this->tm('to', $lang) . ' ' . $sent_to;
                 } else {
                 }
 
-                return AfwFormatHelper::pbm_result($err, $info);
+                return AfwFormatHelper::pbm_result($err_arr, $info_arr, $war_arr);
         }
 
         public function generateCacheFile($lang = 'ar', $onlyIfNotDone = false, $throwError = false)
