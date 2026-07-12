@@ -88,11 +88,13 @@ class ModuleAuser extends AFWObject
           $main_company = AfwSession::currentCompany();
           $freinds_company_menu = AfwSession::config('freinds-applications', [], "menu", 'force-client', $main_company);
           $freinds = array_merge($freinds_all_menu, $freinds_company_menu);
-
+          if ($id_auser == 1) die(AfwExportHelper::afwExport(["freinds" => $freinds]));
           foreach ($freinds as $donor => $recipient_row) {
-               $donorModuleId = substr($donor, 1);
+
                if ($recipient_row["m$module_id"] and is_array($recipient_row["m$module_id"])) {
+                    $donorModuleId = substr($donor, 1);
                     $mauDonor = self::loadByMainIndex($donorModuleId, $id_auser);
+                    if ($id_auser == 1) die(AfwExportHelper::afwExport(["mauDonor" => $mauDonor]));
                     if ($mauDonor) {
                          $ids_to_add_arr = [];
                          foreach ($recipient_row["m$module_id"] as $freindRole) {
@@ -105,6 +107,8 @@ class ModuleAuser extends AFWObject
                                    $ids_to_add_arr[] = $role_id;
                               }
                          }
+
+                         if ($id_auser == 1) die(AfwExportHelper::afwExport(["ids_to_add_arr" => $ids_to_add_arr]));
 
                          $mau->addInMfk("arole_mfk", $ids_to_add_arr);
                     }
