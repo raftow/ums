@@ -1253,8 +1253,10 @@ class Arole extends UmsObject
             $moduleId = $moduleObj->getId();
             $moduleCode = $moduleObj->getVal("module_code");
             $previlegeFilenameForRole = UmsManager::previlegeFilenameForRole($moduleCode, $roleId);
-            
-            return AfwCodeHelper::showCodeLines($previlegeFilenameForRole);
+
+            $file_dir_name = dirname(__FILE__);
+            $previlegeFilenameForRoleFullPath = "$file_dir_name/../../$moduleCode/previleges/role/$previlegeFilenameForRole.php";            
+            return AfwCodeHelper::showCodeLines($previlegeFilenameForRoleFullPath);
         }
 
         return "No module for this role !!??";
