@@ -12,7 +12,7 @@ class UmsAuserAfwStructure
 			// $obj->UNIQUE_KEY = array('email');
 			$obj->UNIQUE_KEY = array('username');
 			$obj->editByStep = true;
-			$obj->editNbSteps = 5;
+			$obj->editNbSteps = 6;
 			$obj->showQeditErrors = true;
 			$obj->showRetrieveErrors = true;
 			$obj->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
@@ -434,6 +434,23 @@ class UmsAuserAfwStructure
 
 		'php' => array(
 			'STEP' => 4,
+			'TYPE' => 'TEXT',
+			'CATEGORY' => 'FORMULA',
+			'SHOW' => true,
+			'EDIT' => true,
+			'MINIBOX' => false,
+			'READONLY' => true,
+			'CAN-BE-SETTED' => false,
+			'SIZE' => 255,
+			'INPUT_WIDE' => true,
+			'SEARCH-BY-ONE' => '',
+			'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',
+			'EDIT-UGROUPS' => '',
+		),
+
+		'showPhpCode' => array(
+			'STEP' => 6,
 			'TYPE' => 'TEXT',
 			'CATEGORY' => 'FORMULA',
 			'SHOW' => true,

@@ -559,27 +559,34 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return $pbms;
         }
 
-        public function getPrevilegesPhpCode($lang = 'ar')
+        public function getPrevilegesPhpCode($lang = 'ar', $pbm = true, $reset = false)
         {
-                $company = AfwSession::currentCompany();
-                $parent_project_path = AfwSession::config('parent_project_path', '');
-                if (!$parent_project_path)
-                        return ['please define parent_project_path system config parameter', ''];
                 $me_id = $this->id;
-                $file_path = $parent_project_path . '/cache/chusers';
-                $fileName = $company . "_user_$me_id" . '_data.php';
-                $fileFullName = $file_path . '/' . $fileName;
+                if (!self::$codePhp[$me_id] or $reset) {
+                        $company = AfwSession::currentCompany();
+                        $parent_project_path = AfwSession::config('parent_project_path', '');
+                        if (!$parent_project_path)
+                                return ['please define parent_project_path system config parameter', ''];
 
-                self::$codePhp[$me_id] = $this->showAttribute('mau');
-                self::$codePhp[$me_id] .= AfwCodeHelper::showCodeLines($fileFullName);
+                        $file_path = $parent_project_path . '/cache/chusers';
+                        $fileName = $company . "_user_$me_id" . '_data.php';
+                        $fileFullName = $file_path . '/' . $fileName;
 
-                return ['', 'done'];
+                        self::$codePhp[$me_id] = $this->showAttribute('mau');
+                        self::$codePhp[$me_id] .= AfwCodeHelper::showCodeLines($fileFullName);
+                        $info = 'done';
+                } else {
+                        $info = 'already previously done';
+                }
+                if ($pbm) return ['', $info];
+
+                return self::$codePhp[$me_id];
         }
 
         public function calcShowPhpCode($what = 'value')
         {
-                $me_id = $this->id;
-                return self::$codePhp[$me_id];
+                $lang = AfwLanguageHelper::getGlobalLanguage();
+                return $this->getPrevilegesPhpCode($lang, $pbm = false);
         }
 
         public function canRunApplication($module_code)
