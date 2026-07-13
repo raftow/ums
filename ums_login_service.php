@@ -131,14 +131,14 @@ class UmsLoginService extends AFWRoot
                                                 if (!$employee->is_new) {
                                                         // rafik 26 april 2021,
                                                         // the condition above because if the employee is new no 
-                                                        // need to do updateMyUserInformation 
+                                                        // need to do updateMyUserInformationAndRoles 
                                                         // because already done in employee::beforeMaj
                                                         //
 
                                                         if ($debugg_login) {
                                                                 AFWDebugg::log("update My User Information : starting ...");
                                                         }
-                                                        $employee->updateMyUserInformation();
+                                                        $employee->updateMyUserInformationAndRoles();
                                                         if ($debugg_login) {
                                                                 AFWDebugg::log("update My User Information : end.");
                                                         }
