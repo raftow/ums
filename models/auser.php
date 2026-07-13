@@ -589,6 +589,20 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return $this->getPrevilegesPhpCode($lang, $pbm = false);
         }
 
+        public function calcExportCache($what = 'value')
+        {
+                $lang = AfwLanguageHelper::getGlobalLanguage();
+
+                list($cache_found, $quick_links_arr, $mau_info, $menu, $user_info, $user_cache_file_path) = CmsFrontMenu::loadUmsCacheForUser($this->id, $lang);
+
+                $arr = ['menu' => $menu, 'mau_info' => $mau_info, 'user_info' => $user_info, 'user_cache_file_path' => $user_cache_file_path, 'quick_links_arr' => $quick_links_arr,];
+
+                return AfwExportHelper::afwExport($arr);
+        }
+
+
+
+
         public function canRunApplication($module_code)
         {
                 list($module_id, $system_id) = UmsManager::decodeModule($module_code);
