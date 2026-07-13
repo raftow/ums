@@ -15,7 +15,7 @@ class UmsAroleAfwStructure
 
 			$obj->UNIQUE_KEY = array('module_id', 'role_code');
 			$obj->editByStep = true;
-			$obj->editNbSteps = 6;
+			$obj->editNbSteps = 7;
 			$obj->showQeditErrors = true;
 			$obj->showRetrieveErrors = true;
 			$obj->general_check_errors = true;
@@ -447,6 +447,24 @@ class UmsAroleAfwStructure
 			'CATEGORY' => 'FORMULA',
 			'ANSWER' => 'auser',
 			'ANSMODULE' => 'ums',
+			'SEARCH-BY-ONE' => '',
+			'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',
+			'EDIT-UGROUPS' => '',
+		),
+
+
+		'phpCode' => array(
+			'STEP' => 7,
+			'TYPE' => 'TEXT',
+			'CATEGORY' => 'FORMULA',
+			'SHOW' => true,
+			'EDIT' => true,
+			'MINIBOX' => false,
+			'READONLY' => true,
+			'CAN-BE-SETTED' => false,
+			'SIZE' => 255,
+			'INPUT_WIDE' => true,
 			'SEARCH-BY-ONE' => '',
 			'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',

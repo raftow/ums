@@ -1242,4 +1242,21 @@ class Arole extends UmsObject
 
         return true;
     }
+
+    
+
+    public function calcPhpCode($what = 'value')
+    {
+        $roleId = $this->id;
+        $moduleObj = $this->hetModule();
+        if ($moduleObj) {
+            $moduleId = $moduleObj->getId();
+            $moduleCode = $moduleObj->getVal("module_code");
+            $previlegeFilenameForRole = UmsManager::previlegeFilenameForRole($moduleCode, $roleId);
+            
+            return AfwCodeHelper::showCodeLines($previlegeFilenameForRole);
+        }
+
+        return "No module for this role !!??";
+    }
 }

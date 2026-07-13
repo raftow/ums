@@ -7,13 +7,14 @@ class AroleArTranslator
                 $trad = [];
                 $trad["arole"]["step1"] = "البيانات الأساسية";
                 $trad["arole"]["step2"] = "البيانات التكميلية";
-                $trad["arole"]["step3"] = "الصلاحيات الفرعية";
+                $trad["arole"]["step3"] = "المجموعات الفرعية";
                 $trad["arole"]["step4"] = "الوظائف الفرعية";
                 $trad["arole"]["step5"] = "قصص المستخدم";
                 $trad["arole"]["step6"] = "الانتفاع بها";
+                $trad["arole"]["step6"] = "الانتفاع بها";
 
-                $trad["arole"]["titre"] = "وصف الصلاحية";
-                $trad["arole"]["titre_short"] = "مسمى الصلاحية";
+                $trad["arole"]["titre"] = "وصف المجموعة";
+                $trad["arole"]["titre_short"] = "مسمى المجموعة";
                 $trad["arole"]["titre_en"] = "الوصف بالانجليزي";
                 $trad["arole"]["titre_short_en"] = "المسمى بالانجليزي";
                 $trad["arole"]["system_id"] = "النظام";
