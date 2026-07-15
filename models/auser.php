@@ -738,6 +738,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 // $this->fld_ACTIVE();
                 if (isset($this->iCanDoOperationArray["$module_code-$table-$operation_sql"])) {
                         $icanResult = $this->iCanDoOperationArray["$module_code-$table-$operation_sql"];
+                        die("rafik iCanDo dbg 20260715 / 1 :  icanResult =  $icanResult : log : " . AfwSession::getLog('iCanDo'));
                         AfwSession::contextLog("in object cache iCanDoOperationArray[$module_code-$table-$operation_sql] = " . $icanResult, 'iCanDo');
                         return $icanResult;
                 }
@@ -750,11 +751,13 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         $operation = $operation_sql;
                 if (($operation == 'display') and $this->isAdmin()) {
                         AfwSession::contextLog("operation == display and user is Admin", 'iCanDo');
+                        die("rafik iCanDo dbg 20260715 / 2 : " . AfwSession::getLog('iCanDo'));
                         return true;
                 }
 
                 if ($this->isSuperAdmin()) {
                         AfwSession::contextLog("user is is Super Admin he can do all operations here operation=$operation", 'iCanDo');
+                        die("rafik iCanDo dbg 20260715 / 3 : " . AfwSession::getLog('iCanDo'));
                         return true;
                 }
 
