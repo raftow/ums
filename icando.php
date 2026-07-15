@@ -27,6 +27,6 @@ if (!$afwClass) die("cl param is required");
 if ($id) $object = $afwClass::loadById($id);
 else $object = new $afwClass();
 
-AfwUmsPagHelper::userCanDoOperationOnObject($object, $auser, 'delete', true, true);
+AfwUmsPagHelper::userCanDoOperationOnObject($object, $objme, 'delete', true, true);
 
 $out_scr .= $objme->getICanDoLog(false);
