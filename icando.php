@@ -29,4 +29,4 @@ else $object = new $afwClass();
 
 AfwUmsPagHelper::userCanDoOperationOnObject($object, $auser, 'delete');
 
-$out_scr .= $objme->getICanDoLog();
+$out_scr .= $objme->getICanDoLog(false);

@@ -737,7 +737,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
         {
                 // $this->fld_ACTIVE();
                 if (isset($this->iCanDoOperationArray["$module_code-$table-$operation_sql"])) {
-                        return $this->iCanDoOperationArray["$module_code-$table-$operation_sql"];
+                        $icanResult = $this->iCanDoOperationArray["$module_code-$table-$operation_sql"];
+                        AfwSession::contextLog("in object cache iCanDoOperationArray[$module_code-$table-$operation_sql] = " . $icanResult, 'iCanDo');
+                        return $icanResult;
                 }
                 // return true;
                 if ($operation_sql == 'update')
@@ -746,10 +748,16 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         $operation = 'display';
                 else
                         $operation = $operation_sql;
-                if (($operation == 'display') and $this->isAdmin())
+                if (($operation == 'display') and $this->isAdmin()) {
+                        AfwSession::contextLog("operation == display and user is Admin", 'iCanDo');
                         return true;
-                if ($this->isSuperAdmin())
+                }
+
+                if ($this->isSuperAdmin()) {
+                        AfwSession::contextLog("user is is Super Admin he can do all operations here operation=$operation", 'iCanDo');
                         return true;
+                }
+
                 list($module_id, $system_id) = UmsManager::decodeModule($module_code);
                 AfwSession::contextLog("list($module_id, $system_id) = decodeModule($module_code)", 'iCanDo');
                 $atable_id = UmsManager::decodeTable($module_id, $table, AfwSession::hasOption("IGNORE_PREVILEGE_CACHE"));
@@ -785,9 +793,10 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 return $return;
         }
 
-        public function getICanDoLog()
+        public function getICanDoLog($strip_tags = true)
         {
-                $return = strip_tags(AfwSession::getLog('iCanDo'));
+                $return = AfwSession::getLog('iCanDo');
+                if ($strip_tags) $return = strip_tags($return);
                 $return = str_replace('"', '', $return);
                 $return = str_replace("'", '', $return);
 
