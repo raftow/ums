@@ -16,10 +16,10 @@ $myEmplId = $objme->getEmployeeId();
 
 if (!$lang) $lang = AfwLanguageHelper::getGlobalLanguage();
 if (!$lang) $lang = "ar";
-$module = $_GET["md"];
+$module = $_GET["currmod"];
 $afwClass = $_GET["cl"];
 $id = $_GET["id"];
-if (!$module) die("md param is required");
+if (!$module) die("currmod param is required");
 AfwAutoLoader::addModule($module);
 if (!$afwClass) die("cl param is required");
 
