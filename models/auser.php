@@ -879,7 +879,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 if ($_isPublicLevel) {
                         AfwSession::contextLog("iCanDoBF : bf ($moduleCode, $bfId) is public level", 'iCanDo');
                         AfwSession::setVar($cache_user_can_bf_code, 'Y');
-                        return 'bf is public';
+                        return 'bf is public level';
                 }
 
                 AfwSession::contextLog("iCanDoBF : bf ($moduleCode, $bfId) is not public", 'iCanDo');
