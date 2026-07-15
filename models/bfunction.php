@@ -1408,7 +1408,7 @@ class Bfunction extends UmsObject
                         list($role_item_display, $menu_folder, $role_data, $source_found) = UmsManager::getRoleDetails($module_id, $arole_id, $lang, $ignore_cache);
                         $bf_info = $menu_folder['otherbfs'][$bf_id];
 
-                        if ($bf_info) return "bf found in [$source_found] in role " . $role_item_display;
+                        if ($bf_info) return "bf found in [$source_found] in role " . $role_item_display . " [$arole_id]";
                 }
 
                 /* lang = AfwLanguageHelper::getGlobalLanguage();
