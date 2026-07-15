@@ -760,6 +760,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 list($module_id, $system_id) = UmsManager::decodeModule($module_code);
                 AfwSession::contextLog("list($module_id, $system_id) = decodeModule($module_code)", 'iCanDo');
+                die("rafik iCanDo dbg 20260715 : " . AfwSession::getLog('iCanDo'));
                 $atable_id = UmsManager::decodeTable($module_id, $table, AfwSession::hasOption("IGNORE_PREVILEGE_CACHE"));
                 AfwSession::contextLog("$atable_id = decodeTable($module_id, $table)", 'iCanDo');
                 AfwSession::contextLog("can i do [$operation] on table $table(id=$atable_id) from module [$module_code](id=$module_id) and system(id=$system_id)", 'iCanDo');
