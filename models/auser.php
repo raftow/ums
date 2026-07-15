@@ -863,7 +863,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
                 list($found, $bf_info, $whereFound) = AfwPrevilege::loadModuleBfCache($moduleCode, $bfId);
                 if ($bf_info and $found) {
                         $bf_info_export = AfwExportHelper::afwExport($bf_info, true);
-                        AfwSession::contextLog("iCanDoBF : bf ($moduleCode, $bfId) found : $bf_info_export", 'iCanDo');
+                        AfwSession::contextLog("iCanDoBF : bf ($moduleCode, $bfId) found in $whereFound : $bf_info_export", 'iCanDo');
                 } else {
                         AfwSession::contextLog("iCanDoBF : bf not found : ($moduleCode, $bfId)", 'iCanDo');
                 }
