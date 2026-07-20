@@ -1,30 +1,31 @@
 <?php
+
 /**
  * @var string $file_dir_name
  * @var string $MODULE
  */
 // IMPORTANT !!!!!!!!
 // keep $file_dir_name variable not defined here but coming from each module's main.php file
-include_once ("$file_dir_name/ini.php");
-include_once ("$file_dir_name/module_config.php"); 
+include_once("$file_dir_name/ini.php");
+include_once("$file_dir_name/module_config.php");
+
+include_once("$file_dir_name/../lib/afw/utilities/ufw_error_handler.php");
+
 require_once("$file_dir_name/../lib/afw/core/afw_autoloader.php");
 
 
-if($_REQUEST["Main_Page"])
-{
+if ($_REQUEST["Main_Page"]) {
     $Main_Page = $_REQUEST["Main_Page"];
-}
-else
-{
+} else {
     $Main_Page = "home.php";
 }
 
 $table = null;
-if(isset($_REQUEST["cl"])) {
+if (isset($_REQUEST["cl"])) {
     // require("$file_dir_name/../lib/afw/helpers/afw_string_helper.php"); 
     $table = AfwStringHelper::classToTable($_REQUEST["cl"]);
 }
-if(!$table) $table = "all";
+if (!$table) $table = "all";
 // require("$file_dir_name/../lib/afw/cms/cms_main_page.php");
 $options = CmsMainPage::getDefaultOptions($Main_Page, $MODULE, $table);
 CmsMainPage::echoMainPage($MODULE, $Main_Page, $file_dir_name, $options);
