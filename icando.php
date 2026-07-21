@@ -19,6 +19,9 @@ if (!$lang) $lang = "ar";
 $module = $_GET["currmod"];
 $afwClass = $_GET["cl"];
 $id = $_GET["id"];
+$operation = $_GET["op"];
+if (!$operation) $operation = $_GET["operation"];
+if (!$operation) $operation = 'delete';
 if (!$module) die("currmod param is required");
 AfwAutoLoader::addModule($module);
 if (!$afwClass) die("cl param is required");
@@ -27,6 +30,6 @@ if (!$afwClass) die("cl param is required");
 if ($id) $object = $afwClass::loadById($id);
 else $object = new $afwClass();
 
-AfwUmsPagHelper::userCanDoOperationOnObject($object, $objme, 'delete', true, true);
+AfwUmsPagHelper::userCanDoOperationOnObject($object, $objme, $operation, true, true);
 
 $out_scr .= $objme->getICanDoLog(false);
