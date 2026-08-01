@@ -244,7 +244,7 @@ class Bfunction extends UmsObject
                 }
 
                 if ($fields_updated['titre_short_en'] or $fields_updated['titre_short']  or $fields_updated['hierarchy_level_enum']) {
-                        $this->generateBfCache($lang);
+                        $this->generateBfCache($lang, false);
                 }
 
 
@@ -334,13 +334,17 @@ class Bfunction extends UmsObject
                 return -1;
         }
 
-        public function generateBfCache($lang = "ar")
+        public function generateBfCache($lang = "ar", $pbm = true)
         {
                 $curr_class_module_id = $this->getVal("curr_class_module_id");
                 $curr_class_module_code = AfwPrevilege::moduleCodeOfModuleId($curr_class_module_id);
                 list($bfCache, $fileName, $php_code, $mv_cmd) = UmsManager::genereBFCacheFile($curr_class_module_code, $this, true, true);
 
-                return ["", "bf cache generated in $fileName to install : $mv_cmd"];
+                $bf_cache_generated_in = $this->tm("bf cache generated in", $lang);
+                $to_install = $this->tm("to install", $lang);
+                $info = "$bf_cache_generated_in $fileName $to_install : $mv_cmd";
+                if ($pbm) return ["", $info];
+                else AfwSession::pushInformation($info);
         }
 
         public function generateUserStory($lang = "ar", $framework = 0, $commit = true)

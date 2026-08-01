@@ -21,8 +21,8 @@ $messages["related BFs"] = "الوظائف ذات الصلة";
 $messages["related BFs details"] = "تفاصيل الوظائف ذات الصلة";
 
 $messages["No goal found in this job role"] = "لم يتم العثور على هدف في هذه المسؤولية الوظيفية";
-// $messages[""] = "";
-// $messages[""] = "";
+$messages["bf cache generated in"] = "تم انشاء/تحديث ملف الكاش في";
+$messages["to install"] = "للتثبيت قم بـ";
 // $messages[""] = "";
 // $messages[""] = "";
 // $messages[""] = "";
