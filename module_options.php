@@ -15,6 +15,7 @@ $options_arr["HIJRI_TO_GREG"] = ["ar" => "تواريخ ميلادية", "en" => 
 $options_arr["COPY_PAST_M"] = ["ar" => "نسخ لصق متعدد السطور", "en" => "Multiple lines copy paste"];
 if ($objme and $objme->isSuperAdmin()) {
    $options_arr["SWITCH_ROOT"] = ["ar" => "صلاحية الروت", "en" => "Root previleges"];
+   $options_arr["ADVANCED_BACK_TRACE"] = ["ar" => "الآثار المتقدمة", "en" => "Advanced Back Trace"];
 }
 $options_arr["IGNORE_PREVILEGE_CACHE"] = ["ar" => "تجاهل ملفات ذاكرة التخزين المؤقت للأذونات", "en" => "Ignore prevlieges cache files"];
 $options_arr["RUN_CONSOLE"] = ["ar" => "تشغيل وحدة التحكم", "en" => "Run console"];
