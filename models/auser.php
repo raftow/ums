@@ -132,6 +132,11 @@ class Auser extends UmsObject implements AfwFrontEndUser
                         return 0;
         }
 
+        public function isVirtual()
+        {
+                return ($this->id == 2);
+        }
+
         public static function loadByUsername($username)
         {
                 $obj = new Auser();
