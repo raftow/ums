@@ -17,7 +17,7 @@ require_once("$file_dir_name/../lib/afw/core/afw_autoloader.php");
 if ($_REQUEST["Main_Page"]) {
     $Main_Page = $_REQUEST["Main_Page"];
 } else {
-    $Main_Page = "home.php";
+    $Main_Page = "default.php";
 }
 
 $table = null;
