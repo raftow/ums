@@ -92,7 +92,7 @@
 <table style="width: 63%;">
 <tbody><tr>  
 <td style="padding-top: 15px;">
-<div style="font-weight: bold;font-size: 16px;"> صلاحيات الدور الوظيفي '<?=$aroleName?>'   على جداول </div>
+<div style="font-weight: bold;font-size: 16px;"> صلاحيات الدور الوظيفي '<?php echo $aroleName?>'   على جداول </div>
 </td>
 
 <td style="padding-top: 5px;">
@@ -126,8 +126,8 @@
    }
 ?>
 <input type="hidden" name="Main_Page" id="Main_Page" value="hzm_bf_role_manage.php">
-<input type="hidden" name="rol" value="<?=$aroleId?>">
-<input type="hidden" name="subm" value="<?=$subm?>">
+<input type="hidden" name="rol" value="<?php echo $aroleId?>">
+<input type="hidden" name="subm" value="<?php echo $subm?>">
 
 </td>
 </tr>
@@ -148,7 +148,7 @@ foreach($framework_mode_list as $framework_mode => $framework_mode_item)
        if($alt == "z") $alt = "x";
        else $alt = "z";
 ?>        
-        <th class="xqe_hf_<?=$alt?>" align="center"><?=$framework_mode_item["label"][$lang]?></th>
+        <th class="xqe_hf_<?php echo $alt?>" align="center"><?php echo $framework_mode_item["label"][$lang]?></th>
 <?
 }
 ?>
@@ -166,7 +166,7 @@ foreach($tbrg_mat as $tblId => $tblSubMat)
    $alt = "z";
 ?>
 <tr>
-   <td class="xqe_<?=$odd?>_<?=$alt?>" align="center"><?=$tblSubMat["obj"]?></td>
+   <td class="xqe_<?php echo $odd?>_<?php echo $alt?>" align="center"><?php echo $tblSubMat["obj"]?></td>
 <?php   
 foreach($framework_mode_list as $framework_mode => $framework_mode_item)
 {
@@ -174,7 +174,7 @@ foreach($framework_mode_list as $framework_mode => $framework_mode_item)
     if($alt == "z") $alt = "x";
     else $alt = "z";
 ?>        
-  <td class="xqe_<?=$odd?>_<?=$alt?>" align="center">
+  <td class="xqe_<?php echo $odd?>_<?php echo $alt?>" align="center">
 <?
     
     if(($bf_data["bf"]) and (is_object($bf_data["bf"])))
@@ -206,18 +206,18 @@ foreach($framework_mode_list as $framework_mode => $framework_mode_item)
         {
 ?>        
              <img src="../images/redc_d.png">
-             <input type="hidden" value="1" id="<?=$checkbox_name?>" name="<?=$checkbox_name?>">
+             <input type="hidden" value="1" id="<?php echo $checkbox_name?>" name="<?php echo $checkbox_name?>">
 <?php  
         }
         else
         {
 ?>        
-              <input type="checkbox" value="1"  id="<?=$checkbox_name?>" name="<?=$checkbox_name?>" <?=$checkbox_checked?> class="<?=$checkbox_extra_class?>">
+              <input type="checkbox" value="1"  id="<?php echo $checkbox_name?>" name="<?php echo $checkbox_name?>" <?php echo $checkbox_checked?> class="<?php echo $checkbox_extra_class?>">
 <?php  
         }
 ?>  
-        <input type="hidden" value="<?=$checkbox_value?>" id="old_<?=$checkbox_name?>" name="old_<?=$checkbox_name?>">
-        <input type="hidden" value="<?=$bf_id?>" id="<?=$bf_id_input_name?>" name="<?=$bf_id_input_name?>">
+        <input type="hidden" value="<?php echo $checkbox_value?>" id="old_<?php echo $checkbox_name?>" name="old_<?php echo $checkbox_name?>">
+        <input type="hidden" value="<?php echo $bf_id?>" id="<?php echo $bf_id_input_name?>" name="<?php echo $bf_id_input_name?>">
 <?
     }
     else echo "&nbsp;"

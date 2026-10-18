@@ -67,7 +67,7 @@ $tokens["action_page"] = "login.php";
 
 $logbl = substr(md5($_SERVER["HTTP_USER_AGENT"] . "-" . date("Y-m-d")), 0, 10);
 $uri_module = UfwUrlManager::currentURIModule();
-$xmodule = AfwSession::getCurrentlyExecutedModule();
+$xmodule = AfwSession::currentCompanyOrDepartmentCode();
 $site_name = AfwSession::getCurrentSiteName($lang);
 $tokens["module"] = $uri_module;
 $tokens["xmodule"] = $xmodule;
