@@ -168,17 +168,28 @@ class Region extends AFWObject{
                         }
                        
                        // crm.crm_customer-المنطقة	region_id  نوع علاقة بين كيانين ← 2
-                        if(!$simul)
+                        if(!$simul and class_exists("CrmCustomer", true))
                         {
-                            // require_once "../crm/crm_customer.php";
-                            // CrmCustomer::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
+                            // require_once "../crm/models/crm_customer.php";
+                            CrmCustomer::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
                             // $this->execQuery("update ${server_db_prefix}crm.crm_customer set region_id='$id_replace' where region_id='$id' ");
                         }
+
+
+                        
+                        if(!$simul and class_exists("Request", true))
+                        {
+                            // require_once "../crm/models/crm_customer.php";
+                            Request::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}crm.crm_customer set region_id='$id_replace' where region_id='$id' ");
+                        }
+
+
                        // license.invester-المنطقة	region_id  نوع علاقة بين كيانين ← 2
                         if(!$simul)
                         {
                             // require_once "../license/invester.php";
-                            Invester::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
+                            // Invester::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
                             // $this->execQuery("update ${server_db_prefix}license.invester set region_id='$id_replace' where region_id='$id' ");
                         }
 
@@ -199,10 +210,19 @@ class Region extends AFWObject{
                         }
                        
                        // crm.crm_customer-المنطقة	region_id  نوع علاقة بين كيانين ← 2
-                        if(!$simul)
+                        if(!$simul and class_exists("CrmCustomer", true))
                         {
-                            // require_once "../crm/crm_customer.php";
-                            // CrmCustomer::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
+                            // require_once "../crm/models/crm_customer.php";
+                            CrmCustomer::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}crm.crm_customer set region_id='$id_replace' where region_id='$id' ");
+                        }
+
+
+                        
+                        if(!$simul and class_exists("Request", true))
+                        {
+                            // require_once "../crm/models/crm_customer.php";
+                            Request::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
                             // $this->execQuery("update ${server_db_prefix}crm.crm_customer set region_id='$id_replace' where region_id='$id' ");
                         }
                        
@@ -210,7 +230,7 @@ class Region extends AFWObject{
                         if(!$simul)
                         {
                             // require_once "../license/invester.php";
-                            Invester::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
+                            // Invester::updateWhere(array('region_id'=>$id_replace), "region_id='$id'");
                             // $this->execQuery("update ${server_db_prefix}license.invester set region_id='$id_replace' where region_id='$id' ");
                         }
 
