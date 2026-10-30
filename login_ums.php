@@ -11,6 +11,8 @@ $user_name_c = "";
 $user_name = "";
 $user_or_email = "";
 $password = "";
+// company-branch
+$company_branch = UfwUrlManager::currentCompanyBranch();
 if (!isset($login_page_options)) $login_page_options = AfwSession::config("login_page_options", array());
 if (AfwSession::userIsAuthenticated()) {
         header("Location: index.php");
@@ -30,7 +32,7 @@ if (AfwSession::userIsAuthenticated()) {
         // die("before login _POST=".var_export($_POST,true));
         $tokens = UmsLoginService::umsAuthentication($user_or_email, $password);
         //die("after login tokens=".var_export($tokens,true));
-        if($tokens["connected"] and !$tokens["authenticated"] and $tokens["two_factor_authentication"]) {
+        if ($tokens["connected"] and !$tokens["authenticated"] and $tokens["two_factor_authentication"]) {
                 // user need two_factor_authentication so redirect to two_factor_authentication page
                 $two_factor_authentication = $tokens["two_factor_authentication"];
                 $user_name_logged_in = $tokens["user_name_logged_in"];
@@ -39,22 +41,21 @@ if (AfwSession::userIsAuthenticated()) {
                 return include($two_factor_authentication_page);
         }
 } elseif ($_POST["otp_verify_code"] and $_POST["user_name_logged_in"]) {
-    $otp_info_export = "otp verifying sent code";
-    
-    $otp_ok = true;
-    if (AfwSession::getSessionVar("user_OTP") == $_POST["otp_verify_code"]) {
-        $user_name_logged_in = $_POST["user_name_logged_in"]; 
-        // $userObj = CrmCustomer::loadByIdn($user_id); 
-        list($user_found, $user_not_found_reason, $user_infos, $login_dbg[]) = UfwLoginUtilities::db_retrieve_user_info($user_name_logged_in);
-        if ($user_found and $user_infos) AfwSession::userHasBeenAuthenticated($user_infos);
-        else $otp_verify_msg = "حدث خطأ أثناء التحقق من الرمز المدخل ربما أن هذا المستخدم غير موجود في قاعدة البيانات : $user_name_logged_in : " . $user_not_found_reason;
-    } else {
-        $otp_verify_msg = "الرمز المدخل غير صحيح";
-        
-        if(!AfwSession::config("MODE_DEVELOPMENT", false)) $otp_verify_msg .= "<!-- ".AfwSession::getSessionVar("user_OTP") . " != " . $_POST["otp_verify_code"]." -->";
-    }
-    $tokens["message"] = $otp_verify_msg;
-    
+        $otp_info_export = "otp verifying sent code";
+
+        $otp_ok = true;
+        if (AfwSession::getSessionVar("user_OTP") == $_POST["otp_verify_code"]) {
+                $user_name_logged_in = $_POST["user_name_logged_in"];
+                // $userObj = CrmCustomer::loadByIdn($user_id); 
+                list($user_found, $user_not_found_reason, $user_infos, $login_dbg[]) = UfwLoginUtilities::db_retrieve_user_info($user_name_logged_in);
+                if ($user_found and $user_infos) AfwSession::userHasBeenAuthenticated($user_infos);
+                else $otp_verify_msg = "حدث خطأ أثناء التحقق من الرمز المدخل ربما أن هذا المستخدم غير موجود في قاعدة البيانات : $user_name_logged_in : " . $user_not_found_reason;
+        } else {
+                $otp_verify_msg = "الرمز المدخل غير صحيح";
+
+                if (!AfwSession::config("MODE_DEVELOPMENT", false)) $otp_verify_msg .= "<!-- " . AfwSession::getSessionVar("user_OTP") . " != " . $_POST["otp_verify_code"] . " -->";
+        }
+        $tokens["message"] = $otp_verify_msg;
 } else {
         $msg = "";
         $tokens = [];
@@ -63,7 +64,7 @@ if (AfwSession::userIsAuthenticated()) {
 
 $tokens["action_page"] = "login.php";
 
-
+$tokens["company-branch"] = $company_branch ? "-" . $company_branch : "";
 
 $logbl = substr(md5($_SERVER["HTTP_USER_AGENT"] . "-" . date("Y-m-d")), 0, 10);
 $uri_module = UfwUrlManager::currentURIModule();
@@ -80,7 +81,7 @@ $tokens["login_title"] = $site_name;
 $tokens["site_name"] = $site_name;
 if (!$tokens["message"]) $tokens["message"] = "";
 $tokens["message"] .= " " . $msg;
-$msg = $tokens["message"] = trim($tokens["message"] );
+$msg = $tokens["message"] = trim($tokens["message"]);
 $tokens["no_message_s"] = $msg ? "" : "<!-- ";
 $tokens["no_message_e"] = $msg ? "" : " -->";
 $company_selection_enabled = AfwSession::config("company_selection_enabled", true);

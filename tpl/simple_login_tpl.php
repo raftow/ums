@@ -16,7 +16,7 @@
                     <a href="#" class="signup-image-link">[site_name]</a>
                     [site_name_e]
                     [figure_s]
-                    <figure><img src="../client-[company]/pic/login-picture.png" alt="sing up image"></figure>
+                    <figure><img src="../client-[company]/pic/login-picture[company-branch].png" alt="sing up image"></figure>
                     [figure_e]
                 </div>
 
