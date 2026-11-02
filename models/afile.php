@@ -8,7 +8,7 @@
 
 // old include of afw.php
 
-class Afile extends AFWObject
+class Afile extends AFWObject implements AfwStorable
 {
 
         public static $DATABASE                = "";
@@ -29,6 +29,10 @@ class Afile extends AFWObject
                 $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
         }
 
+
+        public function getStoredFileName() {
+                return $this->getVal("afile_name");
+        }
 
         public static function loadByMainIndex($original_name, $afile_size, $owner_id, $stakeholder_id, $create_obj_if_not_found = false)
         {
