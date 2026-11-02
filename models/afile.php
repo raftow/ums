@@ -4,10 +4,8 @@
 // ALTER TABLE `afile` CHANGE `original_name` `original_name` varchar(255); 
 // ALTER TABLE `afile` CHANGE `afile_name` `afile_name` varchar(255);
 
-
-
-// old include of afw.php
-
+$file_dir_name = dirname(__FILE__);
+include_once("$file_dir_name/../../lib/afw/interfaces/afw_storable.php");
 class Afile extends AFWObject implements AfwStorable
 {
 
