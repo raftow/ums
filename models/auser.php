@@ -610,7 +610,11 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
         public function canRunApplication($module_code)
         {
+                // $objme = AfwSession::getUserConnected();
+                // if($objme->isAdmin()) return true;
+                
                 list($module_id, $system_id) = UmsManager::decodeModule($module_code);
+                if(!$module_id) throw new AfwBusinessException("CAN NOT DECODE ID OF MODULE : $module_code");
                 return $this->getMyRoles($module_id, $only_ids = true);
         }
 

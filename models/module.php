@@ -1391,22 +1391,26 @@ class Module extends UmsObject
         return $system->loadMany();
     }
 
-    public static function getModuleByCode($id_sh, $code_mod)
+    /**
+     * @param string $id_sh (id_sh is obsolete since v2.0 of Momken Framework)
+     * @param string $module_code
+     */
+    public static function getModuleByCode($id_sh, $module_code)
     {
         // $id_sh is obsolete
 
         global $cacheSys;
         if ($cacheSys) {
-            $system = $cacheSys->getFromCache("ums", "module", $code_mod, $context = "module::getModuleByCode($id_sh, $code_mod)");
+            $system = $cacheSys->getFromCache("ums", "module", $module_code, $context = "module::getModuleByCode($id_sh, $module_code)");
         } else $system = null;
         if (!$system) {
 
             $system = new Module();
-            $system->select("module_code", $code_mod);
+            $system->select("module_code", $module_code);
             if (!$system->load()) {
                 $system = null;
             } else {
-                if ($cacheSys) $cacheSys->putIntoCache("ums", "module", $system, $code_mod, $context = "module::getModuleByCode($id_sh, $code_mod)");
+                if ($cacheSys) $cacheSys->putIntoCache("ums", "module", $system, $module_code, $context = "module::getModuleByCode($id_sh, $module_code)");
             }
         }
 
