@@ -146,7 +146,7 @@ class UmsJobroleAfwStructure
 			'ANSWER' => 'arole',
 			'ANSMODULE' => 'ums',
 			'CATEGORY' => 'FORMULA',
-			'SUPER_CATEGORY' => 'ITEMS',
+			'FORMULA-CATEGORY' => 'ITEMS',
 			'SHOW' => true,
 			'FORMAT' => 'tree',
 			'LINK_COL' => 'parent_arole_id',
