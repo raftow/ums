@@ -76,21 +76,13 @@ class Jobrole extends UmsObject
                         $fn = trim($this->valtitre_short());
                 else
                         $fn = trim($this->valtitre_short_en());
-
-                return $fn;  // $domain."->".
+                $id = $this->id;
+                return $fn . "-$id";
         }
 
         public function getDropDownDisplay($lang = 'ar')
         {
-                /*$objme = AfwSession::getUserConnected();
 
-                      $id = "";
-
-                      if($objme->isSuperAdmin())
-                      {
-                           $id = trim($this->getId());
-                           $id = " ($id)";
-                      }*/
 
                 $domain = $this->decode('id_domain', '', false, $lang);
 
@@ -99,9 +91,11 @@ class Jobrole extends UmsObject
                 else
                         $fn = trim($this->valtitre_short_en());
 
+
                 $fn = $domain . '&rarr;' . $fn;
 
-                return $fn;
+                $id = $this->id;
+                return $fn . "-$id";
         }
 
         public function getModeDisplayLink()

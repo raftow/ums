@@ -20,7 +20,7 @@ class UmsAroleAfwStructure
 			$obj->showRetrieveErrors = true;
 			$obj->general_check_errors = true;
 			// $obj->after_save_edit = array("class"=>'Road',"attribute"=>'road_id', "currmod"=>'btb',"currstep"=>9);
-			$obj->after_save_edit = array("mode" => "qsearch", "currmod" => 'adm', "class" => 'Arole', "submit" => true);
+			$obj->after_save_edit = array("mode" => "qsearch", "currmod" => 'ums', "class" => 'Arole', "submit" => true);
 		} else {
 			AroleArTranslator::initData();
 			AroleEnTranslator::initData();
@@ -37,7 +37,7 @@ class UmsAroleAfwStructure
 			'RETRIEVE' => true,
 			'EDIT' => true,
 			'TYPE' => 'PK',
-			'SEARCH-BY-ONE' => '',
+			'QSEARCH' => true,
 			'DISPLAY' => true,
 			'STEP' => 1,
 			'DISPLAY-UGROUPS' => '',

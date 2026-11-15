@@ -178,9 +178,9 @@ class Arole extends UmsObject
 
     public function getDropDownDisplay($lang = "ar")
     {
-        $count = $this->calc("rbfListCount") . " | " . $this->calc("childListCount");
-
-        return $this->getShortDisplay($lang) . " ($count)";
+        $count = $this->calc("rbfListCount") . " | " . $this->calc("all_rbfListCount") . " | " . $this->calc("childListCount");
+        $id = $this->id;
+        return $this->getShortDisplay($lang) . " ($count) [$id]";
     }
 
     public function getDisplay($lang = "ar")
@@ -383,9 +383,9 @@ class Arole extends UmsObject
         foreach (self::$rbfList[$this->id] as $rbfId => $rbfObj) {
             if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) and $rbfObj->sureIs("menu")) {
                 $bfObj = $rbfObj->het("bfunction_id");
-                $bf_id = $rbfObj->getVal("bfunction_id");
-                // d ie("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
-                $all_bf_arr[$bf_id] = $bfObj;
+                $bfunction_id = $rbfObj->getVal("bfunction_id");
+                // d ie("in getMenuBFs of arole ".$this->id."<br>add $bfunction_id / ".$bfObj->getDisplay("ar")."<br>");
+                $all_bf_arr[$bfunction_id] = $bfObj;
             }
         }
 
@@ -408,9 +408,9 @@ class Arole extends UmsObject
             foreach (self::$allRbfList[$this->id] as $rbfId => $rbfObj) {
                 if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0) /* and $rbfObj->isNot("menu")*/) {
                     $bfObj = $rbfObj->het("bfunction_id");
-                    $bf_id = $rbfObj->getVal("bfunction_id");
-                    // d ie("in getMenuBFs of arole ".$this->id."<br>add $bf_id / ".$bfObj->getDisplay("ar")."<br>");
-                    self::$otherBFs[$this->id][$bf_id] = $bfObj;
+                    $bfunction_id = $rbfObj->getVal("bfunction_id");
+                    // d ie("in getMenuBFs of arole ".$this->id."<br>add $bfunction_id / ".$bfObj->getDisplay("ar")."<br>");
+                    self::$otherBFs[$this->id][$bfunction_id] = $bfObj;
                 }
             }
         }
@@ -435,9 +435,9 @@ class Arole extends UmsObject
         foreach (self::$rbfList[$this->id] as $rbfId => $rbfObj) {
             if ($rbfObj->isActive() and ($rbfObj->getVal("bfunction_id") > 0)) {
                 $bfObj = $rbfObj->het("bfunction_id");
-                $bf_id = $rbfObj->getVal("bfunction_id");
-                // echo "<br>allbf : $bf_id / $bfObj<br>";
-                $all_bf_arr[$bf_id] = $bfObj;
+                $bfunction_id = $rbfObj->getVal("bfunction_id");
+                // echo "<br>allbf : $bfunction_id / $bfObj<br>";
+                $all_bf_arr[$bfunction_id] = $bfObj;
             }
         }
 
@@ -459,16 +459,16 @@ class Arole extends UmsObject
         
         */
 
-    public function canDoBF($bf_id)
+    public function canDoBF($bfunction_id)
     {
         /*
-              $hasBF = $this->HasAsSpecialBF($bf_id);
+              $hasBF = $this->HasAsSpecialBF($bfunction_id);
               if($hasBF) return true;*/
         $file_dir_name = dirname(__FILE__);
 
         $rbf = new AroleBf();
         $rbf->select("arole_id", $this->getId());
-        $rbf->select("bfunction_id", $bf_id);
+        $rbf->select("bfunction_id", $bfunction_id);
         $rbf->select("avail", "Y");
 
         if ($rbf->load()) {
@@ -477,7 +477,7 @@ class Arole extends UmsObject
             $this_sub_folders = $this->getMyChildList();
             foreach ($this_sub_folders as $sub_folder_item) {
                 if ($sub_folder_item and (is_object($sub_folder_item)) and $sub_folder_item->isActive()) {
-                    if ($sub_folder_item->canDoBF($bf_id)) return true;
+                    if ($sub_folder_item->canDoBF($bfunction_id)) return true;
                 }
             }
         }
@@ -485,30 +485,30 @@ class Arole extends UmsObject
         return false;
     }
 
-    public function canDoBFLog($bf_id)
+    public function canDoBFLog($bfunction_id)
     {
         $canDoBFLog = "";
         $this_id = $this->getId();
         /*
-              $hasBF = $this->HasAsSpecialBF($bf_id);
-              if($hasBF) return "bf $bf_id found in role $this_id as SpecialBF (bfunction_mfk)";
+              $hasBF = $this->HasAsSpecialBF($bfunction_id);
+              if($hasBF) return "bf $bfunction_id found in role $this_id as SpecialBF (bfunction_mfk)";
               */
         $file_dir_name = dirname(__FILE__);
 
         $rbf = new AroleBf();
         $rbf->select("arole_id", $this_id);
-        $rbf->select("bfunction_id", $bf_id);
+        $rbf->select("bfunction_id", $bfunction_id);
         $rbf->select("avail", "Y");
 
         if ($rbf->load()) {
-            return "bf $bf_id found in role $this_id as bf item authorized (tab.arole_bf)";
+            return "bf $bfunction_id found in role $this_id as bf item authorized (tab.arole_bf)";
         } else {
             $this_sub_folders = $this->getMyChildList();
             foreach ($this_sub_folders as $sub_folder_item) {
                 if ($sub_folder_item and (is_object($sub_folder_item)) and $sub_folder_item->isActive()) {
-                    if ($sub_folder_item->canDoBF($bf_id)) {
+                    if ($sub_folder_item->canDoBF($bfunction_id)) {
                         $sub_folder_item_id = $sub_folder_item->getId();
-                        $sub_canDoBFLog = $sub_folder_item->canDoBFLog($bf_id);
+                        $sub_canDoBFLog = $sub_folder_item->canDoBFLog($bfunction_id);
                         return "role[$sub_folder_item_id]->" . $sub_canDoBFLog;
                     }
                 }
@@ -523,10 +523,10 @@ class Arole extends UmsObject
         */
     /*
         obsolete meaning of bfunction_mfk not clear
-        public function HasAsSpecialBF($bf_id)
+        public function HasAsSpecialBF($bfunction_id)
         {
                $bfunction_mfk = $this->getVal("bfunction_mfk");
-               $token = ",$bf_id,";
+               $token = ",$bfunction_id,";
                if (strpos($bfunction_mfk, $token) !== FALSE) return true;
                else 
                {
@@ -535,7 +535,7 @@ class Arole extends UmsObject
                       {
                          if($sub_folder_item and (is_object($sub_folder_item)) and $sub_folder_item->isActive())
                          {
-                                if($sub_folder_item->HasAsSpecialBF($bf_id)) return true;
+                                if($sub_folder_item->HasAsSpecialBF($bfunction_id)) return true;
                          }
                       }
                }
@@ -628,6 +628,18 @@ class Arole extends UmsObject
         $color = 'orange';
         $title_ar = 'استخراج وتفقد ملف الكاش';
         $methodName = 'getCachePhpCode';
+        $pbms[AfwStringHelper::hzmEncode($methodName)] = array(
+            'METHOD' => $methodName,
+            'COLOR' => $color,
+            'LABEL_AR' => $title_ar,
+            // 'PUBLIC' => true,
+            'ADMIN-ONLY' => true,
+            'BF-ID' => '',
+        );
+
+        $color = 'green';
+        $title_ar = 'توليد ملف الصلاحيات';
+        $methodName = 'generePhpFile';
         $pbms[AfwStringHelper::hzmEncode($methodName)] = array(
             'METHOD' => $methodName,
             'COLOR' => $color,
@@ -782,7 +794,27 @@ class Arole extends UmsObject
         return $menu_folder;
     }
 
-    public function addBF($bf_id, $forceInMenu = false)
+
+    /**
+     * @param int $bfunction_id
+     * @return AroleBf | null
+     */
+    public function containInMenu($bfunction_id)
+    {
+        $rbf = new AroleBf();
+        $rbf->select("arole_id", $this->getId());
+        $rbf->select("bfunction_id", $bfunction_id);
+        $rbf->select("menu", "Y");
+
+        if ($rbf->load()) {
+            return $rbf;
+        } else return null;
+    }
+
+    /**
+     * @param int $bfunction_id
+     */
+    public function addBF($bfunction_id, $forceInMenu = false)
     {
         $lang = AfwLanguageHelper::getGlobalLanguage();
 
@@ -795,11 +827,11 @@ class Arole extends UmsObject
         $menu_added_error = "";
         $rbf = new AroleBf();
         $rbf->select("arole_id", $this->getId());
-        $rbf->select("bfunction_id", $bf_id);
+        $rbf->select("bfunction_id", $bfunction_id);
 
         if (!$rbf->load()) {
             $rbf->set("arole_id", $this->getId());
-            $rbf->set("bfunction_id", $bf_id);
+            $rbf->set("bfunction_id", $bfunction_id);
             $rbf->set("menu", 'N');
             $rbf->insert();
             //$menu_added_info = "new RBF inserted id = ".$rbf->getId();
@@ -832,7 +864,7 @@ class Arole extends UmsObject
                 $menu_added_info .= "<br>[$bf] ليس قائمة";
             }
         } else {
-            $menu_added_error = "الوظيفة [id=$bf_id] مفقودة أو تحتوي على مشكل وتعذر إضافتها للقائمة";
+            $menu_added_error = "الوظيفة [id=$bfunction_id] مفقودة أو تحتوي على مشكل وتعذر إضافتها للقائمة";
         }
 
         $rol = $rbf->hetRole();
@@ -844,7 +876,7 @@ class Arole extends UmsObject
         return array($menu_added_error, $menu_added_info);
     }
 
-    public function removeBF($bf_id)
+    public function removeBF($bfunction_id)
     {
 
 
@@ -852,7 +884,7 @@ class Arole extends UmsObject
 
         $rbf = new AroleBf();
         $rbf->select("arole_id", $this->getId());
-        $rbf->select("bfunction_id", $bf_id);
+        $rbf->select("bfunction_id", $bfunction_id);
         $menu_removed = false;
         if ($rbf->load()) {
             $rbf->set("avail", 'N');
@@ -861,9 +893,9 @@ class Arole extends UmsObject
 
         // $bf = $rbf->hetBF();
         /*
-              if($bf_id)
+              if($bfunction_id)
               {
-                       $this->addRemoveInMfk("bfunction_mfk",array(), array($bf_id));
+                       $this->addRemoveInMfk("bfunction_mfk",array(), array($bfunction_id));
                        $menu_removed = $this->update();
               }*/
 
@@ -953,8 +985,8 @@ class Arole extends UmsObject
                 $cat = $atableObj->tableCategory();
                 $bf_arr = $atableObj->createFrameWorkScreens($framework, false);
 
-                foreach ($bf_arr as $bf_id => $bf_data) {
-                    if ($bf_id > 0) {
+                foreach ($bf_arr as $bfunction_id => $bf_data) {
+                    if ($bfunction_id > 0) {
                         $bf = $bf_data["bf"];
                         $bf_new = $bf_data["bf_new"];
                         $menu = $bf_data["menu"];
@@ -1005,17 +1037,17 @@ class Arole extends UmsObject
 
                     $bf_old_checked = $data_posted["old_" . $checkbox_name];
                     $bf_checked = $data_posted[$checkbox_name];
-                    $bf_id = $data_posted[$bf_id_input_name];
+                    $bfunction_id = $data_posted[$bf_id_input_name];
 
                     //if($checkbox_name == "chk_qsearch_25") d ie("old:$bf_old_checked != new:$bf_checked");
 
-                    if (($bf_old_checked != $bf_checked) and ($bf_id > 0)) {
+                    if (($bf_old_checked != $bf_checked) and ($bfunction_id > 0)) {
                         if ($bf_checked) {
-                            $menu_added = $this->addBF($bf_id);
+                            $menu_added = $this->addBF($bfunction_id);
                             $added_count++;
                             if ($menu_added) $menu_added_count++;
                         } else {
-                            $menu_removed = $this->removeBF($bf_id);
+                            $menu_removed = $this->removeBF($bfunction_id);
                             $removed_count++;
                             if ($menu_removed) $menu_removed_count++;
                         }
@@ -1216,15 +1248,22 @@ class Arole extends UmsObject
     }
 
 
-    public function calcPhp_code($what = "value")
+    public function generePhpFile($lang = "ar")
+    {
+        $fileName = $this->calcPhp_code($what = "value", true);
+        return ["", "file generated : $fileName"];
+    }
+
+    public function calcPhp_code($what = "value", $returnFileName = false)
     {
         $moduleObj = $this->het("module_id");
         if ($moduleObj) {
             $module_code = $moduleObj->getVal("module_code");
-            if ($module_code) list($role_infoItem, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $this, $genereFile = true);
-            else $php_code = "No module code defined for the module of this role";
-        } else $php_code = "No module defined for this role";
+            if ($module_code) list($role_infoItem, $fileName, $php_code, $mv_cmd) = UmsManager::genereRolePrevilegesFile($module_code, $this, $genereFile = $returnFileName);
+            else $php_code = $fileName = "No module code defined for the module of this role";
+        } else $php_code = $fileName = "No module defined for this role";
 
+        if ($returnFileName) return $fileName;
         return "<textarea cols='150' rows='30' style='direction: ltr;float: left;background-color: #c6e2fbc4;width: 100%;font-size: 18px;font-family: revert;'>" . $php_code . "</textarea>";
     }
 
@@ -1242,7 +1281,7 @@ class Arole extends UmsObject
         return true;
     }
 
-    
+
 
     public function calcPhpCode($what = 'value')
     {
@@ -1254,7 +1293,7 @@ class Arole extends UmsObject
             $previlegeFilenameForRole = UmsManager::previlegeFilenameForRole($moduleCode, $roleId);
 
             $file_dir_name = dirname(__FILE__);
-            $previlegeFilenameForRoleFullPath = "$file_dir_name/../../$moduleCode/previleges/role/$previlegeFilenameForRole.php";            
+            $previlegeFilenameForRoleFullPath = "$file_dir_name/../../$moduleCode/previleges/role/$previlegeFilenameForRole.php";
             return AfwCodeHelper::showCodeLines($previlegeFilenameForRoleFullPath);
         }
 

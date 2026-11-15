@@ -6,7 +6,7 @@ class UmsUgroupTypeAfwStructure
         {
                 if ($obj instanceof UgroupType) {
                         $obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
-                        $obj->DISPLAY_FIELD_BY_LANG = ['ar'=>"titre_short_ar", 'en'=>"titre_short_en",];
+                        $obj->DISPLAY_FIELD_BY_LANG = ['ar' => "titre_short_ar", 'en' => "titre_short_en",];
 
                         // $obj->ENABLE_DISPLAY_MODE_IN_QEDIT=true;
                         $obj->ORDER_BY_FIELDS = "titre_short_ar";
@@ -19,7 +19,7 @@ class UmsUgroupTypeAfwStructure
                         $obj->showRetrieveErrors = true;
                         $obj->general_check_errors = true;
                         // $obj->after_save_edit = array("class"=>'Road',"attribute"=>'road_id', "currmod"=>'btb',"currstep"=>9);
-                        $obj->after_save_edit = array("mode" => "qsearch", "currmod" => 'adm', "class" => 'UgroupType', "submit" => true);
+                        $obj->after_save_edit = array("mode" => "qsearch", "currmod" => 'ums', "class" => 'UgroupType', "submit" => true);
                 } else {
                         UgroupTypeArTranslator::initData();
                         UgroupTypeEnTranslator::initData();

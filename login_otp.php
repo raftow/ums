@@ -37,7 +37,7 @@ if (!$uri_module) die("site code not defined !!!");
 else {
     $ini_file_path = "$file_dir_name/../$uri_module/ini.php";
     include($ini_file_path);
-    if (!$NOM_SITE) die("OTP LOGIN : web site not configured correctly !!! review your $uri_module module ini file : $ini_file_path : ".highlight_file($ini_file_path, true));
+    if (!$NOM_SITE) die("OTP LOGIN : web site not configured correctly !!! review your $uri_module module ini file : $ini_file_path : " . highlight_file($ini_file_path, true));
     include("$file_dir_name/../$uri_module/module_config.php");
 }
 
@@ -71,7 +71,7 @@ $otp_destination = "Not yet";
 $tokens["otp_verify_the_message"] =  "";
 if (AfwSession::userIsAuthenticated()) {
     header("Location: index.php");
-}  else {
+} else {
     $sms_mobile = "";
 
     // random code
@@ -80,13 +80,11 @@ if (AfwSession::userIsAuthenticated()) {
     $otp_verify_the_subject = "رمز التحقق";
     $otp_verify_the_message = $otp_verify_the_subject . " " . $user_OTP;
 
-    // $app_name = AfwSession::config("application_name", "adm");
-
     $simulate_sms_to_mobile = AfwSession::config("simulate_sms_to_mobile", null);
     $objUser = Auser::loadById($user_id_logged_in);
     if ($simulate_sms_to_mobile) $sms_mobile = $simulate_sms_to_mobile;
     else {
-        
+
         if ($objUser) $sms_mobile = $objUser->getVal("mobile");
     }
 
@@ -101,7 +99,7 @@ if (AfwSession::userIsAuthenticated()) {
 
     // send SMS to customer 
     $otp_show_in_page = AfwSession::config("otp-show-in-page", false);
-    
+
     if ($otp_show_in_page and false) {
         $tokens["otp_verify_the_message"] =  $otp_verify_the_message;
         $otp_ok = true;
@@ -113,8 +111,8 @@ if (AfwSession::userIsAuthenticated()) {
         $otp_destination = "";
         if ($sms_mobile) $otp_destination = "الجوال " . UfwSmsSender::partialShowMobile($sms_mobile);
         if ($email_adress) {
-            if($otp_destination) $otp_destination .= " و ";
-            $otp_destination .= "البريد الالكتروني ". UfwSmsSender::partialShowEmail($email_adress);
+            if ($otp_destination) $otp_destination .= " و ";
+            $otp_destination .= "البريد الالكتروني " . UfwSmsSender::partialShowEmail($email_adress);
         }
         $payLoad = [
             "mobile" => $sms_mobile,

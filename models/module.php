@@ -333,50 +333,7 @@ class Module extends UmsObject
                     }
                 }
 
-                // $role_info strcuture example
-                /*
-                $role_info = array(
-                    382 =>
-                    array(
-                        'name' =>
-                        array(
-                            'ar' => 'إعدادات القبول',
-                            'en' => 'Admission settings',
-                        ),
-                        'menu' =>
-                        array(
-                            'need_admin' => false,
-                            'id' => '382',
-                            'menu_name_ar' => 'إعدادات القبول',
-                            'menu_name_en' => 'Admission settings',
-                            'page' => 'main.php?Main_Page=fm.php&a=1282&r=382',
-                            'css' => 'info',
-                            'icon' => ' icon-382',
-                            'showme' => true,
-                            'items' =>
-                            array(
-                                104643 =>
-                                array(
-                                    'id' => '104643',
-                                    'menu_name_ar' => 'القرارات و اللوائح',
-                                    'menu_name_en' => 'Regulations',
-                                    'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=AconditionOrigin&currmod=adm',
-                                    'css' => 'bf',
-                                    'icon' => ' bficon-104643 bfc-',
-                                ),
-                                104636 =>
-                                array(
-                                    'id' => '104636',
-                                    'menu_name_ar' => 'الشروط',
-                                    'menu_name_en' => 'Conditions',
-                                    'page' => 'main.php?Main_Page=afw_mode_qsearch.php&cl=Acondition&currmod=adm',
-                                    'css' => 'bf',
-                                    'icon' => ' bficon-104636 bfc-',
-                                ),
-                            ),
-                        ),
-                    ),
-                );*/
+
 
                 foreach ($role_info as $role_id => $role_row) {
                     $role_code = $role_row['code'];
@@ -1160,8 +1117,11 @@ class Module extends UmsObject
 
 
 
-            if (($this->getVal("id_module_type") == self::$MODULE_TYPE_APPLICATION) or
-                ($this->getVal("id_module_type") == self::$MODULE_TYPE_MINI_APPLICATION)
+            if (($mode == "edit")
+                and (
+                    ($this->getVal("id_module_type") == self::$MODULE_TYPE_APPLICATION) or
+                    ($this->getVal("id_module_type") == self::$MODULE_TYPE_MINI_APPLICATION)
+                )
             ) {
 
                 $smod_id = $this->getId();
