@@ -11,7 +11,7 @@ $messages["Your new password is"] = "كلمة المرور الجديدة الخ
 $messages["Your user name is"] = "اسم المستخدم الخاص بك";
 
 $messages["Head department"] = "الادارة العليا";
-$messages["You need also approval from your direct manager for this"] = "تحتاج أيضا في طلبك ارفاق موافقة مديرك المباشر مع ذكر اسم الجهة التي تعمل فيها";
+$messages["You may need to attach the approval from your direct manager for this"] = "ربما تحتاج أيضا في طلبك ارفاق موافقة مديرك المباشر مع ذكر اسم الجهة التي تعمل فيها ومعلوماتك الوظيفية مثل البريد الالكتروني والرقم الوظيفي";
 
 
 $messages["related goal"] = "الهدف ذو الصلة";
@@ -23,7 +23,7 @@ $messages["related BFs details"] = "تفاصيل الوظائف ذات الصل�
 $messages["No goal found in this job role"] = "لم يتم العثور على هدف في هذه المسؤولية الوظيفية";
 $messages["bf cache generated in"] = "تم انشاء/تحديث ملف الكاش في";
 $messages["to install"] = "للتثبيت قم بـ";
-// $messages[""] = "";
+$messages["You don't have this previlege"] = "لا تملك هذه الصلاحية";
 // $messages[""] = "";
 // $messages[""] = "";
 // $messages[""] = "";

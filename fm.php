@@ -18,6 +18,7 @@ if ($objme) {
   $myLevel = 999999;
   $myName = "None-authenticated";
   $myId = "0";
+  $r=null;
 }
 
 if (!$a) {
@@ -97,7 +98,7 @@ if ($r == "control") {
                           
                           ";
   }
-} elseif ($r) {
+} elseif ($objme and $r) {
 
   if ($objme->isSuperAdmin() or $objme->hasRole($module, $r)) {
     list($role_item_display, $menu_folder, $role_data) = UmsManager::getRoleDetails($a, $r, $lang, AfwSession::hasOption("IGNORE_PREVILEGE_CACHE"));
@@ -178,9 +179,12 @@ if ($r == "control") {
       $out_scr .= " <!-- role_data = " . var_export($role_data, true) . " -->";
       // $out_scr .=" <!-- role_info = ".var_export($role_info,true)." -->";
     }
+  } elseif ($objme) {
+    $out_scr .= $objme->tm("You don't have this previlege", $lang);
   } else {
-    $out_scr .= "You don't have this previlege";
+    $out_scr .= "You are not authenticated";
   }
+
 }
 
 
