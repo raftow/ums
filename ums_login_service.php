@@ -80,13 +80,18 @@ class UmsLoginService extends AFWRoot
                 }
 
                 $html_debugg_login = AfwSession::config("html_debugg_login", true);
-                $debugg_login = AfwSession::config("debugg_login", true);
+                $debugg_login = AfwSession::config("debugg_login", false);
+                $debugg_login_in_file = AfwSession::config("debugg_login_in_file", "");
+                if (!$debugg_login_in_file) $debugg_login = false;
+                if ($debugg_login) {
+                        AFWDebugg::initialiser("", $debugg_login_in_file);
+                }
                 $debugg_throw_exception = AfwSession::config("debugg_throw_exception", "");
                 $debugg_after_login = AfwSession::config("debugg_after_login", true);
                 $debugg_after_ldap = AfwSession::config("debugg_after_ldap", true);
                 $debugg_after_golden_or_db = AfwSession::config("debugg_after_golden_or_db", true);
                 $debugg_after_session_created = AfwSession::config("debugg_after_session_created", true);
-                $debugg_login_in_file = AfwSession::config("debugg_login_in_file", false);
+
                 $x_module_means_company = AfwSession::config("x_module_means_company", false);
                 $required_modules = AfwSession::config("required_modules", []);
                 // die("dbg x_module_means_company=$x_module_means_company ".AfwSession::log_config());
