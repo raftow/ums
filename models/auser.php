@@ -612,9 +612,9 @@ class Auser extends UmsObject implements AfwFrontEndUser
         {
                 // $objme = AfwSession::getUserConnected();
                 // if($objme->isAdmin()) return true;
-                
+
                 list($module_id, $system_id) = UmsManager::decodeModule($module_code);
-                if(!$module_id) throw new AfwBusinessException("CAN NOT DECODE ID OF MODULE : $module_code");
+                if (!$module_id) throw new AfwBusinessException("CAN NOT DECODE ID OF MODULE : $module_code");
                 return $this->getMyRoles($module_id, $only_ids = true);
         }
 
@@ -2201,7 +2201,7 @@ class Auser extends UmsObject implements AfwFrontEndUser
 
                 // use initials like RB for Rafik BOUBAKER
 
-                $initials = AfwStringHelper::initialsOfName($this->getVal('username'));
+                $initials = AfwStringHelper::initialsOfName($this->getVal('username'), $this->calcNomcomplet("en"), $this->calcNomcomplet("ar"));
                 $html = "<div class='user-account'>$initials</div>";
                 return $html;
         }
